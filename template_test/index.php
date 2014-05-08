@@ -13,10 +13,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../resources/font-awesome/css/font-awesome.min.css">
 
@@ -38,7 +36,7 @@
         <div class="collapse navbar-collapse pull-right">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#"><i class="icon-dashboard icon-large"></i> Dashboard</a></li>
-            <li><a href="#"><i class="icon-inbox icon-large"></i> Procesos</a></li>
+            <li><a href="#"><i class="icon-inbox icon-large"></i> Procesos <span class="badge">42</span></a></li>
             <li><a href="#"><i class="icon-briefcase icon-large"></i> Gestión Estratégica</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -47,7 +45,7 @@
 
       <div class="row" id="contenido" style="background-color: #222;">
         <div class="col-md-2">
-        <div style="color: #FFF;">Aqui va el menu</div>
+        <div style="color: #FFF;"><p>Aqui va el menu</p></div>
         </div>
         <div class="col-md-10" style="background-color: #ddd;">
           <div>
