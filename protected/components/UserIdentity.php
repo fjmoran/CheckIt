@@ -27,7 +27,11 @@ class UserIdentity extends CUserIdentity
 		else
 		{
 			$this->id=$record->id;
-			$this->setState('roles', $record->roles);
+			$roles = array();
+			foreach ($record->roles as $role) {
+				$roles[] = $role->name;
+			}
+			$this->setState('roles', $roles);
 			$this->errorCode=self::ERROR_NONE;
 		}
 		return !$this->errorCode;
