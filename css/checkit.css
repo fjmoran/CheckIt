@@ -17,6 +17,11 @@ html, body, #page, #contenido {
  width: 16%;
 }
 
+#inner-sidebar {
+  float:right;
+  margin-top:20px;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
@@ -69,7 +74,7 @@ html, body, #page, #contenido {
   }
   .bg-colorlight
   {
-    background-color: #ddd;  
+    background-color: #fafafa;  
   }  
   .badge-red
   {

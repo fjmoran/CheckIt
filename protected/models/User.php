@@ -34,7 +34,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password, firstname, lastname, status, created, lastvisit', 'required'),
+			array('email, password, firstname, lastname, status, created', 'required'),
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
 			array('firstname, lastname', 'length', 'max'=>255),
@@ -66,11 +66,11 @@ class User extends CActiveRecord
 			'id' => 'ID',
 			'email' => 'Email',
 			'password' => 'Password',
-			'firstname' => 'Firstname',
-			'lastname' => 'Lastname',
-			'status' => 'Status',
-			'created' => 'Created',
-			'lastvisit' => 'Lastvisit',
+			'firstname' => 'Nombre',
+			'lastname' => 'Apellido',
+			'status' => 'Estado',
+			'created' => 'Creado en',
+			'lastvisit' => 'Última visita',
 		);
 	}
 
@@ -115,5 +115,9 @@ class User extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getStatusOptions() {
+		return array('0' => 'Inactivo', '1' => 'Activo');
 	}
 }
