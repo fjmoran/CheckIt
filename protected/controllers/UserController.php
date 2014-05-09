@@ -27,9 +27,13 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			array('allow',  
 				'actions'=>array('view','create','update','admin','delete'),
 				'roles'=>array('admin'),
+			),
+			array('allow',  
+				'actions'=>array('profile'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -94,6 +98,26 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionProfile()
+	{
+		$model=$this->loadModel(Yii::app()->user->id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			if($model->save())
+				$this->redirect(array('admin'));
+		}
+
+		$this->render('profile',array(
+			'model'=>$model,
+		));
+	}
+
 
 	/**
 	 * Deletes a particular model.

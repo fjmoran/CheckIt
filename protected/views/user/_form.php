@@ -16,6 +16,7 @@
 	'htmlOptions' => array(
         //'enctype' => 'multipart/form-data',
     	'role' => 'form',
+		'autocomplete' => 'off',
     ),
 )); ?>
 
