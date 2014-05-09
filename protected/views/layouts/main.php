@@ -49,9 +49,9 @@
       ),
       'encodeLabel'=>false,
       'items'=>array(
-        array('label'=>'Perfil', 'url'=>array('/user/profile')),
+        array('label'=>'Mi Perfil', 'url'=>array('/user/profile')),
         array('label'=>'', 'itemOptions'=>array('class'=>'divider')),
-        array('label'=>'Salir', 'url'=>array('/site/logout')),
+        array('label'=>'Logout', 'url'=>array('/site/logout')),
       ),
     )); ?>
           </div>
