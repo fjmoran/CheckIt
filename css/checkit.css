@@ -5,6 +5,7 @@ html, body, #page, #contenido {
 
 #page {
   padding-bottom: 30px;
+  padding-top: 50px;
 }
 
 #inner-content  {
@@ -79,8 +80,4 @@ html, body, #page, #contenido {
     background-color: #d2322d;
   } 
 
-}
-
-#page {
-  padding-top: 50px;
 }

@@ -1,6 +1,6 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-        <div class="" id="sidebar-fixed">
+        <div id="sidebar-fixed">
 		    <div class="sidebar-nav">
 		      <div class="navbar navbar-default" role="navigation">
 		        <div class="navbar-header">
