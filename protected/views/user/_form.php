@@ -13,56 +13,46 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array(
+        //'enctype' => 'multipart/form-data',
+    	'role' => 'form',
+    ),
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'firstname'); ?>
-		<?php echo $form->textField($model,'firstname',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'firstname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 		<?php echo $form->error($model,'firstname'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'lastname'); ?>
-		<?php echo $form->textField($model,'lastname',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'lastname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 		<?php echo $form->error($model,'lastname'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
+		<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
-		<?php echo $form->textField($model,'created'); ?>
-		<?php echo $form->error($model,'created'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'lastvisit'); ?>
-		<?php echo $form->textField($model,'lastvisit'); ?>
-		<?php echo $form->error($model,'lastvisit'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="form-group buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -22,6 +22,10 @@ html, body, #page, #contenido {
   margin-top:20px;
 }
 
+.grid-icon {
+  color: #222; font-size:16px; margin-right: 3px; margin-left: 3px;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {

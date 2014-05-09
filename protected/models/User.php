@@ -34,13 +34,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password, firstname, lastname, status, created', 'required'),
+			array('email, password, firstname, lastname, status', 'required'),
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
 			array('firstname, lastname', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, email, password, firstname, lastname, status, created, lastvisit', 'safe', 'on'=>'search'),
+			array('created', 'default', 
+          		'value'=>new CDbExpression('NOW()'),
+          		'setOnEmpty'=>false, 'on'=>'insert'),
 		);
 	}
 

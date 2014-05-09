@@ -21,17 +21,26 @@ class UserIdentity extends CUserIdentity
 	{
 		$record=User::model()->findByAttributes(array('email'=>$this->username));
 		if($record===null)
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
+			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else if($record->password!==md5($this->password))
+			$this->errorCode=self::ERROR_PASSWORD_INVALID;
+		else if($record->status==0)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 		{
 			$this->id=$record->id;
+
+			//User::model()->updateByPk($this->id,array('lastvisit'=>new CDbExpression('NOW()')));
+			$record->lastvisit = new CDbExpression("NOW()");
+			$record->update(array('lastvisit'));
+
 			$roles = array();
 			foreach ($record->roles as $role) {
 				$roles[] = $role->name;
 			}
 			$this->setState('roles', $roles);
+			$this->setState('firstname', $record->firstname);
+			$this->setState('lastname', $record->lastname);
 			$this->errorCode=self::ERROR_NONE;
 		}
 		return !$this->errorCode;

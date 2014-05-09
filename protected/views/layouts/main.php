@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse pull-right">
           <div class="btn-group btn-group-sm" id="btn-gr-login">
             <button type="button" class="btn dropdown-toggle" id="btn-login" data-toggle="dropdown">
-              <?php echo Yii::app()->user->name ?>
+              <?php echo Yii::app()->user->firstname." ".Yii::app()->user->lastname ?>
               <span class="caret"></span>
             </button>
     <?php $this->widget('zii.widgets.CMenu',array(

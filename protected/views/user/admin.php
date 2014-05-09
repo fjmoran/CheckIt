@@ -55,23 +55,26 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'name'=>'created',
-//			'value'=>'strtotime($data->created)?date("j-M-Y", $data->created):\'\'',
+			'value'=>'strtotime($data->created)>0?date("d-m-Y h:i", strtotime($data->created)):\'\'',
 		),
-		'lastvisit',
+		array(
+			'name'=>'lastvisit',
+			'value'=>'strtotime($data->lastvisit)>0?date("d-m-Y h:i", strtotime($data->lastvisit)):\'\'',
+		),
 		array(
 			'class'=>'CButtonColumn',
 	        'template'=>'{update} {delete}',
 	        'buttons'=>array (
 	            'update'=> array(
-	                'label' => '<i class="fa fa-edit"></i>',
+	                'label' => '<i class="fa fa-edit grid-icon"></i>',
 	                                'imageUrl' => false,
 	            ),
 	            'view'=>array(
-	                'label' => '<i class="fa fa-search"></i>',
+	                'label' => '<i class="fa fa-search grid-icon"></i>',
 	                                'imageUrl' => false,
 	            ),
 	            'delete'=>array(
-	                'label' => '<i class="fa fa-trash-o"></i>',
+	                'label' => '<i class="fa fa-trash-o grid-icon"></i>',
 	                                'imageUrl' => false,
 		        ),
 	        ),
