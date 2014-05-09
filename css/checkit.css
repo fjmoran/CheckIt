@@ -1,6 +1,11 @@
 html, body, #page, #contenido {
   height: 100%;
   background-color: #222;
+  font-family: 'Open Sans', sans-serif !important; font-weight: 400;
+}
+
+h2 { 
+  font-family: 'Open Sans', sans-serif !important; font-weight: 600; 
 }
 
 #page {

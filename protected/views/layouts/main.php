@@ -17,6 +17,8 @@
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/checkit.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/fonts/fonts.css" rel="stylesheet" type="text/css">    
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
