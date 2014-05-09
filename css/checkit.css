@@ -13,7 +13,11 @@ html, body, #page, #contenido {
 
 #sidebar-fixed {
  position: fixed;  
+<<<<<<< HEAD
  width: 17%;
+=======
+ width: 16%;
+>>>>>>> FETCH_HEAD
 }
 
 /* make sidebar nav vertical */ 
