@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -22,12 +21,12 @@
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
+/*  .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
     background-color: #222;
   }
-  .sidebar-nav .navbar ul {
+*/  .sidebar-nav .navbar ul {
     float: none;
     display: block;
   }

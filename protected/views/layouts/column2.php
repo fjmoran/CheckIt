@@ -1,6 +1,6 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-        <div class="col-md-2">
+        <div class="" id="sidebar-fixed">
 		    <div class="sidebar-nav">
 		      <div class="navbar navbar-default" role="navigation">
 		        <div class="navbar-header">
@@ -24,8 +24,8 @@
 		      </div>
 		    </div>
         </div>
-        <div class="col-md-10 bg-colorlight">
-			<?php echo $content; ?>asdasd
+        <div class="col-md-offset-2 col-md-10 bg-colorlight" id="inner-content">
+			<?php echo $content; ?>
         </div>
 
 

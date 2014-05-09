@@ -13,10 +13,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/checkit.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/resources/font-awesome/css/font-awesome.min.css">
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -63,8 +63,7 @@
 
     <div class="row" id="footer"> 
       <div class="col-md-12 bg-color">
-        <p class="text-muted credit text-center">Aquí va el footer.
-        </p>
+        <p class="text-muted credit text-center">Aquí va el footer.</p>
       </div>
     </div><!-- footer -->   
 
