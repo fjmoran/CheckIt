@@ -13,6 +13,7 @@
 		          <span class="visible-xs navbar-brand">Sidebar menu</span>
 		        </div>
 		        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+<<<<<<< HEAD
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(
 				'class'=>'nav navbar-nav',
@@ -25,6 +26,15 @@
 				array('label'=>'<i class="icon-cogs icon-large icon-fixed-width"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 			),
 		)); ?>
+=======
+		          <ul class="nav navbar-nav">
+		            <li class="active"><a href="#"><i class="fa fa-dashboard fa-lg fa-fw"></i> Usuarios</a></li>
+		            <li><a href="#"><i class="fa fa-inbox fa-lg fa-fw"></i> Procesos<span class="badge badge-red pull-right">42</span></a></li>
+		            <li><a href="#"><i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica</a></li>
+		            <li><a href="#"><i class="fa fa-cogs fa-lg fa-fw"></i> Administación</a></li>
+		            <li><a href="#">Reviews <span class="badge pull-right badge-red">30</span></a></li>
+		          </ul>
+>>>>>>> FETCH_HEAD
 		        </div><!--/.nav-collapse -->
 		      </div>
 		    </div>

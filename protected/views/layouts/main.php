@@ -35,9 +35,10 @@
           </button>
           <a class="navbar-brand" href="#">Check!It</a>
         </div>
+
         <div class="collapse navbar-collapse pull-right">
-          <div class="btn-group btn-group-sm" style="margin: 10px;">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <div class="btn-group btn-group-sm" id="btn-gr-login">
+            <button type="button" class="btn dropdown-toggle" id="btn-login" data-toggle="dropdown">
               <?php echo Yii::app()->user->name ?>
               <span class="caret"></span>
             </button>
@@ -48,13 +49,14 @@
       ),
       'encodeLabel'=>false,
       'items'=>array(
-        array('label'=>'Perfil', 'url'=>array('/user/profile')),
+        array('label'=>'Mi Perfil', 'url'=>array('/user/profile')),
         array('label'=>'', 'itemOptions'=>array('class'=>'divider')),
-        array('label'=>'Salir', 'url'=>array('/site/logout')),
+        array('label'=>'Logout', 'url'=>array('/site/logout')),
       ),
     )); ?>
           </div>
         </div>
+
         <div class="collapse navbar-collapse pull-right">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(
@@ -62,10 +64,10 @@
 			),
 			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'<i class="icon-dashboard icon-large icon-fixed-width"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard')),
-				array('label'=>'<i class="icon-inbox icon-large icon-fixed-width"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
-				array('label'=>'<i class="icon-briefcase icon-large icon-fixed-width"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
-				array('label'=>'<i class="icon-cogs icon-large icon-fixed-width"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),
+				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard')),
+				array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
+				array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
+				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 			),
 		)); ?>
         </div><!--/.nav-collapse -->
