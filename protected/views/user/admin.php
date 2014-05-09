@@ -25,10 +25,9 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<div id="inner-sidebar"><a href="<?php echo Yii::app()->createUrl('user/create'); ?>" class="btn btn-success">Añadir Nuevo</a></div>
-
 <h1>Usuarios</h1>
+
+<div id="inner-sidebar"><a href="<?php echo Yii::app()->createUrl('user/create'); ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Nuevo</a></div>
 
 <?php /* echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
