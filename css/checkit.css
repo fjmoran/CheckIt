@@ -60,7 +60,7 @@ html, body, #page, #contenido {
     background-color: #222;
   } 
   .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
-    color: #aaa;
+    color: #ccc;
   } 
   .bg-color
   {
@@ -75,5 +75,17 @@ html, body, #page, #contenido {
   {
     background-color: #d2322d;
   } 
-
+  #btn-gr-login
+  {
+    margin: 10px;
+  }
+  #btn-login
+  {
+    color: #aaa; 
+    background-color: #333;
+  }
+  #btn-login:hover
+  {
+    color: #ccc; 
+  }  
 }
