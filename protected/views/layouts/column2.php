@@ -14,7 +14,7 @@
 		        </div>
 		        <div class="navbar-collapse collapse sidebar-navbar-collapse">
 		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="#"><i class="icon-dashboard icon-large icon-fixed-width"></i> Dashboard</a></li>
+		            <li class="active"><a href="#"><i class="icon-dashboard icon-large icon-fixed-width"></i> Usuarios</a></li>
 		            <li><a href="#"><i class="icon-inbox icon-large icon-fixed-width"></i> Procesos<span class="badge badge-red pull-right">42</span></a></li>
 		            <li><a href="#"><i class="icon-briefcase icon-large icon-fixed-width"></i> Gestión Estratégica</a></li>
 		            <li><a href="#"><i class="icon-cogs icon-large icon-fixed-width"></i> Administación</a></li>

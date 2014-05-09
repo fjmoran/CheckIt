@@ -36,6 +36,26 @@
           <a class="navbar-brand" href="#">Check!It</a>
         </div>
         <div class="collapse navbar-collapse pull-right">
+          <div class="btn-group btn-group-sm" style="margin: 10px;">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <?php echo Yii::app()->user->name ?>
+              <span class="caret"></span>
+            </button>
+    <?php $this->widget('zii.widgets.CMenu',array(
+      'htmlOptions'=>array(
+        'class'=>'dropdown-menu',
+        'role'=>'menu',
+      ),
+      'encodeLabel'=>false,
+      'items'=>array(
+        array('label'=>'Perfil', 'url'=>array('/user/profile')),
+        array('label'=>'', 'itemOptions'=>array('class'=>'divider')),
+        array('label'=>'Salir', 'url'=>array('/site/logout')),
+      ),
+    )); ?>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse pull-right">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(
 				'class'=>'nav navbar-nav',
