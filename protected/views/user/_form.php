@@ -20,36 +20,42 @@
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
+<div class="row">	
+	<div class="col-md-6">
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'email'); ?>
+			<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'email'); ?>
+		</div>
 
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
-		<?php echo $form->error($model,'email'); ?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'password'); ?>
+			<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'password'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'firstname'); ?>
+			<?php echo $form->textField($model,'firstname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'firstname'); ?>
+		</div>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'lastname'); ?>
+			<?php echo $form->textField($model,'lastname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'lastname'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'status'); ?>
+			<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'status'); ?>
+		</div>		
 	</div>
 
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
-		<?php echo $form->error($model,'password'); ?>
+	<div class="col-md-6">
+		<!-- nada -->
 	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'firstname'); ?>
-		<?php echo $form->textField($model,'firstname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-		<?php echo $form->error($model,'firstname'); ?>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'lastname'); ?>
-		<?php echo $form->textField($model,'lastname',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-		<?php echo $form->error($model,'lastname'); ?>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
+</div>	
 
 	<div class="form-group buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
