@@ -64,10 +64,10 @@
 			),
 			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'<i class="icon-dashboard icon-large icon-fixed-width"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard')),
-				array('label'=>'<i class="icon-inbox icon-large icon-fixed-width"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
-				array('label'=>'<i class="icon-briefcase icon-large icon-fixed-width"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
-				array('label'=>'<i class="icon-cogs icon-large icon-fixed-width"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),
+				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard')),
+				array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
+				array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
+				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 			),
 		)); ?>
         </div><!--/.nav-collapse -->
