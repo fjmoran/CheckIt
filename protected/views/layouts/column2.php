@@ -14,16 +14,15 @@
 		        </div>
 		        <div class="navbar-collapse collapse sidebar-navbar-collapse">
 <?php 
-if ($this->id == 'user') {
+if (Yii::app()->utility->isActiveMenu('admin')) {
 	$this->widget('zii.widgets.CMenu',array(
 		'htmlOptions'=>array(
 			'class'=>'nav navbar-nav',
 		),
 		'encodeLabel'=>false,
 		'items'=>array(
-			array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Usuarios', 'url'=>array('/user/admin'), 'active'=>
-				$this->id=='user',
-			),
+			array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Usuarios', 'url'=>array('/user/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('usuarios')),
+
 			array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso<span class="badge badge-red pull-right">42</span>', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
 			array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
 			array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),

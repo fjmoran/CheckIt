@@ -33,6 +33,9 @@ return array(
 
 	// application components
 	'components'=>array(
+		'utility'=>array(
+			'class'=>'Utility',
+		),
 		'user'=>array(
 			// enable cookie-based authentication
 			'class' => 'WebUser',

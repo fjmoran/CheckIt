@@ -32,13 +32,6 @@
 
 <div class="container-fluid" id="page">
 
-<?php 
-	$title = "Check!It";
-	if ($this->id == 'user') {
-		$title .= " | Administración";
-	}
-?>
-
 		<div class="navbar navbar-inverse navbar-fixed-top bg-color" role="navigation">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -47,7 +40,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><?php echo $title; ?></a>
+					<a class="navbar-brand" href="#"><?php echo Yii::app()->utility->setTitle(); ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse pull-right">
@@ -81,9 +74,7 @@
 				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard')),
 				array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
 				array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
-				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/user/admin'), 'visible'=>Yii::app()->user->checkAccess('admin'), 'active'=>
-					$this->id=='user',
-				),
+				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/user/admin'), 'visible'=>Yii::app()->user->checkAccess('admin'), 'active'=>Yii::app()->utility->isActiveMenu('admin')),
 			),
 		)); ?>
 				</div><!--/.nav-collapse -->
