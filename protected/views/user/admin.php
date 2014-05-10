@@ -12,6 +12,7 @@ $this->menu=array(
 	array('label'=>'Create User', 'url'=>array('create')),
 );
 
+/*
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -24,7 +25,9 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+*/
 ?>
+
 <h2>Gestión de usuarios</h2>
 
 <div id="inner-sidebar"><a href="<?php echo Yii::app()->createUrl('user/create'); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Nuevo</a></div>
@@ -67,15 +70,16 @@ $('.search-form form').submit(function(){
 	        'buttons'=>array (
 	            'update'=> array(
 	                'label' => '<i class="fa fa-edit grid-icon"></i>',
-	                                'imageUrl' => false,
+	                'imageUrl' => false,
 	            ),
 	            'view'=>array(
 	                'label' => '<i class="fa fa-search grid-icon"></i>',
-	                                'imageUrl' => false,
+	                'imageUrl' => false,
 	            ),
 	            'delete'=>array(
 	                'label' => '<i class="fa fa-trash-o grid-icon"></i>',
-	                                'imageUrl' => false,
+	                'imageUrl' => false,
+	                'visible' => 'Yii::app()->user->id != $data->id',
 		        ),
 	        ),
 		),

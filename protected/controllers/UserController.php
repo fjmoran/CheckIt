@@ -84,6 +84,11 @@ class UserController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		if ($model->id == Yii::app()->user->id) {
+			$this->redirect(array('user/profile'));
+			exit;
+		}
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -109,8 +114,38 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('admin'));
+
+			$_password = User::model()->findByPk(Yii::app()->user->id)->password;
+			//$current_password = $_POST['User']['current_password'];
+			//$repeat_password = $_POST['User']['repeat_password'];
+
+			if ($model->current_password!= '' || $model->password!= '' || $model->repeat_password!=''){
+				if (md5($model->current_password)!=$_password) {
+					$model->addError('current_password', 'La password ingresada no es correcta.');
+				}
+				else {
+					if ($model->password!=$model->repeat_password) {
+						$model->addError('repeat_password', 'Las password ingresadas no coinciden.');
+					}
+					else {
+						if ($model->password=='') {
+							$model->addError('password', 'Ingrese una password.');
+						}
+						else {
+							if ($model->save()) {
+								Yii::app()->user->setFlash('message', 'Los datos fueron guardados con éxito y la password fue cambiada');
+								$this->redirect(array('user/profile'));
+							}
+						}
+					}
+				}
+			}
+			else {
+				if ($model->save()) {
+					Yii::app()->user->setFlash('message', 'Los datos fueron guardados con éxito');
+					$this->redirect(array('user/profile'));
+				}
+			}
 		}
 
 		$this->render('profile',array(
@@ -126,7 +161,13 @@ class UserController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+
+		if ($model->id == Yii::app()->user->id) {
+			exit;
+		}
+
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -171,6 +212,7 @@ class UserController extends Controller
 		$model=User::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
+		$model->password = '';
 		return $model;
 	}
 
