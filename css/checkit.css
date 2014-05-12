@@ -48,6 +48,7 @@ label.error {
   color: #a94442;
 }
 
+<<<<<<< HEAD
 #login {
   margin-top:20px;
   border: 1px solid #222;
@@ -62,6 +63,24 @@ label.error {
   background-color: #f5f5f5!important;
 }
 
+=======
+.yiiPager, .pagination-sm {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.pager li>a, .pager li>span {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.selected>a {
+  background-color: #2a6496 !important;
+  color: #ddd !important;
+} 
+>>>>>>> FETCH_HEAD
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
