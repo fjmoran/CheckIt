@@ -90,7 +90,7 @@
 	<?php endif*/ ?>
 
 			<div class="row bg-color" id="contenido">
-	<?php echo $content; ?>
+				<?php echo $content; ?>
 			</div>
 
 		<div class="row" id="footer"> 
