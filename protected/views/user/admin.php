@@ -85,22 +85,12 @@ $('.search-form form').submit(function(){
 		),
 	),
     'pager'=>array(
-<<<<<<< HEAD
-    	'htmlOptions'=>array('class'=>'pagination'),
-=======
     	'htmlOptions'=>array('class'=>'pagination-sm'),
->>>>>>> FETCH_HEAD
         'header' => '',
         'hiddenPageCssClass' => 'disabled',
         'maxButtonCount' => 10,
         'cssFile' => false,
-<<<<<<< HEAD
         'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
         'nextPageLabel' => '<i class="icon-chevron-right">></i>',
-//        'class' => 'pagination',
-//        'prevPageLabel' => '<i class="fa fa-chevron-left fa-5x" style="position:absolute; top:610px; left:-50px; color: #ccc;"></i>',
-//        'nextPageLabel' => '<i class="fa fa-chevron-right fa-5x" style="position:absolute; top:610px; right:-50px; color: #ccc;"></i>',
-=======
->>>>>>> FETCH_HEAD
     ),
 )); ?>
