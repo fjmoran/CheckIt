@@ -9,16 +9,12 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<div class="row">
-	<div class="col-md-4 col-md-offset-4" id="login">
-
-<h2>Recuperar contraseña</h2>
-
-<?php if (Yii::app()->user->hasFlash('message')):?>
+<div class="ck-login">
+	<?php if (Yii::app()->user->hasFlash('message')):?>
     <div class="alert alert-success"><?php echo Yii::app()->user->getFlash('message');?></div>
 <?php endif;?>
+	<div class="row form-signin">
 
-<div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'forgotpassword-form',
 	'enableClientValidation'=>true,
@@ -31,7 +27,8 @@ $this->breadcrumbs=array(
 		'autocomplete' => 'off',
     ),
 )); ?>
-
+        <h2 class="form-signin-heading">Recuperar contraseña</h2>
+        <p>Instrucciones para recuperar su password seran enviadas a su correo.</p> 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'username'); ?>
 		<?php echo $form->textField($model,'username', array('class'=>'form-control')); ?>
@@ -39,11 +36,9 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="form-group buttons text-center">
-		<?php echo CHtml::submitButton('Enviar', array('class'=>'btn btn-primary ')); ?>
+		<?php echo CHtml::submitButton('Enviar', array('class'=>'btn btn-primary btn-block')); ?>
 	</div>
-
-<?php $this->endWidget(); ?>
-</div><!-- form -->
-
+    <?php $this->endWidget(); ?>
 	</div>
 </div>
+
