@@ -46,7 +46,7 @@ $('.search-form form').submit(function(){
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover',
 	'cssFile'=>false,
-	'template'=>'{items} <div class="pull-right">{summary}</div> {pager}',
+	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		'email',
 		'firstname',
@@ -84,4 +84,14 @@ $('.search-form form').submit(function(){
 	        ),
 		),
 	),
+    'pager'=>array(
+    	//'htmlOptions'=>array('class'=>'pagination'),
+        'header' => '',
+        'hiddenPageCssClass' => 'disabled',
+        'maxButtonCount' => 10,
+        'cssFile' => false,
+//        'class' => 'pagination',
+//        'prevPageLabel' => '<i class="fa fa-chevron-left fa-5x" style="position:absolute; top:610px; left:-50px; color: #ccc;"></i>',
+//        'nextPageLabel' => '<i class="fa fa-chevron-right fa-5x" style="position:absolute; top:610px; right:-50px; color: #ccc;"></i>',
+    ),
 )); ?>
