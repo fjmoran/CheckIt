@@ -147,7 +147,7 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['ChangePasswordForm'];
 			if ($model->validate() && $model->checkpassword($t)) {
-				Yii::app()->user->setFlash('message', 'La contraseña fue cambiada exitosamente.');
+				Yii::app()->user->setFlash('message', 'La contraseña fue cambiada exitosamente. <a href="'.Yii::app()->createUrl('site/login').">Puede ingresar nuevamente haciendo click aqui</a>");
 			}
 		}
 
