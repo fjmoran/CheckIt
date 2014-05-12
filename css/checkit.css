@@ -156,6 +156,12 @@ label.error {
   {
     background-color: #fefefe;  
   }  
+  .bg-image
+  {
+    background-color: #fefefe;  
+    background: url('../images/3849.jpg');
+    background-size: 100%;
+  }  
   .badge-red
   {
     background-color: #d2322d;

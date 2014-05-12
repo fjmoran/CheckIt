@@ -20,6 +20,8 @@
 	<!-- Fonts -->
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/fonts/fonts.css" rel="stylesheet" type="text/css">    
 
+	<?php //if($this->route=='site/login') echo "<style>#inner-content {background: url('".Yii::app()->request->baseUrl."/images/3849.jpg'); background-size: 100%;}</style>";?>
+
 	<?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
