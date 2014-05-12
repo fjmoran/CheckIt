@@ -21,6 +21,8 @@ class User extends CActiveRecord
 
 	public $current_password;
 	public $repeat_password;
+	public $roleIDs = array();
+	public $roleNames = array();
 
 	/**
 	 * @return string the associated database table name
@@ -80,6 +82,11 @@ class User extends CActiveRecord
 			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
 		);
 	}
+
+	public function behaviors(){ 
+          return array( 'CAdvancedArBehavior' => array(
+                'class' => 'application.extensions.CAdvancedArBehavior'));
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -144,4 +151,30 @@ class User extends CActiveRecord
 	public function getStatusOptions() {
 		return array('0' => 'Inactivo', '1' => 'Activo');
 	}
+
+/*	public function rolesToString()
+	{
+		$roles = $this->roles;
+		if ($roles) 
+		{
+			$string = '';
+			foreach($roles as $role) {
+				$string .= $role->name . ', ';
+			}
+			return substr($string,0,strlen($string)-2);
+		}
+		return '';
+	}*/
+
+	// Get current roles for this user:
+    public function afterFind()
+    {
+        if(!empty($this->roles))
+        {
+            foreach($this->roles as $role){
+                $this->roleIDs[]=$role->id;
+                $this->roleNames[]=$role->name;
+            }
+        }
+    }
 }

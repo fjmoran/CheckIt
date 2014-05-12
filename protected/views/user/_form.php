@@ -51,6 +51,28 @@
 			<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'status'); ?>
 		</div>		
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'roles'); ?><br />
+			<?php 
+				echo CHtml::activeCheckBoxList(
+					$model, 
+					'roleIDs', 
+					CHtml::listData( 
+						Role::model()->findAll() , 
+						'id', 
+						'name'
+					),
+					array(
+						'template'=>'{input} {label}',
+						'separator' =>'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+						'class'=>'categoryFilter',
+						'checkAll'=>'Todos',
+					)
+				);  ?>
+			<?php echo $form->error($model,'roles'); ?>
+		</div>		
+
 	</div>
 
 	<div class="col-md-6">

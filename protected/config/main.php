@@ -20,6 +20,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'ext.yii-mail.YiiMailMessage',
+		'application.extensions.CAdvancedArBehavior',
 	),
 
 	'modules'=>array(

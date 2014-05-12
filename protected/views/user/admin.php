@@ -64,8 +64,10 @@ $('.search-form form').submit(function(){
 			'value'=>'User::model()->statusOptions[$data->status]',
 		),
 		array(
-			'name'=>'created',
-			'value'=>'strtotime($data->created)>0?date("d-m-Y h:i", strtotime($data->created)):\'\'',
+			'header'=>'Roles',
+			'name'=>'roles.id',
+			'type'=>'raw',
+			'value'=>'implode(", ",$data->roleNames)',
 		),
 		array(
 			'name'=>'lastvisit',
@@ -73,36 +75,36 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'class'=>'CButtonColumn',
-	        'template'=>'{update} {delete}',
-	        'buttons'=>array (
-	            'update'=> array(
-	                'label' => '<i class="fa fa-edit grid-icon"></i>',
-	                'options'=>array('title'=>'Editar'),
-	                'imageUrl' => false,
-	            ),
-	            'view'=>array(
-	                'label' => '<i class="fa fa-search grid-icon"></i>',
-	                'options'=>array('title'=>'Ver'),
-	                'imageUrl' => false,
-	            ),
-	            'delete'=>array(
-	                'label' => '<i class="fa fa-trash-o grid-icon"></i>',
-	                'options'=>array('title'=>'Eliminar'),
-	                'imageUrl' => false,
-	                'visible' => 'Yii::app()->user->id != $data->id',
-		        ),
-	        ),
+			'template'=>'{update} {delete}',
+			'buttons'=>array (
+				'update'=> array(
+					'label' => '<i class="fa fa-edit grid-icon"></i>',
+					'options'=>array('title'=>'Editar'),
+					'imageUrl' => false,
+				),
+				'view'=>array(
+					'label' => '<i class="fa fa-search grid-icon"></i>',
+					'options'=>array('title'=>'Ver'),
+					'imageUrl' => false,
+				),
+				'delete'=>array(
+					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
+					'options'=>array('title'=>'Eliminar'),
+					'imageUrl' => false,
+					'visible' => 'Yii::app()->user->id != $data->id',
+				),
+			),
 		),
 	),
-    'pager'=>array(
-    	'htmlOptions'=>array('class'=>'pagination-sm'),
-        'header' => '',
-        'hiddenPageCssClass' => 'disabled',
-        'maxButtonCount' => 10,
-        'cssFile' => false,
-        //'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
-        //'nextPageLabel' => '<i class="icon-chevron-right">></i>',
-    ),
+	'pager'=>array(
+		'htmlOptions'=>array('class'=>'pagination-sm'),
+		'header' => '',
+		'hiddenPageCssClass' => 'disabled',
+		'maxButtonCount' => 10,
+		'cssFile' => false,
+		//'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
+		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
+	),
 )); ?>
 	</div>
 </div>
