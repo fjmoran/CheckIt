@@ -20,6 +20,7 @@ class WebUser extends CWebUser
             if ($operation===$role) return 1;
         }
         return 0;
+
         /*if ($role === 'admin') {
             return true; // admin role has access to everything
         }*/

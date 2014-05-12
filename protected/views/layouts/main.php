@@ -40,9 +40,10 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><?php echo Yii::app()->utility->setTitle(); ?></a>
+					<a class="navbar-brand" href="<?php echo Yii::app()->createUrl('site/index')?>"><?php echo Yii::app()->utility->setTitle(); ?></a>
 				</div>
 
+	<?php if (!Yii::app()->user->isGuest) { ?>
 				<div class="collapse navbar-collapse pull-right">
 					<div class="btn-group btn-group-sm" id="btn-gr-login">
 						<button type="button" class="btn dropdown-toggle" id="btn-login" data-toggle="dropdown">
@@ -51,6 +52,7 @@
 						</button>
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(
+				'id'=>'user-menu',
 				'class'=>'dropdown-menu',
 				'role'=>'menu',
 			),
@@ -63,6 +65,7 @@
 		)); ?>
 					</div>
 				</div>
+	<?php } ?>
 
 				<div class="collapse navbar-collapse pull-right">
 		<?php $this->widget('zii.widgets.CMenu',array(
