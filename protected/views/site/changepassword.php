@@ -9,11 +9,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<div class="row">
-	<div class="col-md-4 col-md-offset-4" id="login">
-
-<h2>Cambiar contraseña</h2>
-
+<div class="ck-login">
 <?php if (Yii::app()->user->hasFlash('error')):?>
     <div class="alert alert-danger"><?php echo Yii::app()->user->getFlash('error');?></div>
 <?php else: ?>
@@ -21,8 +17,8 @@ $this->breadcrumbs=array(
 <?php if (Yii::app()->user->hasFlash('message')):?>
     <div class="alert alert-success"><?php echo Yii::app()->user->getFlash('message');?></div>
 <?php else:?>
+	<div class="row form-signin">
 
-<div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'changepassword-form',
 	'enableClientValidation'=>true,
@@ -35,7 +31,8 @@ $this->breadcrumbs=array(
 		'autocomplete' => 'off',
     ),
 )); ?>
-
+        <h2 class="form-signin-heading">Cambiar contraseña</h2>
+        <p>Ingrese su nueva contraseña.</p> 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
@@ -49,14 +46,10 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="form-group buttons text-center">
-		<?php echo CHtml::submitButton('Enviar', array('class'=>'btn btn-primary ')); ?>
+		<?php echo CHtml::submitButton('Enviar', array('class'=>'btn btn-primary btn-block')); ?>
 	</div>
-
-<?php $this->endWidget(); ?>
-</div><!-- form -->
-
-<?php endif;?>
-<?php endif;?>
-
+    <?php $this->endWidget(); ?>
 	</div>
+<?php endif;?>
+<?php endif;?>	
 </div>
