@@ -42,6 +42,8 @@ $this->breadcrumbs=array(
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
+	<a href="<?php echo Yii::app()->createUrl('site/forgotpassword') ?>" class="pull-right">¿Olvidaste tu contraseña?</a>
+
 	<div class="form-group rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
 		<?php echo $form->label($model,'rememberMe'); ?>

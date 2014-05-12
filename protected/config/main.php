@@ -19,6 +19,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.yii-mail.YiiMailMessage',
 	),
 
 	'modules'=>array(
@@ -33,6 +34,20 @@ return array(
 
 	// application components
 	'components'=>array(
+		'mail' => array(
+			'class' => 'ext.yii-mail.YiiMail',
+			'transportType'=>'smtp',
+			'transportOptions'=>array(
+					'host'=>'smtp.gmail.com',
+					'encryption'=>'ssl',
+					'username'=>'kryoxer@gmail.com',
+					'password'=>'12not34die',
+					'port'=>'465',
+			),
+			'viewPath' => 'application.views.mail',   
+			'logging' => true,
+			'dryRun' => false,          
+		),
 		'utility'=>array(
 			'class'=>'Utility',
 		),

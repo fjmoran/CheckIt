@@ -43,6 +43,8 @@ class User extends CActiveRecord
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
 			array('firstname, lastname', 'length', 'max'=>255),
+			array('email', 'email','message'=>"El email ingresado no es correcto"),
+			array('email', 'unique','message'=>'El email ingresado ya existe!'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, email, password, firstname, lastname, status, created, lastvisit', 'safe', 'on'=>'search'),

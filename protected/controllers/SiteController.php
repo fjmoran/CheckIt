@@ -29,7 +29,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('login','error'),
+				'actions'=>array('login','error','forgotpassword','changepassword'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -114,6 +114,46 @@ class SiteController extends Controller
 			}
 		}
 		$this->render('contact',array('model'=>$model));
+	}
+
+	public function actionForgotPassword() {
+		$this->layout='//layouts/column1';	
+
+		$model=new ForgotPasswordForm;
+
+		if(isset($_POST['ForgotPasswordForm']))
+		{
+			$model->attributes=$_POST['ForgotPasswordForm'];
+			if ($model->validate() && $model->sendpassword()) {
+				Yii::app()->user->setFlash('message', 'La contraseña fue enviada al e-mail indicado.');
+			}
+		}
+
+		$this->render('forgotpassword',array(
+			'model'=>$model,
+		));		
+	}
+
+	public function actionChangePassword($t) {
+		$this->layout='//layouts/column1';	
+
+		$model=new ChangePasswordForm;
+		if (!$model->checkToken($t)) {
+			Yii::app()->user->setFlash('error', 'Debe solicitar nuevamente la recuperación de la contraseña.');
+			$model->addError('message','Debe solicitar nuevamente la recuperación de la contraseña.');
+		}
+
+		if(isset($_POST['ChangePasswordForm']))
+		{
+			$model->attributes=$_POST['ChangePasswordForm'];
+			if ($model->validate() && $model->checkpassword($t)) {
+				Yii::app()->user->setFlash('message', 'La contraseña fue cambiada exitosamente.');
+			}
+		}
+
+		$this->render('changepassword',array(
+			'model'=>$model,
+		));		
 	}
 
 	/**
