@@ -168,6 +168,7 @@ label.error {
   {
     color: #aaa; 
     background-color: #393939;
+        min-width: 155px;
   }
   #btn-login:hover
   {

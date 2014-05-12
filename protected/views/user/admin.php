@@ -34,7 +34,7 @@ $('.search-form form').submit(function(){
 	<div class="col-md-12">
 		<a href="<?php echo Yii::app()->createUrl('user/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
-</div>
+</div></br>
 
 <?php /* echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
