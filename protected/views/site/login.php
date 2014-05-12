@@ -37,6 +37,18 @@ $this->breadcrumbs=array(
 				<?php echo $form->error($model,'password'); ?>
 			</div>
 
+<?php if($model->scenario == 'captchaRequired'): ?>
+			<div class="form-group">
+				<?php echo CHtml::activeLabelEx($model,'verifyCode'); ?>
+				<div>
+				<?php $this->widget('CCaptcha'); ?>
+				<?php echo CHtml::activeTextField($model,'verifyCode'); ?>
+				</div>
+				<div class="hint">Ingrese las letras de la imagen anterior.
+				<br/>Respete mayúsculas y minúsculas.</div>
+			</div>
+<?php endif; ?>
+
 			<div class="form-group rememberMe">
 				<?php echo $form->checkBox($model,'rememberMe'); ?>
 				<?php echo $form->label($model,'rememberMe'); ?>

@@ -8,6 +8,8 @@ class SiteController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';	
+	public $attempts = 5; // allowed 5 attempts
+	public $counter;
 
 	/**
 	 * @return array action filters
@@ -29,7 +31,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('login','error','forgotpassword','changepassword'),
+				'actions'=>array('login','error','forgotpassword','changepassword','captcha'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -156,6 +158,10 @@ class SiteController extends Controller
 		));		
 	}
 
+	private function captchaRequired(){
+		return Yii::app()->session->itemAt('captchaRequired') >= $this->attempts;
+	}
+
 	/**
 	 * Displays the login page
 	 */
@@ -163,7 +169,8 @@ class SiteController extends Controller
 	{
 		$this->layout='//layouts/column1';	
 
-		$model=new LoginForm;
+		$model = $this->captchaRequired()? new LoginForm('captchaRequired') : new LoginForm;
+		//$model=new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -179,6 +186,10 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
+			else {
+				$this->counter = Yii::app()->session->itemAt('captchaRequired') + 1;
+				Yii::app()->session->add('captchaRequired',$this->counter);
+			}
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
