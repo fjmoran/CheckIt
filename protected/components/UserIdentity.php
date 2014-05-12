@@ -34,10 +34,7 @@ class UserIdentity extends CUserIdentity
 			$record->lastvisit = new CDbExpression("NOW()");
 			$record->update(array('lastvisit'));
 
-			$roles = array();
-			foreach ($record->roles as $role) {
-				$roles[] = $role->name;
-			}
+			$roles = $record->roleNames;
 			$this->setState('roles', $roles);
 			$this->setState('firstname', $record->firstname);
 			$this->setState('lastname', $record->lastname);

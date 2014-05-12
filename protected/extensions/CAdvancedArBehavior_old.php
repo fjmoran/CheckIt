@@ -89,25 +89,18 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 	{
 		if(!is_array($this->ignoreRelations))
 			throw new CException('ignoreRelations of CAdvancedArBehavior needs to be an array');
+
 		$this->writeManyManyTables();
 		parent::afterSave($event);
 		return true;
 	}
-	
-	public function beforeDelete($event)
-	{
-		if($this->trace)
-			Yii::trace('deleting MANY_MANY data for '.get_class($this->owner), 'system.db.ar.CActiveRecord');
-		foreach($this->getRelations() as $relation) 
-		{
-			$this->cleanRelation($relation);
-		}
-	}
-	
+
 	protected function writeManyManyTables() 
 	{
 		if($this->trace)
-			Yii::trace('writing MANY_MANY data for '.get_class($this->owner), 'system.db.ar.CActiveRecord');
+			Yii::trace('writing MANY_MANY data for '.get_class($this->owner),
+					'system.db.ar.CActiveRecord');
+
 		foreach($this->getRelations() as $relation) 
 		{
 			$this->cleanRelation($relation);
@@ -126,28 +119,28 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 	{
 		$relations = array();
 
-		foreach ($this->owner->getMetaData()->relations as $key => $relation)
+		foreach ($this->owner->relations() as $key => $relation) 
 		{
-			if (get_class($relation) == CActiveRecord::MANY_MANY &&
+			if ($relation[0] == CActiveRecord::MANY_MANY && 
 					!in_array($key, $this->ignoreRelations) &&
-					$this->owner->hasRelated($key) &&
+					$this->owner->hasRelated($key) && 
 					$this->owner->$key != -1)
 			{
 				$info = array();
 				$info['key'] = $key;
-				$info['foreignTable'] = $relation->className;
+				$info['foreignTable'] = $relation[1];
 
-					if (preg_match('/^(.+)\((.+)\s*,\s*(.+)\)$/s', $relation->foreignKey, $pocks))
+					if (preg_match('/^(.+)\((.+)\s*,\s*(.+)\)$/s', $relation[2], $pocks)) 
 					{
 						$info['m2mTable'] = $pocks[1];
 						$info['m2mThisField'] = $pocks[2];
 						$info['m2mForeignField'] = $pocks[3];
 					}
-					else
+					else 
 					{
-						$info['m2mTable'] = $relation->foreignKey;
+						$info['m2mTable'] = $relation[2];
 						$info['m2mThisField'] = $this->owner->tableSchema->PrimaryKey;
-						$info['m2mForeignField'] = CActiveRecord::model($relation->className)->tableSchema->primaryKey;
+						$info['m2mForeignField'] = CActiveRecord::model($relation[1])->tableSchema->primaryKey;
 					}
 				$relations[$key] = $info;
 			}
@@ -164,44 +157,24 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 		// Only an object or primary key id is given
 		if(!is_array($this->owner->$key) && $this->owner->$key != array()) 		
 			$this->owner->$key = array($this->owner->$key);
-		
-		else if (is_array($this->owner->$key)&& $this->owner->$key != array()) {
 
-			// array of already added
-			$addedIds = array();
-			// An array of objects is given
-			foreach((array)$this->owner->$key as $foreignobject)
-			{
-				if(!is_numeric($foreignobject) && is_object($foreignobject)) {
-					// $foreignobject = $foreignobject->{$foreignobject->$relation['m2mForeignField']};
-					// bug with Model.model_id
-					$foreignobject = $foreignobject->primaryKey;
-				}
-				// only unique values for M2M
-				// skip object, if it has been already added
-				if(in_array((int)$foreignobject, array_values($addedIds))) continue;
-				$this->execute($this->makeManyManyInsertCommand($relation, $foreignobject));
-				
-				// adding to list of added
-				$addedIds[] = (int)$foreignobject;
-			}
+		else if (is_array($this->owner->$key)&& $this->owner->$key != array())
 
+		// An array of objects is given
+		foreach((array)$this->owner->$key as $foreignobject)
+		{
+			if(!is_numeric($foreignobject) && is_object($foreignobject))
+				$foreignobject = $foreignobject->{$foreignobject->$relation['m2mForeignField']};
+			$this->execute(
+					$this->makeManyManyInsertCommand($relation, $foreignobject));
 		}
-
 	}
 
 	/* before saving our relation data, we need to clean up exsting relations so
 	 * they are synchronized */
 	protected function cleanRelation($relation)
 	{
-		try
-		{
-			$this->execute($this->makeManyManyDeleteCommand($relation));
-		}
-		catch (CDbException $ex) {
-			// ignore any errors on cleaning the relation - just log them
-			Yii::trace("caught exception while cleaning relation '{$relation['foreignTable']}.{$relation['key']}': ".$ex->getMessage(), 'system.db.ar.CActiveRecord');
-		}
+		$this->execute($this->makeManyManyDeleteCommand($relation));	
 	}
 
 	// A wrapper function for execution of SQL queries
@@ -211,18 +184,18 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 
 	public function makeManyManyInsertCommand($relation, $value) {
 		return sprintf("insert into %s (%s, %s) values ('%s', '%s')",
-			$relation['m2mTable'],
-			$relation['m2mThisField'],
-			$relation['m2mForeignField'],
-			$this->owner->{$this->owner->tableSchema->primaryKey},
-			$value);
+				$relation['m2mTable'],
+				$relation['m2mThisField'],
+				$relation['m2mForeignField'],
+				$this->owner->{$this->owner->tableSchema->primaryKey},
+				$value);
 	}
 
 	public function makeManyManyDeleteCommand($relation) {
-		return sprintf("delete from %s where %s = '%s'",
-			$relation['m2mTable'],
-			$relation['m2mThisField'],
-			$this->owner->{$this->owner->tableSchema->primaryKey}
-		);
+		return sprintf("delete ignore from %s where %s = '%s'",
+				$relation['m2mTable'],
+				$relation['m2mThisField'],
+				$this->owner->{$this->owner->tableSchema->primaryKey}
+				);
 	}
 }
