@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
         	<div class="form-group buttons text-center">
 				<?php echo CHtml::submitButton('Ingresar', array('class'=>'btn btn-primary btn-block')); ?>
 			</div>
-        <a href="#recuperar">Recuperar contraseña</a> 
+        <a href="<?php echo Yii::app()->createUrl('site/forgotpassword') ?>">Recuperar contraseña</a> 
     <?php $this->endWidget(); ?>
 	</div>
 </div>
