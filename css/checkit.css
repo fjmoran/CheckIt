@@ -56,7 +56,7 @@ label.error {
   max-width: 450px;
   padding: 19px 29px 29px;
   margin: 0 auto 20px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
@@ -159,7 +159,7 @@ label.error {
   .bg-image
   {
     background-color: #fefefe;  
-    background: url('../images/3849.jpg');
+    background: url('../images/back.jpg');
     background-size: 100%;
   }  
   .badge-red
