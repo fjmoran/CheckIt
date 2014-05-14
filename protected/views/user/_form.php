@@ -47,6 +47,13 @@
 		</div>
 
 		<div class="form-group">
+			<?php echo $form->labelEx($model,'position_id'); ?>
+			<?php $data = Position::model()->findAll(array('order' => 'name')); ?>
+			<?php echo $form->dropDownList($model,'position_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin cargo','class'=>'form-control')); ?>
+			<?php echo $form->error($model,'position_id'); ?>
+		</div>		
+
+		<div class="form-group">
 			<?php echo $form->labelEx($model,'status'); ?>
 			<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'status'); ?>

@@ -10,6 +10,10 @@
  */
 class Position extends CActiveRecord
 {
+
+	public $userIDs = array();
+	public $userNames = array();
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -26,7 +30,7 @@ class Position extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, parent_id', 'required'),
+			array('name', 'required'),
 			array('parent_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
@@ -43,6 +47,8 @@ class Position extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'parent' => array(self::BELONGS_TO, 'Position', 'parent_id'),
+			'users' => array(self::HAS_MANY, 'User', 'position_id')
 		);
 	}
 
@@ -53,8 +59,8 @@ class Position extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'parent_id' => 'Parent',
+			'name' => 'Nombre',
+			'parent_id' => 'Superior Jerárquico',
 		);
 	}
 
@@ -95,4 +101,15 @@ class Position extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function afterFind()
+    {
+        if(!empty($this->users))
+        {
+            foreach($this->users as $user){
+                $this->userIDs[]=$user->id;
+                $this->userNames[]=$user->firstname." ".$user->lastname;
+            }
+        }
+    }
 }

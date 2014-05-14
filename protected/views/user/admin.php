@@ -59,6 +59,10 @@ $('.search-form form').submit(function(){
 		'firstname',
 		'lastname',
 		array(
+			'header'=>'Cargo',
+			'name'=>'position.name',
+		),
+		array(
 			'name'=>'status',
 			'type'=>'html',
 			'value'=>'User::model()->statusOptions[$data->status]',

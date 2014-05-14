@@ -12,6 +12,7 @@ $this->menu=array(
 	array('label'=>'Create Position', 'url'=>array('create')),
 );
 
+/*
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -23,33 +24,78 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
-");
+");*/
 ?>
 
-<h1>Manage Positions</h1>
+<h1>Gestión de Cargos</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<div class="row">
+	<div class="col-md-12">
+		<a href="<?php echo Yii::app()->createUrl('position/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+	</div>
+</div></br>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php /*echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
+<?php */ ?>
+
+<div class="row">
+	<div class="col-md-12">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'position-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	//'filter'=>$model,
+	'itemsCssClass' => 'table table-condensed table-hover table-striped',
+	'cssFile'=>false,
+	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'id',
 		'name',
-		'parent_id',
+		array(
+			'header'=>'Superior Jerárquico',
+			'name'=>'parent.name',
+		),
+		array(
+			'header'=>'Usuarios',
+			'name'=>'user.id',
+			'value'=>'implode(", ",$data->userNames)',
+		),
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{update} {delete}',
+			'buttons'=>array (
+				'update'=> array(
+					'label' => '<i class="fa fa-edit grid-icon"></i>',
+					'options'=>array('title'=>'Editar'),
+					'imageUrl' => false,
+				),
+				'view'=>array(
+					'label' => '<i class="fa fa-search grid-icon"></i>',
+					'options'=>array('title'=>'Ver'),
+					'imageUrl' => false,
+				),
+				'delete'=>array(
+					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
+					'options'=>array('title'=>'Eliminar'),
+					'imageUrl' => false,
+					'visible' => 'Yii::app()->user->id != $data->id',
+				),
+			),
 		),
 	),
+	'pager'=>array(
+		'htmlOptions'=>array('class'=>'pagination-sm'),
+		'header' => '',
+		'hiddenPageCssClass' => 'disabled',
+		'maxButtonCount' => 10,
+		'cssFile' => false,
+		//'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
+		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
+	),
 )); ?>
+	</div>
+</div>

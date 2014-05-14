@@ -58,12 +58,6 @@ $this->menu=array(
 			<?php echo $form->error($model,'lastname'); ?>
 		</div>
 
-		<div class="form-group">
-			<?php echo $form->labelEx($model,'status'); ?>
-			<?php echo $form->dropDownList($model,'status', User::model()->statusOptions, array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'status'); ?>
-		</div>		
-
 <h2>Cambiar password</h2>
 
 		<div class="form-group">

@@ -42,7 +42,7 @@ class User extends CActiveRecord
 		return array(
 			array('email, firstname, lastname, status', 'required'),
 			array('password', 'required', 'on' => 'insert'),
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('status, position_id', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
 			array('firstname, lastname', 'length', 'max'=>255),
 			array('email', 'email','message'=>"El email ingresado no es correcto"),
@@ -78,7 +78,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			//'id0' => array(self::BELONGS_TO, 'UserRole', 'id'),
+			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
 			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
 		);
 	}
@@ -100,6 +100,7 @@ class User extends CActiveRecord
 			'firstname' => 'Nombre',
 			'lastname' => 'Apellido',
 			'status' => 'Estado',
+			'position_id' => 'Cargo',
 			'created' => 'Creado en',
 			'lastvisit' => 'Última visita',
 		);

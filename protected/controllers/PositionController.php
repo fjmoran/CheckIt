@@ -63,7 +63,7 @@ class PositionController extends Controller
 		{
 			$model->attributes=$_POST['Position'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -87,7 +87,7 @@ class PositionController extends Controller
 		{
 			$model->attributes=$_POST['Position'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(

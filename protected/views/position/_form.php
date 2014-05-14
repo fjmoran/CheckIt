@@ -31,14 +31,20 @@
 
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'parent_id'); ?>
-			<?php echo $form->textField($model,'parent_id'); ?>
+			<?php 
+			if ($model->id) 
+				$data = Position::model()->findAll('id<>'.$model->id,array('order' => 'name'));
+			else
+				$data = Position::model()->findAll(array('order' => 'name'));
+			?>
+			<?php echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin superior','class'=>'form-control')); ?>
 			<?php echo $form->error($model,'parent_id'); ?>
 		</div>
 	</div>
 </div>
 
-<div class="row buttons">
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+<div class="form-group buttons">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
 </div>
 
 <?php $this->endWidget(); ?>
