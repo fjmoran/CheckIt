@@ -97,7 +97,11 @@
 
 		<div class="row" id="footer"> 
 			<div class="col-md-12 bg-color">
-				<p class="text-muted credit text-center">Aquí va el footer.</p>
+				<p class="text-muted credit pull-right" style="padding-top: 10px;">
+					<i class="fa fa-facebook-square"></i>
+					&nbsp
+					<i class="fa fa-twitter"></i>
+					 | Check!It 2014.</p>
 			</div>
 		</div><!-- footer -->   
 
