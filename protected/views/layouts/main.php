@@ -101,7 +101,7 @@
 					<i class="fa fa-facebook-square"></i>
 					&nbsp
 					<i class="fa fa-twitter"></i>
-					 | Check!It 2014.</p>
+					 | 2014 Check!It</p>
 			</div>
 		</div><!-- footer -->   
 
