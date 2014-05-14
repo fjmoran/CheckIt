@@ -80,9 +80,9 @@
 	</div>
 </div>	
 
-	<div class="form-group buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
-	</div>
+<div class="form-group buttons">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
