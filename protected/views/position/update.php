@@ -16,10 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<<<<<<< HEAD
-<h1>Editar Cargo</h1>
-=======
 <h2>Editar Cargo</h2>
->>>>>>> FETCH_HEAD
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
