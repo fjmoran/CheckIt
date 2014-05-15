@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Editar opción "<?php echo $model->name; ?>"</h1>
+<h2>Editar parámetro "<?php echo $model->name; ?>"</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear <?php echo Yii::app()->utility->getOption('task_name'); ?></h1>
+<h2>Crear <?php echo Yii::app()->utility->getOption('task_name'); ?></h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

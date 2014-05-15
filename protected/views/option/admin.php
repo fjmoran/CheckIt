@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h1>Opciones de Sistema</h1>
+<h2>Parámetros de Sistema</h2>
 
 <?php /*echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Editar <?php echo Yii::app()->utility->getOption('subproject_name'); ?></h1>
+<h2>Editar <?php echo Yii::app()->utility->getOption('subproject_name'); ?></h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

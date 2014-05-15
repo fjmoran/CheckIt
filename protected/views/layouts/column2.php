@@ -23,10 +23,10 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 		'items'=>array(
 			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Usuarios', 'url'=>array('/user/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('user')),
 			array('label'=>'<i class="fa fa-tags fa-lg fa-fw"></i> Cargos', 'url'=>array('/position/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('position')),
-			array('label'=>'<i class="fa fa-tags fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('project')),
-			array('label'=>'<i class="fa fa-tags fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subprojects_name'), 'url'=>array('/subproject/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('subproject')),
-			array('label'=>'<i class="fa fa-tags fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task')),
-			array('label'=>'<i class="fa fa-tags fa-lg fa-fw"></i> Opciones', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option')),
+			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('project')),
+			array('label'=>'<i class="fa fa-clipboard fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subprojects_name'), 'url'=>array('/subproject/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('subproject')),
+			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task')),
+			array('label'=>'<i class="fa fa-code fa-lg fa-fw"></i> Parámetros', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option')),
 
 /*			array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso<span class="badge badge-red pull-right">42</span>', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
 			array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
