@@ -50,7 +50,7 @@
 					<div class="btn-group btn-group-sm" id="btn-gr-login">
 						<button type="button" class="btn dropdown-toggle" id="btn-login" data-toggle="dropdown">
 							<?php echo Yii::app()->user->firstname." ".Yii::app()->user->lastname ?>
-							<span class="caret"></span>
+							&nbsp<i class="fa fa-chevron-down"></i>
 						</button>
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(

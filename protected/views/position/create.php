@@ -13,6 +13,10 @@ $this->menu=array(
 );
 ?>
 
+<<<<<<< HEAD
 <h1>Crear nuevo Cargo</h1>
+=======
+<h2>Crear Cargo</h2>
+>>>>>>> FETCH_HEAD
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
