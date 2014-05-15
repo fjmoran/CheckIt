@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h1>Gestión de <?php echo Yii::app()->utility->getOption('projects_name'); ?></h1>
+<h2>Gestión de <?php echo Yii::app()->utility->getOption('projects_name'); ?></h2>
 
 <div class="row">
 	<div class="col-md-12">
