@@ -24,16 +24,40 @@ class Utility extends CApplicationComponent
 
 		if ($controller=='user' && $action!='profile') {
 			if ($level == 1) return 'admin';
-			if ($level == 2) return 'usuarios';
+			if ($level == 2) return 'user';
 			if ($level == 3) return ' - Administración';
 		}
 		if ($controller=='position') {
 			if ($level == 1) return 'admin';
-			if ($level == 2) return 'cargos';
+			if ($level == 2) return 'position';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='option') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'option';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='project') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'project';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='subproject') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'subproject';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='task') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'task';
 			if ($level == 3) return ' - Administración';
 		}
 
 		return '';    
+	}
+
+	public function getOption($name) {
+		return Option::model()->find("name='$name'")->value;
 	}
 
 }

@@ -1,13 +1,13 @@
 <?php
-/* @var $this PositionController */
-/* @var $model Position */
+/* @var $this SubprojectController */
+/* @var $model Subproject */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'position-form',
+	'id'=>'subproject-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -31,15 +31,10 @@
 		</div>
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'parent_id'); ?>
-			<?php 
-			if ($model->id) 
-				$data = Position::model()->findAll('id<>'.$model->id,array('order' => 'name'));
-			else
-				$data = Position::model()->findAll(array('order' => 'name'));
-			?>
-			<?php echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin superior','class'=>'form-control')); ?>
-			<?php echo $form->error($model,'parent_id'); ?>
+			<?php echo $form->labelEx($model,Yii::app()->utility->getOption('project_name')); ?>
+			<?php $data = Project::model()->findAll(array('order' => 'name')); ?>
+			<?php echo $form->dropDownList($model,'project_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'project_id'); ?>
 		</div>
 	</div>
 </div>
