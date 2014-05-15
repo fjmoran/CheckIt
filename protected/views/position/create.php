@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Position</h1>
+<h2>Crear Cargo</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

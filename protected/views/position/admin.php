@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h1>Gestión de Cargos</h1>
+<h2>Gestión de Cargos</h2>
 
 <div class="row">
 	<div class="col-md-12">
