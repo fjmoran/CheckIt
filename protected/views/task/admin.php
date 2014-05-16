@@ -55,6 +55,7 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'name',
 		array(
+			'htmlOptions' => array('style' => 'min-width: 600px;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
 		),
@@ -62,6 +63,7 @@ $('.search-form form').submit(function(){
 		'due_date',
 		array(
 			'class'=>'CButtonColumn',
+			'htmlOptions' => array('style' => 'width: 60px;'),
 			'template'=>'{update} {delete}',
 			'buttons'=>array (
 				'update'=> array(
