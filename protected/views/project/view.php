@@ -16,13 +16,62 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Project #<?php echo $model->id; ?></h1>
+<h2><?php echo Yii::app()->utility->getOption('project_name').": ".$model->name; ?></h2>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'name',
-		'position_id',
-	),
-)); ?>
+<?php foreach ($model->subprojects as $subproject) { ?>
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			<h3 class="panel-title"><? echo Yii::app()->utility->getOption('subproject_name'); ?></h3>
+		</div>
+
+		<div class="panel-body">
+			<p><?php echo $subproject->name;?></p>
+		</div>
+
+		<table class="table table-condensed">
+			<tr>
+				<th><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+				<th>Fecha inicio</th>
+				<th>Fecha término</th>
+				<th style="width: 150px;"></th>
+			</tr>
+		<?php foreach ($subproject->tasks as $task) { ?>
+			<tr>
+				<td><?php echo $task->name; ?></td>
+				<td><?php echo $task->start_date; ?></td>
+				<td><?php echo $task->due_date; ?></td>
+				<td class="button-column" style="text-align: right;">
+					<a title="Editar" data-toggle="modal" data-target="#myModal"
+					data-remote="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+						<i class="fa fa-edit grid-icon"></i>
+					<?php 
+						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
+						$datediff = (int)$interval->format("%R%a");
+					?>
+					<?php if ($task->status == 1):?>
+						<span class="label label-success">Terminado</span>
+					<?php elseif ($datediff < 0): ?>
+						<span class="label label-danger">Vencido</span>
+					<?php elseif ($datediff < 16): ?>
+						<span class="label label-warning"><i class="fa fa-arrow-right"></i> Vence en <?=$datediff?> días</span>
+					<?php else: ?>
+						<span class="label label-info">Pendiente</span>
+					<?php endif; ?>
+					</a>
+				</td>
+			</tr>
+		<? } ?>
+		</table>
+
+	</div>
+	
+<? } ?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>

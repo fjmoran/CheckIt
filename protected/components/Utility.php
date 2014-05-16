@@ -37,7 +37,7 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'option';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='project') {
+		if ($controller=='project' && ($action!='myprojects' && $action!='view')) {
 			if ($level == 1) return 'admin';
 			if ($level == 2) return 'project';
 			if ($level == 3) return ' - Administración';
@@ -52,6 +52,15 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'task';
 			if ($level == 3) return ' - Administración';
 		}
+
+
+
+		if ($controller=='project' && ($action=='myprojects' || $action=='view')) {
+			if ($level == 1) return 'strategy';
+			if ($level == 2) return 'myprojects';
+			if ($level == 3) return ' - Gestión Estratégica';
+		}
+
 
 		return '';    
 	}

@@ -28,8 +28,12 @@ class ProjectController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('view','create','update','admin','delete'),
+				'actions'=>array('create','update','admin','delete'),
 				'roles'=>array('admin'),
+			),
+			array('allow',
+				'actions'=>array('myprojects','view'),
+				'roles'=>array('strategy'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -116,6 +120,28 @@ class ProjectController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('Project');
 		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionMyProjects()
+	{
+		$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
+
+		if ($position_id) {
+			$criteria = new CDbCriteria();
+			$criteria->addCondition('position_id='.$position_id,'AND');
+			$criteria->order='name ASC';
+			$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
+		}
+		else {
+			$dataProvider=null;
+		}
+
+		$this->render('myprojects',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}

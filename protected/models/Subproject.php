@@ -105,4 +105,15 @@ class Subproject extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function afterFind()
+	{
+		if(!empty($this->tasks))
+		{
+			foreach($this->tasks as $task){
+				$this->taskIDs[]=$task->id;
+				$this->taskNames[]=$task->name;
+			}
+		}
+	}
 }

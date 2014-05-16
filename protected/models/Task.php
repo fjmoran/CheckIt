@@ -15,6 +15,9 @@
  */
 class Task extends CActiveRecord
 {
+
+	private $statusOptions = array('0' => 'Abierta', '1' => 'Terminada');
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,11 +35,11 @@ class Task extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, subproject_id, start_date, due_date', 'required'),
-			array('subproject_id', 'numerical', 'integerOnly'=>true),
+			array('subproject_id, status', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, subproject_id, start_date, due_date', 'safe', 'on'=>'search'),
+			array('id, name, subproject_id, start_date, due_date, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -105,4 +108,13 @@ class Task extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getStatusOptions() {
+		return $this->statusOptions;
+	}
+
+	public function getStatusText() {
+		return $this->statusOptions[$this->status];
+	}
+
 }

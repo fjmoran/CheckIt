@@ -27,13 +27,42 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 			array('label'=>'<i class="fa fa-clipboard fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subprojects_name'), 'url'=>array('/subproject/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('subproject')),
 			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task')),
 			array('label'=>'<i class="fa fa-code fa-lg fa-fw"></i> Parámetros', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option')),
-
-/*			array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso<span class="badge badge-red pull-right">42</span>', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process')),
-			array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('strategy')),
-			array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/site/contact'), 'visible'=>Yii::app()->user->checkAccess('admin')),*/
 		),
 	)); 
 }?>
+
+<?php 
+if (Yii::app()->utility->isActiveMenu('strategy')) {
+
+	$alert_tasks = '';
+	$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
+
+	if ($position_id) {
+
+		$rows = Yii::app()->db->createCommand()
+			->select('count(*) as q')
+			->from('task t')
+			->join('subproject s','t.subproject_id = s.id')
+			->join('project p', 's.project_id = p.id')
+			->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$position_id))
+			//->order('j.jobno,j.projid')
+			->queryRow();
+		$alert_tasks = $rows['q'];
+		if ($alert_tasks==0) $alert_tasks='';
+	}
+
+
+	$this->widget('zii.widgets.CMenu',array(
+		'htmlOptions'=>array(
+			'class'=>'nav navbar-nav',
+		),
+		'encodeLabel'=>false,
+		'items'=>array(
+			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name').'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
+		),
+	)); 
+}?>
+
 		        </div><!--/.nav-collapse -->
 		      </div>
 		    </div>

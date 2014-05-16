@@ -104,4 +104,15 @@ class Project extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function afterFind()
+	{
+		if(!empty($this->subprojects))
+		{
+			foreach($this->subprojects as $subproject){
+				$this->subprojectIDs[]=$subproject->id;
+				$this->subprojectNames[]=$subproject->name;
+			}
+		}
+	}
 }

@@ -31,11 +31,42 @@ class TaskController extends Controller
 				'actions'=>array('view','create','update','admin','delete'),
 				'roles'=>array('admin'),
 			),
+			array('allow',
+				'actions'=>array('changestatus'),
+				'roles'=>array('strategy'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
 	}
+
+	public function actionChangeStatus($id) {
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Task']))
+		{
+			switch ($model->status):
+				case '0':
+					$model->status='1';
+					$model->end_date = new CDbExpression("NOW()");
+					break;
+				case '1':
+					$model->status='0';
+					$model->end_date = new CDbExpression("NULL");
+					break;
+			endswitch;
+
+			if ($model->save(array('status','end_date'))) {
+				$this->redirect(array('project/view','id'=>$model->subproject->project->id));
+			}
+		}
+
+		$this->renderPartial('changestatus',array(
+			'model'=>$model,
+		));
+	}
+
 
 	/**
 	 * Displays a particular model.

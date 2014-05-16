@@ -48,7 +48,8 @@ class Position extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'parent' => array(self::BELONGS_TO, 'Position', 'parent_id'),
-			'users' => array(self::HAS_MANY, 'User', 'position_id')
+			'users' => array(self::HAS_MANY, 'User', 'position_id'),
+			'projects' => array(self::HAS_MANY, 'Project', 'position_id'),
 		);
 	}
 
@@ -102,14 +103,14 @@ class Position extends CActiveRecord
 		return parent::model($className);
 	}
 
-    public function afterFind()
-    {
-        if(!empty($this->users))
-        {
-            foreach($this->users as $user){
-                $this->userIDs[]=$user->id;
-                $this->userNames[]=$user->firstname." ".$user->lastname;
-            }
-        }
-    }
+	public function afterFind()
+	{
+		if(!empty($this->users))
+		{
+			foreach($this->users as $user){
+				$this->userIDs[]=$user->id;
+				$this->userNames[]=$user->firstname." ".$user->lastname;
+			}
+		}
+	}
 }
