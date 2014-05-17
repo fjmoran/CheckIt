@@ -42,10 +42,11 @@ $this->menu=array(
 				<td><?php echo $task->name; ?></td>
 				<td><?php echo $task->start_date; ?></td>
 				<td><?php echo $task->due_date; ?></td>
-				<td class="button-column" style="text-align: right;">
-					<a title="Editar" data-toggle="modal" data-target="#myModal"
-					data-remote="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
-						<i class="fa fa-edit grid-icon"></i>
+				<td style="text-align: right;">
+					<a title="Editar" style="text-decoration:none;" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+	
+					<i class="fa fa-edit grid-icon"></i>
 					<?php 
 						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
 						$datediff = (int)$interval->format("%R%a");
@@ -55,10 +56,11 @@ $this->menu=array(
 					<?php elseif ($datediff < 0): ?>
 						<span class="label label-danger">Vencido</span>
 					<?php elseif ($datediff < 16): ?>
-						<span class="label label-warning"><i class="fa fa-arrow-right"></i> Vence en <?=$datediff?> días</span>
+						<span class="label label-warning">Vence en <?=$datediff?> días</span>
 					<?php else: ?>
 						<span class="label label-info">Pendiente</span>
 					<?php endif; ?>
+
 					</a>
 				</td>
 			</tr>
