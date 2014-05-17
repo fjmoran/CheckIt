@@ -32,21 +32,20 @@ $this->menu=array(
 
 		<table class="table table-condensed">
 			<tr>
-				<th><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
-				<th>Fecha inicio</th>
-				<th>Fecha término</th>
-				<th style="width: 150px;"></th>
+				<th style="width: 30%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+				<th style="width: 20%;">Fecha inicio</th>
+				<th style="width: 20%;">Fecha término</th>
+				<th style="width: 15%;">Estado</th>
+				<th style="width: 15%;"><span class="pull-right">Modificar</span></th>
 			</tr>
 		<?php foreach ($subproject->tasks as $task) { ?>
 			<tr>
 				<td><?php echo $task->name; ?></td>
 				<td><?php echo $task->start_date; ?></td>
-				<td><?php echo $task->due_date; ?></td>
-				<td style="text-align: right;">
-					<a title="Editar" style="text-decoration:none;" data-toggle="modal" data-target="#myModal" 
-					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
-	
-					<i class="fa fa-edit grid-icon"></i>
+				<td>
+					<?php echo $task->due_date; ?>
+				</td>
+				<td>
 					<?php 
 						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
 						$datediff = (int)$interval->format("%R%a");
@@ -60,6 +59,12 @@ $this->menu=array(
 					<?php else: ?>
 						<span class="label label-info">Pendiente</span>
 					<?php endif; ?>
+				</td>
+				<td style="text-align: right;">
+					<a title="Editar" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+	
+					<i class="fa fa-edit grid-icon"></i>
 
 					</a>
 				</td>
