@@ -17,11 +17,21 @@
 					?>
 
 						<div class="pull-right">
-							<?php if ($next_tasks) { ?>
+							<?php 
+							if ($next_tasks > '1') { ?>
 							<span class="label label-warning"><?php echo $next_tasks;?> Próximas</span>
-							<?php } ?>
-							<?php if ($expired_tasks) { ?>
+							<?php 
+							} 
+							if ($next_tasks == '1') { ?>
+							<span class="label label-warning"><?php echo $next_tasks;?> Próxima</span>							
+							<?php } ?>	
+
+							<?php if ($expired_tasks > '1') { ?>
 							<span class="label label-danger"><?php echo $expired_tasks;?> Vencidas</span>
+							<?php 
+							} 
+							if ($expired_tasks == '1') { ?>
+							<span class="label label-danger"><?php echo $expired_tasks;?> Vencida</span>
 							<?php } ?>
 						</div>
 						<?php } ?>
