@@ -27,6 +27,6 @@ $this->menu=array(
 
 <div class="row" style="position:absolute; bottom: 0; width: 100%;">
 	<div class="col-md-12">
-		<div class="well well-sm" style="font-size: 12px;">(*) Los textos en <span class="label label-warning">amarillo</span> son tareas que vencen los próximos 15 días y los textos en <span class="label label-danger">rojo</span> corresponden a tareas ya vencidas</div>
+		<div class="well well-sm" style="font-size: 12px;">(*) Los textos en <span class="label label-warning">amarillo</span> son tareas que vencen los próximos 15 días, los textos en <span class="label label-danger">rojo</span> corresponden a tareas ya vencidas.</div>
 	</div>
 </div>

@@ -32,15 +32,20 @@ $this->menu=array(
 
 		<table class="table table-condensed">
 			<tr>
-				<th style="width: 30%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+				<th style="width: 35%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
 				<th style="width: 20%;">Fecha inicio</th>
 				<th style="width: 20%;">Fecha término</th>
 				<th style="width: 15%;">Estado</th>
-				<th style="width: 15%;"><span class="pull-right">Modificar</span></th>
+				<th style="width: 10%; text-align: center;">Modificar</th>
 			</tr>
 		<?php foreach ($subproject->tasks as $task) { ?>
 			<tr>
-				<td><?php echo $task->name; ?></td>
+				<td>
+					<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
+					<?php echo $task->name; ?>
+					</a>
+				</td>
 				<td><?php echo $task->start_date; ?></td>
 				<td>
 					<?php echo $task->due_date; ?>
@@ -60,7 +65,7 @@ $this->menu=array(
 						<span class="label label-info">Pendiente</span>
 					<?php endif; ?>
 				</td>
-				<td style="text-align: right;">
+				<td style="text-align: center;">
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
 	
@@ -70,11 +75,16 @@ $this->menu=array(
 				</td>
 			</tr>
 		<? } ?>
-		</table>
-
+		</table>	
 	</div>
 	
 <? } ?>
+
+	<div class="row">
+		<div class="col-md-12">
+			<a href="javascript:history.back()" class="btn btn-default pull-right" role="button">Volver</a>
+		</div>
+	</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
