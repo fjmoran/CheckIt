@@ -53,14 +53,21 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
 		array(
+			'htmlOptions' => array('style' => 'width: 75%;'),			
+			'header'=>'Nombre del objetivo',
+			'name'=>'name',
+		),		
+		array(
+			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('project_name'),
 			'name'=>'project.name',
 		),
 		array(
+			'header'=> 'Opciones',
 			'class'=>'CButtonColumn',
 			'template'=>'{update} {delete}',
+			'htmlOptions' => array('style' => 'width: 7%;'),				
 			'buttons'=>array (
 				'update'=> array(
 					'label' => '<i class="fa fa-edit grid-icon"></i>',

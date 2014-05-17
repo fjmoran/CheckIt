@@ -48,10 +48,20 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
-		'value',
+		array(
+			'htmlOptions' => array('style' => 'width: 50%;'),			
+			'header'=>'Nombre del parámetro',
+			'name'=>'name',
+		),	
+		array(
+			'htmlOptions' => array('style' => 'width: 43%;'),			
+			'header'=>'Valor',
+			'name'=>'value',
+		),			
 		array(
 			'class'=>'CButtonColumn',
+			'header'=> 'Opciones',			
+			'htmlOptions' => array('style' => 'width: 7%;'),			
 			'template'=>'{update}',
 			'buttons'=>array (
 				'update'=> array(
