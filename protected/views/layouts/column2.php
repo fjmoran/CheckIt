@@ -34,23 +34,8 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 <?php 
 if (Yii::app()->utility->isActiveMenu('strategy')) {
 
-	$alert_tasks = '';
-	$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
-
-	if ($position_id) {
-
-		$rows = Yii::app()->db->createCommand()
-			->select('count(*) as q')
-			->from('task t')
-			->join('subproject s','t.subproject_id = s.id')
-			->join('project p', 's.project_id = p.id')
-			->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$position_id))
-			//->order('j.jobno,j.projid')
-			->queryRow();
-		$alert_tasks = $rows['q'];
-		if ($alert_tasks==0) $alert_tasks='';
-	}
-
+	$alert_tasks = User::model()->find('id='.Yii::app()->user->id)->alertTasks;
+	if ($alert_tasks==0) $alert_tasks='';
 
 	$this->widget('zii.widgets.CMenu',array(
 		'htmlOptions'=>array(

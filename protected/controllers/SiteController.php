@@ -73,9 +73,24 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+
+		$roles = User::model()->findByPk(Yii::app()->user->id)->roleIDs;
+		if (in_array(2, $roles)) {
+			$this->redirect(array('user/login'));
+			exit;
+		}
+		if (in_array(3, $roles)) {
+			$this->redirect(array('user/login'));
+			exit;
+		}
+		if (in_array(4, $roles)) {
+			$this->redirect(array('project/myprojects'));
+			exit;
+		}
+		if (in_array(1, $roles)) {
+			$this->redirect(array('user/admin'));
+			exit;
+		}
 	}
 
 	/**
