@@ -54,13 +54,20 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
 		array(
+			'htmlOptions' => array('style' => 'width: 47%;'),			
+			'header'=>'Nombre de la acción',
+			'name'=>'name',
+		),		
+		array(
+			'htmlOptions' => array('style' => 'width: 46%;'),			
 			'header'=>'Cargo Responsable',
 			'name'=>'position.name',
 		),
 		array(
 			'class'=>'CButtonColumn',
+			'htmlOptions' => array('style' => 'width: 7%;'),			
+			'header'=>'Opciones',			
 			'template'=>'{update} {delete}',
 			'buttons'=>array (
 				'update'=> array(

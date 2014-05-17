@@ -53,17 +53,30 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
 		array(
-			'htmlOptions' => array('style' => 'min-width: 600px;'),
+			'htmlOptions' => array('style' => 'width: 26%;'),			
+			'header'=> 'Nombre',
+			'name'=> 'name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 43%;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
 		),
-		'start_date',
-		'due_date',
+		array(
+			'htmlOptions' => array('style' => 'width: 12%;'),
+			'header'=> 'Inicio',
+			'name'=> 'start_date',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 12%;'),			
+			'header'=> 'Fin',
+			'name'=> 'due_date',
+		),				
 		array(
 			'class'=>'CButtonColumn',
-			'htmlOptions' => array('style' => 'width: 60px;'),
+			'header' => 'Opciones',
+			'htmlOptions' => array('style' => 'width: 7%;'),
 			'template'=>'{update} {delete}',
 			'buttons'=>array (
 				'update'=> array(

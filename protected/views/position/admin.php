@@ -54,19 +54,28 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
 		array(
+			'htmlOptions' => array('style' => 'width: 20%;'),			
+			'header'=>'Cargo',
+			'name'=>'name',
+		),		
+
+		array(
+			'htmlOptions' => array('style' => 'width: 20%;'),				
 			'header'=>'Superior Jerárquico',
 			'name'=>'parent.name',
 		),
 		array(
-			'header'=>'Usuarios',
+			'htmlOptions' => array('style' => 'width: 53%;'),				
+			'header'=>'Usuarios en el cargo',
 			'name'=>'user.id',
 			'value'=>'implode(", ",$data->userNames)',
 		),
 		array(
+			'htmlOptions' => array('style' => 'width: 7%;'),
 			'class'=>'CButtonColumn',
 			'template'=>'{update} {delete}',
+			'header' => 'Opciones',			
 			'buttons'=>array (
 				'update'=> array(
 					'label' => '<i class="fa fa-edit grid-icon"></i>',

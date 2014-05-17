@@ -55,31 +55,48 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'email',
-		'firstname',
-		'lastname',
 		array(
+			'htmlOptions' => array('style' => 'width: 24%;'),			
+			'header'=>'Correo electrónico',
+			'name'=>'email',
+		),		
+		array(
+			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'header'=>'Nombre',
+			'name'=>'firstname',
+		),			
+		array(
+			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'header'=>'Apellido',
+			'name'=>'lastname',
+		),		
+		array(
+			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>'Cargo',
 			'name'=>'position.name',
 		),
 		array(
+			'htmlOptions' => array('style' => 'width: 7%;'),			
 			'name'=>'status',
 			'type'=>'html',
 			'value'=>'User::model()->statusOptions[$data->status]',
 		),
-		array(
+		/* array(
 			'header'=>'Roles',
 			'name'=>'roles.id',
 			'type'=>'raw',
 			'value'=>'implode(", ",$data->roleNames)',
-		),
+		), */
 		array(
+			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'name'=>'lastvisit',
 			'value'=>'strtotime($data->lastvisit)>0?date("d-m-Y h:i", strtotime($data->lastvisit)):\'\'',
 		),
 		array(
 			'class'=>'CButtonColumn',
+			'htmlOptions' => array('style' => 'width: 7%;'),
 			'template'=>'{update} {delete}',
+			'header' => 'Opciones',	
 			'buttons'=>array (
 				'update'=> array(
 					'label' => '<i class="fa fa-edit grid-icon"></i>',
