@@ -28,6 +28,19 @@
 
 	<!-- <script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/jquery/1.11.1/jquery.min.js"></script> -->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript"> 
+      
+      $(document).ready(function(){       
+
+		$('.modal').on('hidden.bs.modal', function () {
+			// alert("cerrado!");
+			$(this).removeData();
+		});
+
+      })    
+    </script>
+
 </head>
 
 <body>
