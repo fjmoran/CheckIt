@@ -38,6 +38,10 @@ class SiteController extends Controller
 				'actions'=>array('logout','index'),
 				'users'=>array('@'),
 			),
+			array('allow',
+				'actions'=>array('report'),
+				'roles'=>array('dashboard'),
+			),
 /*			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
@@ -67,6 +71,10 @@ class SiteController extends Controller
 		);
 	}
 
+	public function actionReport() {
+		$this->render('report');
+	}
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -76,7 +84,7 @@ class SiteController extends Controller
 
 		$roles = User::model()->findByPk(Yii::app()->user->id)->roleIDs;
 		if (in_array(2, $roles)) {
-			$this->redirect(array('user/login'));
+			$this->redirect(array('site/report'));
 			exit;
 		}
 		if (in_array(3, $roles)) {

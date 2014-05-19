@@ -48,6 +48,23 @@ if (Yii::app()->utility->isActiveMenu('strategy')) {
 	)); 
 }?>
 
+<?php 
+if (Yii::app()->utility->isActiveMenu('dashboard')) {
+
+	//$alert_tasks = User::model()->find('id='.Yii::app()->user->id)->alertTasks;
+	//if ($alert_tasks==0) $alert_tasks='';
+
+	$this->widget('zii.widgets.CMenu',array(
+		'htmlOptions'=>array(
+			'class'=>'nav navbar-nav',
+		),
+		'encodeLabel'=>false,
+		'items'=>array(
+			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'), 'active'=>Yii::app()->utility->isActiveSubMenu('sitereport')),
+		),
+	)); 
+}?>
+
 		        </div><!--/.nav-collapse -->
 		      </div>
 		    </div>

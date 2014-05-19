@@ -34,8 +34,14 @@ if ($model->start_date=='') $model->start_date=date('Y-m-d');
 
 		<div class="form-group">
 			<?php echo $form->labelEx($model,Yii::app()->utility->getOption('subproject_name')); ?>
-			<?php $data = Subproject::model()->findAll(array('order' => 'name')); ?>
-			<?php echo $form->dropDownList($model,'subproject_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
+			<?php 
+			$data = Subproject::model()->findAll(array('order' => 'project_id,name'));
+			$listdata;
+			foreach ($data as $sp) {
+				$listdata[$sp->id] = $sp->project->name . " > " . $sp->name;
+			} 
+			?>
+			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent')); ?>
 			<?php echo $form->error($model,'subproject_id'); ?>
 		</div>
 

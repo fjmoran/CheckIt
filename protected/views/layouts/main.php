@@ -28,6 +28,7 @@
 
 	<!-- <script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/jquery/1.11.1/jquery.min.js"></script> -->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/js/jquery.dependent-selects.js"></script>
 
     <script type="text/javascript"> 
       
@@ -36,6 +37,10 @@
 		$('.modal').on('hidden.bs.modal', function () {
 			// alert("cerrado!");
 			$(this).removeData();
+		});
+
+		$('.dependent').dependentSelects({
+			class: 'form-control select-level',
 		});
 
       })    
@@ -94,7 +99,7 @@
 			),
 			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->checkAccess('dashboard'), 'active'=>Yii::app()->utility->isActiveMenu('dashboard')),
+				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/report'), 'visible'=>Yii::app()->user->checkAccess('dashboard'), 'active'=>Yii::app()->utility->isActiveMenu('dashboard')),
 				array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('process'), 'active'=>Yii::app()->utility->isActiveMenu('process')),
 				array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica <span class="badge badge-red">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'visible'=>Yii::app()->user->checkAccess('strategy'), 'active'=>Yii::app()->utility->isActiveMenu('strategy')),
 				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/user/admin'), 'visible'=>Yii::app()->user->checkAccess('admin'), 'active'=>Yii::app()->utility->isActiveMenu('admin')),

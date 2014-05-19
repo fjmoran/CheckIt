@@ -102,6 +102,10 @@ label.error {
   color: #ddd !important;
 } 
 
+.select-level {
+  margin-top: 2px;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {

@@ -62,6 +62,14 @@ class Utility extends CApplicationComponent
 		}
 
 
+
+		if ($controller=='site' && ($action=='report')) {
+			if ($level == 1) return 'dashboard';
+			if ($level == 2) return 'sitereport';
+			if ($level == 3) return ' - Cuadro de Mando';
+		}
+
+
 		return '';    
 	}
 
