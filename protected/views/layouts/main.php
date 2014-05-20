@@ -60,7 +60,10 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo Yii::app()->createUrl('site/index')?>"><?php echo Yii::app()->utility->setTitle(); ?></a>
+					<a class="navbar-brand" href="<?php echo Yii::app()->createUrl('site/index')?>">
+					 <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="Logo Check!It" height="30">
+					 <?php // echo Yii::app()->utility->setTitle(); ?>
+					</a>
 				</div>
 
 	<?php if (!Yii::app()->user->isGuest) { ?>
