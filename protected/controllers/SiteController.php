@@ -72,6 +72,16 @@ class SiteController extends Controller
 	}
 
 	public function actionReport() {
+		$projects = Project::model()->with('position')->findAll();
+
+		$position_array = Array();
+		foreach ($projects as $project) {
+			$position_array[] = $project->position->id;
+		}
+		$position_array = array_unique($position_array);
+
+		
+
 		$this->render('report');
 	}
 
