@@ -138,7 +138,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date>=NOW()', array(':id'=>$this->id))
+				->where('p.position_id=:id AND t.status=0 AND t.due_date>=NOW() + INTERVAL 15 DAY', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
@@ -154,7 +154,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>NOW()', array(':id'=>$this->id))
+				->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>=NOW()', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];

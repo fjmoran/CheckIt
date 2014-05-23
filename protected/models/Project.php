@@ -138,7 +138,7 @@ class Project extends CActiveRecord
 				->select('count(*) as q')
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
-				->where('s.project_id=:id AND t.status=0 AND t.due_date>=NOW()', array(':id'=>$this->id))
+				->where('s.project_id=:id AND t.status=0 AND t.due_date>=NOW() + INTERVAL 15 DAY', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
@@ -153,7 +153,7 @@ class Project extends CActiveRecord
 				->select('count(*) as q')
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
-				->where('s.project_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>NOW()', array(':id'=>$this->id))
+				->where('s.project_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>=NOW()', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
