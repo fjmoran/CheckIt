@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<h3>Cumplimiento de planificación</h3>
+		<h2>Cumplimiento de planificación</h2><br>
 	</div>
 </div>
 <div class="row">
@@ -16,7 +16,7 @@ $this->Widget('ext.highcharts.HighchartsWidget', array(
 		),
 		'yAxis' => array(
 			'min' => 0,
-			'title' => array('text' => 'Cumplimiento')
+			'title' => array('text' => 'Cumplimiento (%)')
 		),
 		'tooltip' => array(
 			'pointformat' => '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
@@ -47,7 +47,7 @@ $this->Widget('ext.highcharts.HighchartsWidget', array(
 		),
 		'yAxis' => array(
 			'min' => 0,
-			'title' => array('text' => 'Cumplimiento')
+			'title' => array('text' => 'Cumplimiento (%)')
 		),
 		'tooltip' => array(
 			'pointformat' => '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
