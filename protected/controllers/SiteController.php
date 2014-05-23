@@ -80,9 +80,33 @@ class SiteController extends Controller
 		}
 		$position_array = array_unique($position_array);
 
-		
+		$detail = array();
+		foreach ($position_array as $position) {
+			$pos = Position::model()->find('id='.$position);
+			$detail['categories'][] = $pos->name;
+			//tareas atrasadas
+			$detail['overdueTasks'][] = (int)$pos->overdueTasks;
+			//tareas pendientes
+			$detail['pendingTasks'][] = (int)$pos->pendingTasks;
+			//tareas proximas
+			$detail['nextTasks'][] = (int)$pos->nextTasks;
+		}
 
-		$this->render('report');
+		$detail2 = array();
+		foreach ($projects as $project) {
+			$detail2['categories'][] = $project->name;
+			//tareas atrasadas
+			$detail2['overdueTasks'][] = (int)$project->overdueTasks;
+			//tareas pendientes
+			$detail2['pendingTasks'][] = (int)$project->pendingTasks;
+			//tareas proximas
+			$detail2['nextTasks'][] = (int)$project->nextTasks;
+		}
+
+		$this->render('report',array(
+			'detail'=>$detail,
+			'detail2'=>$detail2,
+		));
 	}
 
 	/**

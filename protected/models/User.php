@@ -180,12 +180,9 @@ class User extends CActiveRecord
     }
 
 	public function getAlertTasks() {
-
 		$alert_tasks = 0;
 		$position_id = User::model()->find('id='.$this->id)->position_id;
-
 		if ($position_id) {
-
 			$rows = Yii::app()->db->createCommand()
 				->select('count(*) as q')
 				->from('task t')
@@ -197,9 +194,7 @@ class User extends CActiveRecord
 			$alert_tasks = $rows['q'];
 			if ($alert_tasks==0) $alert_tasks='';
 		}
-
 		return $alert_tasks;
-
 	}
 
 }

@@ -115,4 +115,51 @@ class Project extends CActiveRecord
 			}
 		}
 	}
+
+	public function getOverdueTasks() {
+		$tasks = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('task t')
+				->join('subproject s','t.subproject_id = s.id')
+				->where('s.project_id=:id AND t.status=0 AND t.due_date<NOW()', array(':id'=>$this->id))
+				//->order('j.jobno,j.projid')
+				->queryRow();
+			$tasks = $rows['q'];
+		}
+		return $tasks;
+	}
+
+	public function getPendingTasks() {
+		$tasks = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('task t')
+				->join('subproject s','t.subproject_id = s.id')
+				->where('s.project_id=:id AND t.status=0 AND t.due_date>=NOW()', array(':id'=>$this->id))
+				//->order('j.jobno,j.projid')
+				->queryRow();
+			$tasks = $rows['q'];
+		}
+		return $tasks;
+	}
+
+	public function getNextTasks() {
+		$tasks = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('task t')
+				->join('subproject s','t.subproject_id = s.id')
+				->where('s.project_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>NOW()', array(':id'=>$this->id))
+				//->order('j.jobno,j.projid')
+				->queryRow();
+			$tasks = $rows['q'];
+		}
+		return $tasks;
+	}
+
+
 }
