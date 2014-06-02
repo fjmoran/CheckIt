@@ -54,22 +54,22 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 26%;'),			
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'header'=> 'Nombre',
 			'name'=> 'name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 43%;'),
+			'htmlOptions' => array('style' => 'width: 25%;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 18%;'),			
+			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>Yii::app()->utility->getOption('project_name'),
 			'name'=>'subproject.project.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>'Cargo Responsable',
 			'name'=>'position.name',
 		),

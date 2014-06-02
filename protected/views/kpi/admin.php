@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h1>Gestión de KPI</h1>
+<h2>Gestión de KPI</h2>
 
 <div class="row">
 	<div class="col-md-12">
@@ -51,31 +51,21 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
 		array(
-			'htmlOptions' => array('style' => 'width: 43%;'),
+			'htmlOptions' => array('style' => 'width: 34%;'),
+			'header'=>'KPI',
+			'name'=>'name',
+		),		
+		array(
+			'htmlOptions' => array('style' => 'width: 34%;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'header'=>'Cargo Responsable',
 			'name'=>'position.name',
 		),
-		/*
-		'base_date',
-		'description',
-		'frequency',
-		'goal_date',
-		'base_value',
-		'goal_value',
-		'unit',
-		'real_value',
-		'limit_red',
-		'limit_yellow',
-		'limit_green',
-		'position_id',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',

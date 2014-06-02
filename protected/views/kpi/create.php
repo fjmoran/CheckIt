@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear KPI</h1>
+<h2>Crear KPI</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
