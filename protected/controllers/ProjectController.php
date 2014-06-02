@@ -131,10 +131,31 @@ class ProjectController extends Controller
 	{
 		$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
 
-		//buscamos los objetivos estratégicos
-
 		if ($position_id) {
+			//buscamos las tareas
+			$subproject_array = array();
+			$tasks = Task::model()->find('position_id='.$position_id);
+			$in = '';
+			if ($tasks) {
+				foreach ($tasks as $task) {
+					$subproject_array[] = $task->subproject_id;
+				}
+				$subproject_array = array_unique($subproject_array);
+				$in = 'OR id IN ('.join("','",$subproject_array).')';
+			}
+
 			$criteria = new CDbCriteria();
+
+			//buscamos los subproyectos
+			$project_array = array();
+			$subprojects = Subproject::model()->find('position_id='.$position_id.' '.$in);
+			if ($subprojects) {
+				foreach ($subprojects as $subproject) {
+					$project_array[] = $subproject->project_id;
+				}				
+				$criteria->addCondition('id IN ('.join("','",$project_array).')','OR');
+			}
+
 			$criteria->addCondition('position_id='.$position_id,'AND');
 			$criteria->order='name ASC';
 			$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
