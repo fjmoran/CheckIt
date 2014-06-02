@@ -26,7 +26,7 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('project')),
 			array('label'=>'<i class="fa fa-clipboard fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subprojects_name'), 'url'=>array('/subproject/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('subproject')),
 			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task')),
-			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> KPI', 'url'=>array('/kpi/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('kpi')),
+			array('label'=>'<i class="fa fa-sliders fa-lg fa-fw"></i> KPI', 'url'=>array('/kpi/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('kpi')),
 			array('label'=>'<i class="fa fa-code fa-lg fa-fw"></i> Parámetros', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option')),
 		),
 	)); 

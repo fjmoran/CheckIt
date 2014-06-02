@@ -54,7 +54,7 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 75%;'),			
+			'htmlOptions' => array('style' => 'width: 55%;'),			
 			'header'=>'Nombre',
 			'name'=>'name',
 		),		
@@ -64,7 +64,7 @@ $('.search-form form').submit(function(){
 			'name'=>'project.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'header'=>'Cargo Responsable',
 			'name'=>'position.name',
 		),

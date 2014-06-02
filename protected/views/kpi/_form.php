@@ -102,8 +102,10 @@
 			<?php echo $form->textField($model,'base_value',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'base_value'); ?>
 		</div>
+	</div>
 
-		<div class="form-group">
+	<div class="col-md-6">
+<div class="form-group">
 			<?php echo $form->labelEx($model,'goal_value'); ?>
 			<?php echo $form->textField($model,'goal_value',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'goal_value'); ?>
@@ -145,11 +147,11 @@
 			<?php echo $form->dropDownList($model,'position_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'position_id'); ?>
 		</div>
-	</div>
+	</div>	
 </div>
 
 <div class="form-group buttons">
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-primary')); ?>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class'=>'btn btn-primary')); ?>
 </div>
 
 <?php $this->endWidget(); ?>
