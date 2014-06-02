@@ -55,13 +55,18 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		array(
 			'htmlOptions' => array('style' => 'width: 75%;'),			
-			'header'=>'Nombre del objetivo',
+			'header'=>'Nombre',
 			'name'=>'name',
 		),		
 		array(
 			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('project_name'),
 			'name'=>'project.name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'header'=>'Cargo Responsable',
+			'name'=>'position.name',
 		),
 		array(
 			'header'=> 'Opciones',

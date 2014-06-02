@@ -64,6 +64,16 @@ $('.search-form form').submit(function(){
 			'name'=>'subproject.name',
 		),
 		array(
+			'htmlOptions' => array('style' => 'width: 18%;'),			
+			'header'=>Yii::app()->utility->getOption('project_name'),
+			'name'=>'subproject.project.name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'header'=>'Cargo Responsable',
+			'name'=>'position.name',
+		),
+		array(
 			'htmlOptions' => array('style' => 'width: 12%;'),
 			'header'=> 'Inicio',
 			'name'=> 'start_date',

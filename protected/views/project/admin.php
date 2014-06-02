@@ -56,7 +56,7 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		array(
 			'htmlOptions' => array('style' => 'width: 47%;'),			
-			'header'=>'Nombre de la acción',
+			'header'=>'Nombre',
 			'name'=>'name',
 		),		
 		array(

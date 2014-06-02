@@ -35,11 +35,11 @@ class Task extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, subproject_id, start_date, due_date', 'required'),
-			array('subproject_id, status', 'numerical', 'integerOnly'=>true),
+			array('subproject_id, status, position_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, subproject_id, start_date, due_date, status', 'safe', 'on'=>'search'),
+			array('id, name, subproject_id, start_date, due_date, status, position_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +52,7 @@ class Task extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
+			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
 		);
 	}
 
@@ -66,6 +67,7 @@ class Task extends CActiveRecord
 			'subproject_id' => 'Subproyecto',
 			'start_date' => 'Fecha de Inicio',
 			'due_date' => 'Fecha de Término',
+			'position_id' => 'Cargo Responsable',
 		);
 	}
 
@@ -92,6 +94,7 @@ class Task extends CActiveRecord
 		$criteria->compare('subproject_id',$this->subproject_id);
 		$criteria->compare('start_date',$this->start_date,true);
 		$criteria->compare('due_date',$this->due_date,true);
+		$criteria->compare('position_id',$this->position_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

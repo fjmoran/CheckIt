@@ -35,11 +35,11 @@ class Subproject extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, project_id', 'required'),
-			array('project_id', 'numerical', 'integerOnly'=>true),
+			array('project_id, position_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, project_id', 'safe', 'on'=>'search'),
+			array('id, name, project_id, position_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +53,7 @@ class Subproject extends CActiveRecord
 		return array(
 			'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
 			'tasks' => array(self::HAS_MANY, 'Task', 'subproject_id'),
+			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
 		);
 	}
 
@@ -65,6 +66,7 @@ class Subproject extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Nombre',
 			'project_id' => 'Proyecto',
+			'position_id' => 'Cargo Responsable',
 		);
 	}
 
@@ -89,6 +91,7 @@ class Subproject extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('project_id',$this->project_id);
+		$criteria->compare('position_id',$this->position_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

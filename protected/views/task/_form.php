@@ -46,6 +46,13 @@ if ($model->start_date=='') $model->start_date=date('Y-m-d');
 		</div>
 
 		<div class="form-group">
+			<?php echo $form->labelEx($model,'position_id'); ?>
+			<?php $data = Position::model()->findAll(array('order' => 'name')); ?>
+			<?php echo $form->dropDownList($model,'position_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'position_id'); ?>
+		</div>
+
+		<div class="form-group">
 			<?php echo $form->labelEx($model,'start_date'); ?>
 			<?php
 			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
