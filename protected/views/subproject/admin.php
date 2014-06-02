@@ -88,7 +88,6 @@ $('.search-form form').submit(function(){
 					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
 					'options'=>array('title'=>'Eliminar'),
 					'imageUrl' => false,
-					'visible' => 'Yii::app()->user->id != $data->id',
 				),
 			),
 		),

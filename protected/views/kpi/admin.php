@@ -96,9 +96,17 @@ $('.search-form form').submit(function(){
 					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
 					'options'=>array('title'=>'Eliminar'),
 					'imageUrl' => false,
-					'visible' => 'Yii::app()->user->id != $data->id',
 				),
 			),
 		),
+	),
+	'pager'=>array(
+		'htmlOptions'=>array('class'=>'pagination-sm'),
+		'header' => '',
+		'hiddenPageCssClass' => 'disabled',
+		'maxButtonCount' => 10,
+		'cssFile' => false,
+		//'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
+		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
 	),
 )); ?>

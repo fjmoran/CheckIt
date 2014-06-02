@@ -131,6 +131,8 @@ class ProjectController extends Controller
 	{
 		$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
 
+		//buscamos los objetivos estratégicos
+
 		if ($position_id) {
 			$criteria = new CDbCriteria();
 			$criteria->addCondition('position_id='.$position_id,'AND');
