@@ -52,6 +52,11 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'task';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='kpi') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'kpi';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 
