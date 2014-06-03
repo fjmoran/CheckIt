@@ -39,11 +39,11 @@ foreach ($model->subprojects as $subproject) {
 		<table class="table table-condensed">
 			<tr>
 				<th style="width: 24%;">KPI</th>
-				<th style="width: 12%;">Valor Base</th>
-				<th style="width: 12%;">Valor Meta</th>
-				<th style="width: 12%;">Valor Actual</th>
-				<th style="width: 15%;">Estado</th>
+				<th style="width: 12%;">Base</th>
+				<th style="width: 12%;">Meta</th>
+				<th style="width: 12%;">Actual</th>
 				<th style="width: 15%;">Responsable</th>
+				<th style="width: 15%;">Estado</th>
 				<th style="width: 10%; text-align: center;">Acciones</th>
 			</tr>
 		<?php foreach ($subproject->kpis as $kpi) { ?>
@@ -61,6 +61,9 @@ foreach ($model->subprojects as $subproject) {
 				<td>
 					<?php echo $kpi->real_value; ?>
 				</td>
+				<td>
+					<?php if ($kpi->position) echo $kpi->position->name; ?>
+				</td>				
 				<td>
 					<?php if ($kpi->base_value < $kpi->goal_value) {
 						switch($kpi->real_value){
@@ -88,9 +91,6 @@ foreach ($model->subprojects as $subproject) {
 						}
 					} ?>
 				</td>
-				<td>
-					<?php if ($kpi->position) echo $kpi->position->name; ?>
-				</td>
 				<td style="text-align: center;">
 					<?php if ($kpi->position_id == $position_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
@@ -101,8 +101,10 @@ foreach ($model->subprojects as $subproject) {
 				</td>
 			</tr>		<? } ?>
 		</table>
-		<br><br><br>
 		<?php endif; ?>	
+		<?php if($subproject->tasks && $subproject->kpis){ ?>
+			<br><br>
+		<?php } ?>
 
 		<?php if ($subproject->tasks): ?>
 		<table class="table table-condensed">
@@ -110,8 +112,8 @@ foreach ($model->subprojects as $subproject) {
 				<th style="width: 32%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
 				<th style="width: 14%;">Fecha inicio</th>
 				<th style="width: 14%;">Fecha término</th>
+				<th style="width: 15%;">Responsable</th>				
 				<th style="width: 15%;">Estado</th>
-				<th style="width: 15%;">Responsable</th>
 				<th style="width: 10%; text-align: center;">Accciones</th>
 			</tr>
 		<?php foreach ($subproject->tasks as $task) { ?>
@@ -127,6 +129,9 @@ foreach ($model->subprojects as $subproject) {
 					<?php echo $task->due_date; ?>
 				</td>
 				<td>
+					<?php if ($task->position) echo $task->position->name; ?>
+				</td>				
+				<td>
 					<?php 
 						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
 						$datediff = (int)$interval->format("%R%a");
@@ -141,15 +146,14 @@ foreach ($model->subprojects as $subproject) {
 						<span class="label label-info">Pendiente</span>
 					<?php endif; ?>
 				</td>
-				<td>
-					<?php if ($task->position) echo $task->position->name; ?>
-				</td>
 				<td style="text-align: center;">
 					<?php if ($task->position_id == $position_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 					</a>
+					<?php else: ?>
+						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
 					<?php endif; ?>
 				</td>
 			</tr>

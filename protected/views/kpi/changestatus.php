@@ -30,14 +30,21 @@
 				<?php echo $form->errorSummary($model); ?>
 
 				<div class="row">	
-					<div class="col-md-12">
+					<div class="col-md-6">
 
-						<p><strong>KPI:</strong> <?php echo $model->name; ?></p>
+						<p><strong>KPI:</strong> </p>
 
-						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> <?php echo $model->subproject->name; ?></p>
+						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> </p>
 
-						<p><strong>Valor actual (<?php echo $model->unit; ?>):</strong> <?php echo $form->textField($model,'real_value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?></p>
+						<p><strong>Valor actual (<?php echo $model->unit; ?>):</strong> </p>
 
+					</div>
+					<div class="col-md-6">
+						<p><?php echo $model->name; ?> </p>
+
+						<p><?php echo $model->subproject->name; ?> </p>
+
+						<p><?php echo $form->textField($model,'real_value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?> </p>
 					</div>
 				</div>
 
