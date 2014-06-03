@@ -18,7 +18,12 @@ $this->menu=array(
 
 <h2><?php echo Yii::app()->utility->getOption('project_name').": ".$model->name; ?></h2>
 
-<?php foreach ($model->subprojects as $subproject) { ?>
+<?php 
+
+$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
+
+foreach ($model->subprojects as $subproject) { 
+?>
 
 	<div class="panel panel-default">
 
@@ -30,12 +35,82 @@ $this->menu=array(
 			<p><?php echo $subproject->name;?></p>
 		</div>
 
+		<?php if ($subproject->kpis): ?>
+		<table class="table table-condensed">
+			<tr>
+				<th style="width: 35%;">KPI</th>
+				<th style="width: 20%;">Valor Base</th>
+				<th style="width: 20%;">Valor Meta</th>
+				<th style="width: 20%;">Valor Actual</th>
+				<th style="width: 15%;">Estado</th>
+				<th style="width: 15%;">Responsable</th>
+				<th style="width: 10%; text-align: center;">Modificar</th>
+			</tr>
+		<?php foreach ($subproject->kpis as $kpi) { ?>
+			<tr>
+				<td>
+					<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
+					<?php echo $kpi->name; ?>
+					</a>
+				</td>
+				<td><?php echo $kpi->base_value; ?></td>
+				<td>
+					<?php echo $kpi->goal_value; ?>
+				</td>
+				<td>
+					<?php echo $kpi->real_value; ?>
+				</td>
+				<td>
+					<?php if ($kpi->base_value < $kpi->goal_value) {
+						switch($kpi->real_value){
+							case ($kpi->real_value >= $kpi->limit_green): ?>
+								<span class="label label-success">Verde</span>
+								<?php break;
+							case ($kpi->real_value >= $kpi->limit_yellow): ?>
+								<span class="label label-warning">Amarillo</span>
+								<?php break;
+							default: ?>
+								<span class="label label-danger">Rojo</span>
+								<?php break;
+						}
+					 } else {
+						switch($kpi->real_value){
+							case ($kpi->real_value <= $kpi->limit_green): ?>
+								<span class="label label-success">Verde</span>
+								<?php break;
+							case ($kpi->real_value <= $kpi->limit_yellow): ?>
+								<span class="label label-warning">Amarillo</span>
+								<?php break;
+							default: ?>
+								<span class="label label-danger">Rojo</span>
+								<?php break;
+						}
+					} ?>
+				</td>
+				<td>
+					<?php if ($kpi->position) echo $kpi->position->name; ?>
+				</td>
+				<td style="text-align: center;">
+					<?php if ($kpi->position_id == $position_id): ?>
+					<a title="Editar" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
+						<i class="fa fa-edit grid-icon"></i>
+					</a>
+					<?php endif; ?>
+				</td>
+			</tr>		<? } ?>
+		</table>
+		<?php endif; ?>	
+
+		<?php if ($subproject->tasks): ?>
 		<table class="table table-condensed">
 			<tr>
 				<th style="width: 35%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
 				<th style="width: 20%;">Fecha inicio</th>
 				<th style="width: 20%;">Fecha término</th>
 				<th style="width: 15%;">Estado</th>
+				<th style="width: 15%;">Responsable</th>
 				<th style="width: 10%; text-align: center;">Modificar</th>
 			</tr>
 		<?php foreach ($subproject->tasks as $task) { ?>
@@ -65,17 +140,21 @@ $this->menu=array(
 						<span class="label label-info">Pendiente</span>
 					<?php endif; ?>
 				</td>
+				<td>
+					<?php if ($task->position) echo $task->position->name; ?>
+				</td>
 				<td style="text-align: center;">
+					<?php if ($task->position_id == $position_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
-	
-					<i class="fa fa-edit grid-icon"></i>
-
+						<i class="fa fa-edit grid-icon"></i>
 					</a>
+					<?php endif; ?>
 				</td>
 			</tr>
 		<? } ?>
-		</table>	
+		</table>
+		<?php endif; ?>	
 	</div>
 	
 <? } ?>

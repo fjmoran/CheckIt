@@ -31,14 +31,31 @@ class KpiController extends Controller
 				'actions'=>array('create','update','admin','delete'),
 				'roles'=>array('admin'),
 			),
-			/*array('allow',
-				'actions'=>array('myprojects','view'),
+			array('allow',
+				'actions'=>array('changestatus'),
 				'roles'=>array('strategy'),
-			),*/
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionChangeStatus($id) {
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Kpi']))
+		{
+			$model->real_value = $_POST['Kpi']['real_value'];
+			$model->modified_date = new CDbExpression("NOW()");
+			if ($model->save(array('real_value','modified_date'))) {
+				$this->redirect(array('project/view','id'=>$model->subproject->project->id));
+			}
+		}
+
+		$this->renderPartial('changestatus',array(
+			'model'=>$model,
+		));
 	}
 
 	/**

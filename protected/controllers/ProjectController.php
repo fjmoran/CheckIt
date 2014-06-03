@@ -134,7 +134,7 @@ class ProjectController extends Controller
 		if ($position_id) {
 			//buscamos las tareas
 			$subproject_array = array();
-			$tasks = Task::model()->find('position_id='.$position_id);
+			$tasks = Task::model()->findAll('position_id='.$position_id);
 			$in = '';
 			if ($tasks) {
 				foreach ($tasks as $task) {
@@ -148,15 +148,16 @@ class ProjectController extends Controller
 
 			//buscamos los subproyectos
 			$project_array = array();
-			$subprojects = Subproject::model()->find('position_id='.$position_id.' '.$in);
+			$subprojects = Subproject::model()->findAll('position_id='.$position_id.' '.$in);
 			if ($subprojects) {
 				foreach ($subprojects as $subproject) {
 					$project_array[] = $subproject->project_id;
-				}				
-				$criteria->addCondition('id IN ('.join("','",$project_array).')','OR');
+				}
+				$project_array = array_unique($project_array);
+				$criteria->addCondition("id IN ('".join("','",$project_array)."')",'OR');
 			}
 
-			$criteria->addCondition('position_id='.$position_id,'AND');
+			$criteria->addCondition('position_id='.$position_id,'OR');
 			$criteria->order='name ASC';
 			$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
 		}

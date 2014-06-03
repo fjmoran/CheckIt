@@ -53,6 +53,7 @@ class Subproject extends CActiveRecord
 		return array(
 			'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
 			'tasks' => array(self::HAS_MANY, 'Task', 'subproject_id'),
+			'kpis' => array(self::HAS_MANY, 'Kpi', 'subproject_id'),
 			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
 		);
 	}
