@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::app()->utility->getOption('project_name').": ".$model->name; ?></h2>
+<h2 style="padding-bottom:20px;"><?php echo Yii::app()->utility->getOption('project_name').": ".$model->name; ?></h2>
 
 <?php 
 
