@@ -38,13 +38,13 @@ foreach ($model->subprojects as $subproject) {
 		<?php if ($subproject->kpis): ?>
 		<table class="table table-condensed">
 			<tr>
-				<th style="width: 35%;">KPI</th>
-				<th style="width: 20%;">Valor Base</th>
-				<th style="width: 20%;">Valor Meta</th>
-				<th style="width: 20%;">Valor Actual</th>
+				<th style="width: 24%;">KPI</th>
+				<th style="width: 12%;">Valor Base</th>
+				<th style="width: 12%;">Valor Meta</th>
+				<th style="width: 12%;">Valor Actual</th>
 				<th style="width: 15%;">Estado</th>
 				<th style="width: 15%;">Responsable</th>
-				<th style="width: 10%; text-align: center;">Modificar</th>
+				<th style="width: 10%; text-align: center;">Acciones</th>
 			</tr>
 		<?php foreach ($subproject->kpis as $kpi) { ?>
 			<tr>
@@ -101,17 +101,18 @@ foreach ($model->subprojects as $subproject) {
 				</td>
 			</tr>		<? } ?>
 		</table>
+		<br><br><br>
 		<?php endif; ?>	
 
 		<?php if ($subproject->tasks): ?>
 		<table class="table table-condensed">
 			<tr>
-				<th style="width: 35%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
-				<th style="width: 20%;">Fecha inicio</th>
-				<th style="width: 20%;">Fecha término</th>
+				<th style="width: 32%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+				<th style="width: 14%;">Fecha inicio</th>
+				<th style="width: 14%;">Fecha término</th>
 				<th style="width: 15%;">Estado</th>
 				<th style="width: 15%;">Responsable</th>
-				<th style="width: 10%; text-align: center;">Modificar</th>
+				<th style="width: 10%; text-align: center;">Accciones</th>
 			</tr>
 		<?php foreach ($subproject->tasks as $task) { ?>
 			<tr>
@@ -160,7 +161,7 @@ foreach ($model->subprojects as $subproject) {
 <? } ?>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" style="padding-bottom:15px;">
 			<a href="javascript:history.back()" class="btn btn-default pull-right" role="button">Volver</a>
 		</div>
 	</div>
