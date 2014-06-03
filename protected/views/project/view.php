@@ -97,6 +97,8 @@ foreach ($model->subprojects as $subproject) {
 					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 					</a>
+					<?php else: ?>
+						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
 					<?php endif; ?>
 				</td>
 			</tr>		<? } ?>
