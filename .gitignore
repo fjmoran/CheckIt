@@ -1,4 +1,4 @@
-protected/config/main.php
+protected/config/*
 assets/*
 !assets/.gitignore
 protected/runtime/*
