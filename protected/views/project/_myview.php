@@ -5,7 +5,7 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4 class="panel-title">
+			<h2 class="panel-title">
 				<a href="<?php echo Yii::app()->createUrl('project/view',array('id'=>$data->id)); ?>">
 					<?php echo CHtml::encode($data->name); ?>
 
@@ -18,50 +18,67 @@
 							$yellow_kpis = count(Kpi::model()->findAll('subproject_id IN ('.$subproject_ids.') AND ((base_value<goal_value AND real_value<limit_green AND real_value>=limit_yellow) OR (base_value>goal_value AND real_value>limit_green AND real_value<=limit_yellow))'));
 					?>
 
-						<div class="pull-right">
-							<?php if ($expired_tasks+$next_tasks>0) { ?>
-								<b><?php echo Yii::app()->utility->getOption('tasks_name'); ?>:</b>
-							<?php } ?>
-							<?php 
-							if ($next_tasks > '1') { ?>
-							<span class="label label-warning"><?php echo $next_tasks;?> Próximas</span>
-							<?php 
-							} 
-							if ($next_tasks == '1') { ?>
-							<span class="label label-warning"><?php echo $next_tasks;?> Próxima</span>							
-							<?php } ?>	
-
-							<?php if ($expired_tasks > '1') { ?>
-							<span class="label label-danger"><?php echo $expired_tasks;?> Vencidas</span>
-							<?php 
-							} 
-							if ($expired_tasks == '1') { ?>
-							<span class="label label-danger"><?php echo $expired_tasks;?> Vencida</span>
-							<?php } ?>
-
-							<?php if ($red_kpis+$yellow_kpis>0) { ?>
-								<b>KPIs:</b>
-							<?php } ?>
-							<?php 
-							if ($yellow_kpis > '1') { ?>
-							<span class="label label-warning"><?php echo $yellow_kpis;?> Amarillos</span>
-							<?php 
-							} 
-							if ($yellow_kpis == '1') { ?>
-							<span class="label label-warning"><?php echo $yellow_kpis;?> Amarillo</span>							
-							<?php } ?>	
-
-							<?php if ($red_kpis > '1') { ?>
-							<span class="label label-danger"><?php echo $red_kpis;?> Rojos</span>
-							<?php 
-							} 
-							if ($red_kpis == '1') { ?>
-							<span class="label label-danger"><?php echo $red_kpis;?> Rojo</span>
-							<?php } ?>
-
-						</div>
-						<?php } ?>
 				</a>
-			</h4>
+			</h2>
 		</div>
-	</div>
+
+		<table class="table table-condensed">
+		<tr>
+			<th style="width: 50%;">KPIs</th>
+			<th style="width: 50%;"><?php echo Yii::app()->utility->getOption('tasks_name'); ?></th>
+		</tr>
+		<tr>
+			<?php if ($red_kpis+$yellow_kpis>0) { ?>
+				<td style="padding: 15px;">
+					<?php 
+					if ($yellow_kpis > '1') { ?>
+					<span class="label label-warning"><?php echo $yellow_kpis;?> Amarillos</span>
+					<?php 
+					} 
+					if ($yellow_kpis == '1') { ?>
+					<span class="label label-warning"><?php echo $yellow_kpis;?> Amarillo</span>							
+					<?php } ?>	
+
+					<?php if ($red_kpis > '1') { ?>
+					<span class="label label-danger"><?php echo $red_kpis;?> Rojos</span>
+					<?php 
+					} 
+					if ($red_kpis == '1') { ?>
+					<span class="label label-danger"><?php echo $red_kpis;?> Rojo</span>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($red_kpis+$yellow_kpis<=0) { ?>
+				<td style="padding: 15px;">
+					No tiene KPIs con alerta.
+				</td>	
+			<?php } ?>	
+			<?php if ($expired_tasks+$next_tasks>0) { ?>
+				<td style="padding: 15px;">	
+					<?php 
+					if ($next_tasks > '1') { ?>
+					<span class="label label-warning"><?php echo $next_tasks;?> Próximos</span>
+					<?php 
+					} 
+					if ($next_tasks == '1') { ?>
+					<span class="label label-warning"><?php echo $next_tasks;?> Próximo</span>							
+					<?php } ?>	
+
+					<?php if ($expired_tasks > '1') { ?>
+					<span class="label label-danger"><?php echo $expired_tasks;?> Vencidos</span>
+					<?php 
+					} 
+					if ($expired_tasks == '1') { ?>
+					<span class="label label-danger"><?php echo $expired_tasks;?> Vencido</span>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($expired_tasks+$next_tasks<=0) { ?>
+				<td style="padding: 15px;">
+					No tiene tareas con alerta.
+				</td>	
+			<?php } ?>	
+		</tr>	
+		</table>	
+						<?php } ?>
+	</div>	
