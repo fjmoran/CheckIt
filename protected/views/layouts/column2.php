@@ -44,7 +44,7 @@ if (Yii::app()->utility->isActiveMenu('strategy')) {
 		),
 		'encodeLabel'=>false,
 		'items'=>array(
-			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name').'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
+			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name').'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
 		),
 	)); 
 }?>
