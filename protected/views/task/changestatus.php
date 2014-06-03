@@ -30,15 +30,22 @@
 				<?php echo $form->errorSummary($model); ?>
 
 				<div class="row">	
-					<div class="col-md-12">
+					<div class="col-md-6">
 
-						<p><strong><?php echo Yii::app()->utility->getOption('task_name');?>:</strong> <?php echo $model->name; ?></p>
+						<p><strong><?php echo Yii::app()->utility->getOption('task_name');?>:</strong></p>
 
-						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> <?php echo $model->subproject->name; ?></p>
+						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong></p>
 
-						<p><strong>Estado actual:</strong> <?php echo $model->statusText; ?></p>
+						<p><strong>Estado actual:</strong></p>
 
 					</div>
+					<div class="col-md-6">
+						<p><?php echo $model->name; ?></p>
+
+						<p><?php echo $model->subproject->name; ?></p>
+
+						<p><?php echo $model->statusText; ?></p>
+					</div>	
 				</div>
 
 			</div>
