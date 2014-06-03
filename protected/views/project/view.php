@@ -28,11 +28,11 @@ foreach ($model->subprojects as $subproject) {
 	<div class="panel panel-default">
 
 		<div class="panel-heading">
-			<h3 class="panel-title"><? echo Yii::app()->utility->getOption('subproject_name'); ?></h3>
+			<h2 class="panel-title"><? echo Yii::app()->utility->getOption('subproject_name'); ?> - <?php echo $subproject->name;?></h2>
 		</div>
 
 		<div class="panel-body">
-			<p><?php echo $subproject->name;?></p>
+
 		</div>
 
 		<?php if ($subproject->kpis): ?>
