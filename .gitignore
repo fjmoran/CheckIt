@@ -1,3 +1,4 @@
+protected/config/main.php
 assets/*
 !assets/.gitignore
 protected/runtime/*
@@ -6,6 +7,4 @@ protected/data/*.db
 themes/classic/views/
 *~
 .htaccess
-
 .htaccess
-protected/config/main.php
