@@ -162,4 +162,22 @@ class Position extends CActiveRecord
 		return $tasks;
 	}
 
+	public function getDeepProjects() {
+		$projects = array();
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('p.id as p_id')
+				->from('task t')
+				->join('subproject s','t.subproject_id = s.id')
+				->join('project p', 's.project_id = p.id')
+				->where('p.position_id=:id OR s.position_id=:id OR t.position_id=:id', array(':id'=>$this->id))
+				->queryAll();
+			foreach ($rows as $row) {
+				$projects[] = $row['p_id'];
+			}
+			$projects = array_unique($projects);
+		}
+		return $projects;
+	}
+
 }

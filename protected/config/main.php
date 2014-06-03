@@ -74,13 +74,19 @@ return array(
 		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			
+			'connectionString' => 'mysql:host=mysql.christianoviedo.com;dbname=checkitapp',
+			'emulatePrepare' => true,
+			'username' => 'checkitchile',
+			'password' => 'check.it2014',
+			'charset' => 'utf8',
+			'tablePrefix' => '',
+/*			
 			'connectionString' => 'mysql:host=localhost;dbname=checkit',
 			'emulatePrepare' => true,
 			'username' => 'checkit',
 			'password' => '0e0r0t0y',
 			'charset' => 'utf8',
-			'tablePrefix' => '',
+			'tablePrefix' => '',*/
 		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

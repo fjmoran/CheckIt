@@ -188,7 +188,7 @@ class User extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$position_id))
+				->where('t.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$position_id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$alert_tasks = $rows['q'];

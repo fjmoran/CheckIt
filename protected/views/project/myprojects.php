@@ -22,7 +22,7 @@ $this->menu=array(
 )); ?>
 </div>
 <?php else: ?>
-	<div class="alert alert-warning">Póngase en contacto con el administrador del sistema para que le asigne un cargo.</div>
+	<div class="alert alert-warning">Póngase en contacto con el administrador del sistema para que le asigne responsabilidades.</div>
 <?php endif; ?>
 
 <div class="row" style="position:absolute; bottom: 0; width: 100%;">

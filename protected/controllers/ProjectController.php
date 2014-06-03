@@ -130,36 +130,22 @@ class ProjectController extends Controller
 	public function actionMyProjects()
 	{
 		$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
+		$position = Position::model()->find('id='.$position_id);
 
-		if ($position_id) {
-			//buscamos las tareas
-			$subproject_array = array();
-			$tasks = Task::model()->findAll('position_id='.$position_id);
-			$in = '';
-			if ($tasks) {
-				foreach ($tasks as $task) {
-					$subproject_array[] = $task->subproject_id;
-				}
-				$subproject_array = array_unique($subproject_array);
-				$in = 'OR id IN ('.join("','",$subproject_array).')';
+		if ($position) {
+
+			$projects = $position->getDeepProjects();
+
+			if ($projects) {
+				$criteria = new CDbCriteria();
+				$criteria->addCondition("id IN ('".join("','",$projects)."')",'OR');
+				$criteria->order='name ASC';
+				$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
+			}
+			else {
+				$dataProvider = null;
 			}
 
-			$criteria = new CDbCriteria();
-
-			//buscamos los subproyectos
-			$project_array = array();
-			$subprojects = Subproject::model()->findAll('position_id='.$position_id.' '.$in);
-			if ($subprojects) {
-				foreach ($subprojects as $subproject) {
-					$project_array[] = $subproject->project_id;
-				}
-				$project_array = array_unique($project_array);
-				$criteria->addCondition("id IN ('".join("','",$project_array)."')",'OR');
-			}
-
-			$criteria->addCondition('position_id='.$position_id,'OR');
-			$criteria->order='name ASC';
-			$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
 		}
 		else {
 			$dataProvider=null;
