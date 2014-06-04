@@ -103,9 +103,21 @@ class SiteController extends Controller
 			$detail2['nextTasks'][] = (int)$project->nextTasks;
 		}
 
+		$detail3 = array();
+		foreach ($projects as $project) {
+			$detail3['categories'][] = $project->name;
+			//tareas atrasadas
+			$detail3['greenKpis'][] = (int)$project->greenKpis;
+			//tareas pendientes
+			$detail3['yellowKpis'][] = (int)$project->yellowKpis;
+			//tareas proximas
+			$detail3['redKpis'][] = (int)$project->redKpis;
+		}
+
 		$this->render('report',array(
 			'detail'=>$detail,
 			'detail2'=>$detail2,
+			'detail3'=>$detail3,
 		));
 	}
 

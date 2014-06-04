@@ -161,5 +161,46 @@ class Project extends CActiveRecord
 		return $tasks;
 	}
 
+	public function getRedKpis() {
+		$kpis = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('kpi k')
+				->join('subproject s','k.subproject_id = s.id')
+				->where('s.project_id=:id AND ((base_value<goal_value AND real_value<limit_yellow) OR (base_value>goal_value AND real_value>limit_yellow))', array(':id'=>$this->id))
+				->queryRow();
+			$kpis = $rows['q'];
+		}
+		return $kpis;
+	}
+
+	public function getYellowKpis() {
+		$kpis = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('kpi k')
+				->join('subproject s','k.subproject_id = s.id')
+				->where('s.project_id=:id AND ((base_value<goal_value AND real_value<limit_green AND real_value>=limit_yellow) OR (base_value>goal_value AND real_value>limit_green AND real_value<=limit_yellow))', array(':id'=>$this->id))
+				->queryRow();
+			$kpis = $rows['q'];
+		}
+		return $kpis;
+	}
+
+	public function getGreenKpis() {
+		$kpis = 0;
+		if ($this->id) {
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('kpi k')
+				->join('subproject s','k.subproject_id = s.id')
+				->where('s.project_id=:id AND ((base_value<goal_value AND real_value>=limit_green) OR (base_value>goal_value AND real_value<=limit_green))', array(':id'=>$this->id))
+				->queryRow();
+			$kpis = $rows['q'];
+		}
+		return $kpis;
+	}
 
 }
