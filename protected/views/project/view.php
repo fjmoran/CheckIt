@@ -49,10 +49,14 @@ foreach ($model->subprojects as $subproject) {
 		<?php foreach ($subproject->kpis as $kpi) { ?>
 			<tr>
 				<td>
-					<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
-					<?php echo $kpi->name; ?>
-					</a>
+					<?php if ($kpi->position_id == $position_id): ?>
+						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
+						<?php echo $kpi->name; ?>
+						</a>
+					<?php else: ?>
+						<?php echo $kpi->name; ?>
+					<?php endif; ?>
 				</td>
 				<td><?php echo $kpi->base_value; ?></td>
 				<td>
@@ -121,10 +125,14 @@ foreach ($model->subprojects as $subproject) {
 		<?php foreach ($subproject->tasks as $task) { ?>
 			<tr>
 				<td>
-					<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
-					<?php echo $task->name; ?>
-					</a>
+					<?php if ($task->position_id == $position_id): ?>
+						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
+						<?php echo $task->name; ?>
+						</a>
+					<?php else: ?>
+						<?php echo $task->name; ?>
+					<?php endif; ?>
 				</td>
 				<td><?php echo $task->start_date; ?></td>
 				<td>
