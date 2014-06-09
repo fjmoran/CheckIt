@@ -7,4 +7,6 @@ themes/classic/views/
 *~
 .htaccess
 .htaccess
-protected/config/
+protected/config/main.php
+protected/config/console.php
+
