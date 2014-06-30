@@ -31,7 +31,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('login','error','forgotpassword','changepassword','captcha'),
+				'actions'=>array('login','error','forgotpassword','changepassword','captcha','js'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -69,6 +69,10 @@ class SiteController extends Controller
 				'class'=>'CViewAction',
 			),
 		);
+	}
+
+	public function actionJs() {
+			$this->renderPartial('js');
 	}
 
 	public function actionReport() {

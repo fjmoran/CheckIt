@@ -29,8 +29,6 @@
 	<!-- <script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/jquery/1.11.1/jquery.min.js"></script> -->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/js/jquery.dependent-selects.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/highcharts/js/highcharts.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/highcharts/js/modules/exporting.js"></script>
     <script type="text/javascript"> 
       
       $(document).ready(function(){       

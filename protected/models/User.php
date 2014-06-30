@@ -103,6 +103,7 @@ class User extends CActiveRecord
 			'position_id' => 'Cargo',
 			'created' => 'Creado en',
 			'lastvisit' => 'Última visita',
+			'roles' => 'Módulos',
 		);
 	}
 
