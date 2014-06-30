@@ -28,13 +28,17 @@ class ProcessController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('create','update','admin','delete','view'),
+				'actions'=>array('create','update','admin','delete','view','js'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionJs() {
+			$this->renderPartial('js');
 	}
 
 	/**

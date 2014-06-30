@@ -154,7 +154,7 @@ jsPlumb.ready(function() {
 		y: top
 	};
 
-	$.post(url_processtask_create, data,  function(d) {
+	$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
 		if(!d['success']) {alert('Error!');}
 	});
 
@@ -166,3 +166,4 @@ jsPlumb.ready(function() {
 
 
 });
+

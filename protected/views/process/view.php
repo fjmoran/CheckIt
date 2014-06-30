@@ -3,9 +3,10 @@
 /* @var $model Process */
 
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('site/js'),CClientScript::POS_HEAD);
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('site/js'),CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jquery.jsPlumb.min.js',CClientScript::POS_HEAD);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jsPlumb_conf.js',CClientScript::POS_HEAD);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('process/js'),CClientScript::POS_HEAD);
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jsPlumb_conf.js',CClientScript::POS_HEAD);
 
 $this->breadcrumbs=array(
 	'Processes'=>array('index'),
@@ -49,9 +50,9 @@ $this->menu=array(
 }
 
 #flowchart-options {
-	border: 1px solid #ddd;
-/*	width: 100px;
-	height: 400px;*/
+/*	border: 1px solid #ddd;*/
+	width: 80px;
+/*	height: 400px;*/
 	position: absolute;
 	top:10px;
 	left: 10px;
@@ -69,7 +70,7 @@ $this->menu=array(
 
 <div id="flowchart-edit">
 	<div id="flowchart-options">
-		<div class="top">Opciones</div>
+		<!--div class="top">Opciones</div-->
 		<div class="content">
 			<a id="option-add-task" class="btn btn-primary btn-sm btn-block" style="margin: 5px 0;">Nueva Tarea</a>
 		</div>
