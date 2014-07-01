@@ -38,7 +38,11 @@ class ProcessController extends Controller
 	}
 
 	public function actionJs() {
-			$this->renderPartial('js');
+		$process_id = Yii::app()->request->getQuery("process_id"); //$_GET['process_id'];
+		$this->renderPartial('js',array(
+			'process_id' => $process_id,
+			'model'=>$this->loadModel($process_id),
+		));
 	}
 
 	/**

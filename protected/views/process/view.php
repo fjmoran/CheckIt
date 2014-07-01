@@ -5,7 +5,7 @@
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
 //Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('site/js'),CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jquery.jsPlumb.min.js',CClientScript::POS_HEAD);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('process/js'),CClientScript::POS_HEAD);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('process/js', array('process_id'=>$model->id)),CClientScript::POS_HEAD);
 //Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jsPlumb_conf.js',CClientScript::POS_HEAD);
 
 $this->breadcrumbs=array(
@@ -76,3 +76,4 @@ $this->menu=array(
 		</div>
 	</div>
 </div>
+

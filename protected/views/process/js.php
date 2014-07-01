@@ -39,7 +39,7 @@ jsPlumb.ready(function() {
 	sourceEndpoint = {
 		endpoint:"Dot",
 		isSource:true,
-		maxConnections:20,
+		maxConnections:-1,
 		paintStyle:{ 
 			strokeStyle:"#7AB02C",
 			fillStyle:"white",
@@ -76,14 +76,70 @@ jsPlumb.ready(function() {
         ]
 	},			
 
-
+/*
 	init = function(connection) {			
 		//connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
 		connection.bind("editCompleted", function(o) {
 			if (typeof console != "undefined")
 				console.log("connection edited. path is now ", o.path);
 		});
+	};*/
+
+	add_task = function(id, name, pos_x, pos_y) {
+		var newState = $('<div>').attr('id', id).addClass('item');
+		var title = $('<div>').addClass('title').text(name);
+
+		newState.css({
+			'top': pos_y,
+			'left': pos_x
+		});
+
+		newState.append(title);
+
+		var sourceUUID = id + "_bottom";
+		var targetUUID = id + "_top";
+
+		newState.dblclick(function(e) {
+			instance.detachAllConnections($(this));
+			instance.deleteEndpoint(sourceUUID);
+			instance.deleteEndpoint(targetUUID);
+			$(this).remove();
+			e.stopPropagation();
+		});
+
+		instance.draggable(newState, {
+			grid: [20, 20],
+			stop: function(){
+				var offset = $(this).position();
+				var xPos = offset.left;
+				var yPos = offset.top;
+
+				//database
+				var data = {
+					pos_x: xPos,
+					pos_y: yPos
+				};
+
+				$.post('<?php echo Yii::app()->createUrl('processtask/update?id='); ?>'+id, data,  function(d) {
+					if(!d['success']) {alert('Error!');}
+				});
+
+				console.log("New position: x: ", xPos, " - y:", yPos);
+			},
+		});
+
+		$('#flowchart-edit').append(newState);
+
+		instance.addEndpoint(id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+		instance.addEndpoint(id, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
+
 	};
+
+/*	instance.bind("connectionDragStop", function(info){
+		alert(info.targetId.position());
+		console.log(info.targetId.position()) ;
+	});*/
+
 
 /*  instance.makeSource($('.item'), {
     connector: 'Flowchart'
@@ -92,77 +148,89 @@ jsPlumb.ready(function() {
     anchor: 'Continuous'
   });*/
 
-  var i = 1;
+	var i = 1;
 
-  $('#option-add-task').click(function(e) {
+	$('#option-add-task').click(function(e) {
 
-  	var name = 'Tarea ' + i;
-  	var top = 100 + (5*(i-1));
-  	var left = 100 + (5*(i-1));
+		var name = 'Tarea ' + i;
+		var top = 100 + (20*(i-1))%80;
+		var left = 100 + (20*(i-1))%80;
 
-    var newState = $('<div>').attr('id', 'state' + i).addClass('item');
-    
-    var title = $('<div>').addClass('title').text(name);
-    //var connect = $('<div>').addClass('connect');
+		var newState = $('<div>').attr('id', 'state' + i).addClass('item');
 
-    newState.css({
-      'top': top,
-      'left': left
-    });
-    
-    /*instance.makeTarget(newState, {
-      anchor: 'Continuous'
-    });
-    
-    instance.makeSource(connect, {
-      parent: newState,
-      anchor: 'Continuous'
-    });*/
-    
-    newState.append(title);
-    //newState.append(connect);
+		var title = $('<div>').addClass('title').text(name);
+		//var connect = $('<div>').addClass('connect');
 
-	var sourceUUID = i + "BottomCenter";
-	var targetUUID = i + "TopCenter";
+		newState.css({
+		  'top': top,
+		  'left': left
+		});
 
-	newState.dblclick(function(e) {
-	  instance.detachAllConnections($(this));
-	  instance.deleteEndpoint(sourceUUID);
-	  instance.deleteEndpoint(targetUUID);
-	  $(this).remove();
-	  e.stopPropagation();
-	});
+		/*instance.makeTarget(newState, {
+		  anchor: 'Continuous'
+		});
 
-	instance.draggable(newState, {
-	  //containment: 'parent',
-	  grid: [20, 20]
-	});
+		instance.makeSource(connect, {
+		  parent: newState,
+		  anchor: 'Continuous'
+		});*/
 
-    $('#flowchart-edit').append(newState);
+		newState.append(title);
+		//newState.append(connect);
 
-	//source
-	instance.addEndpoint('state'+i, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+		var sourceUUID = i + "BottomCenter";
+		var targetUUID = i + "TopCenter";
 
-	//target
-	instance.addEndpoint("state" + i, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
+		newState.dblclick(function(e) {
+		  instance.detachAllConnections($(this));
+		  instance.deleteEndpoint(sourceUUID);
+		  instance.deleteEndpoint(targetUUID);
+		  $(this).remove();
+		  e.stopPropagation();
+		});
 
-	//database
-	var data = {
-		name: name,
-		process_id: 1,
-		x: left,
-		y: top
+		instance.draggable(newState, {
+		  //containment: 'parent',
+		  grid: [20, 20]
+		});
+
+		$('#flowchart-edit').append(newState);
+
+		//source
+		instance.addEndpoint('state'+i, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+
+		//target
+		instance.addEndpoint("state" + i, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
+
+		//database
+		var data = {
+			name: name,
+			process_id: <?php echo $process_id; ?>,
+			pos_x: left,
+			pos_y: top
+		};
+
+		$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
+			if(!d['success']) {alert('Error!');}
+		});
+
+		i++;
+
+	});  
+
+	
+	load_data = function(ins) {
+	<?php 
+		foreach ($model->processTasks as $processTask) {
+			?>
+		add_task('<?php echo $processTask->id?>', '<?php echo $processTask->name?>', <?php echo $processTask->pos_x?>, <?php echo $processTask->pos_y?>);
+			<?php
+		}
+	?>
 	};
 
-	$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
-		if(!d['success']) {alert('Error!');}
-	});
 
-    i++;
-
-  });  
-
-
+	load_data(instance);
 
 
 });

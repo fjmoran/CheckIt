@@ -16,6 +16,7 @@ class ProcessTaskController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + create', // we only allow deletion via POST request
+			'postOnly + update', // we only allow deletion via POST request
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
@@ -29,7 +30,7 @@ class ProcessTaskController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create'),
+				'actions'=>array('create','update'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -110,21 +111,22 @@ class ProcessTaskController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+
 		$model=$this->loadModel($id);
+		$model->attributes = $_POST;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$response = array();
 
-		if(isset($_POST['ProcessTask']))
-		{
-			$model->attributes=$_POST['ProcessTask'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if ($model->save() === false) {
+			$response['success'] = false;
+			$response['errors'] = $model->errors;
+		} else {
+			$response['success'] = true;
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		header('Content-type:application/json');
+		echo CJSON::encode($response);
+		exit();
 	}
 
 	/**

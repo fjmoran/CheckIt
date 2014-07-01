@@ -32,7 +32,7 @@ class ProcessTask extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, process_id', 'required'),
-			array('process_id', 'numerical', 'integerOnly'=>true),
+			array('process_id, pos_x, pos_y', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
