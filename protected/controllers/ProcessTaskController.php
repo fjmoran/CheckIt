@@ -89,6 +89,7 @@ class ProcessTaskController extends Controller
 			//echo CJSON::encode($model->errors);exit;
 		} else {
 			$response['success'] = true;
+			$response['data'] = $model;
 
 			//respond with the saved contact in case the model/db changed any values
 			//$response['contacts'] = $contact; 

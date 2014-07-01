@@ -85,6 +85,10 @@ jsPlumb.ready(function() {
 		});
 	};*/
 
+	add_connection = function() {
+
+	}
+
 	add_task = function(id, name, pos_x, pos_y) {
 		var newState = $('<div>').attr('id', id).addClass('item');
 		var title = $('<div>').addClass('title').text(name);
@@ -132,21 +136,7 @@ jsPlumb.ready(function() {
 
 		instance.addEndpoint(id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
 		instance.addEndpoint(id, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
-
 	};
-
-/*	instance.bind("connectionDragStop", function(info){
-		alert(info.targetId.position());
-		console.log(info.targetId.position()) ;
-	});*/
-
-
-/*  instance.makeSource($('.item'), {
-    connector: 'Flowchart'
-  });
-  instance.makeTarget($('.item'), {
-    anchor: 'Continuous'
-  });*/
 
 	var i = 1;
 
@@ -155,52 +145,6 @@ jsPlumb.ready(function() {
 		var name = 'Tarea ' + i;
 		var top = 100 + (20*(i-1))%80;
 		var left = 100 + (20*(i-1))%80;
-
-		var newState = $('<div>').attr('id', 'state' + i).addClass('item');
-
-		var title = $('<div>').addClass('title').text(name);
-		//var connect = $('<div>').addClass('connect');
-
-		newState.css({
-		  'top': top,
-		  'left': left
-		});
-
-		/*instance.makeTarget(newState, {
-		  anchor: 'Continuous'
-		});
-
-		instance.makeSource(connect, {
-		  parent: newState,
-		  anchor: 'Continuous'
-		});*/
-
-		newState.append(title);
-		//newState.append(connect);
-
-		var sourceUUID = i + "BottomCenter";
-		var targetUUID = i + "TopCenter";
-
-		newState.dblclick(function(e) {
-		  instance.detachAllConnections($(this));
-		  instance.deleteEndpoint(sourceUUID);
-		  instance.deleteEndpoint(targetUUID);
-		  $(this).remove();
-		  e.stopPropagation();
-		});
-
-		instance.draggable(newState, {
-		  //containment: 'parent',
-		  grid: [20, 20]
-		});
-
-		$('#flowchart-edit').append(newState);
-
-		//source
-		instance.addEndpoint('state'+i, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
-
-		//target
-		instance.addEndpoint("state" + i, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
 
 		//database
 		var data = {
@@ -211,7 +155,12 @@ jsPlumb.ready(function() {
 		};
 
 		$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
-			if(!d['success']) {alert('Error!');}
+			if(!d['success']) 
+				alert('Error!');
+			else {
+				id = d['data']['id'];
+				add_task(id, name, left, top);
+			}
 		});
 
 		i++;
@@ -220,6 +169,7 @@ jsPlumb.ready(function() {
 
 	
 	load_data = function(ins) {
+
 	<?php 
 		foreach ($model->processTasks as $processTask) {
 			?>
@@ -227,11 +177,36 @@ jsPlumb.ready(function() {
 			<?php
 		}
 	?>
+
+		instance.bind("click", function(conn, originalEvent) {
+			if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
+				jsPlumb.detach(conn); 
+		});	
+
+		instance.bind("connection", function(info) {
+			//database
+			var data = {
+				id: info.connection.id,
+				from: info.sourceId,
+				to: info.targetId,
+			};
+
+			console.log("connection " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+		});
+		
+		instance.bind("connectionDetached", function(info) {
+			var data = {
+				id: info.connection.id,
+				from: info.sourceId,
+				to: info.targetId,
+			};
+
+			//console.log("detached " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+		});
+		
 	};
 
-
 	load_data(instance);
-
 
 });
 

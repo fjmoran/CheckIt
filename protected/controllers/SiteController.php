@@ -31,8 +31,12 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('login','error','forgotpassword','changepassword','captcha','logout'),
+				'actions'=>array('login','error','forgotpassword','changepassword','captcha'),
 				'users'=>array('*'),
+			),
+			array('allow',
+				'actions'=>array('logout','index'),
+				'users'=>array('@'),
 			),
 			array('allow',
 				'actions'=>array('report'),
