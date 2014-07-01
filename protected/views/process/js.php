@@ -18,22 +18,22 @@ jsPlumb.ready(function() {
 
 	// this is the paint style for the connecting lines..
 	var connectorPaintStyle = {
-		lineWidth:4,
-		strokeStyle:"#61B7CF",
+		lineWidth:3,
+		strokeStyle:"#3276b1",
 		joinstyle:"round",
 		outlineColor:"white",
 		outlineWidth:2
 	},
 	// .. and this is the hover style. 
 	connectorHoverStyle = {
-		lineWidth:4,
-		strokeStyle:"#216477",
+		lineWidth:3,
+		strokeStyle:"#285e8e",
 		outlineWidth:2,
 		outlineColor:"white"
 	},
 	endpointHoverStyle = {
-		fillStyle:"#216477",
-		strokeStyle:"#216477"
+		fillStyle:"#285e8e",
+		strokeStyle:"#285e8e"
 	},
 	// the definition of source endpoints (the small blue ones)
 	sourceEndpoint = {
@@ -41,12 +41,12 @@ jsPlumb.ready(function() {
 		isSource:true,
 		maxConnections:-1,
 		paintStyle:{ 
-			strokeStyle:"#7AB02C",
+			strokeStyle:"#3276b1",
 			fillStyle:"white",
 			radius:7,
 			lineWidth:3 
 		},				
-		connector:[ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],								                
+		connector:[ "Flowchart", { stub:[5, 25], gap:10, cornerRadius:3, alwaysRespectStubs:true } ],								                
 		connectorStyle:connectorPaintStyle,
 		hoverPaintStyle:endpointHoverStyle,
 		connectorHoverStyle:connectorHoverStyle,
@@ -62,7 +62,7 @@ jsPlumb.ready(function() {
 	// the definition of target endpoints (will appear when the user drags a connection) 
 	targetEndpoint = {
 		endpoint:"Dot",					
-		paintStyle:{ fillStyle:"#7AB02C",radius:11 },
+		paintStyle:{ fillStyle:"#3276b1",radius:9 },
 		hoverPaintStyle:endpointHoverStyle,
 		maxConnections:-1,
 		dropOptions:{ hoverClass:"hover", activeClass:"active" },

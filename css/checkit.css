@@ -111,11 +111,11 @@ label.error {
   width:100%;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color:white;
-  overflow:auto;  
+  background-color: white;
+  overflow: auto;  
   margin-top: 15px;
-  margin-bottom:25px;
-  height: 600px;
+  margin-bottom: 25px;
+  height: 700px;
 }
 
 /* make sidebar nav vertical */ 

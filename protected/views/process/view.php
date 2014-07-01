@@ -25,14 +25,13 @@ $this->menu=array(
 <style>
 .item {
 	position: absolute;        
-	border: 1px solid black;
+	border: 3px solid;
+	border-color: #999;
 	width: 150px;
 	font-size: 80%;
-    background-color:#FFFFFF;
+    background-color:#eee;
 	text-align: center;
-	-moz-box-shadow: 2px 2px 3px 1px #AAA;
-	-webkit-box-shadow: 2px 2px 3px 1px #AAA;
-	box-shadow: 2px 2px 3px 1px #AAA;
+	border-radius: 7px;
 }
 
 .title {
@@ -49,31 +48,18 @@ $this->menu=array(
 	background-color: #40B3DF;
 }
 
-#flowchart-options {
-/*	border: 1px solid #ddd;*/
-	width: 80px;
-/*	height: 400px;*/
-	position: absolute;
-	top:10px;
-	left: 10px;
-}
-
-#flowchart-options .top {
-	background-color: #222;
-	color: white;
-	text-align: center;
-	padding: 5px;
-}
 </style>
 
 <h2>Proceso: <?php echo $model->name; ?></h2>
 
 <div id="flowchart-edit">
-	<div id="flowchart-options">
-		<!--div class="top">Opciones</div-->
-		<div class="content">
-			<a id="option-add-task" class="btn btn-primary btn-sm btn-block" style="margin: 5px 0;">Nueva Tarea</a>
-		</div>
+	<div class="btn-group" style="padding: 10px;">
+  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Tarea</a>
+  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Inicio</a>
+  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Final</a>  		
+  		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
+  		<a id="option-add-task2" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
+  		<a id="option-add-task3" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>
 	</div>
 </div>
 
