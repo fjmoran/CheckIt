@@ -167,7 +167,7 @@ jsPlumb.ready(function() {
 
 	});  
 
-	
+
 	load_data = function(ins) {
 
 	<?php 

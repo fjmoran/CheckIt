@@ -34,6 +34,20 @@ $this->menu=array(
 	border-radius: 7px;
 }
 
+.decision{
+	border: 3px solid;
+	border-color: #999;	
+    background-color: #eee;
+    height: 86px;
+    width: 86px;
+    transform:rotate(-45deg) skew(15deg, 15deg);
+	-ms-transform:rotate(-45deg) skew(15deg, 15deg);
+    -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
+    position: absolute;
+	text-align: center;
+	border-radius: 5px;    
+}
+
 .title {
 	padding: 10px;
 	cursor: move;
@@ -61,5 +75,6 @@ $this->menu=array(
   		<a id="option-add-task2" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
   		<a id="option-add-task3" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>
 	</div>
+	<div class="decision"></div>
 </div>
 
