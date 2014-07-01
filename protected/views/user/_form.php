@@ -21,7 +21,9 @@
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
-<div class="row">	
+<div class="row">
+	  	<input type='text' style='display: none'> <!-- previene el autocomplete -->
+  		<input type='password' style='display: none'>  <!-- previene el autocomplete -->
 	<div class="col-md-6">
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'email'); ?>
@@ -94,3 +96,9 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script>
+$(window).load(function() { // can also try on document ready
+    $('input').removeAttr('autocomplete');
+});
+</script>
