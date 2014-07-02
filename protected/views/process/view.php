@@ -51,8 +51,8 @@ $this->menu=array(
 	border: 3px solid;
 	border-color: #999;	
     background-color: #eee;
-    height: 86px;
-    width: 86px;
+    height: 86.60254037844386px;
+    width: 86.60254037844386px;
     transform:rotate(-45deg) skew(15deg, 15deg);
 	-ms-transform:rotate(-45deg) skew(15deg, 15deg);
     -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
@@ -88,5 +88,6 @@ $this->menu=array(
   		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
   		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a> -->
 	</div>
+	<div class="decision"></div>
 </div>
 
