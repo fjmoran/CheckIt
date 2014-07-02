@@ -30,7 +30,7 @@ class ProcessConnectorController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -118,10 +118,11 @@ class ProcessConnectorController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
+		exit;
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		//if(!isset($_GET['ajax']))
+		//	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**

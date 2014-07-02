@@ -85,13 +85,17 @@ jsPlumb.ready(function() {
 		});
 	};*/
 
-	add_connector = function(source_id,target_id) {
+	add_connector = function(id, source_id, target_id) {
 		//instance.connect({source:source_id, target:target_id});
-		instance.connect({uuids:[source_id + "_bottom", target_id + "_top"], editable:false});
+		conn = instance.connect({uuids:["task_" + source_id + "_bottom", "task_" + target_id + "_top"], editable:false});
+		conn.id = "connection_" + id;
 	}
 
 	add_task = function(id, name, pos_x, pos_y) {
-		var newState = $('<div>').attr('id', id).addClass('item');
+
+		var task_id = 'task_' + id;
+
+		var newState = $('<div>').attr('id', task_id).addClass('item');
 		var title = $('<div>').addClass('title').text(name);
 
 		newState.css({
@@ -101,10 +105,23 @@ jsPlumb.ready(function() {
 
 		newState.append(title);
 
-		var sourceUUID = id + "_bottom";
-		var targetUUID = id + "_top";
+		var sourceUUID = task_id + "_bottom";
+		var targetUUID = task_id + "_top";
 
 		newState.dblclick(function(e) {
+
+			var arr = $(this).attr('id').split('_');
+
+			id = arr[1];
+
+			$.post('<?php echo Yii::app()->createUrl('processtask/delete?id='); ?>'+id, null,  function(d) {
+				if(!d['success']) {
+					//doLine=false;
+				}
+			});
+
+			console.log("task deleted " + $(this).attr('id'));
+
 			instance.detachAllConnections($(this));
 			instance.deleteEndpoint(sourceUUID);
 			instance.deleteEndpoint(targetUUID);
@@ -135,8 +152,8 @@ jsPlumb.ready(function() {
 
 		$('#flowchart-edit').append(newState);
 
-		instance.addEndpoint(id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
-		instance.addEndpoint(id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
+		instance.addEndpoint(task_id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+		instance.addEndpoint(task_id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
 	};
 
 	var i = 1;
@@ -179,14 +196,6 @@ jsPlumb.ready(function() {
 		}
 	?>
 
-	<?php 
-		foreach ($model->processConnectors as $processConnector) {
-			?>
-		add_connector('<?php echo $processConnector->source_task_id?>', '<?php echo $processConnector->target_task_id?>');
-			<?php
-		}
-	?>
-
 		instance.bind("click", function(conn, originalEvent) {
 			if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
 				instance.detach(conn); 
@@ -194,11 +203,14 @@ jsPlumb.ready(function() {
 
 		instance.bind("beforeDrop", function(info){
 
+			var arr1 = info.sourceId.split('_');
+			var arr2 = info.targetId.split('_');
+
 			//database
 			var data = {
 				process_id: <?php echo $process_id; ?>,
-				source_task_id: info.sourceId,
-				target_task_id: info.targetId,
+				source_task_id: arr1[1],
+				target_task_id: arr2[1],
 			};
 
 			var doLine=true;
@@ -215,6 +227,11 @@ jsPlumb.ready(function() {
 				success: function(d) {
 					if(!d['success']) {
 						doLine=false;
+						alert(d['errors']);
+					}
+					else {
+						id = d['data']['id'];
+						info.connection.id = 'connection_' + id;
 					}
 				},
 				//dataType: dataType,
@@ -227,38 +244,35 @@ jsPlumb.ready(function() {
 
 		instance.bind("connection", function(info) {
 			info.connection.setDetachable(false);
-
-/*			alert(info.id);
-
-			//database
-			var data = {
-				id: info.connection.id,
-				from: info.sourceId,
-				to: info.targetId,
-			};
-
-			$.post('<?php echo Yii::app()->createUrl('processconnector/create'); ?>', data,  function(d) {
-				if(!d['success']) 
-					alert('Error!');
-				else {
-					id = d['data']['id'];
-					add_task(id, name, left, top);
-				}
-			});
-*/
-			//console.log("connection " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
 		});
 		
 		instance.bind("connectionDetached", function(info) {
-			var data = {
-				id: info.connection.id,
-				from: info.sourceId,
-				to: info.targetId,
-			};
 
-			console.log("detached " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+			var arr = info.connection.id.split('_');
+
+			if (arr[0] == 'connection') {
+				id = arr[1];
+
+				$.post('<?php echo Yii::app()->createUrl('processconnector/delete?id='); ?>'+id, null,  function(d) {
+					if(!d['success']) {
+						//doLine=false;
+					}
+				});
+
+				console.log("detached " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+
+			}
+
 		});
 		
+	<?php 
+		foreach ($model->processConnectors as $processConnector) {
+			?>
+		add_connector('<?php echo $processConnector->id?>', '<?php echo $processConnector->source_task_id?>', '<?php echo $processConnector->target_task_id?>');
+			<?php
+		}
+	?>
+
 	};
 
 	load_data(instance);
