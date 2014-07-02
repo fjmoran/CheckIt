@@ -32,17 +32,33 @@ class ProcessConnector extends CActiveRecord
 		return array(
 			array('source_task_id, target_task_id', 'required'),
 			array('source_task_id, target_task_id, process_id, position', 'numerical', 'integerOnly'=>true),
-			array('source_task_id', 'unique', 'criteria'=>array(
-				'condition'=>'`target_task_id`=:target_task_id',
-				'params'=>array(
-				':target_task_id'=>$this->target_task_id
-				)
-			)),
+			array('info', 'checkConnection'),
 			//array('source_task_id, target_task_id', 'unique', 'attributes' => array('source_task_id', 'target_task_id')),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, source_task_id, target_task_id', 'safe', 'on'=>'search'),
 		);
+	}
+
+	public function checkConnection($attribute)
+	{
+		//buscamos si existe una conexion igual en la BD
+		$con = ProcessConnector::model()->findByAttributes(array('source_task_id'=>$this->source_task_id, 'target_task_id'=>$this->target_task_id));
+		if ($con) {
+			$this->addError($attribute, "Error: Ya existe una conexión entre esos elementos.");
+			return false;
+		}
+
+		//si es actividad, no puede salir más de una conexión
+		$con = ProcessConnector::model()->with('sourceTask')->findByAttributes(array('source_task_id'=>$this->source_task_id));
+		if ($con) {
+			if ($con->sourceTask->type == 0 || $con->sourceTask->type == 1 || $con->sourceTask->type == 2)  {// origen es tarea, inicio o término
+				$this->addError($attribute, "Error: Ya existe una conexión para la actividad ".$con->sourceTask->name);
+			}
+			//$this->addError($attribute, "Error: La actividad no puede tener más de una conexión.");
+			return false;
+		}
+
 	}
 
 	/**

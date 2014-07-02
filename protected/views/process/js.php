@@ -270,7 +270,7 @@ jsPlumb.ready(function() {
 				success: function(d) {
 					if(!d['success']) {
 						doLine=false;
-						alert(d['errors']);
+						alert(d['errors']['info']);
 					}
 					else {
 						id = d['data']['id'];
