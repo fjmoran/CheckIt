@@ -88,6 +88,5 @@ $this->menu=array(
   		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
   		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a> -->
 	</div>
-	<div class="decision"></div>
 </div>
 

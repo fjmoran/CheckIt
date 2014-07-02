@@ -15,6 +15,9 @@
  */
 class ProcessTask extends CActiveRecord
 {
+
+	private $typeOptions = array('0' => 'Actividad', '1' => 'Inicio', '2' => 'Término');
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,7 +35,7 @@ class ProcessTask extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, process_id', 'required'),
-			array('process_id, pos_x, pos_y', 'numerical', 'integerOnly'=>true),
+			array('process_id, pos_x, pos_y, type', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -103,4 +106,10 @@ class ProcessTask extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getTypeOptions() {
+		return $this->typeOptions;
+	}
+
+
 }

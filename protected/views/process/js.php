@@ -91,12 +91,19 @@ jsPlumb.ready(function() {
 		conn.id = "connection_" + id;
 	}
 
-	add_task = function(id, name, pos_x, pos_y) {
+	add_task = function(id, name, type, pos_x, pos_y) {
 
 		var task_id = 'task_' + id;
 
 		var newState = $('<div>').attr('id', task_id).addClass('item activity');
 		var title = $('<div>').addClass('title').text(name);
+
+		if (type==1) { // es inicio
+			newState.addClass('begin-point');
+		}
+		if (type==2) { // es fin
+			newState.addClass('end-point');
+		}
 
 		newState.css({
 			'top': pos_y,
@@ -152,15 +159,33 @@ jsPlumb.ready(function() {
 
 		$('#flowchart-edit').append(newState);
 
-		instance.addEndpoint(task_id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
-		instance.addEndpoint(task_id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
+		if (type!=1) { // no es inicio
+			instance.addEndpoint(task_id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
+		}
+		if (type!=2) { // no es fin
+			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+		}
 	};
 
+	//private $typeOptions = array('0' => 'Actividad', '1' => 'Inicio', '2' => 'Término');
+
 	var i = 1;
-
 	$('#option-add-task').click(function(e) {
+		var name = 'Actividad ' + i;
+		add_task_db(name, 0);
+	});
 
-		var name = 'Tarea ' + i;
+	$('#option-add-start').click(function(e) {
+		var name = 'Actividad Inicial';
+		add_task_db(name, 1); // 1 = 
+	});
+
+	$('#option-add-end').click(function(e) {
+		var name = 'Actividad Final';
+		add_task_db(name, 2); // 1 = 
+	});
+
+	function add_task_db(name, type) {
 		var top = 100 + (20*(i-1))%80;
 		var left = 100 + (20*(i-1))%80;
 
@@ -169,28 +194,27 @@ jsPlumb.ready(function() {
 			name: name,
 			process_id: <?php echo $process_id; ?>,
 			pos_x: left,
-			pos_y: top
+			pos_y: top,
+			type: type
 		};
-
 		$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
 			if(!d['success']) 
 				alert('Error!');
 			else {
 				id = d['data']['id'];
-				add_task(id, name, left, top);
+				add_task(id, name, type, left, top);
 			}
 		});
 
 		i++;
-
-	});
+	};
 
 	load_data = function(ins) {
 
 	<?php 
 		foreach ($model->processTasks as $processTask) {
 			?>
-		add_task('<?php echo $processTask->id?>', '<?php echo $processTask->name?>', <?php echo $processTask->pos_x?>, <?php echo $processTask->pos_y?>);
+		add_task('<?php echo $processTask->id?>', '<?php echo $processTask->name?>', <?php echo $processTask->type?>, <?php echo $processTask->pos_x?>, <?php echo $processTask->pos_y?>);
 			<?php
 		}
 	?>
