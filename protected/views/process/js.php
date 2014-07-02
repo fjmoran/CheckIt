@@ -111,8 +111,13 @@ jsPlumb.ready(function() {
 		newState.dblclick(function(e) {
 
 			var arr = $(this).attr('id').split('_');
-
 			id = arr[1];
+
+			instance.detachAllConnections($(this));
+			instance.deleteEndpoint(sourceUUID);
+			instance.deleteEndpoint(targetUUID);
+			$(this).remove();
+			e.stopPropagation();
 
 			$.post('<?php echo Yii::app()->createUrl('processtask/delete?id='); ?>'+id, null,  function(d) {
 				if(!d['success']) {
@@ -122,11 +127,6 @@ jsPlumb.ready(function() {
 
 			console.log("task deleted " + $(this).attr('id'));
 
-			instance.detachAllConnections($(this));
-			instance.deleteEndpoint(sourceUUID);
-			instance.deleteEndpoint(targetUUID);
-			$(this).remove();
-			e.stopPropagation();
 		});
 
 		instance.draggable(newState, {
@@ -183,8 +183,7 @@ jsPlumb.ready(function() {
 
 		i++;
 
-	});  
-
+	});
 
 	load_data = function(ins) {
 
