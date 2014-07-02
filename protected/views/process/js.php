@@ -46,7 +46,7 @@ jsPlumb.ready(function() {
 			radius:7,
 			lineWidth:3 
 		},				
-		connector:[ "Flowchart", { stub:[5, 25], gap:10, cornerRadius:3, alwaysRespectStubs:true } ],								                
+		connector:[ "Flowchart", { stub:[10, 35], gap:10, cornerRadius:3, alwaysRespectStubs:true } ],								                
 		connectorStyle:connectorPaintStyle,
 		hoverPaintStyle:endpointHoverStyle,
 		connectorHoverStyle:connectorHoverStyle,
