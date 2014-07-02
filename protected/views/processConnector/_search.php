@@ -1,0 +1,35 @@
+<?php
+/* @var $this ProcessConnectorController */
+/* @var $model ProcessConnector */
+/* @var $form CActiveForm */
+?>
+
+<div class="wide form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'action'=>Yii::app()->createUrl($this->route),
+	'method'=>'get',
+)); ?>
+
+	<div class="row">
+		<?php echo $form->label($model,'id'); ?>
+		<?php echo $form->textField($model,'id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'source_task_id'); ?>
+		<?php echo $form->textField($model,'source_task_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'target_task_id'); ?>
+		<?php echo $form->textField($model,'target_task_id'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Search'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- search-form -->

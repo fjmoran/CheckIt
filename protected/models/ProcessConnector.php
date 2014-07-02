@@ -31,7 +31,8 @@ class ProcessConnector extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('source_task_id, target_task_id', 'required'),
-			array('source_task_id, target_task_id', 'numerical', 'integerOnly'=>true),
+			array('source_task_id, target_task_id, process_id', 'numerical', 'integerOnly'=>true),
+			array('source_task_id, target_task_id', 'unique', 'attributes' => array('source_task_id', 'target_task_id')),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, source_task_id, target_task_id', 'safe', 'on'=>'search'),

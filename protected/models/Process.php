@@ -45,6 +45,7 @@ class Process extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'processTasks' => array(self::HAS_MANY, 'ProcessTask', 'process_id'),
+			'processConnectors' => array(self::HAS_MANY, 'ProcessConnector', 'process_id'),
 		);
 	}
 

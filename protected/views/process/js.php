@@ -85,8 +85,9 @@ jsPlumb.ready(function() {
 		});
 	};*/
 
-	add_connection = function() {
-
+	add_connector = function(source_id,target_id) {
+		//instance.connect({source:source_id, target:target_id});
+		instance.connect({uuids:[source_id + "_bottom", target_id + "_top"], editable:false});
 	}
 
 	add_task = function(id, name, pos_x, pos_y) {
@@ -128,14 +129,14 @@ jsPlumb.ready(function() {
 					if(!d['success']) {alert('Error!');}
 				});
 
-				console.log("New position: x: ", xPos, " - y:", yPos);
+				//console.log("New position: x: ", xPos, " - y:", yPos);
 			},
 		});
 
 		$('#flowchart-edit').append(newState);
 
 		instance.addEndpoint(id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
-		instance.addEndpoint(id, targetEndpoint, { anchor:"TopCenter", uuid:targetUUID });
+		instance.addEndpoint(id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
 	};
 
 	var i = 1;
@@ -178,12 +179,57 @@ jsPlumb.ready(function() {
 		}
 	?>
 
+	<?php 
+		foreach ($model->processConnectors as $processConnector) {
+			?>
+		add_connector('<?php echo $processConnector->source_task_id?>', '<?php echo $processConnector->target_task_id?>');
+			<?php
+		}
+	?>
+
 		instance.bind("click", function(conn, originalEvent) {
 			if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
-				jsPlumb.detach(conn); 
+				instance.detach(conn); 
 		});	
 
+		instance.bind("beforeDrop", function(info){
+
+			//database
+			var data = {
+				process_id: <?php echo $process_id; ?>,
+				source_task_id: info.sourceId,
+				target_task_id: info.targetId,
+			};
+
+			var doLine=true;
+			/*$.post('<?php echo Yii::app()->createUrl('processconnector/create'); ?>', data,  function(d) {
+				if(!d['success']) {
+					doLine=false;
+				}
+			}*/
+
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo Yii::app()->createUrl('processconnector/create'); ?>',
+				data: data,
+				success: function(d) {
+					if(!d['success']) {
+						doLine=false;
+					}
+				},
+				//dataType: dataType,
+				async:false
+			});
+
+			console.log("drop " + info.connection.id + " from " + info.sourceId + " to " + info.targetId );
+			return doLine;
+		});
+
 		instance.bind("connection", function(info) {
+			info.connection.setDetachable(false);
+
+/*			alert(info.id);
+
 			//database
 			var data = {
 				id: info.connection.id,
@@ -191,7 +237,16 @@ jsPlumb.ready(function() {
 				to: info.targetId,
 			};
 
-			console.log("connection " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+			$.post('<?php echo Yii::app()->createUrl('processconnector/create'); ?>', data,  function(d) {
+				if(!d['success']) 
+					alert('Error!');
+				else {
+					id = d['data']['id'];
+					add_task(id, name, left, top);
+				}
+			});
+*/
+			//console.log("connection " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
 		});
 		
 		instance.bind("connectionDetached", function(info) {
@@ -201,7 +256,7 @@ jsPlumb.ready(function() {
 				to: info.targetId,
 			};
 
-			//console.log("detached " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
+			console.log("detached " + info.connection.id + " from " + info.sourceId + " to " + info.targetId);
 		});
 		
 	};
