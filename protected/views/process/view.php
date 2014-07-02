@@ -29,30 +29,21 @@ $this->menu=array(
 	border-color: #999;
 	width: 150px;
 	font-size: 80%;
-    background-color:#ccc;
 	text-align: center;
+}
+
+.activity {
+    background-color:#eee;	
 	border-radius: 7px;
 }
 
 .begin-point {
-	position: absolute;        
-	border: 3px solid;
-	border-color: #999;
-	width: 150px;
-	font-size: 80%;
     background-color:#AFE8B9;
-	text-align: center;
 	border-radius: 20px;
 }
 
 .end-point {
-	position: absolute;        
-	border: 3px solid;
-	border-color: #999;
-	width: 150px;
-	font-size: 80%;
     background-color:#F58C8C;
-	text-align: center;
 	border-radius: 20px;
 }
 
@@ -65,7 +56,6 @@ $this->menu=array(
     transform:rotate(-45deg) skew(15deg, 15deg);
 	-ms-transform:rotate(-45deg) skew(15deg, 15deg);
     -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
-    position: absolute;
 	text-align: center;
 	border-radius: 5px;    
 }

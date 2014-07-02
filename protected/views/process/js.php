@@ -95,7 +95,7 @@ jsPlumb.ready(function() {
 
 		var task_id = 'task_' + id;
 
-		var newState = $('<div>').attr('id', task_id).addClass('item');
+		var newState = $('<div>').attr('id', task_id).addClass('item activity');
 		var title = $('<div>').addClass('title').text(name);
 
 		newState.css({
