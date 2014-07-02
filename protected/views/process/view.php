@@ -29,9 +29,31 @@ $this->menu=array(
 	border-color: #999;
 	width: 150px;
 	font-size: 80%;
-    background-color:#eee;
+    background-color:#ccc;
 	text-align: center;
 	border-radius: 7px;
+}
+
+.begin-point {
+	position: absolute;        
+	border: 3px solid;
+	border-color: #999;
+	width: 150px;
+	font-size: 80%;
+    background-color:#AFE8B9;
+	text-align: center;
+	border-radius: 20px;
+}
+
+.end-point {
+	position: absolute;        
+	border: 3px solid;
+	border-color: #999;
+	width: 150px;
+	font-size: 80%;
+    background-color:#F58C8C;
+	text-align: center;
+	border-radius: 20px;
 }
 
 .decision{
@@ -68,12 +90,13 @@ $this->menu=array(
 
 <div id="flowchart-edit">
 	<div class="btn-group" style="padding: 10px;">
-  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Tarea</a>
-  		<!-- <a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Inicio</a>
-  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Final</a>  -->		
+  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Actividad</a>
+  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Actividad Inicial</a>
+  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Actividad Final</a>	
   		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
-  		<a id="option-add-task2" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
-  		<a id="option-add-task3" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>
+  		<a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a>
+  		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
+  		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a> -->
 	</div>
 	<div class="decision"></div>
 </div>
