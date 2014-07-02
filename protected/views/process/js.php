@@ -85,9 +85,9 @@ jsPlumb.ready(function() {
 		});
 	};*/
 
-	add_connector = function(id, source_id, target_id) {
+	add_connector = function(id, source_id, target_id, pos) {
 		//instance.connect({source:source_id, target:target_id});
-		conn = instance.connect({uuids:["task_" + source_id + "_bottom", "task_" + target_id + "_top"], editable:false});
+		conn = instance.connect({uuids:["task_" + source_id + "_output" + '_' + pos, "task_" + target_id + "_input"], editable:false});
 		conn.id = "connection_" + id;
 	}
 
@@ -117,8 +117,10 @@ jsPlumb.ready(function() {
 			newState.append(title);
 		}
 
-		var sourceUUID = task_id + "_bottom";
-		var targetUUID = task_id + "_top";
+		var sourceUUID_0 = task_id + '_output_0';
+		var sourceUUID_1 = task_id + '_output_1';
+		var sourceUUID_2 = task_id + '_output_2';
+		var targetUUID = task_id + '_input';
 
 		newState.dblclick(function(e) {
 
@@ -126,7 +128,9 @@ jsPlumb.ready(function() {
 			id = arr[1];
 
 			instance.detachAllConnections($(this));
-			instance.deleteEndpoint(sourceUUID);
+			instance.deleteEndpoint(sourceUUID_0);
+			instance.deleteEndpoint(sourceUUID_1);
+			instance.deleteEndpoint(sourceUUID_2);
 			instance.deleteEndpoint(targetUUID);
 			$(this).remove();
 			e.stopPropagation();
@@ -168,8 +172,11 @@ jsPlumb.ready(function() {
 			instance.addEndpoint(task_id, targetEndpoint, {anchor:"TopCenter", uuid:targetUUID});
 		}
 		if (type!=2) { // no es fin
-			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID});
+			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"Left", uuid:sourceUUID_0});
+			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"BottomCenter", uuid:sourceUUID_1});
+			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"Right", uuid:sourceUUID_2});
 		}
+
 	};
 
 	//private $typeOptions = array('0' => 'Actividad', '1' => 'Inicio', '2' => 'Término');
@@ -239,20 +246,18 @@ jsPlumb.ready(function() {
 			var arr1 = info.sourceId.split('_');
 			var arr2 = info.targetId.split('_');
 
+			var uuid = info.connection.endpoints[0].getUuid();
+			var arr3 = uuid.split('_');
+
 			//database
 			var data = {
 				process_id: <?php echo $process_id; ?>,
 				source_task_id: arr1[1],
 				target_task_id: arr2[1],
+				position: arr3[3]
 			};
 
 			var doLine=true;
-			/*$.post('<?php echo Yii::app()->createUrl('processconnector/create'); ?>', data,  function(d) {
-				if(!d['success']) {
-					doLine=false;
-				}
-			}*/
-
 			$.ajax({
 				type: 'POST',
 				url: '<?php echo Yii::app()->createUrl('processconnector/create'); ?>',
@@ -301,7 +306,7 @@ jsPlumb.ready(function() {
 	<?php 
 		foreach ($model->processConnectors as $processConnector) {
 			?>
-		add_connector('<?php echo $processConnector->id?>', '<?php echo $processConnector->source_task_id?>', '<?php echo $processConnector->target_task_id?>');
+		add_connector('<?php echo $processConnector->id?>', '<?php echo $processConnector->source_task_id?>', '<?php echo $processConnector->target_task_id?>', '<?php echo $processConnector->position?>');
 			<?php
 		}
 	?>

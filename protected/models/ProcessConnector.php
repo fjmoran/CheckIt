@@ -31,7 +31,7 @@ class ProcessConnector extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('source_task_id, target_task_id', 'required'),
-			array('source_task_id, target_task_id, process_id', 'numerical', 'integerOnly'=>true),
+			array('source_task_id, target_task_id, process_id, position', 'numerical', 'integerOnly'=>true),
 			array('source_task_id', 'unique', 'criteria'=>array(
 				'condition'=>'`target_task_id`=:target_task_id',
 				'params'=>array(
