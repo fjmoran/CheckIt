@@ -149,8 +149,8 @@ jsPlumb.ready(function() {
 			grid: [20, 20],
 			stop: function(){
 				var offset = $(this).position();
-				var xPos = Math.round( offset.left );
-				var yPos = Math.round( offset.top );
+				var xPos = (Math.round((offset.left/20)))*20;
+				var yPos = (Math.round((offset.top/20)))*20;
 
 				//database
 				var data = {
