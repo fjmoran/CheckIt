@@ -69,8 +69,8 @@ $this->menu=array(
 <div id="flowchart-edit">
 	<div class="btn-group" style="padding: 10px;">
   		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Tarea</a>
-  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Inicio</a>
-  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Final</a>  		
+  		<!-- <a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Inicio</a>
+  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Final</a>  -->		
   		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
   		<a id="option-add-task2" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
   		<a id="option-add-task3" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>

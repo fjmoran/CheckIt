@@ -51,7 +51,11 @@ $('.search-form form').submit(function(){
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
+		array(
+			'htmlOptions' => array('style' => 'width: 93%;'),
+			'header'=>'Nombre',
+			'name'=>'name',
+		),
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',
