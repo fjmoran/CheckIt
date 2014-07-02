@@ -10,3 +10,7 @@ themes/classic/views/
 protected/config/main.php
 protected/config/console.php
 
+
+protected/views/process/view.php
+
+protected/views/process/view.php

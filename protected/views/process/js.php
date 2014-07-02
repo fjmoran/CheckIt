@@ -96,7 +96,6 @@ jsPlumb.ready(function() {
 		var task_id = 'task_' + id;
 
 		var newState = $('<div>').attr('id', task_id).addClass('item activity');
-		var title = $('<div>').addClass('title').text(name);
 
 		if (type==1) { // es inicio
 			newState.addClass('begin-point');
@@ -104,13 +103,19 @@ jsPlumb.ready(function() {
 		if (type==2) { // es fin
 			newState.addClass('end-point');
 		}
+		if (type==3) { // es fin
+			newState.addClass('decision');
+		}
 
 		newState.css({
 			'top': pos_y,
 			'left': pos_x
 		});
 
-		newState.append(title);
+		if (type!=3) {
+			var title = $('<div>').addClass('title').text(name);
+			newState.append(title);
+		}
 
 		var sourceUUID = task_id + "_bottom";
 		var targetUUID = task_id + "_top";
@@ -140,8 +145,8 @@ jsPlumb.ready(function() {
 			grid: [20, 20],
 			stop: function(){
 				var offset = $(this).position();
-				var xPos = offset.left;
-				var yPos = offset.top;
+				var xPos = Math.round( offset.left );
+				var yPos = Math.round( offset.top );
 
 				//database
 				var data = {
@@ -177,12 +182,17 @@ jsPlumb.ready(function() {
 
 	$('#option-add-start').click(function(e) {
 		var name = 'Actividad Inicial';
-		add_task_db(name, 1); // 1 = 
+		add_task_db(name, 1); // inicio
 	});
 
 	$('#option-add-end').click(function(e) {
 		var name = 'Actividad Final';
-		add_task_db(name, 2); // 1 = 
+		add_task_db(name, 2); // fin
+	});
+
+	$('#option-add-decision').click(function(e) {
+		var name = 'Decisión';
+		add_task_db(name, 3); // decision
 	});
 
 	function add_task_db(name, type) {
@@ -220,7 +230,7 @@ jsPlumb.ready(function() {
 	?>
 
 		instance.bind("click", function(conn, originalEvent) {
-			if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
+			if (confirm("¿Esta seguro que quiere eliminar esta conexión?"))
 				instance.detach(conn); 
 		});	
 
