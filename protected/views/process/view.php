@@ -53,6 +53,7 @@ $this->menu=array(
     background-color: #eee;
     height: 86px;
     width: 86px;
+    transform:translate(43px, 43px);
     transform:rotate(-45deg) skew(15deg, 15deg);
 	-ms-transform:rotate(-45deg) skew(15deg, 15deg);
     -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
