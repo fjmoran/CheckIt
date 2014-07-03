@@ -48,6 +48,7 @@ $this->menu=array(
 }
 
 .decision{
+	cursor: move;
 	border: 3px solid;
 	border-color: #999;	
     background-color: #eee;
@@ -74,6 +75,9 @@ $this->menu=array(
 	background-color: #40B3DF;
 }
 
+.hide {
+	display: none;
+}
 </style>
 
 <h2>Proceso: <?php echo $model->name; ?></h2>

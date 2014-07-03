@@ -152,6 +152,9 @@ jsPlumb.ready(function() {
 				var xPos = (Math.round((offset.left/20)))*20;
 				var yPos = (Math.round((offset.top/20)))*20;
 
+				$(this).css({'top': yPos+'px', 'left': xPos+'px'});
+				instance.repaint('task_'+id);
+
 				//database
 				var data = {
 					pos_x: xPos,
@@ -182,6 +185,26 @@ jsPlumb.ready(function() {
 			instance.addEndpoint(task_id, sourceEndpoint, {anchor:anchor_2, uuid:sourceUUID_2});
 		}
 
+/*
+		//instance.selectEndpoints({element:newState}).setVisible(false);
+		instance.selectEndpoints({element:newState}).each(function (endpoint){
+			endpoint.addClass('hide');
+		});
+		newState.hover(
+		//function() { jsPlumb.selectEndpoints({element:$(this)}).setVisible(true); },
+//			function() { instance.selectEndpoints({element:$(this)}).setVisible(true); }
+			function() {
+				instance.selectEndpoints({element:newState}).each(function (endpoint){
+					endpoint.removeClass('hide');
+				});
+			},
+			function() {
+				instance.selectEndpoints({element:newState}).each(function (endpoint){
+					endpoint.addClass('hide');
+				});
+			}
+		);
+*/
 	};
 
 	//private $typeOptions = array('0' => 'Actividad', '1' => 'Inicio', '2' => 'Término');
