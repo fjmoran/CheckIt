@@ -36,7 +36,15 @@
 
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger pull-left">Eliminar</button>
+	<?php echo CHtml::link(
+		'Eliminar',
+		'#',
+		array(
+			'submit' => array('processTask/delete','id'=>$model->id),
+			'class' => 'btn btn-danger btn-small pull-left',
+			'confirm' => '¿Esta seguro?'
+		)
+	); ?>
 	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary')); ?>
 </div>
