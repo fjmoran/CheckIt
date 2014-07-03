@@ -32,13 +32,16 @@
 			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'name'); ?>
 		</div>
+		<div class="col-md-6">
+			<!-- segunda col -->
+		</div>
 	</div>
 
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger pull-left">Eliminar</button>
-	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary')); ?>
+	<button type="button" class="btn btn-danger btn-sm pull-left">Eliminar</button>
+	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary btn-sm')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

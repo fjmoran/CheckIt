@@ -114,10 +114,10 @@ label.error {
   /* border: 1px solid #ccc; 
   border-radius: 5px; */
   background-color: white;
-  overflow: auto;  
+  overflow: scroll;  
   margin-top: 10px;
   margin-bottom: 15px;
-  height: 700px;
+  height: 20000px;
 }
 
 .item {
