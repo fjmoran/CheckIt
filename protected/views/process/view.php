@@ -35,7 +35,7 @@ $this->menu=array(
 <div class="tab-content">
   <div class="tab-pane active" id="modeler">
 	<div id="flowchart-edit">
-		<div class="btn-group">
+		<div class="btn-group affix-space" data-spy="affix" data-offset-top="110" style="z-index:100;">
 	  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Actividad</a>
 	  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Actividad Inicial</a>
 	  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Actividad Final</a>	

@@ -255,5 +255,9 @@ label.error {
   #btn-login:hover
   {
     color: #ccc; 
-  }  
+  }    
+}
+.affix-space.affix
+{
+top: 65px;
 }
