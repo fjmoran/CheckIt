@@ -123,7 +123,6 @@ jsPlumb.ready(function() {
 		var targetUUID = task_id + '_input';
 
 		newState.dblclick(function(e) {
-
 			$('#myModal-lg').modal({
 				'remote': '<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id
 			}); return;
