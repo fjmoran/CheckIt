@@ -152,7 +152,7 @@ class ProcessTaskController extends Controller
 		{
 			$model->attributes=$_POST['ProcessTask'];
 			if($model->save())
-				$this->redirect(array('admin'));
+				$this->redirect(array('process/view','id'=>$model->process_id));
 		}
 
 		$this->renderPartial('update',array(
