@@ -176,13 +176,13 @@ jsPlumb.ready(function() {
 
 		if (type!=1) { // no es inicio
 			anchor_0 = [0.5, 0, 0, -1];
-			if(type==3){anchor_0 = [ 0.862, 0, 0, -1 ]; }
+			if(type==3){anchor_0 = [ 0.863, 0, 0, -1 ]; }
 			instance.addEndpoint(task_id, targetEndpoint, {anchor:anchor_0, uuid:targetUUID});
 		}
 		if (type!=2) { // no es fin
 			anchor_1 = [ 0.5, 1, 0, 1 ];
 			anchor_2 = [ 1, 0.5, 1, 0 ];
-			if(type==3){anchor_1 = [ 0.862, 1, 0, 1 ]; anchor_2 = [ 1.65, 0.5, 1, 0 ]}
+			if(type==3){anchor_1 = [ 0.863, 1, 0, 1 ]; anchor_2 = [ 1.65, 0.5, 1, 0 ]}
 			instance.addEndpoint(task_id, sourceEndpoint, {anchor:"Left", uuid:sourceUUID_0});
 			instance.addEndpoint(task_id, sourceEndpoint, {anchor:anchor_1, uuid:sourceUUID_1});
 			instance.addEndpoint(task_id, sourceEndpoint, {anchor:anchor_2, uuid:sourceUUID_2});
