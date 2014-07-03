@@ -124,7 +124,7 @@ jsPlumb.ready(function() {
 
 		newState.dblclick(function(e) {
 
-			$('#myModal').modal({
+			$('#myModal-lg').modal({
 				'remote': '<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id
 			}); return;
 

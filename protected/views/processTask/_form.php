@@ -36,6 +36,7 @@
 
 </div>
 <div class="modal-footer">
+	<button type="button" class="btn btn-danger pull-left">Eliminar</button>
 	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary')); ?>
 </div>
