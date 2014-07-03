@@ -111,12 +111,12 @@ label.error {
 #flowchart-edit {
   position: relative;
   width:100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  /* border: 1px solid #ccc; 
+  border-radius: 5px; */
   background-color: white;
   overflow: auto;  
-  margin-top: 15px;
-  margin-bottom: 25px;
+  margin-top: 10px;
+  margin-bottom: 15px;
   height: 700px;
 }
 

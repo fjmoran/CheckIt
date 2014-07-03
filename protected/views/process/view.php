@@ -24,16 +24,31 @@ $this->menu=array(
 
 <h2>Proceso: <?php echo $model->name; ?></h2>
 
-<div id="flowchart-edit">
-	<div class="btn-group" style="padding: 10px;">
-  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Actividad</a>
-  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Actividad Inicial</a>
-  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Actividad Final</a>	
-  		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
-  		<a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a>
-  		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
-  		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>  -->
-	</div>
+
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#modeler" role="tab" data-toggle="tab">Modelador</a></li>
+  <li><a href="#forms" role="tab" data-toggle="tab">Formularios</a></li>
+</ul>
+
+
+<div class="tab-content">
+  <div class="tab-pane active" id="modeler">
+	<div id="flowchart-edit">
+		<div class="btn-group">
+	  		<a id="option-add-task" class="btn btn-default"><i class="fa fa-tasks"></i> Actividad</a>
+	  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Actividad Inicial</a>
+	  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Actividad Final</a>	
+	  		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
+	  		<a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a>
+	  		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
+	  		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>  -->
+		</div>
+	</div>  	
+  </div> <!-- fin pane -->
+  <div class="tab-pane" id="forms"> 
+  	Forms acá
+  </div>
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
