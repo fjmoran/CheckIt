@@ -40,7 +40,7 @@ $this->menu=array(
 	  		<a id="option-add-start" class="btn btn-default"><i class="fa fa-play"></i> Actividad Inicial</a>
 	  		<a id="option-add-end" class="btn btn-default"><i class="fa fa-stop"></i> Actividad Final</a>	
 	  		<a id="option-add-decision" class="btn btn-default"><i class="fa fa-cubes"></i> Decisión</a>
-	  		<a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a>
+	  		<!-- a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a -->
 	  		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
 	  		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>  -->
 		</div>

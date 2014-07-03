@@ -158,7 +158,7 @@ class ProcessTaskController extends Controller
 				$this->redirect(array('process/view','id'=>$model->process_id));
 		}
 
-		$this->renderPartial('update',array(
+		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
@@ -166,6 +166,10 @@ class ProcessTaskController extends Controller
 	public function actionDelete($id)
 	{
 		$model = $this->loadModel($id);
+		
+		ProcessConnector::model()->deleteAllByAttributes(array('source_task_id'=>$model->id));
+		ProcessConnector::model()->deleteAllByAttributes(array('target_task_id'=>$model->id));
+		
 		$process_id = $model->process_id;
 		$model->delete();
 		$this->redirect(array('process/view', 'id'=>$process_id));

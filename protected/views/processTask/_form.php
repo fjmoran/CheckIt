@@ -42,7 +42,7 @@
 		array(
 			'submit' => array('processTask/delete','id'=>$model->id),
 			'class' => 'btn btn-danger btn-small pull-left',
-			'confirm' => '¿Esta seguro?'
+			//'confirm' => '¿Esta seguro?'
 		)
 	); ?>
 	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
