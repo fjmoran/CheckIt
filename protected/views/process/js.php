@@ -124,6 +124,9 @@ jsPlumb.ready(function() {
 
 		newState.dblclick(function(e) {
 
+			
+
+
 			var arr = $(this).attr('id').split('_');
 			id = arr[1];
 
@@ -135,7 +138,7 @@ jsPlumb.ready(function() {
 			$(this).remove();
 			e.stopPropagation();
 
-			$.post('<?php echo Yii::app()->createUrl('processtask/delete?id='); ?>'+id, null,  function(d) {
+			$.post('<?php echo Yii::app()->createUrl('processTask/delete?id='); ?>'+id, null,  function(d) {
 				if(!d['success']) {
 					//doLine=false;
 				}
@@ -161,7 +164,7 @@ jsPlumb.ready(function() {
 					pos_y: yPos
 				};
 
-				$.post('<?php echo Yii::app()->createUrl('processtask/update?id='); ?>'+id, data,  function(d) {
+				$.post('<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id, data,  function(d) {
 					if(!d['success']) {alert('Error!');}
 				});
 
@@ -242,7 +245,7 @@ jsPlumb.ready(function() {
 			pos_y: top,
 			type: type
 		};
-		$.post('<?php echo Yii::app()->createUrl('processtask/create'); ?>', data,  function(d) {
+		$.post('<?php echo Yii::app()->createUrl('processTask/create'); ?>', data,  function(d) {
 			if(!d['success']) 
 				alert('Error!');
 			else {
@@ -288,7 +291,7 @@ jsPlumb.ready(function() {
 			var doLine=true;
 			$.ajax({
 				type: 'POST',
-				url: '<?php echo Yii::app()->createUrl('processconnector/create'); ?>',
+				url: '<?php echo Yii::app()->createUrl('processConnector/create'); ?>',
 				data: data,
 				success: function(d) {
 					if(!d['success']) {
@@ -319,7 +322,7 @@ jsPlumb.ready(function() {
 			if (arr[0] == 'connection') {
 				id = arr[1];
 
-				$.post('<?php echo Yii::app()->createUrl('processconnector/delete?id='); ?>'+id, null,  function(d) {
+				$.post('<?php echo Yii::app()->createUrl('processConnector/delete?id='); ?>'+id, null,  function(d) {
 					if(!d['success']) {
 						//doLine=false;
 					}

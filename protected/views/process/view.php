@@ -22,64 +22,6 @@ $this->menu=array(
 );
 ?>
 
-<style>
-.item {
-	position: absolute;        
-	border: 3px solid;
-	border-color: #999;
-	width: 150px;
-	font-size: 80%;
-	text-align: center;
-}
-
-.activity {
-    background-color:#eee;	
-	border-radius: 7px;
-}
-
-.begin-point {
-    background-color:#AFE8B9;
-	border-radius: 20px;
-}
-
-.end-point {
-    background-color:#F58C8C;
-	border-radius: 20px;
-}
-
-.decision{
-	cursor: move;
-	border: 3px solid;
-	border-color: #999;	
-    background-color: #eee;
-    height: 86.60254037844386px;
-    width: 86.60254037844386px;
-    transform: translate(100px,0px) rotate(-45deg) skew(15deg, 15deg);
-	-ms-transform: translate(100px,0px) rotate(-45deg) skew(15deg, 15deg);
-    -webkit-transform: translate(30px,0px) rotate(-45deg) skew(15deg, 15deg);
-	text-align: center;
-	border-radius: 5px;     
-}
-
-.title {
-	padding: 10px;
-	cursor: move;
-	font-weight: bold;
-	font-size: 120%;	
-}
-
-.connect {
-	width: 100%;
-	height: 20px;
-	cursor: pointer;
-	background-color: #40B3DF;
-}
-
-.hide {
-	display: none;
-}
-</style>
-
 <h2>Proceso: <?php echo $model->name; ?></h2>
 
 <div id="flowchart-edit">
@@ -91,6 +33,13 @@ $this->menu=array(
   		<a id="option-add-report" class="btn btn-default"><i class="fa fa-copy"></i> Reporte</a>
   		<!-- <a id="option-add-divide" class="btn btn-default"><i class="fa fa-share-alt"></i> Dividir</a>
   		<a id="option-add-join" class="btn btn-default"><i class="fa fa-link"></i> Reunir</a>  -->
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
 	</div>
 </div>
 

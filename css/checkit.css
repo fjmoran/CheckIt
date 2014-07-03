@@ -106,6 +106,8 @@ label.error {
   margin-top: 2px;
 }
 
+/* Edicion de flujos de proceso */
+
 #flowchart-edit {
   position: relative;
   width:100%;
@@ -117,6 +119,63 @@ label.error {
   margin-bottom: 25px;
   height: 700px;
 }
+
+.item {
+  position: absolute;        
+  border: 3px solid;
+  border-color: #999;
+  width: 150px;
+  font-size: 80%;
+  text-align: center;
+}
+
+.activity {
+    background-color:#eee;  
+  border-radius: 7px;
+}
+
+.begin-point {
+    background-color:#AFE8B9;
+  border-radius: 20px;
+}
+
+.end-point {
+    background-color:#F58C8C;
+  border-radius: 20px;
+}
+
+.decision{
+  cursor: move;
+  border: 3px solid;
+  border-color: #999; 
+    background-color: #eee;
+    height: 86.60254037844386px;
+    width: 86.60254037844386px;
+    transform: translate(100px,0px) rotate(-45deg) skew(15deg, 15deg);
+  -ms-transform: translate(100px,0px) rotate(-45deg) skew(15deg, 15deg);
+    -webkit-transform: translate(30px,0px) rotate(-45deg) skew(15deg, 15deg);
+  text-align: center;
+  border-radius: 5px;     
+}
+
+.title {
+  padding: 10px;
+  cursor: move;
+  font-weight: bold;
+  font-size: 120%;  
+}
+
+.connect {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  background-color: #40B3DF;
+}
+
+.hide {
+  display: none;
+}
+
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
