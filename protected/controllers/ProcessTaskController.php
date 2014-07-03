@@ -19,6 +19,7 @@ class ProcessTaskController extends Controller
 			'postOnly + createJS', // we only allow deletion via POST request
 			'postOnly + updateJS', // we only allow deletion via POST request
 			'postOnly + deleteJS', // we only allow deletion via POST request
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -31,7 +32,7 @@ class ProcessTaskController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('createjs','updatejs','deletejs','update'),
+				'actions'=>array('createjs','updatejs','deletejs','update','delete'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -146,6 +147,8 @@ class ProcessTaskController extends Controller
 	}
 
 	public function actionUpdate($id) {
+		$this->layout = 'modal';
+
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['ProcessTask']))
@@ -159,6 +162,20 @@ class ProcessTaskController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionDelete($id)
+	{
+		$model = $this->loadModel($id);
+		$process_id = $model->process_id;
+		$model->delete();
+		$this->redirect(array('process/view', 'id'=>$process_id));
+		exit;
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		//if(!isset($_GET['ajax']))
+		//	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
 
 	/**
 	 * Lists all models.
