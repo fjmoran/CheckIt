@@ -32,6 +32,9 @@
 			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'name'); ?>
 		</div>
+		<div class="col-md-6">
+			<!-- segunda col -->
+		</div>
 	</div>
 
 </div>
@@ -41,12 +44,12 @@
 		'#',
 		array(
 			'submit' => array('processTask/delete','id'=>$model->id),
-			'class' => 'btn btn-danger btn-small pull-left',
+			'class' => 'btn btn-danger btn-sm pull-left',
 			//'confirm' => '¿Esta seguro?'
 		)
 	); ?>
-	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary')); ?>
+	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary btn-sm')); ?>
 </div>
 
 <?php $this->endWidget(); ?>
