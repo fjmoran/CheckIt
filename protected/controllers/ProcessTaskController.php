@@ -16,9 +16,9 @@ class ProcessTaskController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + create', // we only allow deletion via POST request
-			'postOnly + update', // we only allow deletion via POST request
-			'postOnly + delete', // we only allow deletion via POST request
+			'postOnly + createJS', // we only allow deletion via POST request
+			'postOnly + updateJS', // we only allow deletion via POST request
+			'postOnly + deleteJS', // we only allow deletion via POST request
 		);
 	}
 
@@ -31,7 +31,7 @@ class ProcessTaskController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create','update','delete'),
+				'actions'=>array('createjs','updatejs','deletejs','update'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -67,7 +67,7 @@ class ProcessTaskController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreateJS()
 	{
 		//read the post input (use this technique if you have no post variable name):
 //		$post = file_get_contents("php://input");
@@ -111,7 +111,7 @@ class ProcessTaskController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdateJS($id)
 	{
 
 		$model=$this->loadModel($id);
@@ -136,13 +136,28 @@ class ProcessTaskController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDeleteJS($id)
 	{
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		//if(!isset($_GET['ajax']))
 		//	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+	public function actionUpdate($id) {
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['ProcessTask']))
+		{
+			$model->attributes=$_POST['ProcessTask'];
+			if($model->save())
+				$this->redirect(array('admin'));
+		}
+
+		$this->renderPartial('update',array(
+			'model'=>$model,
+		));
 	}
 
 	/**

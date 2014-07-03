@@ -124,7 +124,9 @@ jsPlumb.ready(function() {
 
 		newState.dblclick(function(e) {
 
-			
+			$('#myModal').modal({
+				'remote': '<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id
+			}); return;
 
 
 			var arr = $(this).attr('id').split('_');
@@ -138,7 +140,7 @@ jsPlumb.ready(function() {
 			$(this).remove();
 			e.stopPropagation();
 
-			$.post('<?php echo Yii::app()->createUrl('processTask/delete?id='); ?>'+id, null,  function(d) {
+			$.post('<?php echo Yii::app()->createUrl('processTask/deletejs?id='); ?>'+id, null,  function(d) {
 				if(!d['success']) {
 					//doLine=false;
 				}
@@ -164,7 +166,7 @@ jsPlumb.ready(function() {
 					pos_y: yPos
 				};
 
-				$.post('<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id, data,  function(d) {
+				$.post('<?php echo Yii::app()->createUrl('processTask/updatejs?id='); ?>'+id, data,  function(d) {
 					if(!d['success']) {alert('Error!');}
 				});
 
@@ -245,7 +247,7 @@ jsPlumb.ready(function() {
 			pos_y: top,
 			type: type
 		};
-		$.post('<?php echo Yii::app()->createUrl('processTask/create'); ?>', data,  function(d) {
+		$.post('<?php echo Yii::app()->createUrl('processTask/createjs'); ?>', data,  function(d) {
 			if(!d['success']) 
 				alert('Error!');
 			else {

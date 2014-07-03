@@ -64,8 +64,8 @@ class ProcessTask extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'process_id' => 'Process',
+			'name' => 'Nombre',
+			'process_id' => 'Proceso',
 		);
 	}
 

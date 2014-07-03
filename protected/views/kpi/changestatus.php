@@ -2,7 +2,6 @@
 /* @var $this TaskController */
 /* @var $model Task */
 /* @var $form CActiveForm */
-
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
