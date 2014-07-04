@@ -235,7 +235,7 @@ jsPlumb.ready(function() {
 	});
 
 	function add_task_db(name, type) {
-		var top = 100 + (20*(i-1))%80;
+		var top = 100 + (20*(i-1))%80 + $('.affix-space').position().top;
 		var left = 100 + (20*(i-1))%80;
 
 		//database
