@@ -35,14 +35,20 @@ $('.search-form form').submit(function(){
 
 <div class="tab-content">
   <div class="tab-pane active">
-
-  	<h3>Lista de formularios</h3>
-
 		<div class="row">
-			<div class="col-md-12">
-				<a href="<?php echo Yii::app()->createUrl('form/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+			<div class="col-md-10">
+
+			  	<ol class="breadcrumb">
+				  	<li><a href="#">Home</a></li>
+			  		<li><a href="#">Library</a></li>
+			  		<li class="active">Data</li>
+				</ol>
+
+			</div>	
+			<div class="col-md-2">
+				<a href="<?php echo Yii::app()->createUrl('form/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right" style="margin-top: 10px; margin-bottom: 10px;"><i class="fa fa-plus-circle"></i> Nuevo</a>
 			</div>
-		</div></br>
+		</div>
 
 <?php /* echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

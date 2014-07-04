@@ -261,3 +261,12 @@ label.error {
 {
 top: 65px;
 }
+
+.breadcrumb {
+padding: 8px 0px;
+margin-top: 3px;
+margin-bottom: 5px !important;
+list-style: none;
+background-color: transparent !important;
+border-radius: 0px;
+}
