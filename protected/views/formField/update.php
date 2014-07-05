@@ -16,6 +16,19 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update FormField <?php echo $model->id; ?></h1>
+<h2>Proceso: <?php echo $process->name; ?></h2>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<ul class="nav nav-tabs" role="tablist">
+  <li><a href="<?php echo Yii::app()->createUrl('process/view', array('id'=>$process->id))?>" role="tab">Modelador</a></li>
+  <li class="active"><a href="#" role="tab">Formularios</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active">
+
+  	<h3>Modificar campo en formulario <?php echo $_form->name ?></h3>
+
+<?php $this->renderPartial('_form', array('model'=>$model, 'process'=>$process, '_form'=>$_form)); ?>
+
+	</div>
+</div>

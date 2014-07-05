@@ -79,6 +79,7 @@ $('.search-form form').submit(function(){
 					'imageUrl' => false,
 				),
 				'view'=>array(
+					'url' => 'Yii::app()->createUrl("formField/admin", array("form_id"=>$data->id))',
 					'label' => '<i class="fa fa-search grid-icon"></i>',
 					'options'=>array('title'=>'Ver'),
 					'imageUrl' => false,

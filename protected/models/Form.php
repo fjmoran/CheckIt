@@ -10,7 +10,7 @@
  *
  * The followings are the available model relations:
  * @property Process $process
- * @property FormField[] $formFields
+ * @property FormProperty[] $formProperties
  */
 class Form extends CActiveRecord
 {
@@ -48,7 +48,7 @@ class Form extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'process' => array(self::BELONGS_TO, 'Process', 'process_id'),
-			'formFields' => array(self::HAS_MANY, 'FormField', 'form_id'),
+			'formProperties' => array(self::HAS_MANY, 'FormProperty', 'form_id'),
 		);
 	}
 

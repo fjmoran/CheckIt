@@ -13,44 +13,71 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array(
+		//'enctype' => 'multipart/form-data',
+		'role' => 'form',
+		'autocomplete' => 'off',
+	),
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'name'); ?>
+	<div class="row">	
+		<div class="col-md-6">
+			<?php echo $form->labelEx($model,'name'); ?>
+			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'name'); ?>
+		</div>
+	</div>
+
+<?php Yii::app()->clientScript->registerScript('fill_default', "
+	$('#FormField_name').change(function(){
+		def = $('#FormField_code').val();
+		if (def=='') {
+			val = ($(this).val()).toLowerCase();
+			val = val.replace(/[^\w]/gi, '_');
+			$('#FormField_code').val(val);
+		}
+	});
+"); ?>
+
+	<div class="row">	
+		<div class="col-md-6">
+			<?php echo $form->labelEx($model,'code'); ?>
+			<?php echo $form->textField($model,'code',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'code'); ?>
+		</div>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'form_id'); ?>
-		<?php echo $form->textField($model,'form_id'); ?>
-		<?php echo $form->error($model,'form_id'); ?>
+		<div class="col-md-6">
+			<?php echo $form->labelEx($model,'required'); ?>
+			<?php echo $form->dropDownList($model,'required', $model->requiredOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'required'); ?>
+		</div>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'required'); ?>
-		<?php echo $form->textField($model,'required'); ?>
-		<?php echo $form->error($model,'required'); ?>
+		<div class="col-md-6">
+			<?php echo $form->labelEx($model,'type'); ?>
+			<?php echo $form->dropDownList($model,'type', $model->typeOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'type'); ?>
+		</div>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type'); ?>
-		<?php echo $form->error($model,'type'); ?>
+		<div class="col-md-6">
+			<?php echo $form->labelEx($model,'position'); ?>
+			<?php echo $form->textField($model,'position',array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'position'); ?>
+		</div>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'position'); ?>
-		<?php echo $form->textField($model,'position'); ?>
-		<?php echo $form->error($model,'position'); ?>
-	</div>
+	<?php echo $form->hiddenField($model,'form_id'); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="form-group buttons">
+		<a href="<?php echo Yii::app()->createUrl('formField/admin', array('form_id'=>$_form->id));?>" class="btn btn-default">Cancelar</a>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -67,6 +67,11 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'process';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='formField') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'process';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 

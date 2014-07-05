@@ -1,6 +1,6 @@
 <?php
 
-class FormFieldController extends Controller
+class FormPropertyController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,10 +28,6 @@ class FormFieldController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('create','update','admin','delete'),
-				'roles'=>array('admin'),
-			),
-/*			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
@@ -42,7 +38,7 @@ class FormFieldController extends Controller
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),*/
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -66,26 +62,19 @@ class FormFieldController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$form_id = Yii::app()->request->getQuery("form_id"); //$_GET['process_id'];
-		if (!(int)$form_id) exit;
-		$form = Form::model()->findByPk($form_id);
-
-		$model=new FormField;
+		$model=new FormProperty;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['FormField']))
+		if(isset($_POST['FormProperty']))
 		{
-			$model->attributes=$_POST['FormField'];
-			if (!$model->form_id) $model->form_id = $form_id;
+			$model->attributes=$_POST['FormProperty'];
 			if($model->save())
-				$this->redirect(array('admin','form_id'=>$form_id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
-			'process'=>$form->process,
-			'_form'=>$form,
 			'model'=>$model,
 		));
 	}
@@ -99,23 +88,17 @@ class FormFieldController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		$form_id = $model->form_id; //$_GET['process_id'];
-		if (!(int)$form_id) exit;
-		$form = Form::model()->findByPk($form_id);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['FormField']))
+		if(isset($_POST['FormProperty']))
 		{
-			$model->attributes=$_POST['FormField'];
+			$model->attributes=$_POST['FormProperty'];
 			if($model->save())
-				$this->redirect(array('admin','form_id'=>$form_id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
-			'process'=>$form->process,
-			'_form'=>$form,
 			'model'=>$model,
 		));
 	}
@@ -139,7 +122,7 @@ class FormFieldController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('FormField');
+		$dataProvider=new CActiveDataProvider('FormProperty');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -150,18 +133,12 @@ class FormFieldController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$form_id = Yii::app()->request->getQuery("form_id"); //$_GET['process_id'];
-		if (!(int)$form_id) exit;
-		$form = Form::model()->findByPk($form_id);
-
-		$model=new FormField('search');
+		$model=new FormProperty('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['FormField']))
-			$model->attributes=$_GET['FormField'];
+		if(isset($_GET['FormProperty']))
+			$model->attributes=$_GET['FormProperty'];
 
 		$this->render('admin',array(
-			'process'=>$form->process,
-			'form'=>$form,
 			'model'=>$model,
 		));
 	}
@@ -170,12 +147,12 @@ class FormFieldController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return FormField the loaded model
+	 * @return FormProperty the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=FormField::model()->findByPk($id);
+		$model=FormProperty::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -183,11 +160,11 @@ class FormFieldController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param FormField $model the model to be validated
+	 * @param FormProperty $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='form-field-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='form-property-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -1,31 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "form_field".
+ * This is the model class for table "form_field_option".
  *
- * The followings are the available columns in table 'form_field':
+ * The followings are the available columns in table 'form_field_option':
  * @property integer $id
  * @property string $name
- * @property integer $process_id
- * @property string $code
- * @property integer $type
+ * @property integer $form_field_id
  * @property integer $position
  *
  * The followings are the available model relations:
- * @property FormFieldOption[] $formFieldOptions
- * @property FormProperty[] $formProperties
+ * @property FormField $formField
  */
-class FormField extends CActiveRecord
+class FormFieldOption extends CActiveRecord
 {
-
-	private $typeOptions = array('0' => 'Texto');
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'form_field';
+		return 'form_field_option';
 	}
 
 	/**
@@ -36,25 +30,13 @@ class FormField extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, process_id, code, type, position', 'required'),
-			array('process_id, type, position', 'numerical', 'integerOnly'=>true),
-			array('name, code', 'length', 'max'=>255),
-			array('code','unique'),
-			array('code','validateCode'),
+			array('name, form_field_id, position', 'required'),
+			array('form_field_id, position', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, process_id, code, type, position', 'safe', 'on'=>'search'),
+			array('id, name, form_field_id, position', 'safe', 'on'=>'search'),
 		);
-	}
-
-	public function validateCode($elem) {
-		$clean = preg_replace('/[^a-z0-9\_]/', '_', $this->$elem);
-
-		if ($clean != $this->$elem) {
-			$this->addError($elem, "El código debe contener sólo minúsculas, números y/o guión bajo (_).");
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -65,8 +47,7 @@ class FormField extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'formFieldOptions' => array(self::HAS_MANY, 'FormFieldOption', 'form_field_id'),
-			'formProperties' => array(self::HAS_MANY, 'FormProperty', 'form_field_id'),
+			'formField' => array(self::BELONGS_TO, 'FormField', 'form_field_id'),
 		);
 	}
 
@@ -77,11 +58,9 @@ class FormField extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Nombre',
-			'process_id' => 'Process',
-			'code' => 'ID / código de referencia',
-			'type' => 'Tipo',
-			'position' => 'Posición',
+			'name' => 'Name',
+			'form_field_id' => 'Form Field',
+			'position' => 'Position',
 		);
 	}
 
@@ -105,9 +84,7 @@ class FormField extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('process_id',$this->process_id);
-		$criteria->compare('code',$this->code,true);
-		$criteria->compare('type',$this->type);
+		$criteria->compare('form_field_id',$this->form_field_id);
 		$criteria->compare('position',$this->position);
 
 		return new CActiveDataProvider($this, array(
@@ -119,20 +96,10 @@ class FormField extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return FormField the static model class
+	 * @return FormFieldOption the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-	public function getTypeOptions() {
-		return $this->typeOptions;
-	}
-
-	public function getTypeValue() {
-		return $this->typeOptions[$this->type];
-	}
-
-
 }
