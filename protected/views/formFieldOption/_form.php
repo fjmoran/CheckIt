@@ -24,17 +24,21 @@
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'name'); ?>
-			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'name'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'name'); ?>
+				<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+				<?php echo $form->error($model,'name'); ?>
+		</div>
 		</div>
 	</div>
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'position'); ?>
-			<?php echo $form->textField($model,'position', array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'position'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'position'); ?>
+				<?php echo $form->textField($model,'position', array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'position'); ?>
+			</div>
 		</div>
 	</div>
 
