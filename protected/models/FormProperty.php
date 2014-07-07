@@ -16,6 +16,10 @@
  */
 class FormProperty extends CActiveRecord
 {
+
+	private $visibleOptions = array('0' => 'Editable', '1' => 'No editable');
+	private $requiredOptions = array('0' => 'Opcional', '1' => 'Obligatorio');
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,11 +36,11 @@ class FormProperty extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('form_id, form_field_id, visible, required', 'required'),
-			array('form_id, form_field_id, visible, required', 'numerical', 'integerOnly'=>true),
+			array('form_id, form_field_id, visible, required, position', 'required'),
+			array('form_id, form_field_id, visible, required, position', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, form_id, form_field_id, visible, required', 'safe', 'on'=>'search'),
+			array('id, form_id, form_field_id, visible, required, position', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +65,10 @@ class FormProperty extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'form_id' => 'Form',
-			'form_field_id' => 'Form Field',
-			'visible' => 'Visible',
-			'required' => 'Required',
+			'form_field_id' => 'Campo',
+			'visible' => 'Es editable',
+			'required' => 'Es obligatorio',
+			'position' => 'Posición',
 		);
 	}
 
@@ -90,6 +95,7 @@ class FormProperty extends CActiveRecord
 		$criteria->compare('form_field_id',$this->form_field_id);
 		$criteria->compare('visible',$this->visible);
 		$criteria->compare('required',$this->required);
+		$criteria->compare('position',$this->position);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -106,4 +112,21 @@ class FormProperty extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getVisibleOptions() {
+		return $this->visibleOptions;
+	}
+
+	public function getVisibleValue() {
+		return $this->visibleOptions[$this->visible];
+	}
+
+	public function getRequiredOptions() {
+		return $this->requiredOptions;
+	}
+
+	public function getRequiredValue() {
+		return $this->requiredOptions[$this->required];
+	}
+
 }

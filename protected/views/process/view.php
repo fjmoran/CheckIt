@@ -24,11 +24,7 @@ $this->menu=array(
 
 <h2>Proceso: <?php echo $model->name; ?></h2>
 
-<ul class="nav nav-tabs" role="tablist">
-	<li class="active"><a href="#" role="tab">Modelador</a></li>
-	<li><a href="<?php echo Yii::app()->createUrl('formField/admin', array('process_id'=>$model->id))?>" role="tab">Campos</a></li>
-	<li><a href="<?php echo Yii::app()->createUrl('form/admin', array('process_id'=>$model->id))?>" role="tab">Formularios</a></li>
-</ul>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$model->id)); ?>
 
 <div class="tab-content">
   <div class="tab-pane active" id="modeler">

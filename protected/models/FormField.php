@@ -18,7 +18,7 @@
 class FormField extends CActiveRecord
 {
 
-	private $typeOptions = array('0' => 'Texto');
+	private $typeOptions = array('0' => 'Texto', '1' => 'Texto largo', '2' => 'Fecha', '3' => 'Selección Única', '4' => 'Selección Múltiple', '5' => 'Archivo');
 
 	/**
 	 * @return string the associated database table name
@@ -36,14 +36,14 @@ class FormField extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, process_id, code, type, position', 'required'),
-			array('process_id, type, position', 'numerical', 'integerOnly'=>true),
+			array('name, process_id, code, type', 'required'),
+			array('process_id, type', 'numerical', 'integerOnly'=>true),
 			array('name, code', 'length', 'max'=>255),
-			array('code','unique'),
+			//array('code','unique'),
 			array('code','validateCode'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, process_id, code, type, position', 'safe', 'on'=>'search'),
+			array('id, name, process_id, code, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +65,7 @@ class FormField extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'process' => array(self::BELONGS_TO, 'Process', 'process_id'),
 			'formFieldOptions' => array(self::HAS_MANY, 'FormFieldOption', 'form_field_id'),
 			'formProperties' => array(self::HAS_MANY, 'FormProperty', 'form_field_id'),
 		);
@@ -81,7 +82,6 @@ class FormField extends CActiveRecord
 			'process_id' => 'Process',
 			'code' => 'ID / código de referencia',
 			'type' => 'Tipo',
-			'position' => 'Posición',
 		);
 	}
 
@@ -108,7 +108,6 @@ class FormField extends CActiveRecord
 		$criteria->compare('process_id',$this->process_id);
 		$criteria->compare('code',$this->code,true);
 		$criteria->compare('type',$this->type);
-		$criteria->compare('position',$this->position);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

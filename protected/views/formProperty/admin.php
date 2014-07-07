@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Create FormProperty', 'url'=>array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
+/*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
 	return false;
@@ -23,35 +23,78 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
-");
+");*/
 ?>
 
-<h1>Manage Form Properties</h1>
+<h2>Proceso: <?php echo $process->name; ?></h2>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$process->id)); ?>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<div class="tab-content">
+  <div class="tab-pane active">
+
+  	<h3>Lista de campos formulario <?php echo $form->name?></h3>
+
+		<div class="row">
+			<div class="col-md-12">
+				<a href="<?php echo Yii::app()->createUrl('formProperty/create', array('form_id'=>$form->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+			</div>
+		</div></br>
+
+<?php /*echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
+<?php */ ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'form-property-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	//'filter'=>$model,
+	'itemsCssClass' => 'table table-condensed table-hover table-striped',
+	'cssFile'=>false,
+	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'id',
-		'form_id',
-		'form_field_id',
-		'visible',
-		'required',
+		array(
+			'name'=>'form_field_id',
+			'value'=>'$data->formField->name',
+		),
+		array(
+			'name'=>'visible',
+			'value'=>'$data->visibleValue',
+		),
+		array(
+			'name'=>'required',
+			'value'=>'$data->requiredValue',
+		),
+		'position',
 		array(
 			'class'=>'CButtonColumn',
+			'header' => 'Opciones',
+			'htmlOptions' => array('style' => 'width: 7%;'),
+			'template'=>'{update} {delete}',
+			'buttons'=>array (
+				'update'=> array(
+					'label' => '<i class="fa fa-edit grid-icon"></i>',
+					'options'=>array('title'=>'Editar'),
+					'imageUrl' => false,
+				),
+				'view'=>array(
+					'label' => '<i class="fa fa-search grid-icon"></i>',
+					'options'=>array('title'=>'Ver'),
+					'imageUrl' => false,
+				),
+				'delete'=>array(
+					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
+					'options'=>array('title'=>'Eliminar'),
+					'imageUrl' => false,
+				),
+			),
 		),
 	),
 )); ?>
+
+	</div>
+</div>

@@ -1,6 +1,6 @@
 <?php
 
-class FormFieldController extends Controller
+class FormFieldOptionController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,7 +28,7 @@ class FormFieldController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('create','update','admin','delete'),
+				'actions'=>array('admin','create','update','delete'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -66,25 +66,26 @@ class FormFieldController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$process_id = Yii::app()->request->getQuery("process_id"); //$_GET['process_id'];
-		if (!(int)$process_id) exit;
-		$process = Process::model()->findByPk($process_id);
+		$form_field_id = Yii::app()->request->getQuery("form_field_id"); //$_GET['process_id'];
+		if (!(int)$form_field_id) exit;
+		$formField = FormField::model()->findByPk($form_field_id);
 
-		$model=new FormField;
+		$model=new FormFieldOption;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['FormField']))
+		if(isset($_POST['FormFieldOption']))
 		{
-			$model->attributes=$_POST['FormField'];
-			if (!$model->process_id) $model->process_id = $process_id;
+			$model->attributes=$_POST['FormFieldOption'];
+			if (!$model->form_field_id) $model->form_field_id = $form_field_id;
 			if($model->save())
-				$this->redirect(array('admin','process_id'=>$process_id));
+				$this->redirect(array('admin','form_field_id'=>$form_field_id));
 		}
 
 		$this->render('create',array(
-			'process'=>$process,
+			'process'=>$formField->process,
+			'formField'=>$formField,
 			'model'=>$model,
 		));
 	}
@@ -98,22 +99,23 @@ class FormFieldController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		$process_id = $model->process_id; //$_GET['process_id'];
-		if (!(int)$process_id) exit;
-		$process = Process::model()->findByPk($process_id);
+		$form_field_id = $model->form_field_id; //$_GET['process_id'];
+		if (!(int)$form_field_id) exit;
+		$formField = FormField::model()->findByPk($form_field_id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['FormField']))
+		if(isset($_POST['FormFieldOption']))
 		{
-			$model->attributes=$_POST['FormField'];
+			$model->attributes=$_POST['FormFieldOption'];
 			if($model->save())
-				$this->redirect(array('admin','process_id'=>$process_id));
+				$this->redirect(array('admin','form_field_id'=>$form_field_id));
 		}
 
 		$this->render('update',array(
-			'process'=>$process,
+			'process'=>$formField->process,
+			'formField'=>$formField,
 			'model'=>$model,
 		));
 	}
@@ -137,7 +139,7 @@ class FormFieldController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('FormField');
+		$dataProvider=new CActiveDataProvider('FormFieldOption');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -148,18 +150,19 @@ class FormFieldController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$process_id = Yii::app()->request->getQuery("process_id"); //$_GET['process_id'];
-		if (!(int)$process_id) exit;
-		$process = Process::model()->findByPk($process_id);
+		$form_field_id = Yii::app()->request->getQuery("form_field_id"); //$_GET['process_id'];
+		if (!(int)$form_field_id) exit;
+		$formField = FormField::model()->findByPk($form_field_id);
 
-		$model=new FormField('search');
+		$model=new FormFieldOption('search');
 		$model->unsetAttributes();  // clear any default values
-		$model->process_id = $process_id;
-		if(isset($_GET['FormField']))
-			$model->attributes=$_GET['FormField'];
+		$model->form_field_id = $form_field_id;
+		if(isset($_GET['FormFieldOption']))
+			$model->attributes=$_GET['FormFieldOption'];
 
 		$this->render('admin',array(
-			'process'=>$process,
+			'process'=>$formField->process,
+			'formField'=>$formField,
 			'model'=>$model,
 		));
 	}
@@ -168,12 +171,12 @@ class FormFieldController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return FormField the loaded model
+	 * @return FormFieldOption the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=FormField::model()->findByPk($id);
+		$model=FormFieldOption::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -181,11 +184,11 @@ class FormFieldController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param FormField $model the model to be validated
+	 * @param FormFieldOption $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='form-field-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='form-field-option-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

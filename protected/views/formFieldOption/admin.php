@@ -1,15 +1,15 @@
 <?php
-/* @var $this FormFieldController */
-/* @var $model FormField */
+/* @var $this FormFieldOptionController */
+/* @var $model FormFieldOption */
 
 $this->breadcrumbs=array(
-	'Form Fields'=>array('index'),
+	'Form Field Options'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List FormField', 'url'=>array('index')),
-	array('label'=>'Create FormField', 'url'=>array('create')),
+	array('label'=>'List FormFieldOption', 'url'=>array('index')),
+	array('label'=>'Create FormFieldOption', 'url'=>array('create')),
 );
 
 /*Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#form-field-grid').yiiGridView('update', {
+	$('#form-field-option-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -33,15 +33,15 @@ $('.search-form form').submit(function(){
 <div class="tab-content">
   <div class="tab-pane active">
 
-  	<h3>Lista de campos</h3>
+  	<h3>Lista de opciones campo <?php echo $formField->name?></h3>
 
 		<div class="row">
 			<div class="col-md-12">
-				<a href="<?php echo Yii::app()->createUrl('formField/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+				<a href="<?php echo Yii::app()->createUrl('formFieldOption/create', array('form_field_id'=>$formField->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 			</div>
 		</div></br>
 
-<?php /* echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php /*echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -49,27 +49,8 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 <?php */ ?>
 
-<?php 
-
-function showFields($data) {
-	if ($data->type == '3' || $data->type == '4') {
-		$list = array();
-		foreach ($data->formFieldOptions as $opt) {
-			$list[] = $opt->name;
-		}
-		if (count($list) > 0) {
-			echo '<a href="'.Yii::app()->createUrl("formFieldOption/admin", array("form_field_id"=>$data->id)).'">';
-			echo join(", ", $list);		
-			echo '</a>';
-		}
-		else {
-			echo '<a class="label label-warning" href="'.Yii::app()->createUrl("formFieldOption/admin", array("form_field_id"=>$data->id)).'">Haga click aquí para agregar opciones</a>';
-		}
-	}
-}
-
-$this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'form-field-grid',
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'form-field-option-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
@@ -77,15 +58,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		'name',
-		'code',
-		array(
-			'name'=>'type',
-			'value'=>'$data->typeValue',
-		),
-		array(
-			'name'=>'Campos',
-			'value'=>'showFields($data)',
-		),
+		'position',
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',
@@ -98,7 +71,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 					'imageUrl' => false,
 				),
 				'view'=>array(
-					'url' => 'Yii::app()->createUrl("formField/admin", array("form_id"=>$data->id))',
 					'label' => '<i class="fa fa-search grid-icon"></i>',
 					'options'=>array('title'=>'Ver'),
 					'imageUrl' => false,

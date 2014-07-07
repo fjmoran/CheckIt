@@ -16,6 +16,16 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update FormProperty <?php echo $model->id; ?></h1>
+<h2>Proceso: <?php echo $process->name; ?></h2>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$process->id)); ?>
+
+<div class="tab-content">
+  <div class="tab-pane active">
+
+  	<h3>Modificar campo en formulario <?php echo $_form->name ?></h3>
+
+<?php $this->renderPartial('_form', array('model'=>$model, 'process'=>$process, '_form'=>$_form)); ?>
+
+	</div>
+</div>

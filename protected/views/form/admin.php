@@ -28,15 +28,15 @@ $('.search-form form').submit(function(){
 
 <h2>Proceso: <?php echo $process->name; ?></h2>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li><a href="<?php echo Yii::app()->createUrl('process/view', array('id'=>$process->id))?>" role="tab">Modelador</a></li>
-  <li class="active"><a href="#" role="tab">Formularios</a></li>
-</ul>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$process->id)); ?>
 
 <div class="tab-content">
   <div class="tab-pane active">
+
+  		<h3>Formularios</h3>
+
 		<div class="row">
-			<div class="col-md-10">
+<!--			<div class="col-md-10">
 
 			  	<ol class="breadcrumb">
 				  	<li><a href="#">Home</a></li>
@@ -45,7 +45,7 @@ $('.search-form form').submit(function(){
 				</ol>
 
 			</div>	
-			<div class="col-md-2">
+-->			<div class="col-md-12">
 				<a href="<?php echo Yii::app()->createUrl('form/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right" style="margin-top: 10px; margin-bottom: 10px;"><i class="fa fa-plus-circle"></i> Nuevo</a>
 			</div>
 		</div>
@@ -58,7 +58,24 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 <?php */ ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+
+function showFields($data) {
+	$list = array();
+	foreach ($data->formProperties as $prop) {
+		$list[] = $prop->formField->name;
+	}
+	if (count($list) > 0) {
+		echo '<a href="'.Yii::app()->createUrl("formProperty/admin", array("form_id"=>$data->id)).'">';
+		echo join("<br>", $list);		
+		echo '</a>';
+	}
+	else {
+		echo '<a class="label label-warning" href="'.Yii::app()->createUrl("formProperty/admin", array("form_id"=>$data->id)).'">Haga click aquí para agregar campos al formulario</a>';
+	}
+}
+
+$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'form-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
@@ -67,6 +84,10 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		'name',
+		array(
+			'name'=>'Campos',
+			'value'=>'showFields($data)',
+		),
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',

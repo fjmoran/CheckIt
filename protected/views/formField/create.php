@@ -15,17 +15,14 @@ $this->menu=array(
 
 <h2>Proceso: <?php echo $process->name; ?></h2>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li><a href="<?php echo Yii::app()->createUrl('process/view', array('id'=>$process->id))?>" role="tab">Modelador</a></li>
-  <li class="active"><a href="#" role="tab">Formularios</a></li>
-</ul>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$process->id)); ?>
 
 <div class="tab-content">
   <div class="tab-pane active">
 
-  	<h3>Crear nuevo campo en formulario <?php echo $_form->name ?></h3>
+  	<h3>Crear nuevo campo</h3>
 
-<?php $this->renderPartial('_form', array('model'=>$model, 'process'=>$process, '_form'=>$_form)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'process'=>$process)); ?>
 
 	</div>
 </div>

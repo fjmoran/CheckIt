@@ -58,9 +58,9 @@ class FormFieldOption extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Nombre',
 			'form_field_id' => 'Form Field',
-			'position' => 'Position',
+			'position' => 'Posición',
 		);
 	}
 

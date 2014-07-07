@@ -77,6 +77,11 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'process';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='formFieldOption') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'process';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 
@@ -100,6 +105,37 @@ class Utility extends CApplicationComponent
 
 	public function getOption($name) {
 		return Option::model()->find("name='$name'")->value;
+	}
+
+	public function getTabs($data = array()) {
+		echo '	<ul class="nav nav-tabs" role="tablist">
+					<li '.$this->getTabsData('process').'><a href="'.Yii::app()->createUrl('process/view', array('id'=>$data['id'])).'" role="tab">Modelador</a></li>
+					<li '.$this->getTabsData('field').'><a href="'.Yii::app()->createUrl('formField/admin', array('process_id'=>$data['id'])).'" role="tab">Campos</a></li>
+					<li '.$this->getTabsData('form').'><a href="'.Yii::app()->createUrl('form/admin', array('process_id'=>$data['id'])).'" role="tab">Formularios</a></li>
+				</ul>';		
+	}
+
+	private function getTabsData($level) {
+		$controller = Yii::app()->getController()->id;
+		$action = Yii::app()->getController()->getAction()->id;
+
+		$ret = 0;
+
+		if ($controller=='form' || $controller=='formProperty') {
+			if ($level == 'form') $ret = 1;
+		}
+
+		if ($controller=='formField' || $controller=='formFieldOption') {
+			if ($level == 'field') $ret = 1;
+		}
+
+		if ($controller=='process') {
+			if ($level == 'process') $ret = 1;
+		}
+
+		if ($ret) return 'class="active"';
+		return '';
+
 	}
 
 }

@@ -162,6 +162,7 @@ class FormController extends Controller
 
 		$model=new Form('search');
 		$model->unsetAttributes();  // clear any default values
+		$model->process_id = $process_id;
 		if(isset($_GET['Form']))
 			$model->attributes=$_GET['Form'];
 

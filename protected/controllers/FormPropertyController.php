@@ -28,7 +28,7 @@ class FormPropertyController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin','create','update','delete'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -66,6 +66,10 @@ class FormPropertyController extends Controller
 	 */
 	public function actionCreate()
 	{
+		$form_id = Yii::app()->request->getQuery("form_id"); //$_GET['process_id'];
+		if (!(int)$form_id) exit;
+		$form = Form::model()->findByPk($form_id);
+
 		$model=new FormProperty;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -74,11 +78,14 @@ class FormPropertyController extends Controller
 		if(isset($_POST['FormProperty']))
 		{
 			$model->attributes=$_POST['FormProperty'];
+			if (!$model->form_id) $model->form_id = $form_id;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin','form_id'=>$form_id));
 		}
 
 		$this->render('create',array(
+			'process'=>$form->process,
+			'_form'=>$form,
 			'model'=>$model,
 		));
 	}
@@ -92,6 +99,10 @@ class FormPropertyController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		$form_id = $model->form_id; //$_GET['process_id'];
+		if (!(int)$form_id) exit;
+		$form = Form::model()->findByPk($form_id);
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -99,10 +110,12 @@ class FormPropertyController extends Controller
 		{
 			$model->attributes=$_POST['FormProperty'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin','form_id'=>$form_id));
 		}
 
 		$this->render('update',array(
+			'process'=>$form->process,
+			'_form'=>$form,
 			'model'=>$model,
 		));
 	}
@@ -137,12 +150,19 @@ class FormPropertyController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		$form_id = Yii::app()->request->getQuery("form_id"); //$_GET['process_id'];
+		if (!(int)$form_id) exit;
+		$form = Form::model()->findByPk($form_id);
+
 		$model=new FormProperty('search');
 		$model->unsetAttributes();  // clear any default values
+		$model->form_id = $form_id;
 		if(isset($_GET['FormProperty']))
 			$model->attributes=$_GET['FormProperty'];
 
 		$this->render('admin',array(
+			'process'=>$form->process,
+			'form'=>$form,
 			'model'=>$model,
 		));
 	}
