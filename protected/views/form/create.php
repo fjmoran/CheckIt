@@ -15,7 +15,7 @@ $this->menu=array(
 
 <h2>Proceso: <?php echo $process->name; ?></h2>
 
-<?php echo Yii::app()->utility->getTabs(array('id'=>$model->id)); ?>
+<?php echo Yii::app()->utility->getTabs(array('id'=>$process->id)); ?>
 
 <div class="tab-content">
   <div class="tab-pane active">

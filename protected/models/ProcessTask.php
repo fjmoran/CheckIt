@@ -7,10 +7,14 @@
  * @property integer $id
  * @property string $name
  * @property integer $process_id
+ * @property integer $pos_x
+ * @property integer $pos_y
+ * @property integer $type
  *
  * The followings are the available model relations:
  * @property ProcessConnector[] $processConnectors
  * @property ProcessConnector[] $processConnectors1
+ * @property ProcessStep[] $processSteps
  * @property Process $process
  */
 class ProcessTask extends CActiveRecord
@@ -39,7 +43,7 @@ class ProcessTask extends CActiveRecord
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, process_id', 'safe', 'on'=>'search'),
+			array('id, name, process_id, pos_x, pos_y, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +57,7 @@ class ProcessTask extends CActiveRecord
 		return array(
 			'processConnectors' => array(self::HAS_MANY, 'ProcessConnector', 'target_task_id'),
 			'processConnectors1' => array(self::HAS_MANY, 'ProcessConnector', 'source_task_id'),
+			'processSteps' => array(self::HAS_MANY, 'ProcessStep', 'process_task_id'),
 			'process' => array(self::BELONGS_TO, 'Process', 'process_id'),
 		);
 	}
@@ -66,7 +71,9 @@ class ProcessTask extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Nombre',
 			'process_id' => 'Proceso',
-		);
+			'pos_x' => 'Pos X',
+			'pos_y' => 'Pos Y',
+			'type' => 'Tipo',		);
 	}
 
 	/**
@@ -90,6 +97,9 @@ class ProcessTask extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('process_id',$this->process_id);
+		$criteria->compare('pos_x',$this->pos_x);
+		$criteria->compare('pos_y',$this->pos_y);
+		$criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -109,6 +119,10 @@ class ProcessTask extends CActiveRecord
 
 	public function getTypeOptions() {
 		return $this->typeOptions;
+	}
+
+	public function getTypeValue() {
+		return $this->typeOptions[$this->type];
 	}
 
 

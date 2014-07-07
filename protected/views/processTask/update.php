@@ -2,7 +2,7 @@
 $cs=Yii::app()->clientScript;
 $cs->scriptMap = array('jquery.js'=>false,);
 
-$this->renderPartial('_form', array('model'=>$model));
+$this->renderPartial('_form', array('model'=>$model, 'step'=>$step));
 
 /*
 $c = $this->renderPartial('_form', array('model'=>$model), true, true); 

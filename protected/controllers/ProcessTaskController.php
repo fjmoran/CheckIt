@@ -151,6 +151,10 @@ class ProcessTaskController extends Controller
 
 		$model=$this->loadModel($id);
 
+		$step=new ProcessStep('search');
+		$step->process_task_id = $model->id;
+		$step->unsetAttributes();  // clear any default values
+
 		if(isset($_POST['ProcessTask']))
 		{
 			$model->attributes=$_POST['ProcessTask'];
@@ -160,6 +164,7 @@ class ProcessTaskController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'step'=>$step,
 		));
 	}
 

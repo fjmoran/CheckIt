@@ -56,6 +56,7 @@ $('.search-form form').submit(function(){
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
+	'enableSorting' => false,
 	'columns'=>array(
 		array(
 			'header' => 'Campo',
