@@ -66,13 +66,16 @@
 						'cssFile'=>false,
 						'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 						'columns'=>array(
-							'form_id',
+							array(
+								'name' => 'form_id',
+								'value' => '$data->form->name',
+							),
 							'position',
 							array(
 								'class'=>'CButtonColumn',
 								'header' => 'Opciones',
 								'htmlOptions' => array('style' => 'width: 7%;'),
-								'template'=>'{view} {update} {delete}',
+								'template'=>'{delete}',
 								'buttons'=>array (
 									'update'=> array(
 										'label' => '<i class="fa fa-edit grid-icon"></i>',
@@ -85,6 +88,7 @@
 										'imageUrl' => false,
 									),
 									'delete'=>array(
+										'url'=>'Yii::app()->createUrl("/processStep/delete", array("id" =>  $data["id"]))',
 										'label' => '<i class="fa fa-trash-o grid-icon"></i>',
 										'options'=>array('title'=>'Eliminar'),
 										'imageUrl' => false,

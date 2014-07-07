@@ -31,7 +31,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/resources/js/jquery.dependent-selects.js"></script>
     <script type="text/javascript"> 
       
-      $(document).ready(function(){       
+      $(document).ready(function(){
 
 		$('.modal').on('hidden.bs.modal', function () {
 			// alert("cerrado!");
