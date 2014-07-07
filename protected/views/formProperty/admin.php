@@ -58,18 +58,29 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
+			'header' => 'Campo',
+			'htmlOptions' => array('style' => 'width: 40%;'),			
 			'name'=>'form_field_id',
 			'value'=>'$data->formField->name',
 		),
 		array(
+			'header' => 'Es editable',
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'name'=>'visible',
 			'value'=>'$data->visibleValue',
 		),
 		array(
+			'header' => 'Es obligatorio',
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'name'=>'required',
 			'value'=>'$data->requiredValue',
 		),
-		'position',
+		array(
+			'header' => 'Posición',
+			'htmlOptions' => array('style' => 'width: 13%;'),			
+			'name'=>'position',
+			'value'=>'$data->position',
+		),
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',

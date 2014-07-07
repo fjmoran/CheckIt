@@ -63,7 +63,7 @@ function showFields($data) {
 			echo '</a>';
 		}
 		else {
-			echo '<a class="label label-warning" href="'.Yii::app()->createUrl("formFieldOption/admin", array("form_field_id"=>$data->id)).'">Haga click aquí para agregar opciones</a>';
+			echo '<a class="label label-warning" style="font-weight: normal;" href="'.Yii::app()->createUrl("formFieldOption/admin", array("form_field_id"=>$data->id)).'">Haga click aquí para agregar opciones</a>';
 		}
 	}
 }
@@ -76,14 +76,28 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
-		'code',
+		array(
+			'name'=>'name',
+			'header' => 'Nombre',
+			'htmlOptions' => array('style' => 'width: 24%;'),
+			'value'=>'$data->name',			
+		),
+		array(
+			'name'=>'code',
+			'header' => 'ID / código de referencia',
+			'htmlOptions' => array('style' => 'width: 24%;'),
+			'value'=>'$data->code',			
+		),
 		array(
 			'name'=>'type',
+			'header' => 'Tipo',
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'value'=>'$data->typeValue',
 		),
 		array(
 			'name'=>'Campos',
+			'header' => 'Campos',
+			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'value'=>'showFields($data)',
 		),
 		array(

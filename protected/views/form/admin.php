@@ -71,7 +71,7 @@ function showFields($data) {
 		echo '</a>';
 	}
 	else {
-		echo '<a class="label label-warning" href="'.Yii::app()->createUrl("formProperty/admin", array("form_id"=>$data->id)).'">Haga click aquí para agregar campos al formulario</a>';
+		echo '<a class="label label-warning" style="font-weight: normal;" href="'.Yii::app()->createUrl("formProperty/admin", array("form_id"=>$data->id)).'">Haga click aquí para agregar campos al formulario</a>';
 	}
 }
 
@@ -83,9 +83,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
+		array(
+			'name'=>'name',
+			'header' => 'Nombre',
+			'htmlOptions' => array('style' => 'width: 25%;'),
+			'value'=>'$data->name',			
+		),
 		array(
 			'name'=>'Campos',
+			'header' => 'Campos',
+			'htmlOptions' => array('style' => 'width: 68%;'),			
 			'value'=>'showFields($data)',
 		),
 		array(
