@@ -24,9 +24,11 @@
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'name'); ?>
-			<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'name'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'name'); ?>
+				<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+				<?php echo $form->error($model,'name'); ?>
+			</div>
 		</div>
 	</div>
 
@@ -43,17 +45,21 @@
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'code'); ?>
-			<?php echo $form->textField($model,'code',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'code'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'code'); ?>
+				<?php echo $form->textField($model,'code',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+				<?php echo $form->error($model,'code'); ?>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'type'); ?>
-			<?php echo $form->dropDownList($model,'type', $model->typeOptions, array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'type'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'type'); ?>
+				<?php echo $form->dropDownList($model,'type', $model->typeOptions, array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'type'); ?>
+		</div>
 		</div>
 	</div>
 
