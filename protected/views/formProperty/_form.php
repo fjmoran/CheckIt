@@ -24,46 +24,54 @@
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'form_field_id'); ?>
-			<?php
-				$actual_fields = FormProperty::model()->findAllByAttributes(array('form_id'=>$_form->id));
-				$fields = array();
-				foreach ($actual_fields as $field) {
-					if ($field->form_field_id != $model->form_field_id)
-						$fields[] = $field->form_field_id;
-				}
-				$fields = join(",", $fields);
-				if ($fields)
-					$data = FormField::model()->findAll('process_id='.$process->id.' AND id NOT in ('.$fields.')',array('order' => 'name')); 
-				else
-					$data = FormField::model()->findAll('process_id='.$process->id,array('order' => 'name')); 
-			?>
-			<?php echo $form->dropDownList($model,'form_field_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'form_field_id'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'form_field_id'); ?>
+				<?php
+					$actual_fields = FormProperty::model()->findAllByAttributes(array('form_id'=>$_form->id));
+					$fields = array();
+					foreach ($actual_fields as $field) {
+						if ($field->form_field_id != $model->form_field_id)
+							$fields[] = $field->form_field_id;
+					}
+					$fields = join(",", $fields);
+					if ($fields)
+						$data = FormField::model()->findAll('process_id='.$process->id.' AND id NOT in ('.$fields.')',array('order' => 'name')); 
+					else
+						$data = FormField::model()->findAll('process_id='.$process->id,array('order' => 'name')); 
+				?>
+				<?php echo $form->dropDownList($model,'form_field_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'form_field_id'); ?>
+		</div>
 		</div>
 	</div>
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'visible'); ?>
-			<?php echo $form->dropDownList($model,'visible', $model->visibleOptions, array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'visible'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'visible'); ?>
+				<?php echo $form->dropDownList($model,'visible', $model->visibleOptions, array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'visible'); ?>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">	
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'required'); ?>
-			<?php echo $form->dropDownList($model,'required', $model->requiredOptions, array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'required'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'required'); ?>
+				<?php echo $form->dropDownList($model,'required', $model->requiredOptions, array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'required'); ?>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">
-			<?php echo $form->labelEx($model,'position'); ?>
-			<?php echo $form->textField($model,'position',array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'position'); ?>
+			<div class="form-group">
+				<?php echo $form->labelEx($model,'position'); ?>
+				<?php echo $form->textField($model,'position',array('class'=>'form-control')); ?>
+				<?php echo $form->error($model,'position'); ?>
+			</div>
 		</div>
 	</div>
 
