@@ -46,7 +46,7 @@ $('.search-form form').submit(function(){
 
 			</div>	
 -->			<div class="col-md-12">
-				<a href="<?php echo Yii::app()->createUrl('form/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right" style="margin-top: 10px; margin-bottom: 10px;"><i class="fa fa-plus-circle"></i> Nuevo</a>
+				<a href="<?php echo Yii::app()->createUrl('form/create', array('process_id'=>$process->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 			</div>
 		</div>
 
