@@ -123,12 +123,15 @@ jsPlumb.ready(function() {
 		var targetUUID = task_id + '_input';
 
 		newState.dblclick(function(e) {
-			$('#myModal-lg').modal({
+
+			window.open('<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id,'_self')
+			e.stopPropagation();
+
+			/*$('#myModal-lg').modal({
 				'remote': '<?php echo Yii::app()->createUrl('processTask/update?id='); ?>'+id
-			}); return;
+			}); return;*/
 
-
-			var arr = $(this).attr('id').split('_');
+			/* var arr = $(this).attr('id').split('_');
 			id = arr[1];
 
 			instance.detachAllConnections($(this));
@@ -145,7 +148,7 @@ jsPlumb.ready(function() {
 				}
 			});
 
-			console.log("task deleted " + $(this).attr('id'));
+			console.log("task deleted " + $(this).attr('id'));*/
 
 		});
 

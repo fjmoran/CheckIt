@@ -18,11 +18,6 @@
 	),
 )); ?>
 
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title" id="myModalLabel">Modificar Actividad</h4>
-</div>
-<div class="modal-body">
 
 	<ul class="nav nav-tabs" role="tablist">
 		<li class="active"><a href="#data" role="tab" data-toggle="tab">Datos</a></li>
@@ -113,43 +108,34 @@
 
 	</div>
 
-</div>
-<div class="modal-footer">
 	<?php echo CHtml::link(
-		'Eliminar',
+		'Eliminar Actividad',
 		'#',
 		array(
 			'submit' => array('processTask/delete','id'=>$model->id),
-			'class' => 'btn btn-danger btn-sm pull-left',
-			//'confirm' => '¿Esta seguro?'
+			'class' => 'btn btn-danger btn-sm pull-right',
+			'confirm' => '¿Esta seguro?'
 		)
 	); ?>
-	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+	<a class="btn btn-default btn-sm" href="<?php echo Yii::app()->createUrl('process/view', array('id'=>$process->id)); ?>">Cancelar</a>
+	<!-- button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button -->
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', array('class'=>'btn btn-primary btn-sm')); ?>
-</div>
 
 <?php $this->endWidget(); ?>
 
 <script>
-$('#myModal2').on('hidden.bs.modal', function () {
-	$('#process-step-grid').yiiGridView.update('process-step-grid');
-})
+$(document).ready(function(){
+	$('#myModal2').on('hidden.bs.modal', function () {
+		$(this).removeData();
+		$('#process-step-grid').yiiGridView.update('process-step-grid');
+	});
+});
 </script>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-<!--            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h4 class="modal-title">Modal title</h4>
-
-            </div>
-            <div class="modal-body"><div class="te"></div></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div> --> 
+        </div>
     </div> 
 </div>
 <!-- /.modal -->

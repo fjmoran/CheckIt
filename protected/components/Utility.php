@@ -82,6 +82,21 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'process';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='processTask') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'process';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='group') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'group';
+			if ($level == 3) return ' - Administración';
+		}
+		if ($controller=='userGroup') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'group';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 
@@ -129,7 +144,7 @@ class Utility extends CApplicationComponent
 			if ($level == 'field') $ret = 1;
 		}
 
-		if ($controller=='process') {
+		if ($controller=='process' || $controller=='processTask') {
 			if ($level == 'process') $ret = 1;
 		}
 

@@ -33,10 +33,14 @@
       
       $(document).ready(function(){
 
-		$('.modal').on('hidden.bs.modal', function () {
+		/*$('body').on('hidden.bs.modal', '.modal', function () {
+			$(this).removeData('bs.modal');
+		});*/
+
+		/*$('.modal').on('hidden.bs.modal', function () {
 			// alert("cerrado!");
 			$(this).removeData();
-		});
+		});*/
 
 		$('.dependent').dependentSelects({
 			class: 'form-control select-level',

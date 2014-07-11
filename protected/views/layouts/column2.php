@@ -28,6 +28,7 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task')),
 			array('label'=>'<i class="fa fa-sliders fa-lg fa-fw"></i> KPI', 'url'=>array('/kpi/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('kpi')),
 			array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/process/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('process')),
+			array('label'=>'<i class="fa fa-users fa-lg fa-fw"></i> Grupos', 'url'=>array('/group/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('group')),
 			array('label'=>'<i class="fa fa-code fa-lg fa-fw"></i> Parámetros', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option')),
 		),
 	)); 

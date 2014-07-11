@@ -10,11 +10,16 @@
  * @property string $firstname
  * @property string $lastname
  * @property integer $status
+ * @property integer $position_id
  * @property string $created
  * @property string $lastvisit
+ * @property string $token
+ * @property string $token_created
  *
  * The followings are the available model relations:
- * @property UserRole $id0
+ * @property Position $position
+ * @property Group[] $groups
+ * @property Role[] $roles
  */
 class User extends CActiveRecord
 {
@@ -79,6 +84,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
+			'groups' => array(self::MANY_MANY, 'Group', 'user_group(user_id, group_id)'),
 			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
 		);
 	}
@@ -131,8 +137,11 @@ class User extends CActiveRecord
 		$criteria->compare('firstname',$this->firstname,true);
 		$criteria->compare('lastname',$this->lastname,true);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('position_id',$this->position_id);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('lastvisit',$this->lastvisit,true);
+		$criteria->compare('token',$this->token,true);
+		$criteria->compare('token_created',$this->token_created,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

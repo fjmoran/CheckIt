@@ -1,6 +1,6 @@
 <?php
 
-class ProcessStepController extends Controller
+class GroupController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -15,7 +15,6 @@ class ProcessStepController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + createJS', // we only allow deletion via POST request
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
@@ -28,8 +27,8 @@ class ProcessStepController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createJS','delete'),
+			array('allow',  
+				'actions'=>array('create','update','admin','delete'),
 				'roles'=>array('admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -67,63 +66,23 @@ class ProcessStepController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$this->layout = 'modal';
-
-		$process_task_id = Yii::app()->request->getQuery("process_task_id"); //$_GET['process_id'];
-		if (!(int)$process_task_id) exit;
-		$processTask = ProcessTask::model()->findByPk($process_task_id);
-
-		$model=new ProcessStep;
-		if (!$model->process_task_id) $model->process_task_id = $process_task_id;
+		$model=new Group;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ProcessStep']))
+		if(isset($_POST['Group']))
 		{
-
-
-			$model->attributes = $_POST['ProcessStep'];
-
-			$response = array();
-
-			if ($model->save() === false) {
-				$response['success'] = false;
-				$response['errors'] = $model->errors;
-				//echo CJSON::encode($model->errors);exit;
-			} else {
-				$response['success'] = true;
-				$response['data'] = $model;
-			}
-
-			header('Content-type:application/json');
-			echo CJSON::encode($response);
-
-			exit();
-
-/*			$model->attributes=$_POST['ProcessStep'];
+			$model->attributes=$_POST['Group'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));*/
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
-			'task'=>$processTask,
 			'model'=>$model,
 		));
 	}
 
-	public function actionCreateJS()
-	{
-
-		$model=new ProcessStep;
-		if (isset($_POST['ProcessStep'])) {
-
-
-
-		}
-
-		//use exit() if in debug mode and don't want to return debug output
-	}
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -136,11 +95,11 @@ class ProcessStepController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ProcessStep']))
+		if(isset($_POST['Group']))
 		{
-			$model->attributes=$_POST['ProcessStep'];
+			$model->attributes=$_POST['Group'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
@@ -156,11 +115,10 @@ class ProcessStepController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-		exit;
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		/*if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));*/
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -168,7 +126,7 @@ class ProcessStepController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('ProcessStep');
+		$dataProvider=new CActiveDataProvider('Group');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -179,10 +137,10 @@ class ProcessStepController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new ProcessStep('search');
+		$model=new Group('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['ProcessStep']))
-			$model->attributes=$_GET['ProcessStep'];
+		if(isset($_GET['Group']))
+			$model->attributes=$_GET['Group'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -193,12 +151,12 @@ class ProcessStepController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return ProcessStep the loaded model
+	 * @return Group the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=ProcessStep::model()->findByPk($id);
+		$model=Group::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -206,11 +164,11 @@ class ProcessStepController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param ProcessStep $model the model to be validated
+	 * @param Group $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='process-step-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='group-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

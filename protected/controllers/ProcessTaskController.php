@@ -147,13 +147,13 @@ class ProcessTaskController extends Controller
 	}
 
 	public function actionUpdate($id) {
-		$this->layout = 'modal';
+		//$this->layout = 'modal';
 
 		$model=$this->loadModel($id);
 
 		$step=new ProcessStep('search');
-		$step->process_task_id = $model->id;
 		$step->unsetAttributes();  // clear any default values
+		$step->process_task_id = $model->id;
 
 		if(isset($_POST['ProcessTask']))
 		{
@@ -164,6 +164,7 @@ class ProcessTaskController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'process'=>$model->process,
 			'step'=>$step,
 		));
 	}
