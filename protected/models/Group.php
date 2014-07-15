@@ -8,7 +8,7 @@
  * @property string $name
  *
  * The followings are the available model relations:
- * @property User[] $users
+ * @property UserGroup[] $userGroups
  */
 class Group extends CActiveRecord
 {
@@ -44,7 +44,7 @@ class Group extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'users' => array(self::MANY_MANY, 'User', 'user_group(group_id, user_id)'),
+			'userGroups' => array(self::HAS_MANY, 'UserGroup', 'group_id'),
 		);
 	}
 

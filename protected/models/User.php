@@ -110,6 +110,7 @@ class User extends CActiveRecord
 			'created' => 'Creado en',
 			'lastvisit' => 'Última visita',
 			'roles' => 'Módulos',
+			'fullname' => 'Nombre Completo',
 		);
 	}
 
@@ -205,6 +206,10 @@ class User extends CActiveRecord
 			if ($alert_tasks==0) $alert_tasks='';
 		}
 		return $alert_tasks;
+	}
+
+	public function getFullName() {
+		return $this->firstname . " " . $this->lastname;
 	}
 
 }

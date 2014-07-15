@@ -1,15 +1,15 @@
 <?php
-/* @var $this GroupController */
-/* @var $model Group */
+/* @var $this UserGroupController */
+/* @var $model UserGroup */
 
 $this->breadcrumbs=array(
-	'Groups'=>array('index'),
+	'User Groups'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Group', 'url'=>array('index')),
-	array('label'=>'Create Group', 'url'=>array('create')),
+	array('label'=>'List UserGroup', 'url'=>array('index')),
+	array('label'=>'Create UserGroup', 'url'=>array('create')),
 );
 
 /*Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#group-grid').yiiGridView('update', {
+	$('#user-group-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,11 +26,11 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h2>Grupos</h2>
+<h2>Usuarios en grupo <?php echo $group->name; ?></h2>
 
 <div class="row">
 	<div class="col-md-12">
-		<a href="<?php echo Yii::app()->createUrl('group/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+		<a href="<?php echo Yii::app()->createUrl('userGroup/create', array('group_id'=>$group->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
 </div></br>
 
@@ -43,19 +43,19 @@ $('.search-form form').submit(function(){
 <?php */ ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'group-grid',
+	'id'=>'user-group-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
 	'cssFile'=>false,
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
-		'name',
+		'user.fullname',
 		array(
 			'class'=>'CButtonColumn',
 			'header' => 'Opciones',
 			'htmlOptions' => array('style' => 'width: 7%;'),
-			'template'=>'{view} {update} {delete}',
+			'template'=>'{delete}',
 			'buttons'=>array (
 				'update'=> array(
 					'label' => '<i class="fa fa-edit grid-icon"></i>',

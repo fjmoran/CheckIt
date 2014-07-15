@@ -4,8 +4,13 @@
  * This is the model class for table "user_group".
  *
  * The followings are the available columns in table 'user_group':
+ * @property integer $id
  * @property integer $user_id
  * @property integer $group_id
+ *
+ * The followings are the available model relations:
+ * @property User $user
+ * @property Group $group
  */
 class UserGroup extends CActiveRecord
 {
@@ -29,7 +34,7 @@ class UserGroup extends CActiveRecord
 			array('user_id, group_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('user_id, group_id', 'safe', 'on'=>'search'),
+			array('id, user_id, group_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,6 +46,8 @@ class UserGroup extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'group' => array(self::BELONGS_TO, 'Group', 'group_id'),
 		);
 	}
 
@@ -50,8 +57,9 @@ class UserGroup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'user_id' => 'User',
-			'group_id' => 'Group',
+			'id' => 'ID',
+			'user_id' => 'Usuario',
+			'group_id' => 'Grupo',
 		);
 	}
 
@@ -73,6 +81,7 @@ class UserGroup extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('group_id',$this->group_id);
 

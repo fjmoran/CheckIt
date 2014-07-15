@@ -41,7 +41,7 @@
 				?>
 				<?php echo $form->dropDownList($model,'form_field_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
 				<?php echo $form->error($model,'form_field_id'); ?>
-		</div>
+			</div>
 		</div>
 	</div>
 
