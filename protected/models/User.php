@@ -179,16 +179,16 @@ class User extends CActiveRecord
 	}*/
 
 	// Get current roles for this user:
-    public function afterFind()
-    {
-        if(!empty($this->roles))
-        {
-            foreach($this->roles as $role){
-                $this->roleIDs[]=$role->id;
-                $this->roleNames[]=$role->name;
-            }
-        }
-    }
+	public function afterFind()
+	{
+		if(!empty($this->roles))
+		{
+			foreach($this->roles as $role){
+				$this->roleIDs[]=$role->id;
+				$this->roleNames[]=$role->name;
+			}
+		}
+	}
 
 	public function getAlertTasks() {
 		$alert_tasks = 0;
