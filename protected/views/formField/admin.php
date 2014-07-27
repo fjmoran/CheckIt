@@ -96,7 +96,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		),
 		array(
 			'name'=>'Campos',
-			'header' => 'Campos',
+			'header' => 'Opciones campo',
 			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'value'=>'showFields($data)',
 		),

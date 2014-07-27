@@ -40,3 +40,9 @@
   font-weight: 600;
   src: local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'), url(OpenSansSemiboldItalic.woff) format('woff');
 }
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(OswaldBold.woff) format('woff');
+}

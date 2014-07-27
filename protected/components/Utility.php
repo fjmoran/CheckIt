@@ -125,8 +125,8 @@ class Utility extends CApplicationComponent
 	public function getTabs($data = array()) {
 		echo '	<ul class="nav nav-tabs" role="tablist">
 					<li '.$this->getTabsData('process').'><a href="'.Yii::app()->createUrl('process/view', array('id'=>$data['id'])).'" role="tab">Modelador</a></li>
-					<li '.$this->getTabsData('field').'><a href="'.Yii::app()->createUrl('formField/admin', array('process_id'=>$data['id'])).'" role="tab">Campos</a></li>
 					<li '.$this->getTabsData('form').'><a href="'.Yii::app()->createUrl('form/admin', array('process_id'=>$data['id'])).'" role="tab">Formularios</a></li>
+					<li '.$this->getTabsData('field').'><a href="'.Yii::app()->createUrl('formField/admin', array('process_id'=>$data['id'])).'" role="tab">Campos</a></li>					
 				</ul>';		
 	}
 
