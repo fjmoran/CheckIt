@@ -1,6 +1,6 @@
 <?php
 
-class PositionController extends Controller
+class DepartmentController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -54,14 +54,14 @@ class PositionController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Position;
+		$model=new Department;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Position']))
+		if(isset($_POST['Department']))
 		{
-			$model->attributes=$_POST['Position'];
+			$model->attributes=$_POST['Department'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -83,9 +83,9 @@ class PositionController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Position']))
+		if(isset($_POST['Department']))
 		{
-			$model->attributes=$_POST['Position'];
+			$model->attributes=$_POST['Department'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -114,7 +114,7 @@ class PositionController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Position');
+		$dataProvider=new CActiveDataProvider('Department');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -125,10 +125,10 @@ class PositionController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Position('search');
+		$model=new Department('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Position']))
-			$model->attributes=$_GET['Position'];
+		if(isset($_GET['Department']))
+			$model->attributes=$_GET['Department'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -139,12 +139,12 @@ class PositionController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Position the loaded model
+	 * @return Department the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Position::model()->findByPk($id);
+		$model=Department::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -152,11 +152,11 @@ class PositionController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Position $model the model to be validated
+	 * @param Department $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='position-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='department-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

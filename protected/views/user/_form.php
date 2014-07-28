@@ -49,10 +49,16 @@
 		</div>
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'position_id'); ?>
-			<?php $data = Position::model()->findAll(array('order' => 'name')); ?>
-			<?php echo $form->dropDownList($model,'position_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin cargo','class'=>'form-control')); ?>
-			<?php echo $form->error($model,'position_id'); ?>
+			<?php echo $form->labelEx($model,'position'); ?>
+			<?php echo $form->textField($model,'position',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'position'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'department_id'); ?>
+			<?php $data = Department::model()->findAll(array('order' => 'name')); ?>
+			<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin área','class'=>'form-control')); ?>
+			<?php echo $form->error($model,'department_id'); ?>
 		</div>		
 
 		<div class="form-group">

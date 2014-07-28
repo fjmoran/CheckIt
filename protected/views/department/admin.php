@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");*/
 ?>
 
-<h2>Gestión de Cargos</h2>
+<h2>Gestión de <?php echo Yii::app()->utility->getOption('departments_name') ?></h2>
 
 <div class="row">
 	<div class="col-md-12">
@@ -56,18 +56,18 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		array(
 			'htmlOptions' => array('style' => 'width: 20%;'),			
-			'header'=>'Cargo',
+			'header'=>Yii::app()->utility->getOption('department_name'),
 			'name'=>'name',
 		),		
 
 		array(
 			'htmlOptions' => array('style' => 'width: 20%;'),				
-			'header'=>'Superior Jerárquico',
+			'header'=>'Superior Jerárquica',
 			'name'=>'parent.name',
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 53%;'),				
-			'header'=>'Usuarios en el cargo',
+			'header'=>'Usuarios',
 			'name'=>'user.id',
 			'value'=>'implode(", ",$data->userNames)',
 		),

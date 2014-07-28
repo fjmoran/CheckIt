@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 */
 ?>
 
-<h2>Gestión de usuarios</h2>
+<h2>Gestión de Usuarios</h2>
 
 <div class="row">
 	<div class="col-md-12">
@@ -72,8 +72,8 @@ $('.search-form form').submit(function(){
 		),		
 		array(
 			'htmlOptions' => array('style' => 'width: 18%;'),			
-			'header'=>'Cargo',
-			'name'=>'position.name',
+			'header'=>Yii::app()->utility->getOption('department_name'),
+			'name'=>'department.name',
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 7%;'),			

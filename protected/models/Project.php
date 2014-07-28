@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'project':
  * @property integer $id
  * @property string $name
- * @property integer $position_id
+ * @property integer $department_id
  *
  * The followings are the available model relations:
  * @property Subproject[] $subprojects
@@ -33,12 +33,12 @@ class Project extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, position_id', 'required'),
-			array('position_id', 'numerical', 'integerOnly'=>true),
+			array('name, department_id', 'required'),
+			array('department_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, position_id', 'safe', 'on'=>'search'),
+			array('id, name, department_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +51,7 @@ class Project extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'subprojects' => array(self::HAS_MANY, 'Subproject', 'project_id'),
-			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
+			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 		);
 	}
 
@@ -63,7 +63,7 @@ class Project extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'position_id' => 'Cargo Responsable',
+			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
 		);
 	}
 
@@ -87,7 +87,7 @@ class Project extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('position_id',$this->position_id);
+		$criteria->compare('department_id',$this->department_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -10,14 +10,15 @@
  * @property string $firstname
  * @property string $lastname
  * @property integer $status
- * @property integer $position_id
+ * @property string $position
  * @property string $created
  * @property string $lastvisit
  * @property string $token
  * @property string $token_created
+ * @property integer $department_id
  *
  * The followings are the available model relations:
- * @property Position $position
+ * @property Department $department
  * @property Group[] $groups
  * @property Role[] $roles
  */
@@ -47,14 +48,14 @@ class User extends CActiveRecord
 		return array(
 			array('email, firstname, lastname, status', 'required'),
 			array('password', 'required', 'on' => 'insert'),
-			array('status, position_id', 'numerical', 'integerOnly'=>true),
+			array('status, department_id', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
-			array('firstname, lastname', 'length', 'max'=>255),
+			array('firstname, lastname, position', 'length', 'max'=>255),
 			array('email', 'email','message'=>"El email ingresado no es correcto"),
 			array('email', 'unique','message'=>'El email ingresado ya existe!'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password, firstname, lastname, status, created, lastvisit', 'safe', 'on'=>'search'),
+			array('id, email, password, firstname, lastname, status, created, lastvisit, position', 'safe', 'on'=>'search'),
 			array('current_password, repeat_password', 'safe', 'on'=>'update'),
 			array('created', 'default', 
           		'value'=>new CDbExpression('NOW()'),
@@ -83,7 +84,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'position' => array(self::BELONGS_TO, 'Position', 'position_id'),
+			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'groups' => array(self::MANY_MANY, 'Group', 'user_group(user_id, group_id)'),
 			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
 		);
@@ -106,7 +107,8 @@ class User extends CActiveRecord
 			'firstname' => 'Nombre',
 			'lastname' => 'Apellido',
 			'status' => 'Estado',
-			'position_id' => 'Cargo',
+			'position' => 'Cargo',
+			'department_id' => Yii::app()->utility->getOption('department_name'),
 			'created' => 'Creado en',
 			'lastvisit' => 'Última visita',
 			'roles' => 'Módulos',
@@ -138,7 +140,8 @@ class User extends CActiveRecord
 		$criteria->compare('firstname',$this->firstname,true);
 		$criteria->compare('lastname',$this->lastname,true);
 		$criteria->compare('status',$this->status);
-		$criteria->compare('position_id',$this->position_id);
+		$criteria->compare('position',$this->position, true);
+		$criteria->compare('department_id',$this->department_id);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('lastvisit',$this->lastvisit,true);
 		$criteria->compare('token',$this->token,true);
@@ -192,14 +195,14 @@ class User extends CActiveRecord
 
 	public function getAlertTasks() {
 		$alert_tasks = 0;
-		$position_id = User::model()->find('id='.$this->id)->position_id;
-		if ($position_id) {
+		$department_id = User::model()->find('id='.$this->id)->department_id;
+		if ($department_id) {
 			$rows = Yii::app()->db->createCommand()
 				->select('count(*) as q')
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('t.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$position_id))
+				->where('t.department_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$department_id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$alert_tasks = $rows['q'];

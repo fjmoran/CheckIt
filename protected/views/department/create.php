@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h2>Crear Cargo</h2>
+<h2>Crear <?php echo Yii::app()->utility->getOption('department_name') ?></h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -27,9 +27,9 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'user';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='position') {
+		if ($controller=='department') {
 			if ($level == 1) return 'admin';
-			if ($level == 2) return 'position';
+			if ($level == 2) return 'department';
 			if ($level == 3) return ' - Administración';
 		}
 		if ($controller=='option') {
@@ -119,7 +119,9 @@ class Utility extends CApplicationComponent
 	}
 
 	public function getOption($name) {
-		return Option::model()->find("name='$name'")->value;
+		$data = Option::model()->find("name='$name'");
+		if ($data) return $data->value;
+		return null;
 	}
 
 	public function getTabs($data = array()) {

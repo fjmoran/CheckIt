@@ -1,14 +1,14 @@
 <?php
 
 /**
- * This is the model class for table "position".
+ * This is the model class for table "department".
  *
- * The followings are the available columns in table 'position':
+ * The followings are the available columns in table 'department':
  * @property integer $id
  * @property string $name
  * @property integer $parent_id
  */
-class Position extends CActiveRecord
+class Department extends CActiveRecord
 {
 
 	public $userIDs = array();
@@ -19,7 +19,7 @@ class Position extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'position';
+		return 'department';
 	}
 
 	/**
@@ -47,9 +47,9 @@ class Position extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'parent' => array(self::BELONGS_TO, 'Position', 'parent_id'),
-			'users' => array(self::HAS_MANY, 'User', 'position_id'),
-			'projects' => array(self::HAS_MANY, 'Project', 'position_id'),
+			'parent' => array(self::BELONGS_TO, 'Department', 'parent_id'),
+			'users' => array(self::HAS_MANY, 'User', 'department_id'),
+			'projects' => array(self::HAS_MANY, 'Project', 'department_id'),
 		);
 	}
 
@@ -61,7 +61,7 @@ class Position extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'parent_id' => 'Superior Jerárquico',
+			'parent_id' => 'Superior Jerárquica',
 		);
 	}
 
@@ -96,7 +96,7 @@ class Position extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Position the static model class
+	 * @return Department the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -122,7 +122,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW()', array(':id'=>$this->id))
+				->where('p.department_id=:id AND t.status=0 AND t.due_date<NOW()', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
@@ -138,7 +138,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date>=NOW() + INTERVAL 15 DAY', array(':id'=>$this->id))
+				->where('p.department_id=:id AND t.status=0 AND t.due_date>=NOW() + INTERVAL 15 DAY', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
@@ -154,7 +154,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>=NOW()', array(':id'=>$this->id))
+				->where('p.department_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY AND t.due_date>=NOW()', array(':id'=>$this->id))
 				//->order('j.jobno,j.projid')
 				->queryRow();
 			$tasks = $rows['q'];
@@ -170,7 +170,7 @@ class Position extends CActiveRecord
 				->from('task t')
 				->join('subproject s','t.subproject_id = s.id')
 				->join('project p', 's.project_id = p.id')
-				->where('p.position_id=:id OR s.position_id=:id OR t.position_id=:id', array(':id'=>$this->id))
+				->where('p.department_id=:id OR s.department_id=:id OR t.department_id=:id', array(':id'=>$this->id))
 				->queryAll();
 			foreach ($rows as $row) {
 				$projects[] = $row['p_id'];

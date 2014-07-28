@@ -63,8 +63,8 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 25%;'),			
-			'header'=>'Cargo Responsable',
-			'name'=>'position.name',
+			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
+			'name'=>'department.name',
 		),
 		array(
 			'class'=>'CButtonColumn',

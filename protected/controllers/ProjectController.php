@@ -129,12 +129,12 @@ class ProjectController extends Controller
 	 */
 	public function actionMyProjects()
 	{
-		$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
-		$position = Position::model()->find('id='.$position_id);
+		$department_id = User::model()->find('id='.Yii::app()->user->id)->department_id;
+		if ($department_id) {
 
-		if ($position) {
+			$department = Department::model()->find('id='.$department_id);
 
-			$projects = $position->getDeepProjects();
+			$projects = $department->getDeepProjects();
 
 			if ($projects) {
 				$criteria = new CDbCriteria();

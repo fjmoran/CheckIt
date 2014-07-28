@@ -72,17 +72,17 @@ class SiteController extends Controller
 	}
 
 	public function actionReport() {
-		$projects = Project::model()->with('position')->findAll();
+		$projects = Project::model()->with('department')->findAll();
 
-		$position_array = Array();
+		$department_array = Array();
 		foreach ($projects as $project) {
-			$position_array[] = $project->position->id;
+			$department_array[] = $project->department->id;
 		}
-		$position_array = array_unique($position_array);
+		$department_array = array_unique($department_array);
 
 		$detail = array();
-		foreach ($position_array as $position) {
-			$pos = Position::model()->find('id='.$position);
+		foreach ($department_array as $department) {
+			$pos = Department::model()->find('id='.$department);
 			$detail['categories'][] = $pos->name;
 			//tareas atrasadas
 			$detail['overdueTasks'][] = (int)$pos->overdueTasks;
