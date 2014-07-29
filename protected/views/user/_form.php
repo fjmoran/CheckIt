@@ -53,7 +53,9 @@
 			<?php echo $form->textField($model,'position',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'position'); ?>
 		</div>
+	</div>
 
+	<div class="col-md-6">
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'department_id'); ?>
 			<?php $data = Department::model()->findAll(array('order' => 'name')); ?>
@@ -68,35 +70,58 @@
 		</div>		
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'roles'); ?><br />
-			<?php 
 
-				Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
+			<div class="panel panel-info">
+				<div class="panel-heading">Roles</div>
+				<?php //echo $form->labelEx($model,'roles'); ?>
+				<div class="panel-body">
 
-				$data = Role::model()->findAll(array('order'=>'pos ASC'));
-				$list = Array();
-				foreach ($data as $d) {
-					$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
-					//$list[$d->id] = $d->friendly_name.' <i class="tooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'" class="fa fa-question"></i>';
-				}
-				echo CHtml::activeCheckBoxList(
-					$model, 
-					'roleIDs', 
-					$list,
-					array(
-						'template'=>'{input} &nbsp;&nbsp;{label}',
-						'separator' =>'<br />',
-						'class'=>'categoryFilter',
-						'checkAll'=>'Todos',
-					)
-				);  ?>
+					<?php 
+					Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
+
+					$data = Role::model()->findAll('type=0', array('order'=>'pos ASC'));
+					$list = Array();
+					foreach ($data as $d) {
+						$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
+					}
+					echo CHtml::activeCheckBoxList(
+						$model, 
+						'roleIDs', 
+						$list,
+						array(
+							'template'=>'{input} &nbsp;&nbsp;{label}',
+							'separator' =>'<br />',
+							'class'=>'categoryFilter',
+							//'checkAll'=>'Todos',
+						)
+					);  ?>
+
+					<br>
+					<a href="javascript:void(0);" onclick="$('#moreroles').toggle();">otros roles</a>
+					<div id="moreroles" style="display: none;">
+					<?php 
+						$data = Role::model()->findAll('type=1', array('order'=>'pos ASC'));
+						$list = Array();
+						foreach ($data as $d) {
+							$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
+						}
+						echo CHtml::activeCheckBoxList(
+							$model, 
+							'roleIDs', 
+							$list,
+							array(
+								'template'=>'{input} &nbsp;&nbsp;{label}',
+								'separator' =>'<br />',
+								'class'=>'categoryFilter',
+								//'checkAll'=>'Todos',
+							)
+						);  ?>
+					</div>
+				</div>
+			</div>
+
 			<?php echo $form->error($model,'roles'); ?>
 		</div>		
-
-	</div>
-
-	<div class="col-md-6">
-		<!-- nada -->
 	</div>
 </div>	
 
