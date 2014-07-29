@@ -184,7 +184,7 @@ class DepartmentController extends Controller
 		$model->department_id = new CDbExpression('NULL');
 		$model->manager = 0;
 
-		$model->save(false);
+		$model->save(false, 'department_id,manager');
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -203,7 +203,7 @@ class DepartmentController extends Controller
 		{
 			$model=User::model()->findByPk($_POST['user']);
 			$model->department_id=$department_id;
-			if($model->save())
+			if($model->save(false, 'department_id'))
 				$this->redirect(array('users', 'department_id'=>$department_id));
 		}
 

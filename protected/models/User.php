@@ -67,23 +67,50 @@ class User extends CActiveRecord
 
 	public function beforeSave(){
 		if(parent::beforeSave()){
-			if ($this->password)
+			if ($this->password) {
+				if ($this->isNewRecord) {
+					$this->password = md5($this->password);
+				}
+				else {
+					$_password = User::model()->findByPk($this->id)->password;
+					if ($this->password != $_password) {
+						$this->password = md5($this->password);
+					}
+				}
+			}
+			else {
+				if (!$this->isNewRecord) {
+					$_password = User::model()->findByPk($this->id)->password;
+					$this->password = $_password;
+				}
+			}
+
+			/*if ($this->password)
 				$this->password = md5($this->password);
 			else {
 				$_password = User::model()->findByPk($this->id)->password;
 				$this->password = $_password;
-			}
+			}*/
 
 			//vemos si tiene asignado un departamento y si es el unico
 			if ($this->department_id && $this->department_id!=new CDbExpression('NULL')) {
-				$users = User::model()->findAllByAttributes(
-					array(), 
-					$condition = 'status=:status && department_id=:department_id && id!=:id',
+				$condition = 'status=:status && department_id=:department_id && id!=:id';
+				$params = array(
+					':status' => 1,
+					':department_id' => $this->department_id,
+					':id' => $this->id,
+				);
+				if ($this->isNewRecord) {
+					$condition = 'status=:status && department_id=:department_id';
 					$params = array(
 						':status' => 1,
 						':department_id' => $this->department_id,
-						':id' => $this->id,
-					)
+					);
+				}
+				$users = User::model()->findAllByAttributes(
+					array(), 
+					$condition,
+					$params
 				);
 				if (count($users) == 0) {
 					$this->manager = 1;

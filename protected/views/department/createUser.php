@@ -21,7 +21,7 @@
 		<div class="form-group">
 			<?php echo CHtml::label('Usuario', 'user'); ?>
 			<?php 
-				$data = User::model()->findAll('department_id!='.$department->id.' OR department_id IS NULL', array('order' => 'firstname, lastname'));
+				$data = User::model()->findAll('department_id IS NULL', array('order' => 'firstname, lastname'));
 			?>
 			<?php echo CHtml::dropDownList('user', '', CHtml::listData($data, 'id', 'fullname'), array('class'=>'form-control')); ?>
 		</div>
