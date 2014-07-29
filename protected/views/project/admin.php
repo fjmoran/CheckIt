@@ -58,11 +58,16 @@ $('.search-form form').submit(function(){
 			'htmlOptions' => array('style' => 'width: 47%;'),			
 			'header'=>'Nombre',
 			'name'=>'name',
-		),		
+		),
 		array(
-			'htmlOptions' => array('style' => 'width: 46%;'),			
+			'htmlOptions' => array('style' => 'width: 23%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 23%;'),			
+			'header'=>'Encargado de Área',
+			'name'=>'department.managerName',
 		),
 		array(
 			'class'=>'CButtonColumn',
