@@ -69,7 +69,7 @@ $('.search-form form').submit(function(){
 			'name'=>'department.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 23%;'),			
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
 			'name'=>'department.managerName',
 		),
