@@ -29,7 +29,7 @@ class FormPropertyController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('admin','create','update','delete'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'workflow_admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),

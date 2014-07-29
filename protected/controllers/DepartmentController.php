@@ -30,7 +30,7 @@ class DepartmentController extends Controller
 		return array(
 			array('allow',  
 				'actions'=>array('view','create','update','admin','delete','users','deleteUser','createUser'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin','system_admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

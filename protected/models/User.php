@@ -132,7 +132,7 @@ class User extends CActiveRecord
 		return array(
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'groups' => array(self::MANY_MANY, 'Group', 'user_group(user_id, group_id)'),
-			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
+			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)', 'order'=>'pos ASC'),
 		);
 	}
 

@@ -29,7 +29,7 @@ class ProcessController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('create','update','admin','delete','view','js'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'workflow_admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

@@ -29,11 +29,11 @@ class TaskController extends Controller
 		return array(
 			array('allow',  
 				'actions'=>array('view','create','update','admin','delete'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
 				'actions'=>array('changestatus'),
-				'roles'=>array('strategy'),
+				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

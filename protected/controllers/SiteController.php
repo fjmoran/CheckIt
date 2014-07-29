@@ -40,12 +40,12 @@ class SiteController extends Controller
 			),
 			array('allow',
 				'actions'=>array('report'),
-				'roles'=>array('dashboard'),
+				'roles'=>array('admin', 'dashboard_user', 'dashboard_manager', 'viewer'),
 			),
-/*			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),*/
+			array('allow',
+				'actions'=>array('admin'),
+				'roles'=>array('dashboard_admin', 'strategy_admin', 'workflow_admin', 'admin', 'system_admin'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -121,15 +121,37 @@ class SiteController extends Controller
 		));
 	}
 
+	public function actionAdmin() {
+		$admins = array('admin','strategy_admin','workflow_admin','dashboard_admin');
+		$roles = User::model()->findByPk(Yii::app()->user->id)->roleIDs;
+		if ($roles) {
+			foreach ($roles as $rol) {
+				$data = Role::model()->findByPk($rol);
+				if (in_array($data->name, $admins) && $data->start_page) {
+					$this->redirect(array($data->start_page));
+					exit;
+				}
+			}
+		}
+		exit;
+	}
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
 	{
-
 		$roles = User::model()->findByPk(Yii::app()->user->id)->roleIDs;
-		if (in_array(2, $roles)) {
+		if ($roles) {
+			$rol = Role::model()->findByPk($roles[0]);
+			if ($rol->start_page) {
+				$this->redirect(array($rol->start_page));
+			}
+		}
+		exit;
+
+/*		if (in_array(2, $roles)) {
 			$this->redirect(array('site/report'));
 			exit;
 		}
@@ -144,7 +166,7 @@ class SiteController extends Controller
 		if (in_array(1, $roles)) {
 			$this->redirect(array('user/admin'));
 			exit;
-		}
+		}*/
 	}
 
 	/**

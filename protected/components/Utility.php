@@ -97,6 +97,11 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'group';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='site' && $action=='admin') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return '';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 

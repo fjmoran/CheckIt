@@ -29,7 +29,7 @@ class FormFieldController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('create','update','admin','delete'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'workflow_admin'),
 			),
 /*			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
