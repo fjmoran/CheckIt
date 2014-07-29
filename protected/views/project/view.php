@@ -20,7 +20,7 @@ $this->menu=array(
 
 <?php 
 
-$position_id = User::model()->find('id='.Yii::app()->user->id)->position_id;
+$department_id = User::model()->find('id='.Yii::app()->user->id)->department_id;
 
 foreach ($model->subprojects as $subproject) { 
 ?>
@@ -49,7 +49,7 @@ foreach ($model->subprojects as $subproject) {
 		<?php foreach ($subproject->kpis as $kpi) { ?>
 			<tr>
 				<td>
-					<?php if ($kpi->position_id == $position_id): ?>
+					<?php if ($kpi->department_id == $department_id): ?>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
 						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
 						<?php echo $kpi->name; ?>
@@ -66,7 +66,7 @@ foreach ($model->subprojects as $subproject) {
 					<?php echo $kpi->real_value; ?>
 				</td>
 				<td>
-					<?php if ($kpi->position) echo $kpi->position->name; ?>
+					<?php if ($kpi->department) echo $kpi->department->name; ?>
 				</td>				
 				<td>
 					<?php if ($kpi->base_value < $kpi->goal_value) {
@@ -96,7 +96,7 @@ foreach ($model->subprojects as $subproject) {
 					} ?>
 				</td>
 				<td style="text-align: center;">
-					<?php if ($kpi->position_id == $position_id): ?>
+					<?php if ($kpi->department_id == $department_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
@@ -125,7 +125,7 @@ foreach ($model->subprojects as $subproject) {
 		<?php foreach ($subproject->tasks as $task) { ?>
 			<tr>
 				<td>
-					<?php if ($task->position_id == $position_id): ?>
+					<?php if ($task->department_id == $department_id): ?>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
 						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
 						<?php echo $task->name; ?>
@@ -139,7 +139,7 @@ foreach ($model->subprojects as $subproject) {
 					<?php echo $task->due_date; ?>
 				</td>
 				<td>
-					<?php if ($task->position) echo $task->position->name; ?>
+					<?php if ($task->department) echo $task->department->name; ?>
 				</td>				
 				<td>
 					<?php 
@@ -157,7 +157,7 @@ foreach ($model->subprojects as $subproject) {
 					<?php endif; ?>
 				</td>
 				<td style="text-align: center;">
-					<?php if ($task->position_id == $position_id): ?>
+					<?php if ($task->department_id == $department_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>

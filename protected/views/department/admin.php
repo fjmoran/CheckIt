@@ -67,7 +67,7 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 20%;'),				
-			'header'=>'Administrador',
+			'header'=>Yii::app()->utility->getOption('manager_name'),
 			'type'=>'html',
 			'value'=>'$data->managerName?$data->managerName:"<span class=\"label label-danger\">Sin Administrador!</span>"',
 		),

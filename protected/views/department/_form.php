@@ -44,7 +44,7 @@
 
 <?php if (!$model->isNewRecord): ?>
 		<div class="form-group">
-			<?php echo CHtml::label('Administrador', 'user'); ?>
+			<?php echo CHtml::label(Yii::app()->utility->getOption('manager_name'), 'user'); ?>
 			<?php 
 				$data = User::model()->findAll('department_id='.$model->id, array('empty'=>'Seleccione', 'order' => 'firstname, lastname'));
 			?>

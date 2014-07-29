@@ -54,7 +54,7 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 55%;'),			
+			'htmlOptions' => array('style' => 'width: 35%;'),			
 			'header'=>'Nombre',
 			'name'=>'name',
 		),		
@@ -67,6 +67,11 @@ $('.search-form form').submit(function(){
 			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 23%;'),			
+			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
+			'name'=>'department.managerName',
 		),
 		array(
 			'header'=> 'Opciones',
