@@ -108,8 +108,11 @@ class DepartmentController extends Controller
 				$this->redirect(array('admin'));
 		}
 
+		$manager = User::model()->find('manager=1 AND department_id='.$model->id);
+
 		$this->render('update',array(
 			'model'=>$model,
+			'manager'=>$manager,
 		));
 	}
 

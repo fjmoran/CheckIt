@@ -48,7 +48,7 @@
 			<?php 
 				$data = User::model()->findAll('department_id='.$model->id, array('empty'=>'Seleccione', 'order' => 'firstname, lastname'));
 			?>
-			<?php echo CHtml::dropDownList('user', '', CHtml::listData($data, 'id', 'fullname'), array('class'=>'form-control')); ?>
+			<?php echo CHtml::dropDownList('user', $manager?$manager->id:'', CHtml::listData($data, 'id', 'fullname'), array('class'=>'form-control')); ?>
 		</div>
 <?php endif; ?>
 

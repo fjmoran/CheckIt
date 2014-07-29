@@ -118,7 +118,7 @@ class Department extends CActiveRecord
 		if (!empty($this->manager)) {
 			foreach ($this->manager as $m) {
 				$this->managerID = $m->id;
-				$this->managerName = $m->firstname." ".$user->lastname;
+				$this->managerName = $m->firstname." ".$m->lastname;
 			}
 		}
 

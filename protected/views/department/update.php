@@ -18,4 +18,4 @@ $this->menu=array(
 
 <h2>Editar <?php echo Yii::app()->utility->getOption('departments_name') ?></h2>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'manager'=>$manager)); ?>
