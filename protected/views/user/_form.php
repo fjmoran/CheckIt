@@ -79,7 +79,7 @@
 					<?php 
 					Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
 
-					$data = Role::model()->findAll('type=0', array('order'=>'pos ASC'));
+					$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=0'));
 					$list = Array();
 					foreach ($data as $d) {
 						$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
@@ -100,7 +100,7 @@
 					<a href="javascript:void(0);" onclick="$('#moreroles').toggle();">otros roles</a>
 					<div id="moreroles" style="display: none;">
 					<?php 
-						$data = Role::model()->findAll('type=1', array('order'=>'pos ASC'));
+						$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=1'));
 						$list = Array();
 						foreach ($data as $d) {
 							$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
