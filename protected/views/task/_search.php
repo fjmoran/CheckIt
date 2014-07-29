@@ -4,40 +4,27 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="wide form">
+<div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
+	'htmlOptions' => array(
+		//'enctype' => 'multipart/form-data',
+		'role' => 'form',
+	),
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->label($model,'subproject_id'); ?>
-		<?php echo $form->textField($model,'subproject_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'start_date'); ?>
-		<?php echo $form->textField($model,'start_date'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'due_date'); ?>
-		<?php echo $form->textField($model,'due_date'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php 
+			$data = Subproject::model()->with('project')->findAll(array('order' => 'project.name ASC, t.name ASC')); 
+			$r = array();
+			foreach ($data as $d) {
+				$r[$d->id] = $d->project->name." > ".$d->name;
+			}
+		?>
+		<?php echo $form->dropDownList($model,'subproject_id', $r, array('class'=>'form-control dependent')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

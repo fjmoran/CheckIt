@@ -12,23 +12,26 @@ $this->menu=array(
 	array('label'=>'Create Task', 'url'=>array('create')),
 );
 
-/*Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#task-grid').yiiGridView('update', {
-		data: $(this).serialize()
+Yii::app()->clientScript->registerScript('search', "
+$('#Subproject_project_id').change(function(){
+	$('#subproject-grid').yiiGridView('update', {
+		data: $('.search-form form').serialize()
 	});
-	return false;
 });
-");*/
+", CClientScript::POS_LOAD);
 ?>
 
 <h2>Gestión de <?php echo Yii::app()->utility->getOption('tasks_name'); ?></h2>
 
 <div class="row">
+	<div class="col-md-6">
+		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+		<div class="search-form">
+		<?php $this->renderPartial('_search',array(
+			'model'=>$model,
+		)); ?>
+		</div><!-- search-form -->
+	</div>
 	<div class="col-md-12">
 		<a href="<?php echo Yii::app()->createUrl('task/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>

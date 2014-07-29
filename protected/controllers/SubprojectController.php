@@ -127,6 +127,11 @@ class SubprojectController extends Controller
 	{
 		$model=new Subproject('search');
 		$model->unsetAttributes();  // clear any default values
+
+		//obtenemos el primer proyecto
+		$projects = Project::model()->findAll(array('order'=>'name ASC'));
+		if ($projects) $model->project_id = $projects[0]->id;
+
 		if(isset($_GET['Subproject']))
 			$model->attributes=$_GET['Subproject'];
 

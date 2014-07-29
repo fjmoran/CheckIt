@@ -66,7 +66,7 @@ class Subproject extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'project_id' => 'Proyecto',
+			'project_id' => Yii::app()->utility->getOption('project_name'),
 			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
 		);
 	}

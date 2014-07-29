@@ -64,7 +64,7 @@ class Task extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'subproject_id' => 'Subproyecto',
+			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
 			'start_date' => 'Fecha de Inicio',
 			'due_date' => 'Fecha de Término',
 			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
