@@ -1,15 +1,15 @@
 <?php
-/* @var $this PositionController */
-/* @var $model Position */
+/* @var $this UserController */
+/* @var $model User */
 
 $this->breadcrumbs=array(
-	'Positions'=>array('index'),
+	'Users'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Position', 'url'=>array('index')),
-	array('label'=>'Create Position', 'url'=>array('create')),
+	array('label'=>'List User', 'url'=>array('index')),
+	array('label'=>'Create User', 'url'=>array('create')),
 );
 
 /*
@@ -19,23 +19,24 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#position-grid').yiiGridView('update', {
+	$('#user-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
 });
-");*/
+");
+*/
 ?>
 
-<h2>Gestión de <?php echo Yii::app()->utility->getOption('departments_name') ?></h2>
+<h2>Usuarios de <?php echo $department->name; ?></h2>
 
 <div class="row">
 	<div class="col-md-12">
-		<a href="<?php echo Yii::app()->createUrl('department/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+		<a href="<?php echo Yii::app()->createUrl('department/createUser', array('department_id'=>$department->id)); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
 </div></br>
 
-<?php /*echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php /* echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -47,7 +48,7 @@ $('.search-form form').submit(function(){
 	<div class="col-md-12">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'position-grid',
+	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
@@ -55,33 +56,20 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),			
-			'header'=>Yii::app()->utility->getOption('department_name'),
-			'name'=>'name',
+			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'header'=>'Nombre',
+			'name'=>'firstname',
+		),			
+		array(
+			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'header'=>'Apellido',
+			'name'=>'lastname',
 		),		
-
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),				
-			'header'=>'Superior Jerárquica',
-			'name'=>'parent.name',
-		),
-		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),				
-			'header'=>'Administrador',
-			'type'=>'html',
-			'value'=>'$data->managerName?$data->managerName:"<span class=\"label label-danger\">Sin Administrador!</span>"',
-		),
-		array(
-			'htmlOptions' => array('style' => 'width: 23%;'),				
-			'header'=>'Usuarios',
-			//'name'=>'user.id',
-			'value'=>'count($data->userNames)',
-		),
-		array(
-			'htmlOptions' => array('style' => 'width: 7%;'),
 			'class'=>'CButtonColumn',
-			'template'=>'{view} {update} {delete}',
-			'header' => 'Opciones',			
+			'htmlOptions' => array('style' => 'width: 7%;'),
+			'template'=>'{delete}',
+			'header' => 'Opciones',	
 			'buttons'=>array (
 				'update'=> array(
 					'label' => '<i class="fa fa-edit grid-icon"></i>',
@@ -89,14 +77,14 @@ $('.search-form form').submit(function(){
 					'imageUrl' => false,
 				),
 				'view'=>array(
-					'url' => 'Yii::app()->createUrl("department/users", array("department_id"=>$data->id))',
 					'label' => '<i class="fa fa-search grid-icon"></i>',
 					'options'=>array('title'=>'Ver'),
 					'imageUrl' => false,
 				),
 				'delete'=>array(
+					'url' => 'Yii::app()->createUrl("department/deleteUser", array("id"=>$data->id))',
 					'label' => '<i class="fa fa-trash-o grid-icon"></i>',
-					'options'=>array('title'=>'Eliminar'),
+					'options'=>array('class'=>'delete', 'title'=>'Eliminar'),
 					'imageUrl' => false,
 				),
 			),

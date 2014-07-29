@@ -7,7 +7,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'position-form',
+	'id'=>'department-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -41,6 +41,17 @@
 			<?php echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin superior','class'=>'form-control')); ?>
 			<?php echo $form->error($model,'parent_id'); ?>
 		</div>
+
+<?php if (!$model->isNewRecord): ?>
+		<div class="form-group">
+			<?php echo CHtml::label('Administrador', 'user'); ?>
+			<?php 
+				$data = User::model()->findAll('department_id='.$model->id, array('empty'=>'Seleccione', 'order' => 'firstname, lastname'));
+			?>
+			<?php echo CHtml::dropDownList('user', '', CHtml::listData($data, 'id', 'fullname'), array('class'=>'form-control')); ?>
+		</div>
+<?php endif; ?>
+
 	</div>
 </div>
 

@@ -73,7 +73,9 @@ $('.search-form form').submit(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name'),
-			'name'=>'department.name',
+			//'name'=>'department.name',
+			'type'=>'html',
+			'value'=>'$data->department?$data->department->name:"<span class=\"label label-danger\">Sin Área!</span>"',
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 7%;'),			

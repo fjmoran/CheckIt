@@ -13,6 +13,8 @@ class Department extends CActiveRecord
 
 	public $userIDs = array();
 	public $userNames = array();
+	public $managerID = 0;
+	public $managerName = '';
 
 	/**
 	 * @return string the associated database table name
@@ -50,6 +52,7 @@ class Department extends CActiveRecord
 			'parent' => array(self::BELONGS_TO, 'Department', 'parent_id'),
 			'users' => array(self::HAS_MANY, 'User', 'department_id'),
 			'projects' => array(self::HAS_MANY, 'Project', 'department_id'),
+			'manager' => array(self::HAS_MANY, 'User', 'department_id', 'condition'=>'manager.manager=1'),
 		);
 	}
 
@@ -103,7 +106,7 @@ class Department extends CActiveRecord
 		return parent::model($className);
 	}
 
-	public function afterFind()
+	public function afterFind() 
 	{
 		if(!empty($this->users))
 		{
@@ -112,6 +115,13 @@ class Department extends CActiveRecord
 				$this->userNames[]=$user->firstname." ".$user->lastname;
 			}
 		}
+		if (!empty($this->manager)) {
+			foreach ($this->manager as $m) {
+				$this->managerID = $m->id;
+				$this->managerName = $m->firstname." ".$user->lastname;
+			}
+		}
+
 	}
 
 	public function getOverdueTasks() {

@@ -30,6 +30,8 @@ class User extends CActiveRecord
 	public $roleIDs = array();
 	public $roleNames = array();
 
+	private $managerOptions = array('0' => 'No', '1' => 'Si');
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -48,14 +50,14 @@ class User extends CActiveRecord
 		return array(
 			array('email, firstname, lastname, status', 'required'),
 			array('password', 'required', 'on' => 'insert'),
-			array('status, department_id', 'numerical', 'integerOnly'=>true),
+			array('status, department_id, manager', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>100),
 			array('firstname, lastname, position', 'length', 'max'=>255),
 			array('email', 'email','message'=>"El email ingresado no es correcto"),
 			array('email', 'unique','message'=>'El email ingresado ya existe!'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password, firstname, lastname, status, created, lastvisit, position', 'safe', 'on'=>'search'),
+			array('id, email, password, firstname, lastname, status, created, lastvisit, position, department_id, manager', 'safe', 'on'=>'search'),
 			array('current_password, repeat_password', 'safe', 'on'=>'update'),
 			array('created', 'default', 
           		'value'=>new CDbExpression('NOW()'),
@@ -71,6 +73,23 @@ class User extends CActiveRecord
 				$_password = User::model()->findByPk($this->id)->password;
 				$this->password = $_password;
 			}
+
+			//vemos si tiene asignado un departamento y si es el unico
+			if ($this->department_id && $this->department_id!=new CDbExpression('NULL')) {
+				$users = User::model()->findAllByAttributes(
+					array(), 
+					$condition = 'status=:status && department_id=:department_id && id!=:id',
+					$params = array(
+						':status' => 1,
+						':department_id' => $this->department_id,
+						':id' => $this->id,
+					)
+				);
+				if (count($users) == 0) {
+					$this->manager = 1;
+				}
+			}
+
 			return true;
 		}
 		return false;
@@ -113,6 +132,7 @@ class User extends CActiveRecord
 			'lastvisit' => 'Última visita',
 			'roles' => 'Módulos',
 			'fullname' => 'Nombre Completo',
+			'manager' => 'Administrador',
 		);
 	}
 
@@ -213,6 +233,10 @@ class User extends CActiveRecord
 
 	public function getFullName() {
 		return $this->firstname . " " . $this->lastname;
+	}
+
+	public function getManagerOptions() {
+		return $this->statusOptions;
 	}
 
 }

@@ -16,6 +16,7 @@ class DepartmentController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
+			'postOnly + deleteUser',
 		);
 	}
 
@@ -28,7 +29,7 @@ class DepartmentController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('view','create','update','admin','delete'),
+				'actions'=>array('view','create','update','admin','delete','users','deleteUser','createUser'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -86,6 +87,23 @@ class DepartmentController extends Controller
 		if(isset($_POST['Department']))
 		{
 			$model->attributes=$_POST['Department'];
+
+			if(isset($_POST['user']))
+			{
+				$user=User::model()->findByPk($_POST['user']);
+				$user->manager=1;
+				$user->save(false);
+
+				$ous = User::model()->findAll('id!='.$user->id.' AND department_id='.$model->id);
+				foreach ($ous as $ou) {
+					if ($ou->manager==1) {
+						$ou->manager=0;
+						$ou->save(false);
+					}
+				}
+
+			}
+
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -134,6 +152,64 @@ class DepartmentController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionUsers()
+	{
+		$department_id = Yii::app()->request->getQuery("department_id"); //$_GET['process_id'];
+		if (!(int)$department_id) exit;
+		$department = Department::model()->findByPk($department_id);
+
+		$model=new User('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->department_id = $department_id;
+
+		if(isset($_GET['User']))
+			$model->attributes=$_GET['User'];
+
+		$this->render('users',array(
+			'department' => $department,
+			'model'=>$model,
+		));
+	}
+
+	public function actionDeleteUser($id)
+	{
+		$model=User::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+
+		$model->department_id = new CDbExpression('NULL');
+		$model->manager = 0;
+
+		$model->save(false);
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+	public function actionCreateUser()
+	{
+		$department_id = Yii::app()->request->getQuery("department_id"); //$_GET['process_id'];
+		if (!(int)$department_id) exit;
+		$department = Department::model()->findByPk($department_id);
+
+		//$model=new User;
+
+		if(isset($_POST['user']))
+		{
+			$model=User::model()->findByPk($_POST['user']);
+			$model->department_id=$department_id;
+			if($model->save())
+				$this->redirect(array('users', 'department_id'=>$department_id));
+		}
+
+		$this->render('createUser',array(
+			'department'=>$department,
+		));
+	}
+
+
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
