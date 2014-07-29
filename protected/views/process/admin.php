@@ -68,8 +68,8 @@ $('.search-form form').submit(function(){
 					'imageUrl' => false,
 				),
 				'view'=>array(
-					'label' => '<i class="fa fa-search grid-icon"></i>',
-					'options'=>array('title'=>'Ver'),
+					'label' => '<i class="fa fa-wrench grid-icon"></i>',
+					'options'=>array('title'=>'Configurar'),
 					'imageUrl' => false,
 				),
 				'delete'=>array(

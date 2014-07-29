@@ -90,8 +90,8 @@ $('.search-form form').submit(function(){
 				),
 				'view'=>array(
 					'url' => 'Yii::app()->createUrl("department/users", array("department_id"=>$data->id))',
-					'label' => '<i class="fa fa-search grid-icon"></i>',
-					'options'=>array('title'=>'Ver'),
+					'label' => '<i class="fa fa-wrench grid-icon"></i>',
+					'options'=>array('title'=>'Configurar'),
 					'imageUrl' => false,
 				),
 				'delete'=>array(
