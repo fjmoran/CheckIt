@@ -84,13 +84,16 @@ class Project extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		//$criteria->with='department';
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('department_id',$this->department_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			  'sort'=>array(
+			    'defaultOrder'=>'name ASC',
+			  )				
 		));
 	}
 

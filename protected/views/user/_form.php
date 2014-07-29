@@ -57,7 +57,7 @@
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'department_id'); ?>
 			<?php $data = Department::model()->findAll(array('order' => 'name')); ?>
-			<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin área','class'=>'form-control')); ?>
+			<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Seleccione una opción','class'=>'form-control')); ?>
 			<?php echo $form->error($model,'department_id'); ?>
 		</div>		
 

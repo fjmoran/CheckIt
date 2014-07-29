@@ -92,6 +92,10 @@ class Department extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			  'sort'=>array(
+			    'defaultOrder'=>'parent_id ASC, name ASC',
+			  )
+
 		));
 	}
 
