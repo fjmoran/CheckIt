@@ -58,6 +58,30 @@ $this->menu=array(
 			<?php echo $form->error($model,'lastname'); ?>
 		</div>
 
+		<div class="panel panel-info">
+			<div class="panel-heading">Roles</div>
+			<div class="panel-body">
+					<?php
+					$data = Role::model()->with('users')->findAll(array('order'=>'pos ASC', 'condition'=>'user_id=:user_id', 'params'=>array(':user_id'=>Yii::app()->user->id)));
+					$list = Array();
+					foreach ($data as $d) {
+						echo "<strong>".$d->friendly_name."</strong><br />";
+					}
+					echo CHtml::activeCheckBoxList(
+						$model, 
+						'roleIDs', 
+						$list,
+						array(
+							'template'=>'{input} &nbsp;&nbsp;{label}',
+							'separator' =>'<br />',
+							'class'=>'categoryFilter',
+							//'checkAll'=>'Todos',
+						)
+					);  ?>				
+			</div>
+		</div>
+
+
 <h2>Cambiar password</h2>
 
 		<div class="form-group">
