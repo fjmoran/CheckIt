@@ -157,7 +157,7 @@ class User extends CActiveRecord
 			'department_id' => Yii::app()->utility->getOption('department_name'),
 			'created' => 'Creado en',
 			'lastvisit' => 'Última visita',
-			'roles' => 'Módulos',
+			'roles' => 'Roles',
 			'fullname' => 'Nombre Completo',
 			'manager' => 'Administrador',
 		);

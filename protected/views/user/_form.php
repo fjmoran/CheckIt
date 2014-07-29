@@ -70,17 +70,22 @@
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'roles'); ?><br />
 			<?php 
+
+				Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
+
+				$data = Role::model()->findAll(array('order'=>'pos ASC'));
+				$list = Array();
+				foreach ($data as $d) {
+					$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
+					//$list[$d->id] = $d->friendly_name.' <i class="tooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'" class="fa fa-question"></i>';
+				}
 				echo CHtml::activeCheckBoxList(
 					$model, 
 					'roleIDs', 
-					CHtml::listData( 
-						Role::model()->findAll() , 
-						'id', 
-						'name'
-					),
+					$list,
 					array(
-						'template'=>'{input} {label}',
-						'separator' =>'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+						'template'=>'{input} &nbsp;&nbsp;{label}',
+						'separator' =>'<br />',
 						'class'=>'categoryFilter',
 						'checkAll'=>'Todos',
 					)
