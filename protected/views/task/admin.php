@@ -24,7 +24,7 @@ $('#Subproject_project_id').change(function(){
 <h2>Gestión de <?php echo Yii::app()->utility->getOption('tasks_name'); ?></h2>
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 		<div class="search-form">
 		<?php $this->renderPartial('_search',array(
@@ -32,8 +32,8 @@ $('#Subproject_project_id').change(function(){
 		)); ?>
 		</div><!-- search-form -->
 	</div>
-	<div class="col-md-12">
-		<a href="<?php echo Yii::app()->createUrl('task/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+	<div class="col-md-8">
+		<a href="<?php echo Yii::app()->createUrl('task/create'); ?>" style="margin-top:64px;" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
 </div></br>
 

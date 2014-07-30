@@ -24,7 +24,7 @@ $('#Subproject_project_id').change(function(){
 <h2>Gestión de <?php echo Yii::app()->utility->getOption('subprojects_name'); ?></h2>
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 		<div class="search-form">
 		<?php $this->renderPartial('_search',array(
@@ -32,8 +32,8 @@ $('#Subproject_project_id').change(function(){
 		)); ?>
 		</div><!-- search-form -->
 	</div>
-	<div class="col-md-12">
-		<a href="<?php echo Yii::app()->createUrl('subproject/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+	<div class="col-md-8">
+		<a href="<?php echo Yii::app()->createUrl('subproject/create'); ?>" style="margin-top:28px;" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
 </div></br>
 
@@ -49,17 +49,17 @@ $('#Subproject_project_id').change(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 35%;'),			
+			'htmlOptions' => array('style' => 'width: 47%;'),			
 			'header'=>'Nombre',
 			'name'=>'name',
 		),		
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),			
+			'htmlOptions' => array('style' => 'width: 23%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),			
+			'htmlOptions' => array('style' => 'width: 23%;'),			
 			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
 			'name'=>'department.managerName',
 		),
