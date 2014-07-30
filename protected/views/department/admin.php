@@ -55,24 +55,24 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),			
+			'htmlOptions' => array('style' => 'width: 30%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name'),
 			'name'=>'name',
 		),		
 
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),				
+			'htmlOptions' => array('style' => 'width: 25%;'),				
 			'header'=>'Superior Jerárquica',
 			'name'=>'parent.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),				
+			'htmlOptions' => array('style' => 'width: 25%;'),				
 			'header'=>Yii::app()->utility->getOption('manager_name'),
 			'type'=>'html',
 			'value'=>'$data->managerName?$data->managerName:"<span class=\"label label-danger\">Sin Administrador!</span>"',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 23%;'),				
+			'htmlOptions' => array('style' => 'width: 13%;'),				
 			'header'=>'Usuarios',
 			//'name'=>'user.id',
 			'value'=>'count($data->userNames)',

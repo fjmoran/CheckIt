@@ -56,12 +56,12 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'htmlOptions' => array('style' => 'width: 46%;'),			
 			'header'=>'Nombre',
 			'name'=>'firstname',
 		),			
 		array(
-			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'htmlOptions' => array('style' => 'width: 47%;'),			
 			'header'=>'Apellido',
 			'name'=>'lastname',
 		),		

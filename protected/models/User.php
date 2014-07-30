@@ -160,6 +160,8 @@ class User extends CActiveRecord
 			'roles' => 'Roles',
 			'fullname' => 'Nombre Completo',
 			'manager' => 'Administrador',
+			'current_password' => 'Password actual',
+			'repeat_password' => 'Repetir password',
 		);
 	}
 

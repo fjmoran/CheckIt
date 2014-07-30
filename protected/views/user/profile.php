@@ -15,8 +15,14 @@ $this->menu=array(
 	array('label'=>'Manage User', 'url'=>array('admin')),
 );
 ?>
-
-<h2>Mi perfil</h2>
+<div class="row">
+	<div class="col-md-6">
+		<h2>Mi perfil</h2>
+	</div>
+	<div class="col-md-6">
+		<h2>Cambiar password</h2>
+	</div>
+</div>		
 
 <?php if (Yii::app()->user->hasFlash('message')):?>
     <div class="alert alert-success"><?php echo Yii::app()->user->getFlash('message');?></div>
@@ -80,10 +86,9 @@ $this->menu=array(
 					);  ?>				
 			</div>
 		</div>
+	</div>
 
-
-<h2>Cambiar password</h2>
-
+	<div class="col-md-6">
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'current_password'); ?>
 			<?php echo $form->passwordField($model,'current_password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
@@ -101,11 +106,6 @@ $this->menu=array(
 			<?php echo $form->passwordField($model,'repeat_password',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'repeat_password'); ?>
 		</div>
-
-	</div>
-
-	<div class="col-md-6">
-		<!-- nada -->
 	</div>
 </div>	
 
