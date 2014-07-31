@@ -23,6 +23,9 @@
  */
 class Kpi extends CActiveRecord
 {
+
+	private $frequencyOptions = array(0 => 'Diario', 1 => 'Semanal', 2 => 'Mensual', 3 => 'Trimestral', 4 => 'Semestral', 5 => 'Anual');
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -39,15 +42,16 @@ class Kpi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, calculation, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'required'),
-			array('subproject_id, department_id', 'numerical', 'integerOnly'=>true),
+			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'required'),
+			array('subproject_id, department_id, update_frequency, review_frequency', 'numerical', 'integerOnly'=>true),
 			array('base_value, goal_value, real_value', 'numerical'),
-			array('name, frequency', 'length', 'max'=>255),
-			array('calculation, calculation', 'length', 'max'=>1000),
+			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1),
+			array('name', 'length', 'max'=>255),
+			array('calculation', 'length', 'max'=>1000),
 			array('unit', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, calculation, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'safe', 'on'=>'search'),
+			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,7 +78,8 @@ class Kpi extends CActiveRecord
 			'name' => 'Nombre',
 			'calculation' => 'Forma de cálculo',
 			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
-			'frequency' => 'Frequencia toma de deciciones',
+			'update_frequency' => 'Frecuencia de actualización',
+			'review_frequency' => 'Frecuencia de revisión',
 			'base_date' => 'Fecha base',
 			'goal_date' => 'Fecha de meta',
 			'base_value' => 'Valor base',
@@ -107,7 +112,8 @@ class Kpi extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('calculation',$this->calculation,true);
 		$criteria->compare('subproject_id',$this->subproject_id);
-		$criteria->compare('frequency',$this->frequency,true);
+		$criteria->compare('update_frequency',$this->update_frequency);
+		$criteria->compare('review_frequency',$this->review_frequency);
 		$criteria->compare('base_date',$this->base_date,true);
 		$criteria->compare('goal_date',$this->goal_date,true);
 		$criteria->compare('base_value',$this->base_value);
@@ -131,4 +137,21 @@ class Kpi extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getUpdateFrequencyOptions() {
+		return $this->frequencyOptions;
+	}
+
+	public function getUpdateFrequencyText() {
+		return $this->frequencyOptions[$this->update_frequency];
+	}
+
+	public function getReviewFrequencyOptions() {
+		return $this->frequencyOptions;
+	}
+
+	public function getReviewFrequencyText() {
+		return $this->frequencyOptions[$this->review_frequency];
+	}
+
 }

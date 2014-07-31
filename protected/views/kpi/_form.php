@@ -50,9 +50,15 @@
 		</div>
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'frequency'); ?>
-			<?php echo $form->textField($model,'frequency',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'frequency'); ?>
+			<?php echo $form->labelEx($model,'update_frequency'); ?>
+			<?php echo $form->dropDownList($model,'update_frequency', $model->updateFrequencyOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'update_frequency'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'review_frequency'); ?>
+			<?php echo $form->dropDownList($model,'review_frequency', $model->reviewFrequencyOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'review_frequency'); ?>
 		</div>
 
 		<div class="form-group">
@@ -101,6 +107,12 @@
 			<?php echo $form->labelEx($model,'base_value'); ?>
 			<?php echo $form->textField($model,'base_value',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'base_value'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'weight'); ?>
+			<?php echo $form->textField($model,'weight',array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'weight'); ?>
 		</div>
 	</div>
 
