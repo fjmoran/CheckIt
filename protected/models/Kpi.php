@@ -76,7 +76,7 @@ class Kpi extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Nombre',
 			'description' => 'Descripción',
-			'subproject_id' => 'Subproyecto',
+			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
 			'frequency' => 'Frequencia toma de deciciones',
 			'base_date' => 'Fecha base',
 			'goal_date' => 'Fecha de meta',
