@@ -12,24 +12,26 @@ $this->menu=array(
 	array('label'=>'Create Kpi', 'url'=>array('create')),
 );
 
-/*
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
+$('.select-level').change(function(){
 	$('#kpi-grid').yiiGridView('update', {
-		data: $(this).serialize()
+		data: $('.search-form form').serialize()
 	});
-	return false;
 });
-");*/
+", CClientScript::POS_LOAD);
 ?>
 
 <h2>Gestión de KPI</h2>
 
 <div class="row">
+	<div class="col-md-6">
+		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+		<div class="search-form">
+		<?php $this->renderPartial('_search',array(
+			'model'=>$model,
+		)); ?>
+		</div><!-- search-form -->
+	</div>
 	<div class="col-md-12">
 		<a href="<?php echo Yii::app()->createUrl('kpi/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
@@ -55,12 +57,12 @@ $('.search-form form').submit(function(){
 			'htmlOptions' => array('style' => 'width: 34%;'),
 			'header'=>'KPI',
 			'name'=>'name',
-		),		
-		array(
+		),
+		/*array(
 			'htmlOptions' => array('style' => 'width: 34%;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
-		),
+		),*/
 		array(
 			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',

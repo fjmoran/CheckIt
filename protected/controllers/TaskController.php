@@ -158,6 +158,11 @@ class TaskController extends Controller
 	{
 		$model=new Task('search');
 		$model->unsetAttributes();  // clear any default values
+
+		//obtenemos el primer subproyecto
+		$subprojects = Subproject::model()->with('project')->findAll(array('order'=>'project.name ASC, t.name ASC'));
+		if ($subprojects) $model->subproject_id = $subprojects[0]->id;
+
 		if(isset($_GET['Task']))
 			$model->attributes=$_GET['Task'];
 

@@ -13,8 +13,8 @@ $this->menu=array(
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('#Subproject_project_id').change(function(){
-	$('#subproject-grid').yiiGridView('update', {
+$('.select-level').change(function(){
+	$('#task-grid').yiiGridView('update', {
 		data: $('.search-form form').serialize()
 	});
 });
@@ -61,7 +61,7 @@ $('#Subproject_project_id').change(function(){
 			'header'=> 'Nombre',
 			'name'=> 'name',
 		),
-		array(
+/*		array(
 			'htmlOptions' => array('style' => 'width: 25%;'),
 			'header'=>Yii::app()->utility->getOption('subproject_name'),
 			'name'=>'subproject.name',
@@ -70,7 +70,7 @@ $('#Subproject_project_id').change(function(){
 			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>Yii::app()->utility->getOption('project_name'),
 			'name'=>'subproject.project.name',
-		),
+		),*/
 		array(
 			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
