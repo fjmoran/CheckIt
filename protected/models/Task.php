@@ -98,6 +98,9 @@ class Task extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array(
+            	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
+              ),			
 		));
 	}
 

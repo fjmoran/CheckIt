@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'kpi':
  * @property integer $id
  * @property string $name
- * @property string $calculation
+ * @property string $description
  * @property integer $subproject_id
  * @property string $frequency
  * @property string $base_date
@@ -15,6 +15,9 @@
  * @property double $goal_value
  * @property string $unit
  * @property double $real_value
+ * @property double $limit_red
+ * @property double $limit_yellow
+ * @property double $limit_green
  * @property integer $department_id
  *
  * The followings are the available model relations:
@@ -76,7 +79,7 @@ class Kpi extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'calculation' => 'Forma de cálculo',
+			'description' => 'Descripción',
 			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
 			'update_frequency' => 'Frecuencia de actualización',
 			'review_frequency' => 'Frecuencia de revisión',
@@ -86,6 +89,9 @@ class Kpi extends CActiveRecord
 			'goal_value' => 'Valor meta',
 			'unit' => 'Unidad de medida',
 			'real_value' => 'Valor actual',
+			'limit_red' => 'Límite rojo',
+			'limit_yellow' => 'Límite amarillo',
+			'limit_green' => 'Límite verde',
 			'department_id' => Yii::app()->utility->getOption('department_name').' responsable',
 		);
 	}
@@ -110,7 +116,7 @@ class Kpi extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('calculation',$this->calculation,true);
+		$criteria->compare('description',$this->description,true);
 		$criteria->compare('subproject_id',$this->subproject_id);
 		$criteria->compare('update_frequency',$this->update_frequency);
 		$criteria->compare('review_frequency',$this->review_frequency);
@@ -120,10 +126,16 @@ class Kpi extends CActiveRecord
 		$criteria->compare('goal_value',$this->goal_value);
 		$criteria->compare('unit',$this->unit,true);
 		$criteria->compare('real_value',$this->real_value);
+		$criteria->compare('limit_red',$this->limit_red);
+		$criteria->compare('limit_yellow',$this->limit_yellow);
+		$criteria->compare('limit_green',$this->limit_green);
 		$criteria->compare('department_id',$this->department_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array(
+            	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
+              ),			
 		));
 	}
 
