@@ -114,6 +114,12 @@
 			<?php echo $form->textField($model,'weight',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'weight'); ?>
 		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'measuring'); ?>
+			<?php echo $form->dropDownList($model,'measuring', $model->measuringOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'measuring'); ?>
+		</div>
 	</div>
 
 	<div class="col-md-6">

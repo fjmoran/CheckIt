@@ -28,6 +28,7 @@ class Kpi extends CActiveRecord
 {
 
 	private $frequencyOptions = array(0 => 'Diario', 1 => 'Semanal', 2 => 'Mensual', 3 => 'Trimestral', 4 => 'Semestral', 5 => 'Anual');
+	private $measuringOptions = array(0 => 'Más es mejor (creciente)', 1 => 'Menos es mejor (decreciente)', 2 => 'Más cerca es mejor');
 
 	/**
 	 * @return string the associated database table name
@@ -46,7 +47,7 @@ class Kpi extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'required'),
-			array('subproject_id, department_id, update_frequency, review_frequency', 'numerical', 'integerOnly'=>true),
+			array('subproject_id, department_id, update_frequency, review_frequency, measuring', 'numerical', 'integerOnly'=>true),
 			array('base_value, goal_value, real_value', 'numerical'),
 			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('name', 'length', 'max'=>255),
@@ -54,7 +55,7 @@ class Kpi extends CActiveRecord
 			array('unit', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight', 'safe', 'on'=>'search'),
+			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight, measuring', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,7 +80,6 @@ class Kpi extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'description' => 'Descripción',
 			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
 			'update_frequency' => 'Frecuencia de actualización',
 			'review_frequency' => 'Frecuencia de revisión',
@@ -93,6 +93,8 @@ class Kpi extends CActiveRecord
 			'limit_yellow' => 'Límite amarillo',
 			'limit_green' => 'Límite verde',
 			'department_id' => Yii::app()->utility->getOption('department_name').' responsable',
+			'measuring' => 'Forma de medición',
+			'calculation' => 'Forma de cálculo',
 		);
 	}
 
@@ -116,7 +118,6 @@ class Kpi extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
 		$criteria->compare('subproject_id',$this->subproject_id);
 		$criteria->compare('update_frequency',$this->update_frequency);
 		$criteria->compare('review_frequency',$this->review_frequency);
@@ -126,10 +127,9 @@ class Kpi extends CActiveRecord
 		$criteria->compare('goal_value',$this->goal_value);
 		$criteria->compare('unit',$this->unit,true);
 		$criteria->compare('real_value',$this->real_value);
-		$criteria->compare('limit_red',$this->limit_red);
-		$criteria->compare('limit_yellow',$this->limit_yellow);
-		$criteria->compare('limit_green',$this->limit_green);
 		$criteria->compare('department_id',$this->department_id);
+		$criteria->compare('measuring',$this->measuring);
+		$criteria->compare('calculation',$this->calculation);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -164,6 +164,14 @@ class Kpi extends CActiveRecord
 
 	public function getReviewFrequencyText() {
 		return $this->frequencyOptions[$this->review_frequency];
+	}
+
+	public function getMeasuringOptions() {
+		return $this->measuringOptions;
+	}
+
+	public function getMeasuringText() {
+		return $this->measuringOptions[$this->measuring];
 	}
 
 }
