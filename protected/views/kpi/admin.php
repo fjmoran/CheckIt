@@ -14,9 +14,11 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerScript('search', "
 $('.select-level').change(function(){
-	$('#kpi-grid').yiiGridView('update', {
-		data: $('.search-form form').serialize()
-	});
+	if ($(this).val()) {
+		$('#kpi-grid').yiiGridView('update', {
+			data: $('.search-form form').serialize()
+		});
+	}
 });
 ", CClientScript::POS_LOAD);
 ?>

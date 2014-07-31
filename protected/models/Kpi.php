@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'kpi':
  * @property integer $id
  * @property string $name
- * @property string $description
+ * @property string $calculation
  * @property integer $subproject_id
  * @property string $frequency
  * @property string $base_date
@@ -15,9 +15,6 @@
  * @property double $goal_value
  * @property string $unit
  * @property double $real_value
- * @property double $limit_red
- * @property double $limit_yellow
- * @property double $limit_green
  * @property integer $department_id
  *
  * The followings are the available model relations:
@@ -42,15 +39,15 @@ class Kpi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, description, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, limit_red, limit_yellow, limit_green, department_id', 'required'),
+			array('name, calculation, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'required'),
 			array('subproject_id, department_id', 'numerical', 'integerOnly'=>true),
-			array('base_value, goal_value, real_value, limit_red, limit_yellow, limit_green', 'numerical'),
+			array('base_value, goal_value, real_value', 'numerical'),
 			array('name, frequency', 'length', 'max'=>255),
-			array('description', 'length', 'max'=>1000),
+			array('calculation, calculation', 'length', 'max'=>1000),
 			array('unit', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, description, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, limit_red, limit_yellow, limit_green, department_id', 'safe', 'on'=>'search'),
+			array('id, name, calculation, subproject_id, frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,8 +72,8 @@ class Kpi extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Nombre',
-			'description' => 'Descripción',
-			'subproject_id' => 'Subproyecto',
+			'calculation' => 'Forma de cálculo',
+			'subproject_id' => Yii::app()->utility->getOption('subproject_name'),
 			'frequency' => 'Frequencia toma de deciciones',
 			'base_date' => 'Fecha base',
 			'goal_date' => 'Fecha de meta',
@@ -84,9 +81,6 @@ class Kpi extends CActiveRecord
 			'goal_value' => 'Valor meta',
 			'unit' => 'Unidad de medida',
 			'real_value' => 'Valor actual',
-			'limit_red' => 'Límite rojo',
-			'limit_yellow' => 'Límite amarillo',
-			'limit_green' => 'Límite verde',
 			'department_id' => Yii::app()->utility->getOption('department_name').' responsable',
 		);
 	}
@@ -111,7 +105,7 @@ class Kpi extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('calculation',$this->calculation,true);
 		$criteria->compare('subproject_id',$this->subproject_id);
 		$criteria->compare('frequency',$this->frequency,true);
 		$criteria->compare('base_date',$this->base_date,true);
@@ -120,9 +114,6 @@ class Kpi extends CActiveRecord
 		$criteria->compare('goal_value',$this->goal_value);
 		$criteria->compare('unit',$this->unit,true);
 		$criteria->compare('real_value',$this->real_value);
-		$criteria->compare('limit_red',$this->limit_red);
-		$criteria->compare('limit_yellow',$this->limit_yellow);
-		$criteria->compare('limit_green',$this->limit_green);
 		$criteria->compare('department_id',$this->department_id);
 
 		return new CActiveDataProvider($this, array(

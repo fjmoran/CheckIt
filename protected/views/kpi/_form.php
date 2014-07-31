@@ -31,9 +31,9 @@
 		</div>
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'description'); ?>
-			<?php echo $form->textArea($model,'description',array('size'=>60,'maxlength'=>1000,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'description'); ?>
+			<?php echo $form->labelEx($model,'calculation'); ?>
+			<?php echo $form->textArea($model,'calculation',array('size'=>60,'maxlength'=>1000,'class'=>'form-control')); ?>
+			<?php echo $form->error($model,'calculation'); ?>
 		</div>
 
 		<div class="form-group">
@@ -121,24 +121,6 @@
 			<?php echo $form->labelEx($model,'real_value'); ?>
 			<?php echo $form->textField($model,'real_value',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'real_value'); ?>
-		</div>
-
-		<div class="form-group">
-			<?php echo $form->labelEx($model,'limit_red'); ?>
-			<?php echo $form->textField($model,'limit_red',array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'limit_red'); ?>
-		</div>
-
-		<div class="form-group">
-			<?php echo $form->labelEx($model,'limit_yellow'); ?>
-			<?php echo $form->textField($model,'limit_yellow',array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'limit_yellow'); ?>
-		</div>
-
-		<div class="form-group">
-			<?php echo $form->labelEx($model,'limit_green'); ?>
-			<?php echo $form->textField($model,'limit_green',array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'limit_green'); ?>
 		</div>
 
 		<div class="form-group">
