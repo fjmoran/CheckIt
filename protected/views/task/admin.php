@@ -57,7 +57,7 @@ $('.select-level').change(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 20%;'),			
+			'htmlOptions' => array('style' => 'width: 38%;'),			
 			'header'=> 'Nombre',
 			'name'=> 'name',
 		),
@@ -72,17 +72,17 @@ $('.select-level').change(function(){
 			'name'=>'subproject.project.name',
 		),*/
 		array(
-			'htmlOptions' => array('style' => 'width: 12%;'),			
+			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 12%;'),
+			'htmlOptions' => array('style' => 'width: 15%;'),
 			'header'=> 'Inicio',
 			'name'=> 'start_date',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 12%;'),			
+			'htmlOptions' => array('style' => 'width: 15%;'),			
 			'header'=> 'Fin',
 			'name'=> 'due_date',
 		),				

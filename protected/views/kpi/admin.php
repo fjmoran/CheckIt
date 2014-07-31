@@ -32,8 +32,8 @@ $('.select-level').change(function(){
 		)); ?>
 		</div><!-- search-form -->
 	</div>
-	<div class="col-md-12">
-		<a href="<?php echo Yii::app()->createUrl('kpi/create'); ?>" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
+	<div class="col-md-6">
+		<a href="<?php echo Yii::app()->createUrl('kpi/create'); ?>" style="margin-top:64px;"  class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Nuevo</a>
 	</div>
 </div></br>
 
@@ -54,7 +54,7 @@ $('.select-level').change(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 34%;'),
+			'htmlOptions' => array('style' => 'width: 50%;'),
 			'header'=>'KPI',
 			'name'=>'name',
 		),
@@ -64,9 +64,14 @@ $('.select-level').change(function(){
 			'name'=>'subproject.name',
 		),*/
 		array(
-			'htmlOptions' => array('style' => 'width: 25%;'),			
+			'htmlOptions' => array('style' => 'width: 28%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 15%;'),			
+			'header'=> 'Fecha Meta',
+			'name'=>'goal_date',
 		),
 		array(
 			'class'=>'CButtonColumn',
