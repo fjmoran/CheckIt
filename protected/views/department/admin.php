@@ -48,7 +48,7 @@ $('.search-form form').submit(function(){
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'position-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchTree(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
 	'cssFile'=>false,
@@ -57,14 +57,9 @@ $('.search-form form').submit(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 30%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name'),
+			'type'=>'html',
 			'name'=>'name',
 		),		
-
-		array(
-			'htmlOptions' => array('style' => 'width: 25%;'),				
-			'header'=>'Superior Jerárquica',
-			'name'=>'parent.name',
-		),
 		array(
 			'htmlOptions' => array('style' => 'width: 25%;'),				
 			'header'=>Yii::app()->utility->getOption('manager_name'),

@@ -938,6 +938,7 @@ class NestedSetBehavior extends CActiveRecordBehavior
 
 		$delta2=$key-$left;
 
+//print_r(self::$_cached[get_class($owner)]);exit;
 		foreach(self::$_cached[get_class($owner)] as $node)
 		{
 			if($node->getIsNewRecord() || $node->getIsDeletedRecord())
@@ -984,6 +985,7 @@ class NestedSetBehavior extends CActiveRecordBehavior
 		$delta2=$key-$left;
 		$delta3=$left-$right-1;
 
+//print_r(self::$_cached[get_class($owner)]);
 		foreach(self::$_cached[get_class($owner)] as $node)
 		{
 			if($node->getIsNewRecord() || $node->getIsDeletedRecord())

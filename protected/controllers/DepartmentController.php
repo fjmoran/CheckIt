@@ -63,7 +63,18 @@ class DepartmentController extends Controller
 		if(isset($_POST['Department']))
 		{
 			$model->attributes=$_POST['Department'];
-			if($model->save())
+
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Department::model()->findByPk($model->parent_id);
+				$ret = $model->appendTo($root);
+				//if ($ret) $ret = $model->save();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 
@@ -104,7 +115,18 @@ class DepartmentController extends Controller
 
 			}
 
-			if($model->save())
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->moveAsRoot();
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Department::model()->findByPk($model->parent_id);
+				$ret = $model->moveAsLast($root);
+				$ret = $model->saveNode();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 

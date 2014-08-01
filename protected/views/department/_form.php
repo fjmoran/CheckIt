@@ -37,6 +37,11 @@
 				$data = Department::model()->findAll('id<>'.$model->id,array('order' => 'name'));
 			else
 				$data = Department::model()->findAll(array('order' => 'name'));
+			$model->parent_id = '';
+			if (!$model->isNewRecord) {
+				$parent = $model->parent()->find();
+				if ($parent) $model->parent_id = $parent->id;				
+			}
 			?>
 			<?php echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin superior','class'=>'form-control')); ?>
 			<?php echo $form->error($model,'parent_id'); ?>

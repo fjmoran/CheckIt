@@ -6,10 +6,10 @@
  * The followings are the available columns in table 'department':
  * @property integer $id
  * @property string $name
- * @property integer $parent_id
  */
 class Department extends CActiveRecord
 {
+	public $parent_id;
 
 	public $userIDs = array();
 	public $userNames = array();
@@ -37,7 +37,21 @@ class Department extends CActiveRecord
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, parent_id', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
+		);
+	}
+
+	public function behaviors()
+	{
+		return array(
+			'nestedSetBehavior'=>array(
+				'class'=>'ext.yiiext.behaviors.model.trees.NestedSetBehavior',
+				'hasManyRoots'=>false,
+				'leftAttribute'=>'lft',
+				'rightAttribute'=>'rgt',
+				'levelAttribute'=>'level',
+				'rootAttribute'=>'root',
+			),
 		);
 	}
 
@@ -49,7 +63,6 @@ class Department extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'parent' => array(self::BELONGS_TO, 'Department', 'parent_id'),
 			'users' => array(self::HAS_MANY, 'User', 'department_id'),
 			'projects' => array(self::HAS_MANY, 'Project', 'department_id'),
 			'manager' => array(self::HAS_MANY, 'User', 'department_id', 'condition'=>'manager.manager=1'),
@@ -88,18 +101,39 @@ class Department extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('parent_id',$this->parent_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>array(
             	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
-              ),			
-			  'sort'=>array(
-			    'defaultOrder'=>'parent_id ASC, name ASC',
-			  ),
-
+            ),			
 		));
+	}
+
+	public function searchTree() {
+
+		$rawData = Department::model()->findAll(array('order'=>'root,lft ASC'));
+
+		foreach ($rawData as $d) {
+			$pre = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $d->level-1);
+			if ($d->level%2==0) $pre .= '<i style="font-size: 8px;" class="fa fa-circle-o"></i>&nbsp; ';
+			else $pre .= '<i style="font-size: 8px;" class="fa fa-circle"></i>&nbsp; ';
+			$d->name = $pre.$d->name;
+		}
+
+		$arrayDataProvider=new CArrayDataProvider($rawData, array(
+			'id'=>'id',
+			/*'sort'=>array(
+				'attributes'=>array(
+					'username', 'email',
+				),
+			),*/
+			'pagination'=>array(
+				'pageSize'=> Yii::app()->utility->getOption('table_rows'),
+			),
+		));
+
+		return $arrayDataProvider;
 	}
 
 	/**
@@ -115,6 +149,8 @@ class Department extends CActiveRecord
 
 	public function afterFind() 
 	{
+		parent::afterFind();
+
 		if(!empty($this->users))
 		{
 			foreach($this->users as $user){
