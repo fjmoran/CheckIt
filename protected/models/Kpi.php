@@ -96,6 +96,7 @@ class Kpi extends CActiveRecord
 			'calculation' => 'Forma de cálculo',
 			'parent_id' => 'Depende de otro KPI',
 			'function' => 'Función de cálculo',
+			'weight' => 'Peso',
 		);
 	}
 

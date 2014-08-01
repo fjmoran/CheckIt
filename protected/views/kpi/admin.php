@@ -78,7 +78,7 @@ $this->widget('CTreeView',array(
 ));
 ?>
 
-<?php /* $this->widget('zii.widgets.grid.CGridView', array(
+<?php  $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kpi-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
@@ -134,4 +134,4 @@ $this->widget('CTreeView',array(
 		//'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
 		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
 	),
-))*/; ?>
+)); ?>
