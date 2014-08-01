@@ -14,7 +14,6 @@
  * @property double $base_value
  * @property double $goal_value
  * @property string $unit
- * @property double $real_value
  * @property double $limit_red
  * @property double $limit_yellow
  * @property double $limit_green
@@ -26,6 +25,7 @@
  */
 class Kpi extends CActiveRecord
 {
+	public $parent_id;
 
 	private $frequencyOptions = array(0 => 'Diario', 1 => 'Semanal', 2 => 'Mensual', 3 => 'Trimestral', 4 => 'Semestral', 5 => 'Anual');
 	private $measuringOptions = array(0 => 'Más es mejor (creciente)', 1 => 'Menos es mejor (decreciente)', 2 => 'Más cerca es mejor');
@@ -47,16 +47,30 @@ class Kpi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight', 'required'),
-			array('subproject_id, department_id, update_frequency, review_frequency, measuring, function', 'numerical', 'integerOnly'=>true),
-			array('base_value, goal_value, parent_id, real_value', 'numerical'),
+			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, department_id, weight', 'required'),
+			array('subproject_id, department_id, update_frequency, review_frequency, measuring, function, parent_id', 'numerical', 'integerOnly'=>true),
+			array('base_value, goal_value', 'numerical'),
 			array('weight', 'numerical', 'min'=>1),
 			array('name', 'length', 'max'=>255),
 			array('calculation', 'length', 'max'=>1000),
 			array('unit', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight, measuring, parent_id, function', 'safe', 'on'=>'search'),
+			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, department_id, weight, measuring, function', 'safe', 'on'=>'search'),
+		);
+	}
+
+	public function behaviors()
+	{
+		return array(
+			'nestedSetBehavior'=>array(
+				'class'=>'ext.yiiext.behaviors.model.trees.NestedSetBehavior',
+				'hasManyRoots'=>true,
+				'leftAttribute'=>'lft',
+				'rightAttribute'=>'rgt',
+				'levelAttribute'=>'level',
+				'rootAttribute'=>'root',
+			),
 		);
 	}
 
@@ -70,7 +84,6 @@ class Kpi extends CActiveRecord
 		return array(
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
-			'parent' => array(self::BELONGS_TO, 'Kpi', 'parent_id'),
 		);
 	}
 
@@ -90,13 +103,12 @@ class Kpi extends CActiveRecord
 			'base_value' => 'Valor base',
 			'goal_value' => 'Valor meta',
 			'unit' => 'Unidad de medida',
-			'real_value' => 'Valor actual',
 			'department_id' => Yii::app()->utility->getOption('department_name').' responsable',
 			'measuring' => 'Forma de medición',
 			'calculation' => 'Forma de cálculo',
-			'parent_id' => 'Depende de otro KPI',
 			'function' => 'Función de cálculo',
 			'weight' => 'Peso',
+			'parent_id' => 'KPI del que depende',
 		);
 	}
 
@@ -128,7 +140,6 @@ class Kpi extends CActiveRecord
 		$criteria->compare('base_value',$this->base_value);
 		$criteria->compare('goal_value',$this->goal_value);
 		$criteria->compare('unit',$this->unit,true);
-		$criteria->compare('real_value',$this->real_value);
 		$criteria->compare('department_id',$this->department_id);
 		$criteria->compare('measuring',$this->measuring);
 		$criteria->compare('calculation',$this->calculation);
@@ -138,8 +149,56 @@ class Kpi extends CActiveRecord
 			'criteria'=>$criteria,
 			'pagination'=>array(
             	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
-              ),			
+            ),
+			/*'sort'=>array(
+				'defaultOrder'=>'lft ASC',
+			),*/		
 		));
+	}
+
+/*	private function queryTree($params='') {
+		$data = Kpi::model()->findAll(array('condition'=>'root IS NULL', 'order'=>'name ASC'));
+		foreach ($data as $d) {
+			$root_id = $d->id;
+			$children = Kpi::model()->findAll(array('condition'=>'root=?','order'=>'lft'),array($root_id));
+		}
+	}*/
+
+	public function searchTree() {
+
+		if ($this->subproject_id) {
+
+			//$rawData=$this->queryTree('AND subproject_id='.$this->subproject_id);
+//			Kpi::model()->findAll(array('condition'=>'root=?','order'=>'lft'),array($root_id));
+//			$rawData = Kpi::model()->findAll("subproject_id=".$this->subproject_id." ORDER BY lft ASC");
+
+			$rawData = Kpi::model()->findAll("subproject_id=".$this->subproject_id." ORDER BY root,lft ASC");
+
+			foreach ($rawData as $d) {
+				$pre = str_repeat('--', $d->level);
+				$d->name = $pre.$d->name;
+			}
+
+			$arrayDataProvider=new CArrayDataProvider($rawData, array(
+				'id'=>'id',
+				/*'sort'=>array(
+					'attributes'=>array(
+						'username', 'email',
+					),
+				),*/
+				'pagination'=>array(
+					'pageSize'=> Yii::app()->utility->getOption('table_rows'),
+				),
+			));
+
+			//echo "<pre>";
+			//print_r($arrayDataProvider);
+			//echo "</pre>";
+
+			return $arrayDataProvider;
+
+		}
+
 	}
 
 	/**

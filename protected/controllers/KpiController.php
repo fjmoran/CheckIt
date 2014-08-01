@@ -83,7 +83,9 @@ class KpiController extends Controller
 	public function actionAjaxKpi()
 	{
 		if ($_POST && $_POST['subproject_id']) {
-			$data=Kpi::model()->findAll('subproject_id=:subproject_id', 
+			$where = 'subproject_id=:subproject_id';
+			if ($_POST['this']) $where = $where." AND id!=".(int)$_POST['this'];
+			$data=Kpi::model()->findAll($where, 
 						  array(':subproject_id'=>(int) $_POST['subproject_id']));
 
 			$data=CHtml::listData($data,'id','name');
@@ -161,7 +163,18 @@ class KpiController extends Controller
 		if(isset($_POST['Kpi']))
 		{
 			$model->attributes=$_POST['Kpi'];
-			if($model->save())
+
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Kpi::model()->findByPk($model->parent_id);
+				$ret = $model->moveAsLast($root);
+				//if ($ret) $ret = $model->save();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 

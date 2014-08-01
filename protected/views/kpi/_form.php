@@ -9,8 +9,8 @@ Yii::app()->clientScript->registerScript('dependent_parent', "
 $('.select-level').change(function(){
 	var url = '".Yii::app()->createUrl('kpi/ajaxKpi')."';
 	if ($(this).val()) {
-		$.post(url, {subproject_id: $(this).val()}, function(data) {
-			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">No</option>').append(data);
+		$.post(url, {subproject_id: $(this).val(), this: '".$model->id."'}, function(data) {
+			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data);
 			//html(data);
 		});
 	}
@@ -53,13 +53,13 @@ $('.select-level').change(function(){
 		<div class="form-group">
 			<?php echo $form->labelEx($model,Yii::app()->utility->getOption('subproject_name')); ?>
 			<?php 
-			$data = Subproject::model()->findAll(array('order' => 'project_id,name'));
+			$data = Subproject::model()->with('project')->findAll(array('order' => 'project.name,t.name'));
 			$listdata;
 			foreach ($data as $sp) {
 				$listdata[$sp->id] = $sp->project->name . " > " . $sp->name;
 			} 
 			?>
-			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent')); ?>
+			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent', 'empty'=>'')); ?>
 			<?php echo $form->error($model,'subproject_id'); ?>
 		</div>
 
@@ -159,12 +159,6 @@ $('.select-level').change(function(){
 			<?php echo $form->labelEx($model,'unit'); ?>
 			<?php echo $form->textField($model,'unit',array('size'=>60,'maxlength'=>100,'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'unit'); ?>
-		</div>
-
-		<div class="form-group">
-			<?php echo $form->labelEx($model,'real_value'); ?>
-			<?php echo $form->textField($model,'real_value',array('class'=>'form-control')); ?>
-			<?php echo $form->error($model,'real_value'); ?>
 		</div>
 
 		<div class="form-group">

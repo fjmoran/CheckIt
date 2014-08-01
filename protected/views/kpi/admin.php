@@ -13,7 +13,7 @@ $this->menu=array(
 );
 
 Yii::app()->clientScript->registerScript('search', "
-function init_tree(filter) {
+/*function init_tree(filter) {
 	$('#treeviewkpi').empty();
 	$('#treeviewkpi').treeview({
 		url: '".Yii::app()->createUrl('kpi/ajaxFillTree')."',
@@ -24,10 +24,13 @@ function init_tree(filter) {
 			type: 'post'
 		},
 	});
-}
+}*/
 $('.select-level').change(function(){
 	if ($(this).val()) {
-		init_tree($(this).val());
+//		init_tree($(this).val());
+		$('#kpi-grid').yiiGridView('update', {
+			data: $('.search-form form').serialize()
+		});		
 	}
 });
 ", CClientScript::POS_LOAD);
@@ -58,12 +61,12 @@ $('.select-level').change(function(){
 <?php */ ?>
 
 <?php
-$this->widget('CTreeView',array(
+//$this->widget('CTreeView',array(
 		//'url'=>array('ajaxFillTree'),
-		'htmlOptions'=>array(
-			'id'=>'treeviewkpi',
-			'class'=>'treeview-gray',
-		),
+//		'htmlOptions'=>array(
+//			'id'=>'treeviewkpi',
+//			'class'=>'treeview-gray',
+//		),
 		/*'ajax'=>array(
 			'data'=>array(
 				'subproject_id'=>$subproject_id,
@@ -75,12 +78,12 @@ $this->widget('CTreeView',array(
 					'id'=>'treeview-categ',
                 'class'=>'treeview-red',//there are some classes that ready to use
         ),*/
-));
+//));
 ?>
 
 <?php  $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kpi-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchTree(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
 	'cssFile'=>false,
