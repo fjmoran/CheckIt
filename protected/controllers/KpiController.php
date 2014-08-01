@@ -41,7 +41,7 @@ class KpiController extends Controller
 		);
 	}
 
-	public function actionAjaxFillTree() {
+	/*public function actionAjaxFillTree() {
         // accept only AJAX request (comment this when debugging)
         if (!Yii::app()->request->isAjaxRequest) {
             exit();
@@ -63,7 +63,7 @@ class KpiController extends Controller
             . "GROUP BY m1.id ORDER BY m1.name ASC"
         )->queryAll();
 
-/*        $treedata=array();
+        $treedata=array();
 		foreach($children as $child){
 			$options=array('href'=>'#','id'=>$child['id'],'class'=>'treenode');
 			$nodeText = CHtml::openTag('a', $options);
@@ -71,14 +71,14 @@ class KpiController extends Controller
 			$nodeText.= CHtml::closeTag('a')."\n";
 			$child['text'] = $nodeText;
 			$treedata[]=$child;
-		}*/
+		}
 
         echo str_replace(
             '"hasChildren":"0"',
             '"hasChildren":false',
             CTreeView::saveDataAsJson($children)
         );		
-	}
+	}*/
 
 	public function actionAjaxKpi()
 	{
@@ -182,6 +182,7 @@ class KpiController extends Controller
 			else {
 				$root = Kpi::model()->findByPk($model->parent_id);
 				$ret = $model->moveAsLast($root);
+				$ret = $model->saveNode();
 				//if ($ret) $ret = $model->save();
 			}
 			//if($model->save())

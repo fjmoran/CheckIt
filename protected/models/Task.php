@@ -15,6 +15,7 @@
  */
 class Task extends CActiveRecord
 {
+	public $parent_id;
 
 	private $statusOptions = array('0' => 'Abierta', '1' => 'Terminada');
 
@@ -35,11 +36,60 @@ class Task extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, subproject_id, start_date, due_date', 'required'),
-			array('subproject_id, status, department_id', 'numerical', 'integerOnly'=>true),
+			array('subproject_id, status, department_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
+			array('due_date','compare','compareAttribute'=>'start_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
+			array('start_date','parentMinDate'),
+			array('due_date','parentMaxDate'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, subproject_id, start_date, due_date, status, department_id', 'safe', 'on'=>'search'),
+		);
+	}
+
+	public function parentMinDate($elem) {
+		//obtenemos el padre
+		$parent=$this->parent()->find();
+		if ($parent) {
+			if ($this->$elem < $parent->start_date) {
+				$this->addError($elem, "La fecha inicio debe ser mayor o igual a '{$parent->start_date}' (fecha inicio de padre) .");
+				return false;				
+			}
+			if ($this->$elem > $parent->due_date) {
+				$this->addError($elem, "La fecha inicio debe ser menor o igual a '{$parent->due_date}' (fecha término de padre) .");
+				return false;				
+			}
+		}
+		return true;
+	}
+
+	public function parentMaxDate($elem) {
+		//obtenemos el padre
+		$parent=$this->parent()->find();
+		if ($parent) {
+			if ($this->$elem > $parent->due_date) {
+				$this->addError($elem, "La fecha término debe ser menor o igual a '{$parent->due_date}' (fecha término de padre) .");
+				return false;				
+			}
+			if ($this->$elem < $parent->start_date) {
+				$this->addError($elem, "La fecha término debe ser mayor o igual a '{$parent->start_date}' (fecha inicio de padre) .");
+				return false;				
+			}
+		}
+		return true;
+	}
+
+	public function behaviors()
+	{
+		return array(
+			'nestedSetBehavior'=>array(
+				'class'=>'ext.yiiext.behaviors.model.trees.NestedSetBehavior',
+				'hasManyRoots'=>true,
+				'leftAttribute'=>'lft',
+				'rightAttribute'=>'rgt',
+				'levelAttribute'=>'level',
+				'rootAttribute'=>'root',
+			),
 		);
 	}
 
@@ -68,6 +118,7 @@ class Task extends CActiveRecord
 			'start_date' => 'Fecha de Inicio',
 			'due_date' => 'Fecha de Término',
 			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
+			'parent_id' => Yii::app()->utility->getOption('task_name').' que depende',
 		);
 	}
 
@@ -102,6 +153,37 @@ class Task extends CActiveRecord
             	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
               ),			
 		));
+	}
+
+	public function searchTree() {
+
+		if ($this->subproject_id) {
+
+			$rawData = Task::model()->findAll("subproject_id=".$this->subproject_id." ORDER BY root,lft ASC");
+
+			foreach ($rawData as $d) {
+				$pre = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $d->level-1);
+				if ($d->level%2==0) $pre .= '<i style="font-size: 8px;" class="fa fa-circle-o"></i>&nbsp; ';
+				else $pre .= '<i style="font-size: 8px;" class="fa fa-circle"></i>&nbsp; ';
+				$d->name = $pre.$d->name;
+			}
+
+			$arrayDataProvider=new CArrayDataProvider($rawData, array(
+				'id'=>'id',
+				/*'sort'=>array(
+					'attributes'=>array(
+						'username', 'email',
+					),
+				),*/
+				'pagination'=>array(
+					'pageSize'=> Yii::app()->utility->getOption('table_rows'),
+				),
+			));
+
+			return $arrayDataProvider;
+
+		}
+
 	}
 
 	/**

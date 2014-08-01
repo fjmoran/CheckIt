@@ -6,6 +6,33 @@
 if ($model->start_date=='') $model->start_date=date('Y-m-d');
 ?>
 
+<?php
+Yii::app()->clientScript->registerScript('dependent_parent', "
+$('.select-level').change(function(){
+	var url = '".Yii::app()->createUrl('task/ajaxTask')."';
+	if ($(this).val()) {
+		$.post(url, {subproject_id: $(this).val(), this: '".$model->id."'}, function(data) {
+			$('#Task_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data);
+			//html(data);
+		});
+	}
+});
+", CClientScript::POS_LOAD);
+
+if ($model->subproject_id) {
+	$parent_id = '';
+	$parent = $model->parent()->find();
+	if ($parent) $parent_id = $parent->id;
+	Yii::app()->clientScript->registerScript('dependent_parent_init', "
+		var url = '".Yii::app()->createUrl('task/ajaxTask')."';
+		$.post(url, {subproject_id: ".$model->subproject_id.", this: '".$model->id."'}, function(data) {
+			$('#Task_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data).val(".$parent_id.");
+			//html(data);
+		});
+	", CClientScript::POS_LOAD);
+}
+?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -41,8 +68,14 @@ if ($model->start_date=='') $model->start_date=date('Y-m-d');
 				$listdata[$sp->id] = $sp->project->name . " > " . $sp->name;
 			} 
 			?>
-			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent')); ?>
+			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent', 'empty'=>'')); ?>
 			<?php echo $form->error($model,'subproject_id'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'parent_id'); ?>
+			<?php echo $form->dropDownList($model,'parent_id', array(), array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'parent_id'); ?>
 		</div>
 
 		<div class="form-group">

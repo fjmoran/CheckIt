@@ -18,10 +18,13 @@ $('.select-level').change(function(){
 ", CClientScript::POS_LOAD);
 
 if ($model->subproject_id) {
+	$parent_id = '';
+	$parent = $model->parent()->find();
+	if ($parent) $parent_id = $parent->id;
 	Yii::app()->clientScript->registerScript('dependent_parent_init', "
 		var url = '".Yii::app()->createUrl('kpi/ajaxKpi')."';
 		$.post(url, {subproject_id: ".$model->subproject_id.", this: '".$model->id."'}, function(data) {
-			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data).val(".$model->parent()->find()->id.");
+			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data).val(".$parent_id.");
 			//html(data);
 		});
 	", CClientScript::POS_LOAD);

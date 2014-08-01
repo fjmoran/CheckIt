@@ -51,13 +51,61 @@ class Kpi extends CActiveRecord
 			array('subproject_id, department_id, update_frequency, review_frequency, measuring, function, parent_id', 'numerical', 'integerOnly'=>true),
 			array('base_value, goal_value', 'numerical'),
 			array('weight', 'numerical', 'min'=>1),
+			array('goal_date','compare','compareAttribute'=>'base_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
+			array('base_date','parentMinDate'),
+			array('goal_date','parentMaxDate'),
 			array('name', 'length', 'max'=>255),
 			array('calculation', 'length', 'max'=>1000),
 			array('unit', 'length', 'max'=>100),
+			array('measuring', 'calculationValid'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, department_id, weight, measuring, function', 'safe', 'on'=>'search'),
 		);
+	}
+
+	public function parentMinDate($elem) {
+		//obtenemos el padre
+		$parent=$this->parent()->find();
+		if ($parent) {
+			if ($this->$elem < $parent->base_date) {
+				$this->addError($elem, "La fecha base debe ser mayor o igual a '{$parent->base_date}' (fecha base de kpi padre) .");
+				return false;				
+			}
+			if ($this->$elem > $parent->goal_date) {
+				$this->addError($elem, "La fecha base debe ser menor o igual a '{$parent->goal_date}' (fecha meta de kpi padre) .");
+				return false;				
+			}
+		}
+		return true;
+	}
+
+	public function parentMaxDate($elem) {
+		//obtenemos el padre
+		$parent=$this->parent()->find();
+		if ($parent) {
+			if ($this->$elem > $parent->goal_date) {
+				$this->addError($elem, "La fecha meta debe ser menor o igual a '{$parent->goal_date}' (fecha meta de kpi padre) .");
+				return false;				
+			}
+			if ($this->$elem < $parent->base_date) {
+				$this->addError($elem, "La fecha meta debe ser mayor o igual a '{$parent->base_date}' (fecha base de kpi padre) .");
+				return false;				
+			}
+		}
+		return true;
+	}
+
+	public function calculationValid($elem) {
+		if ($this->$elem == 0 && $this->base_value > $this->goal_value) {
+			$this->addError($elem, "El valor meta debe ser mayor al valor base, si la forma de medición es creciente.");
+			return false;
+		}
+		if ($this->$elem == 1 && $this->base_value < $this->goal_value) {
+			$this->addError($elem, "El valor meta debe ser mejor al valor base, si la forma de medición es 'decreciente'.");
+			return false;
+		}
+		return true;
 	}
 
 	public function behaviors()

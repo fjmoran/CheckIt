@@ -28,7 +28,7 @@ class TaskController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('view','create','update','admin','delete'),
+				'actions'=>array('view','create','update','admin','delete','ajaxTask'),
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
@@ -39,6 +39,23 @@ class TaskController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionAjaxTask()
+	{
+		if ($_POST && $_POST['subproject_id']) {
+			$where = 'subproject_id=:subproject_id';
+			if ($_POST['this']) $where = $where." AND id!=".(int)$_POST['this'];
+			$data=Task::model()->findAll($where, 
+						  array(':subproject_id'=>(int) $_POST['subproject_id']));
+
+			$data=CHtml::listData($data,'id','name');
+			foreach($data as $value=>$name)
+			{
+				echo CHtml::tag('option',
+						   array('value'=>$value),CHtml::encode($name),true);
+			}			
+		}
 	}
 
 	public function actionChangeStatus($id) {
@@ -93,7 +110,18 @@ class TaskController extends Controller
 		if(isset($_POST['Task']))
 		{
 			$model->attributes=$_POST['Task'];
-			if($model->save())
+
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Task::model()->findByPk($model->parent_id);
+				$ret = $model->appendTo($root);
+				//if ($ret) $ret = $model->save();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 
@@ -117,7 +145,19 @@ class TaskController extends Controller
 		if(isset($_POST['Task']))
 		{
 			$model->attributes=$_POST['Task'];
-			if($model->save())
+
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Task::model()->findByPk($model->parent_id);
+				$ret = $model->moveAsLast($root);
+				$ret = $model->saveNode();
+				//if ($ret) $ret = $model->save();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 

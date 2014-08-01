@@ -52,7 +52,7 @@ $('.select-level').change(function(){
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'task-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchTree(),
 	//'filter'=>$model,
 	'itemsCssClass' => 'table table-condensed table-hover table-striped',
 	'cssFile'=>false,
@@ -61,6 +61,7 @@ $('.select-level').change(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 38%;'),			
 			'header'=> 'Nombre',
+			'type'=>'html',
 			'name'=> 'name',
 		),
 /*		array(
