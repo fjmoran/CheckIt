@@ -92,6 +92,7 @@ $('.select-level').change(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 50%;'),
 			'header'=>'KPI',
+			'type'=>'html',
 			'name'=>'name',
 		),
 		array(

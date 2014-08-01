@@ -16,6 +16,16 @@ $('.select-level').change(function(){
 	}
 });
 ", CClientScript::POS_LOAD);
+
+if ($model->subproject_id) {
+	Yii::app()->clientScript->registerScript('dependent_parent_init', "
+		var url = '".Yii::app()->createUrl('kpi/ajaxKpi')."';
+		$.post(url, {subproject_id: ".$model->subproject_id.", this: '".$model->id."'}, function(data) {
+			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">Ninguno</option>').append(data).val(".$model->parent()->find()->id.");
+			//html(data);
+		});
+	", CClientScript::POS_LOAD);
+}
 ?>
 
 <div class="form">
@@ -78,7 +88,7 @@ $('.select-level').change(function(){
 				</div>
 				<div class="form-group">
 					<?php echo $form->labelEx($model,'calculation'); ?>
-					<?php echo $form->textArea($model,'calculation',array('size'=>60,'maxlength'=>1000,'class'=>'form-control')); ?>
+					<?php echo $form->textArea($model,'calculation',array('rows'=>3,'size'=>60,'maxlength'=>1000,'class'=>'form-control')); ?>
 					<?php echo $form->error($model,'calculation'); ?>
 				</div>
 				<div class="form-group">

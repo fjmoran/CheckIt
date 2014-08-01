@@ -139,7 +139,18 @@ class KpiController extends Controller
 		if(isset($_POST['Kpi']))
 		{
 			$model->attributes=$_POST['Kpi'];
-			if($model->save())
+
+			$ret = false;
+			if (!$model->parent_id) {
+				$ret = $model->saveNode();
+			}
+			else {
+				$root = Kpi::model()->findByPk($model->parent_id);
+				$ret = $model->appendTo($root);
+				//if ($ret) $ret = $model->save();
+			}
+			//if($model->save())
+			if ($ret)
 				$this->redirect(array('admin'));
 		}
 

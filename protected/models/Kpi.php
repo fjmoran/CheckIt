@@ -151,31 +151,21 @@ class Kpi extends CActiveRecord
             	'pageSize'=> Yii::app()->utility->getOption('table_rows'),
             ),
 			/*'sort'=>array(
-				'defaultOrder'=>'lft ASC',
+				'defaultOrder'=>'root ASC,lft ASC',
 			),*/		
 		));
 	}
-
-/*	private function queryTree($params='') {
-		$data = Kpi::model()->findAll(array('condition'=>'root IS NULL', 'order'=>'name ASC'));
-		foreach ($data as $d) {
-			$root_id = $d->id;
-			$children = Kpi::model()->findAll(array('condition'=>'root=?','order'=>'lft'),array($root_id));
-		}
-	}*/
 
 	public function searchTree() {
 
 		if ($this->subproject_id) {
 
-			//$rawData=$this->queryTree('AND subproject_id='.$this->subproject_id);
-//			Kpi::model()->findAll(array('condition'=>'root=?','order'=>'lft'),array($root_id));
-//			$rawData = Kpi::model()->findAll("subproject_id=".$this->subproject_id." ORDER BY lft ASC");
-
 			$rawData = Kpi::model()->findAll("subproject_id=".$this->subproject_id." ORDER BY root,lft ASC");
 
 			foreach ($rawData as $d) {
-				$pre = str_repeat('--', $d->level);
+				$pre = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $d->level-1);
+				if ($d->level%2==0) $pre .= '<i style="font-size: 8px;" class="fa fa-circle-o"></i>&nbsp; ';
+				else $pre .= '<i style="font-size: 8px;" class="fa fa-circle"></i>&nbsp; ';
 				$d->name = $pre.$d->name;
 			}
 
@@ -190,10 +180,6 @@ class Kpi extends CActiveRecord
 					'pageSize'=> Yii::app()->utility->getOption('table_rows'),
 				),
 			));
-
-			//echo "<pre>";
-			//print_r($arrayDataProvider);
-			//echo "</pre>";
 
 			return $arrayDataProvider;
 
