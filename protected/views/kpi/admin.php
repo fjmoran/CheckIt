@@ -13,11 +13,21 @@ $this->menu=array(
 );
 
 Yii::app()->clientScript->registerScript('search', "
+function init_tree(filter) {
+	$('#treeviewkpi').empty();
+	$('#treeviewkpi').treeview({
+		url: '".Yii::app()->createUrl('kpi/ajaxFillTree')."',
+		ajax: {
+			data: {
+				'subproject_id': filter,
+			},
+			type: 'post'
+		},
+	});
+}
 $('.select-level').change(function(){
 	if ($(this).val()) {
-		$('#kpi-grid').yiiGridView('update', {
-			data: $('.search-form form').serialize()
-		});
+		init_tree($(this).val());
 	}
 });
 ", CClientScript::POS_LOAD);
@@ -47,7 +57,28 @@ $('.select-level').change(function(){
 </div><!-- search-form -->
 <?php */ ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php
+$this->widget('CTreeView',array(
+		//'url'=>array('ajaxFillTree'),
+		'htmlOptions'=>array(
+			'id'=>'treeviewkpi',
+			'class'=>'treeview-gray',
+		),
+		/*'ajax'=>array(
+			'data'=>array(
+				'subproject_id'=>$subproject_id,
+			),
+			'type'=>'post',
+		),*/
+        /*'data'=>$model->search(),
+        'htmlOptions'=>array(
+					'id'=>'treeview-categ',
+                'class'=>'treeview-red',//there are some classes that ready to use
+        ),*/
+));
+?>
+
+<?php /* $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kpi-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
@@ -60,11 +91,6 @@ $('.select-level').change(function(){
 			'header'=>'KPI',
 			'name'=>'name',
 		),
-		/*array(
-			'htmlOptions' => array('style' => 'width: 34%;'),
-			'header'=>Yii::app()->utility->getOption('subproject_name'),
-			'name'=>'subproject.name',
-		),*/
 		array(
 			'htmlOptions' => array('style' => 'width: 28%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
@@ -108,4 +134,4 @@ $('.select-level').change(function(){
 		//'prevPageLabel' => '<i class="icon-chevron-left"><</i>',
 		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
 	),
-)); ?>
+))*/; ?>

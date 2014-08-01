@@ -29,6 +29,7 @@ class Kpi extends CActiveRecord
 
 	private $frequencyOptions = array(0 => 'Diario', 1 => 'Semanal', 2 => 'Mensual', 3 => 'Trimestral', 4 => 'Semestral', 5 => 'Anual');
 	private $measuringOptions = array(0 => 'Más es mejor (creciente)', 1 => 'Menos es mejor (decreciente)', 2 => 'Más cerca es mejor');
+	private $functionOptions = array(0 => 'Promedio', 1 => 'Suma');
 
 	/**
 	 * @return string the associated database table name
@@ -46,16 +47,16 @@ class Kpi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, real_value, department_id', 'required'),
-			array('subproject_id, department_id, update_frequency, review_frequency, measuring', 'numerical', 'integerOnly'=>true),
-			array('base_value, goal_value, real_value', 'numerical'),
-			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1),
+			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight', 'required'),
+			array('subproject_id, department_id, update_frequency, review_frequency, measuring, function', 'numerical', 'integerOnly'=>true),
+			array('base_value, goal_value, parent_id, real_value', 'numerical'),
+			array('weight', 'numerical', 'min'=>1),
 			array('name', 'length', 'max'=>255),
 			array('calculation', 'length', 'max'=>1000),
 			array('unit', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight, measuring', 'safe', 'on'=>'search'),
+			array('id, name, calculation, subproject_id, update_frequency, review_frequency, base_date, goal_date, base_value, goal_value, unit, real_value, department_id, weight, measuring, parent_id, function', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +70,7 @@ class Kpi extends CActiveRecord
 		return array(
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
+			'parent' => array(self::BELONGS_TO, 'Kpi', 'parent_id'),
 		);
 	}
 
@@ -89,12 +91,11 @@ class Kpi extends CActiveRecord
 			'goal_value' => 'Valor meta',
 			'unit' => 'Unidad de medida',
 			'real_value' => 'Valor actual',
-			'limit_red' => 'Límite rojo',
-			'limit_yellow' => 'Límite amarillo',
-			'limit_green' => 'Límite verde',
 			'department_id' => Yii::app()->utility->getOption('department_name').' responsable',
 			'measuring' => 'Forma de medición',
 			'calculation' => 'Forma de cálculo',
+			'parent_id' => 'Depende de otro KPI',
+			'function' => 'Función de cálculo',
 		);
 	}
 
@@ -130,6 +131,7 @@ class Kpi extends CActiveRecord
 		$criteria->compare('department_id',$this->department_id);
 		$criteria->compare('measuring',$this->measuring);
 		$criteria->compare('calculation',$this->calculation);
+		$criteria->compare('function',$this->function);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -172,6 +174,14 @@ class Kpi extends CActiveRecord
 
 	public function getMeasuringText() {
 		return $this->measuringOptions[$this->measuring];
+	}
+
+	public function getFunctionOptions() {
+		return $this->functionOptions;
+	}
+
+	public function getFunctionText() {
+		return $this->functionOptions[$this->function];
 	}
 
 }

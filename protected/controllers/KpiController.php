@@ -28,7 +28,7 @@ class KpiController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('create','update','admin','delete'),
+				'actions'=>array('create','update','admin','delete','ajaxKpi','ajaxFillTree'),
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
@@ -39,6 +39,49 @@ class KpiController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionAjaxFillTree() {
+        // accept only AJAX request (comment this when debugging)
+        if (!Yii::app()->request->isAjaxRequest) {
+            exit();
+        }
+        
+        if (!isset($_POST['subproject_id'])) exit;
+
+        // parse the user input
+        $parent_id = "NULL";
+        if (isset($_POST['root']) && $_POST['root'] !== 'source') {
+            $parent_id = (int) $_POST['root'];
+        }
+        // read the data (this could be in a model)
+        $children = Yii::app()->db->createCommand(
+            "SELECT m1.id, m1.name AS text, m2.id IS NOT NULL AS hasChildren "
+            . "FROM kpi AS m1 LEFT JOIN kpi AS m2 ON m1.id=m2.parent_id "
+            . "WHERE m1.parent_id <=> $parent_id "
+            . "AND m1.subproject_id = ".$_POST['subproject_id']." "
+            . "GROUP BY m1.id ORDER BY m1.name ASC"
+        )->queryAll();
+        echo str_replace(
+            '"hasChildren":"0"',
+            '"hasChildren":false',
+            CTreeView::saveDataAsJson($children)
+        );		
+	}
+
+	public function actionAjaxKpi()
+	{
+		if ($_POST && $_POST['subproject_id']) {
+			$data=Kpi::model()->findAll('subproject_id=:subproject_id', 
+						  array(':subproject_id'=>(int) $_POST['subproject_id']));
+
+			$data=CHtml::listData($data,'id','name');
+			foreach($data as $value=>$name)
+			{
+				echo CHtml::tag('option',
+						   array('value'=>$value),CHtml::encode($name),true);
+			}			
+		}
 	}
 
 	public function actionChangeStatus($id) {
@@ -158,6 +201,7 @@ class KpiController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
+			'subproject_id'=>$subprojects[0]->id,
 		));
 	}
 

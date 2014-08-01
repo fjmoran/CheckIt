@@ -4,6 +4,20 @@
 /* @var $form CActiveForm */
 ?>
 
+<?php
+Yii::app()->clientScript->registerScript('dependent_parent', "
+$('.select-level').change(function(){
+	var url = '".Yii::app()->createUrl('kpi/ajaxKpi')."';
+	if ($(this).val()) {
+		$.post(url, {subproject_id: $(this).val()}, function(data) {
+			$('#Kpi_parent_id').find('option').remove().end().append('<option value=\"\">No</option>').append(data);
+			//html(data);
+		});
+	}
+});
+", CClientScript::POS_LOAD);
+?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -47,6 +61,12 @@
 			?>
 			<?php echo $form->dropDownList($model,'subproject_id', $listdata, array('class'=>'form-control dependent')); ?>
 			<?php echo $form->error($model,'subproject_id'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'parent_id'); ?>
+			<?php echo $form->dropDownList($model,'parent_id', array(), array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'parent_id'); ?>
 		</div>
 
 		<div class="form-group">
@@ -119,6 +139,12 @@
 			<?php echo $form->labelEx($model,'measuring'); ?>
 			<?php echo $form->dropDownList($model,'measuring', $model->measuringOptions, array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'measuring'); ?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'function'); ?>
+			<?php echo $form->dropDownList($model,'function', $model->functionOptions, array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'function'); ?>
 		</div>
 	</div>
 
