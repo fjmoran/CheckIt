@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
     ),
 )); ?>
         <h2 class="form-signin-heading">Recuperar contraseña</h2>
-        <p>Instrucciones para recuperar su password seran enviadas a su correo.</p> 
+        <p>Instrucciones para recuperar su contraseña serán enviadas a su correo electrónico.</p> 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'username'); ?>
 		<?php echo $form->textField($model,'username', array('class'=>'form-control')); ?>
