@@ -62,6 +62,17 @@ class KpiController extends Controller
             . "AND m1.subproject_id = ".$_POST['subproject_id']." "
             . "GROUP BY m1.id ORDER BY m1.name ASC"
         )->queryAll();
+
+/*        $treedata=array();
+		foreach($children as $child){
+			$options=array('href'=>'#','id'=>$child['id'],'class'=>'treenode');
+			$nodeText = CHtml::openTag('a', $options);
+			$nodeText.= $child['text'];
+			$nodeText.= CHtml::closeTag('a')."\n";
+			$child['text'] = $nodeText;
+			$treedata[]=$child;
+		}*/
+
         echo str_replace(
             '"hasChildren":"0"',
             '"hasChildren":false',
