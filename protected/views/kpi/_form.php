@@ -29,6 +29,15 @@ if ($model->subproject_id) {
 		});
 	", CClientScript::POS_LOAD);
 }
+
+Yii::app()->clientScript->registerScript('department_or_user', "
+$('#Kpi_department_id').change(function(){
+	$('#Kpi_user_id').val('');
+});
+$('#Kpi_user_id').change(function(){
+	$('#Kpi_department_id').val('');
+});
+", CClientScript::POS_LOAD);
 ?>
 
 <div class="form">
@@ -86,8 +95,14 @@ if ($model->subproject_id) {
 				<div class="form-group">
 					<?php echo $form->labelEx($model,'department_id'); ?>
 					<?php $data = Department::model()->findAll(array('order' => 'name')); ?>
-					<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
+					<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'nameWithManager'), array('empty'=>'', 'class'=>'form-control')); ?>
 					<?php echo $form->error($model,'department_id'); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $form->labelEx($model,'user_id'); ?>
+					<?php $data = User::model()->findAll(array('order' => 'firstname ASC, lastname ASC')); ?>
+					<?php echo $form->dropDownList($model,'user_id', CHtml::listData($data, 'id', 'fullName'), array('empty'=>'', 'class'=>'form-control')); ?>
+					<?php echo $form->error($model,'user_id'); ?>
 				</div>
 				<div class="form-group">
 					<?php echo $form->labelEx($model,'calculation'); ?>

@@ -97,8 +97,9 @@ $('.select-level').change(function(){
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 28%;'),			
-			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
-			'name'=>'department.name',
+			'header'=>'Responsable',
+			'name'=>'inCharge',
+			//'name'=>'department.nameWithManager',
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 15%;'),			

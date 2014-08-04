@@ -233,4 +233,10 @@ class Department extends CActiveRecord
 		return $projects;
 	}
 
+	public function getNameWithManager() {
+		$ret = $this->name;
+		if ($this->managerName) $ret.=' ('.$this->managerName.')';
+		return $ret;
+	}
+
 }

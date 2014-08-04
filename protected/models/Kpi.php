@@ -47,8 +47,8 @@ class Kpi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, department_id, weight', 'required'),
-			array('subproject_id, department_id, update_frequency, review_frequency, measuring, function, parent_id', 'numerical', 'integerOnly'=>true),
+			array('name, calculation, subproject_id, base_date, goal_date, base_value, goal_value, unit, weight', 'required'),
+			array('subproject_id, department_id, user_id, update_frequency, review_frequency, measuring, function, parent_id', 'numerical', 'integerOnly'=>true),
 			array('base_value, goal_value', 'numerical'),
 			array('weight', 'numerical', 'min'=>1),
 			array('goal_date','compare','compareAttribute'=>'base_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
@@ -132,6 +132,7 @@ class Kpi extends CActiveRecord
 		return array(
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -157,6 +158,7 @@ class Kpi extends CActiveRecord
 			'function' => 'Función de cálculo',
 			'weight' => 'Peso',
 			'parent_id' => 'KPI del que depende',
+			'user_id' => 'Usuario responsable',
 		);
 	}
 
@@ -276,6 +278,15 @@ class Kpi extends CActiveRecord
 
 	public function getFunctionText() {
 		return $this->functionOptions[$this->function];
+	}
+
+	public function getInCharge() {
+		$ret = '';
+		if ($this->department) 
+			$ret = $this->department->nameWithManager;
+		else if ($this->user)
+			$ret = $this->user->fullname;
+		return $ret;
 	}
 
 }

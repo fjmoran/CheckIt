@@ -129,10 +129,22 @@ class ProjectController extends Controller
 	 */
 	public function actionMyProjects()
 	{
-		$department_id = User::model()->find('id='.Yii::app()->user->id)->department_id;
-		if ($department_id) {
+		$user = User::model()->find('id='.Yii::app()->user->id);
+		$department_id = $user->department_id;
 
-			$department = Department::model()->find('id='.$department_id);
+		//si es jefe, le muestro los KPI del departamento
+
+		if ($department_id && $user->manager == 1) {
+
+			//obtenemos los kpi del proyecto
+			$kpi = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
+
+			//obtenemos las tareas del proyecto
+			$task = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
+
+
+
+			$department = $user->department;
 
 			$projects = $department->getDeepProjects();
 

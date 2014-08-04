@@ -148,7 +148,7 @@ class TaskController extends Controller
 
 			$ret = false;
 			if (!$model->parent_id) {
-				$ret = $model->moveAsRoot();
+				if (!$model->isRoot()) $ret = $model->moveAsRoot();
 				$ret = $model->saveNode();
 			}
 			else {

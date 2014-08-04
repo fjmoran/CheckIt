@@ -36,7 +36,7 @@ class Task extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, subproject_id, start_date, due_date', 'required'),
-			array('subproject_id, status, department_id, parent_id', 'numerical', 'integerOnly'=>true),
+			array('subproject_id, status, department_id, user_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('due_date','compare','compareAttribute'=>'start_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
 			array('start_date','parentMinDate'),
@@ -103,6 +103,7 @@ class Task extends CActiveRecord
 		return array(
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -119,6 +120,7 @@ class Task extends CActiveRecord
 			'due_date' => 'Fecha de Término',
 			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
 			'parent_id' => Yii::app()->utility->getOption('task_name').' que depende',
+			'user_id' => 'Usuario Responsable',
 		);
 	}
 
@@ -203,6 +205,15 @@ class Task extends CActiveRecord
 
 	public function getStatusText() {
 		return $this->statusOptions[$this->status];
+	}
+
+	public function getInCharge() {
+		$ret = '';
+		if ($this->department) 
+			$ret = $this->department->nameWithManager;
+		else if ($this->user)
+			$ret = $this->user->fullname;
+		return $ret;
 	}
 
 }
