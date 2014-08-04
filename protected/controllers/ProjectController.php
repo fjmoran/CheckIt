@@ -136,10 +136,10 @@ class ProjectController extends Controller
 
 		if ($department_id && $user->manager == 1) {
 
-			//obtenemos los kpi del proyecto
+			//obtenemos los kpi del departamento
 			$kpi = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
 
-			//obtenemos las tareas del proyecto
+			//obtenemos las tareas del departamento
 			$task = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
 
 

@@ -97,7 +97,7 @@ $('#Task_user_id').change(function(){
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'user_id'); ?>
 			<?php $data = User::model()->findAll(array('order' => 'firstname ASC, lastname ASC')); ?>
-			<?php echo $form->dropDownList($model,'user_id', CHtml::listData($data, 'id', 'fullName'), array('empty'=>'', 'class'=>'form-control')); ?>
+			<?php echo $form->dropDownList($model,'user_id', CHtml::listData($data, 'id', 'fullName', 'department.name'), array('empty'=>'', 'class'=>'form-control')); ?>
 			<?php echo $form->error($model,'user_id'); ?>
 		</div>
 
