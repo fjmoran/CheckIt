@@ -43,6 +43,12 @@
 			<?php echo $form->dropDownList($model,'department_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'department_id'); ?>
 		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'weight'); ?>
+			<?php echo $form->textField($model,'weight',array('class'=>'form-control')); ?>
+			<?php echo $form->error($model,'weight'); ?>
+		</div>
 	</div>
 </div>
 

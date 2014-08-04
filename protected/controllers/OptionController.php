@@ -28,7 +28,7 @@ class OptionController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('view','update','admin'),
+				'actions'=>array('view','update','admin','strategyData'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -68,6 +68,28 @@ class OptionController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+		));
+	}
+
+	public function actionStrategyData() {
+
+		$data = array();
+		$data['mision'] = Yii::app()->utility->getOption('mision');
+		$data['vision'] = Yii::app()->utility->getOption('vision');
+
+		if(isset($_POST['Option']))
+		{
+			$data = $_POST['Option'];
+
+			foreach ($data as $key => $value) {
+				Yii::app()->utility->setOption($key, $value);
+			}
+
+			Yii::app()->user->setFlash('success', "Datos guardados con éxito!");
+		}
+
+		$this->render('strategydata',array(
+			'data'=>$data,
 		));
 	}
 
@@ -127,6 +149,9 @@ class OptionController extends Controller
 	{
 		$model=new Option('search');
 		$model->unsetAttributes();  // clear any default values
+
+		$model->filter=0;
+
 		if(isset($_GET['Option']))
 			$model->attributes=$_GET['Option'];
 

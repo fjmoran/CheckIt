@@ -32,7 +32,7 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'department';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='option') {
+		if ($controller=='option' && $action!='strategydata') {
 			if ($level == 1) return 'admin';
 			if ($level == 2) return 'option';
 			if ($level == 3) return ' - Administración';
@@ -102,6 +102,11 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return '';
 			if ($level == 3) return ' - Administración';
 		}
+		if ($controller=='option' && $action=='strategydata') {
+			if ($level == 1) return 'admin';
+			if ($level == 2) return 'strategydata';
+			if ($level == 3) return ' - Administración';
+		}
 
 
 
@@ -126,6 +131,15 @@ class Utility extends CApplicationComponent
 	public function getOption($name) {
 		$data = Option::model()->find("name='$name'");
 		if ($data) return $data->value;
+		return null;
+	}
+
+	public function setOption($name, $value) {
+		$data = Option::model()->find("name='$name'");
+		if ($data) {
+			$data->value = $value;
+			return $data->save();
+		}
 		return null;
 	}
 

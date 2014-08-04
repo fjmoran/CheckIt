@@ -36,10 +36,11 @@ class Subproject extends CActiveRecord
 		return array(
 			array('name, project_id', 'required'),
 			array('project_id, department_id', 'numerical', 'integerOnly'=>true),
+			array('weight', 'numerical', 'min'=>1),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, project_id, department_id', 'safe', 'on'=>'search'),
+			array('id, name, project_id, department_id, weight', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +69,7 @@ class Subproject extends CActiveRecord
 			'name' => 'Nombre',
 			'project_id' => Yii::app()->utility->getOption('project_name'),
 			'department_id' => Yii::app()->utility->getOption('department_name').' Responsable',
+			'weight' => 'Peso',
 		);
 	}
 
@@ -93,6 +95,7 @@ class Subproject extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('project_id',$this->project_id);
 		$criteria->compare('department_id',$this->department_id);
+		$criteria->compare('weight',$this->weight);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

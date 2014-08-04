@@ -11,11 +11,12 @@
 
 					<?php
 						$subproject_ids = join(',',$data->subprojectIDs);
+						$red_kpis = $yellow_kpis = 0;
 						if ($subproject_ids) {
 							$expired_tasks = count(Task::model()->findAll('subproject_id IN ('.$subproject_ids.') AND status=0 AND due_date<NOW()'));
 							$next_tasks = count(Task::model()->findAll('subproject_id IN ('.$subproject_ids.') AND status=0 AND due_date<NOW() + INTERVAL 15 DAY AND due_date>=NOW()'));
-							$red_kpis = count(Kpi::model()->findAll('subproject_id IN ('.$subproject_ids.') AND ((base_value<goal_value AND real_value<limit_yellow) OR (base_value>goal_value AND real_value>limit_yellow))'));
-							$yellow_kpis = count(Kpi::model()->findAll('subproject_id IN ('.$subproject_ids.') AND ((base_value<goal_value AND real_value<limit_green AND real_value>=limit_yellow) OR (base_value>goal_value AND real_value>limit_green AND real_value<=limit_yellow))'));
+//							$red_kpis = count(Kpi::model()->findAll('subproject_id IN ('.$subproject_ids.') AND ((base_value<goal_value AND real_value<limit_yellow) OR (base_value>goal_value AND real_value>limit_yellow))'));
+//							$yellow_kpis = count(Kpi::model()->findAll('subproject_id IN ('.$subproject_ids.') AND ((base_value<goal_value AND real_value<limit_green AND real_value>=limit_yellow) OR (base_value>goal_value AND real_value>limit_green AND real_value<=limit_yellow))'));
 					?>
 
 				</a>

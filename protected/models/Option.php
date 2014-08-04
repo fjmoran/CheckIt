@@ -27,7 +27,8 @@ class Option extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, value', 'required'),
-			array('name, value', 'length', 'max'=>255),
+			array('name', 'length', 'max'=>255),
+			array('value', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, value', 'safe', 'on'=>'search'),
@@ -78,6 +79,7 @@ class Option extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('value',$this->value,true);
+		$criteria->compare('filter',$this->filter);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

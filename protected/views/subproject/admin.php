@@ -49,20 +49,21 @@ $('#Subproject_project_id').change(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 47%;'),			
+			'htmlOptions' => array('style' => 'width: 42%;'),			
 			'header'=>'Nombre',
 			'name'=>'name',
 		),		
 		array(
-			'htmlOptions' => array('style' => 'width: 23%;'),			
+			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
 			'name'=>'department.name',
 		),
 		array(
-			'htmlOptions' => array('style' => 'width: 23%;'),			
+			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
 			'name'=>'department.managerName',
 		),
+		'weight',
 		array(
 			'header'=> 'Opciones',
 			'class'=>'CButtonColumn',
