@@ -37,25 +37,25 @@ $this->menu=array(
 		<?php endif;?>
 
 			<?php 
-			$j=0;
+			/*$j=0;
 			foreach ($kpis[$subproject->id] as $kpi):
 				$j++;
 				foreach ($kpi->children()->findAll() as $subkpi):
 					$j++;
 				endforeach;		
-			endforeach; ?>
+			endforeach;*/ ?>
 
 		<tr>
-			<td rowspan="<?php echo $j+1;?>"><?php echo $subproject->name?></td>
+			<td rowspan="<?php echo count($kpis[$subproject->id])+1;?>"><?php echo $subproject->name?></td>
 		</tr>
 
 			<?php foreach ($kpis[$subproject->id] as $kpi):?>
 
 				<?php display_kpi($kpi);?>
 
-				<?php foreach ($kpi->children()->findAll() as $subkpi):?>
+				<?php /*foreach ($kpi->children()->findAll() as $subkpi):?>
 					<?php display_kpi($subkpi, 1); ?>
-				<?php endforeach;?>
+				<?php endforeach;*/?>
 		
 			<?php endforeach; ?>
 
@@ -90,50 +90,9 @@ $this->menu=array(
 		</tr>
 
 			<?php foreach ($tasks[$subproject->id] as $task):?>
-			<tr>
-				<td>
-					<?php //if ($task->department_id == $department_id): ?>
-						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
-						<?php echo $task->name; ?>
-						</a>
-					<?php /*else: ?>
-						<?php echo $task->name; ?>
-					<?php endif; */?>
-				</td>
-				<td><?php echo $task->start_date; ?></td>
-				<td>
-					<?php echo $task->due_date; ?>
-				</td>
-				<td>
-					<?php echo $task->inCharge; ?>
-				</td>				
-				<td>
-					<?php 
-						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
-						$datediff = (int)$interval->format("%R%a");
-					?>
-					<?php if ($task->status == 1):?>
-						<span class="label label-success">Terminado</span>
-					<?php elseif ($datediff < 0): ?>
-						<span class="label label-danger">Vencido</span>
-					<?php elseif ($datediff < 16): ?>
-						<span class="label label-warning">Vence en <?=$datediff?> días</span>
-					<?php else: ?>
-						<span class="label label-info">Pendiente</span>
-					<?php endif; ?>
-				</td>
-				<td style="text-align: center;">
-					<?php //if ($task->department_id == $department_id): ?>
-					<a title="Editar" data-toggle="modal" data-target="#myModal" 
-					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
-						<i class="fa fa-edit grid-icon"></i>
-					</a>
-					<?php /*else: ?>
-						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
-					<?php endif; */?>
-				</td>
-			</tr>	
+
+				<?php display_task($task);?>
+
 			<?php endforeach; ?>
 
 		<?php endif;?>
@@ -207,6 +166,53 @@ $this->menu=array(
 				</td>
 			</tr>		
 <?php }?>
+
+<?php function display_task($task) {?>
+			<tr>
+				<td>
+					<?php //if ($task->department_id == $department_id): ?>
+						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
+						<?php echo $task->name; ?>
+						</a>
+					<?php /*else: ?>
+						<?php echo $task->name; ?>
+					<?php endif; */?>
+				</td>
+				<td><?php echo $task->start_date; ?></td>
+				<td>
+					<?php echo $task->due_date; ?>
+				</td>
+				<td>
+					<?php echo $task->inCharge; ?>
+				</td>				
+				<td>
+					<?php 
+						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
+						$datediff = (int)$interval->format("%R%a");
+					?>
+					<?php if ($task->status == 1):?>
+						<span class="label label-success">Terminado</span>
+					<?php elseif ($datediff < 0): ?>
+						<span class="label label-danger">Vencido</span>
+					<?php elseif ($datediff < 16): ?>
+						<span class="label label-warning">Vence en <?=$datediff?> días</span>
+					<?php else: ?>
+						<span class="label label-info">Pendiente</span>
+					<?php endif; ?>
+				</td>
+				<td style="text-align: center;">
+					<?php //if ($task->department_id == $department_id): ?>
+					<a title="Editar" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+						<i class="fa fa-edit grid-icon"></i>
+					</a>
+					<?php /*else: ?>
+						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
+					<?php endif; */?>
+				</td>
+			</tr>	
+<?php } ?>
 
 <?php /*if ($dataProvider): ?>
 <div class="panel-group" id="accordion">

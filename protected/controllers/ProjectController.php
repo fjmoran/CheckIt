@@ -32,13 +32,22 @@ class ProjectController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('myprojects'),
+				'actions'=>array('myprojects','strategyData'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionStrategyData() {
+		$mision = Option::model()->findByAttributes(array('name'=>'mision'))->value;
+		$vision = Option::model()->findByAttributes(array('name'=>'vision'))->value;
+		$this->render('strategydata',array(
+			'mision'=>$mision,
+			'vision'=>$vision,
+		));
 	}
 
 	/**
