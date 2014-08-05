@@ -55,16 +55,16 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 30%;'),			
+			'htmlOptions' => array('style' => 'width: 50%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name'),
 			'type'=>'html',
 			'name'=>'name',
 		),		
 		array(
-			'htmlOptions' => array('style' => 'width: 25%;'),				
+			'htmlOptions' => array('style' => 'width: 30%;'),				
 			'header'=>Yii::app()->utility->getOption('manager_name'),
 			'type'=>'html',
-			'value'=>'$data->managerName?$data->managerName:"<span class=\"label label-danger\">Sin Administrador!</span>"',
+			'value'=>'$data->managerName?$data->managerName:"<span class=\"label label-danger\">Sin Administrador</span>"',
 		),
 		array(
 			'htmlOptions' => array('style' => 'width: 13%;'),				
