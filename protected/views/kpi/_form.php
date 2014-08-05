@@ -109,16 +109,6 @@ $('#Kpi_user_id').change(function(){
 					<?php echo $form->textArea($model,'calculation',array('rows'=>3,'size'=>60,'maxlength'=>1000,'class'=>'form-control')); ?>
 					<?php echo $form->error($model,'calculation'); ?>
 				</div>
-				<div class="form-group">
-					<?php echo $form->labelEx($model,'update_frequency'); ?>
-					<?php echo $form->dropDownList($model,'update_frequency', $model->updateFrequencyOptions, array('class'=>'form-control')); ?>
-					<?php echo $form->error($model,'update_frequency'); ?>
-				</div>
-				<div class="form-group">
-					<?php echo $form->labelEx($model,'review_frequency'); ?>
-					<?php echo $form->dropDownList($model,'review_frequency', $model->reviewFrequencyOptions, array('class'=>'form-control')); ?>
-					<?php echo $form->error($model,'review_frequency'); ?>
-				</div>
 			</div>			  	
 		</div>	
   	</div>
@@ -171,6 +161,11 @@ $('#Kpi_user_id').change(function(){
 					<?php echo $form->error($model,'goal_date'); ?>
 				</div>
 				<div class="form-group">
+					<?php echo $form->labelEx($model,'update_frequency'); ?>
+					<?php echo $form->dropDownList($model,'update_frequency', $model->updateFrequencyOptions, array('class'=>'form-control')); ?>
+					<?php echo $form->error($model,'update_frequency'); ?>
+				</div>				
+				<div class="form-group">
 					<?php echo $form->labelEx($model,'measuring'); ?>
 					<?php echo $form->dropDownList($model,'measuring', $model->measuringOptions, array('class'=>'form-control')); ?>
 					<?php echo $form->error($model,'measuring'); ?>
@@ -192,6 +187,11 @@ $('#Kpi_user_id').change(function(){
 					<?php echo $form->textField($model,'goal_value',array('class'=>'form-control')); ?>
 					<?php echo $form->error($model,'goal_value'); ?>
 				</div>
+				<div class="form-group">
+					<?php echo $form->labelEx($model,'review_frequency'); ?>
+					<?php echo $form->dropDownList($model,'review_frequency', $model->reviewFrequencyOptions, array('class'=>'form-control')); ?>
+					<?php echo $form->error($model,'review_frequency'); ?>
+				</div>				
 				<div class="form-group">
 					<?php echo $form->labelEx($model,'function'); ?>
 					<?php echo $form->dropDownList($model,'function', $model->functionOptions, array('class'=>'form-control')); ?>
