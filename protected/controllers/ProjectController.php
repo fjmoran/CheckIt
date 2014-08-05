@@ -140,6 +140,8 @@ class ProjectController extends Controller
 			$kpi_d = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
 			$task_d = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
 
+			//si soy jefe, puedo ver un nivel más abajo
+
 		}
 
 		//obtengo los KPI y Tareas del usuario
@@ -152,26 +154,28 @@ class ProjectController extends Controller
 		$kpi_arr = array();
 		$task_arr = array();
 		
-		$oe = array();
-		foreach ($kpi_d as $k) $oe[] = $k->subproject_id;
-		foreach ($task_d as $k) $oe[] = $k->subproject_id;
-		foreach ($kpi as $k) $oe[] = $k->subproject_id;
-		foreach ($task as $k) $oe[] = $k->subproject_id;
-		$oe = array_unique($oe);
+		$oe_kpi = $oe_task = array();
+		foreach ($kpi_d as $k) $oe_kpi[] = $k->subproject_id;
+		foreach ($task_d as $k) $oe_task[] = $k->subproject_id;
+		foreach ($kpi as $k) $oe_kpi[] = $k->subproject_id;
+		foreach ($task as $k) $oe_task[] = $k->subproject_id;
+		$oe_kpi = array_unique($oe_kpi);
+		$oe_task = array_unique($oe_task);
 
 		foreach ($kpi_d as $k) $kpi_arr[$k->subproject_id][] = $k;
 		foreach ($task_d as $k) $task_arr[$k->subproject_id][] = $k;
 		foreach ($kpi as $k) $kpi_arr[$k->subproject_id][] = $k;
 		foreach ($task as $k) $task_arr[$k->subproject_id][] = $k;
 
-		$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',$oe).')');
+		$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',array_merge($oe_kpi, $oe_task)).')');
 
 		$this->render('myprojects',array(
 			//'kpi_d'=>$kpi_d_arr,
 			//'task_d'=>$task_d_arr,
 			'kpis'=>$kpi_arr,
 			'tasks'=>$task_arr,
-			'subproject_ids'=>$oe,
+			'subproject_kpi_ids'=>$oe_kpi,
+			'subproject_task_ids'=>$oe_task,
 			'projects'=>$projects,
 		));
 	}

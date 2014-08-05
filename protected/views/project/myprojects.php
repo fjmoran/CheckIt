@@ -15,38 +15,150 @@ $this->menu=array(
 <h2>Mis <?php echo Yii::app()->utility->getOption('projects_name'); ?></h2>
 
 <?php foreach ($projects as $project):?>
-<h3 style="padding-bottom:20px;"><?php echo Yii::app()->utility->getOption('project_name').": ".$project->name; ?></h3>
+<h3 style="padding-bottom:20px;"><?php echo $project->name; ?></h3>
 
-	<table class="table table-condensed">
+	<!--  KPI  -->
+
+	<?php $i=0; foreach($project->subprojects as $subproject): ?>
+
+		<?php if (in_array($subproject->id, $subproject_kpi_ids)): ?>
+
+		<?php if ($i==0):?>
+			<table class="table table-condensed">
+				<tr>
+					<th style="width: 24%;">Objetivo Estratégico</th>
+					<th style="width: 12%;">KPI</th>
+					<th style="width: 12%;">Meta</th>
+					<th style="width: 12%;">Actual</th>
+					<th style="width: 15%;">Responsable</th>
+					<th style="width: 15%;">Estado</th>
+					<th style="width: 10%; text-align: center;">Acciones</th>
+				</tr>
+		<?php endif;?>
+
+			<?php 
+			$j=0;
+			foreach ($kpis[$subproject->id] as $kpi):
+				$j++;
+				foreach ($kpi->children()->findAll() as $subkpi):
+					$j++;
+				endforeach;		
+			endforeach; ?>
+
 		<tr>
-			<th style="width: 24%;">Objetivo Estratégico</th>
-			<th style="width: 12%;">KPI</th>
-			<th style="width: 12%;">Meta</th>
-			<th style="width: 12%;">Actual</th>
-			<th style="width: 15%;">Responsable</th>
-			<th style="width: 15%;">Estado</th>
-			<th style="width: 10%; text-align: center;">Acciones</th>
+			<td rowspan="<?php echo $j+1;?>"><?php echo $subproject->name?></td>
 		</tr>
 
-	<?php foreach($project->subprojects AS $subproject): ?>
-		<?php if (in_array($subproject->id, $subproject_ids)) :?>
+			<?php foreach ($kpis[$subproject->id] as $kpi):?>
+
+				<?php display_kpi($kpi);?>
+
+				<?php foreach ($kpi->children()->findAll() as $subkpi):?>
+					<?php display_kpi($subkpi, 1); ?>
+				<?php endforeach;?>
+		
+			<?php endforeach; ?>
+
+		<?php endif;?>
+	<?php $i++; endforeach;?>
+
+	<?php if ($i>0):?>
+		</table>
+	<?php endif;?>
+
+	<!--  TASKS  -->
+
+	<?php $i=0; foreach($project->subprojects as $subproject): ?>
+
+		<?php if (in_array($subproject->id, $subproject_task_ids)): ?>
+
+		<?php if ($i==0):?>
+			<table class="table table-condensed">
+				<tr>
+					<th style="width: 24%;">Objetivo Estratégico</th>
+					<th style="width: 32%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+					<th style="width: 14%;">Fecha inicio</th>
+					<th style="width: 14%;">Fecha término</th>
+					<th style="width: 15%;">Responsable</th>				
+					<th style="width: 15%;">Estado</th>
+					<th style="width: 10%; text-align: center;">Acciones</th>
+				</tr>
+		<?php endif;?>
 
 		<tr>
-			<td><?php echo $subproject->name?></td>
+			<td rowspan="<?php echo count($tasks[$subproject->id])+1;?>"><?php echo $subproject->name?></td>
+		</tr>
 
-			<?php foreach ($kpis[$subproject->id] as $kpi):?>
+			<?php foreach ($tasks[$subproject->id] as $task):?>
 			<tr>
 				<td>
-					<?php // if ($kpi->department_id == $department_id): ?>
+					<?php //if ($task->department_id == $department_id): ?>
+						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
+						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
+						<?php echo $task->name; ?>
+						</a>
+					<?php /*else: ?>
+						<?php echo $task->name; ?>
+					<?php endif; */?>
+				</td>
+				<td><?php echo $task->start_date; ?></td>
+				<td>
+					<?php echo $task->due_date; ?>
+				</td>
+				<td>
+					<?php echo $task->inCharge; ?>
+				</td>				
+				<td>
+					<?php 
+						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
+						$datediff = (int)$interval->format("%R%a");
+					?>
+					<?php if ($task->status == 1):?>
+						<span class="label label-success">Terminado</span>
+					<?php elseif ($datediff < 0): ?>
+						<span class="label label-danger">Vencido</span>
+					<?php elseif ($datediff < 16): ?>
+						<span class="label label-warning">Vence en <?=$datediff?> días</span>
+					<?php else: ?>
+						<span class="label label-info">Pendiente</span>
+					<?php endif; ?>
+				</td>
+				<td style="text-align: center;">
+					<?php //if ($task->department_id == $department_id): ?>
+					<a title="Editar" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+						<i class="fa fa-edit grid-icon"></i>
+					</a>
+					<?php /*else: ?>
+						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
+					<?php endif; */?>
+				</td>
+			</tr>	
+			<?php endforeach; ?>
+
+		<?php endif;?>
+	<?php $i++; endforeach;?>
+
+	<?php if ($i>0):?>
+		</table>
+	<?php endif;?>
+
+<? endforeach;?>
+
+
+<?php function display_kpi($kpi, $ischild=0) {?>
+			<tr <?php if ($ischild) echo "class='info'"; ?>>
+				<td>
+					<?php if (!$ischild): ?>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
 						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
 						<?php echo $kpi->name; ?>
 						</a>
-					<?php //else: ?>
-						<?php //echo $kpi->name; ?>
-					<?php //endif; ?>
+					<?php else: ?>
+						<?php echo $kpi->name; ?>
+					<?php endif; ?>
 				</td>
-				<td><?php echo $kpi->base_value; ?></td>
+				<!--td><?php echo $kpi->base_value; ?></td-->
 				<td>
 					<?php echo $kpi->goal_value; ?>
 				</td>
@@ -54,7 +166,7 @@ $this->menu=array(
 					<?php //echo $kpi->real_value; ?>
 				</td>
 				<td>
-					<?php if ($kpi->department) echo $kpi->department->name; ?>
+					<?php echo $kpi->inCharge; ?>
 				</td>				
 				<td>
 					<?php if ($kpi->base_value < $kpi->goal_value) {
@@ -84,26 +196,17 @@ $this->menu=array(
 					} ?>
 				</td>
 				<td style="text-align: center;">
-					<?php //if ($kpi->department_id == $department_id): ?>
+					<?php if (!$ischild): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 					</a>
-					<?php /*else: ?>
+					<?php else: ?>
 						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
-					<?php endif; */?>
+					<?php endif; ?>
 				</td>
-			</tr>				
-			<?php endforeach; ?>
-
-		<tr>
-
-		<?php endif;?>
-	<?php endforeach;?>
-
-	</table>
-
-<? endforeach;?>
+			</tr>		
+<?php }?>
 
 <?php /*if ($dataProvider): ?>
 <div class="panel-group" id="accordion">
