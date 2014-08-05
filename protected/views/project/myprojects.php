@@ -24,15 +24,15 @@ $this->menu=array(
 		<?php if (in_array($subproject->id, $subproject_kpi_ids)): ?>
 
 		<?php if ($i==0):?>
-			<table class="table table-condensed">
+			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 24%;">Objetivo Estratégico</th>
-					<th style="width: 12%;">KPI</th>
-					<th style="width: 12%;">Meta</th>
-					<th style="width: 12%;">Actual</th>
-					<th style="width: 15%;">Responsable</th>
-					<th style="width: 15%;">Estado</th>
-					<th style="width: 10%; text-align: center;">Acciones</th>
+					<th style="width: 26%;">Objetivo Estratégico</th>
+					<th style="width: 26%;">KPI</th>
+					<th style="width: 8%;">Meta</th>
+					<th style="width: 8%;">Actual</th>
+					<th style="width: 17%;">Responsable</th>
+					<th style="width: 8%;">Estado</th>
+					<th style="width: 7%; text-align: center;">Acciones</th>
 				</tr>
 		<?php endif;?>
 
@@ -73,15 +73,15 @@ $this->menu=array(
 		<?php if (in_array($subproject->id, $subproject_task_ids)): ?>
 
 		<?php if ($i==0):?>
-			<table class="table table-condensed">
+			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 24%;">Objetivo Estratégico</th>
-					<th style="width: 32%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
-					<th style="width: 14%;">Fecha inicio</th>
-					<th style="width: 14%;">Fecha término</th>
+					<th style="width: 23%;">Objetivo Estratégico</th>
+					<th style="width: 23%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+					<th style="width: 12%;">Fecha inicio</th>
+					<th style="width: 12%;">Fecha término</th>
 					<th style="width: 15%;">Responsable</th>				
-					<th style="width: 15%;">Estado</th>
-					<th style="width: 10%; text-align: center;">Acciones</th>
+					<th style="width: 8%;">Estado</th>
+					<th style="width: 7%; text-align: center;">Acciones</th>
 				</tr>
 		<?php endif;?>
 
