@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('myprojects','view'),
+				'actions'=>array('myprojects'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
@@ -132,39 +132,47 @@ class ProjectController extends Controller
 		$user = User::model()->find('id='.Yii::app()->user->id);
 		$department_id = $user->department_id;
 
-		//si es jefe, le muestro los KPI del departamento
+		//si es jefe, le muestro los KPI y Tareas del departamento
 
 		if ($department_id && $user->manager == 1) {
 
-			//obtenemos los kpi del departamento
-			$kpi = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
-
-			//obtenemos las tareas del departamento
-			$task = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
-
-
-
-			$department = $user->department;
-
-			$projects = $department->getDeepProjects();
-
-			if ($projects) {
-				$criteria = new CDbCriteria();
-				$criteria->addCondition("id IN ('".join("','",$projects)."')",'OR');
-				$criteria->order='name ASC';
-				$dataProvider=new CActiveDataProvider('Project', array('criteria'=>$criteria,));
-			}
-			else {
-				$dataProvider = null;
-			}
+			//obtenemos los kpi y tareas del departamento
+			$kpi_d = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
+			$task_d = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
 
 		}
-		else {
-			$dataProvider=null;
-		}
+
+		//obtengo los KPI y Tareas del usuario
+		$kpi = Kpi::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id));
+		$task = Task::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id));
+
+		//obtenemos los objetivos estrategicos
+		$kpi_d_arr = array();
+		$task_d_arr = array();
+		$kpi_arr = array();
+		$task_arr = array();
+		
+		$oe = array();
+		foreach ($kpi_d as $k) $oe[] = $k->subproject_id;
+		foreach ($task_d as $k) $oe[] = $k->subproject_id;
+		foreach ($kpi as $k) $oe[] = $k->subproject_id;
+		foreach ($task as $k) $oe[] = $k->subproject_id;
+		$oe = array_unique($oe);
+
+		foreach ($kpi_d as $k) $kpi_arr[$k->subproject_id][] = $k;
+		foreach ($task_d as $k) $task_arr[$k->subproject_id][] = $k;
+		foreach ($kpi as $k) $kpi_arr[$k->subproject_id][] = $k;
+		foreach ($task as $k) $task_arr[$k->subproject_id][] = $k;
+
+		$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',$oe).')');
 
 		$this->render('myprojects',array(
-			'dataProvider'=>$dataProvider,
+			//'kpi_d'=>$kpi_d_arr,
+			//'task_d'=>$task_d_arr,
+			'kpis'=>$kpi_arr,
+			'tasks'=>$task_arr,
+			'subproject_ids'=>$oe,
+			'projects'=>$projects,
 		));
 	}
 
