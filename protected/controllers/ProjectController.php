@@ -57,7 +57,7 @@ class ProjectController extends Controller
 				'order'=>'next_due_date DESC',
 			));
 			$task = Task::model()->findAllByAttributes(array(), array(
-				'condition' => 'user_id=:user_id OR department_id=:department_id',
+				'condition' => '(user_id=:user_id OR department_id=:department_id) AND status=0',
 				'params' => array('department_id'=>$department_id, 'user_id'=>Yii::app()->user->id), 
 				'order'=>'due_date DESC',
 			));

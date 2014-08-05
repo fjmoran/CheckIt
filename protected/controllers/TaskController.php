@@ -74,8 +74,8 @@ class TaskController extends Controller
 					break;
 			endswitch;
 
-			if ($model->save(array('status','end_date'))) {
-				$this->redirect(array('project/view','id'=>$model->subproject->project->id));
+			if ($model->saveNode(array('status','end_date'))) {
+				$this->redirect(array('project/todo'));
 			}
 		}
 
