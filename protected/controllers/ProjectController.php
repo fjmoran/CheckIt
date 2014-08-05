@@ -32,13 +32,55 @@ class ProjectController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('myprojects','strategyData'),
+				'actions'=>array('myprojects','strategyData','toDo'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionToDo() {
+
+		$user = User::model()->find('id='.Yii::app()->user->id);
+		$department_id = $user->department_id;
+
+		//si es jefe, le muestro los KPI y Tareas del departamento
+
+		if ($department_id && $user->manager == 1) {
+
+			//obtenemos los kpi y tareas del departamento y usuario
+			$kpi = Kpi::model()->findAllByAttributes(array(), array(
+				'condition' => 'user_id=:user_id OR department_id=:department_id',
+				'params' => array('department_id'=>$department_id, 'user_id'=>Yii::app()->user->id), 
+				'order'=>'next_due_date DESC',
+			));
+			$task = Task::model()->findAllByAttributes(array(), array(
+				'condition' => 'user_id=:user_id OR department_id=:department_id',
+				'params' => array('department_id'=>$department_id, 'user_id'=>Yii::app()->user->id), 
+				'order'=>'due_date DESC',
+			));
+
+		}
+		else {
+			$kpi = Kpi::model()->findAllByAttributes(array(), array(
+				'condition' => 'user_id=:user_id',
+				'params' => array('user_id'=>Yii::app()->user->id), 
+				'order'=>'next_due_date DESC',
+			));
+			$task = Task::model()->findAllByAttributes(array(), array(
+				'condition' => 'user_id=:user_id',
+				'params' => array('user_id'=>Yii::app()->user->id), 
+				'order'=>'due_date DESC',
+			));
+
+		}
+
+		$this->render('todo',array(
+			'kpis'=>$kpi,
+			'tasks'=>$task,
+		));		
 	}
 
 	public function actionStrategyData() {

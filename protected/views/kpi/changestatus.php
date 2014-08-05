@@ -22,29 +22,37 @@
 
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Modificar KPI</h4>
+				<h4 class="modal-title" id="myModalLabel">Ingresar KPI</h4>
 			</div>
 			<div class="modal-body">
 
 				<?php echo $form->errorSummary($model); ?>
 
-				<div class="row">	
-					<div class="col-md-6">
+				<div class="row">
 
+					<div class="col-md-6">
 						<p><strong>KPI:</strong> </p>
-
-						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> </p>
-
-						<p><strong>Valor actual (<?php echo $model->unit; ?>):</strong> </p>
-
 					</div>
 					<div class="col-md-6">
-						<p><?php echo $model->name; ?> </p>
-
-						<p><?php echo $model->subproject->name; ?> </p>
-
-						<p><?php echo $form->textField($model,'real_value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?> </p>
+						<p><?php echo $kpi->name; ?> </p>
 					</div>
+
+					<div class="col-md-6">
+						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> </p>
+					</div>
+					<div class="col-md-6">
+						<p><?php echo $kpi->subproject->name; ?> </p>
+					</div>
+
+					<div class="col-md-6">
+						<p><strong>Valor actual (<?php echo $kpi->unit; ?>):</strong> </p>
+					</div>
+					<div class="col-md-6">
+						<p><?php echo $form->textField($model,'value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?> </p>
+					</div>
+
+					</div>
+
 				</div>
 
 			</div>
@@ -55,3 +63,10 @@
 
 <?php $this->endWidget(); ?>
 
+<script>
+$(document).ready(function(){
+	$('#myModal').on('hidden.bs.modal', function () {
+		$(this).removeData();
+	});
+});
+</script>

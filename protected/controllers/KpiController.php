@@ -98,18 +98,22 @@ class KpiController extends Controller
 	}
 
 	public function actionChangeStatus($id) {
-		$model=$this->loadModel($id);
+		$kpi=$this->loadModel($id);
+		$model=new KpiData;
 
-		if(isset($_POST['Kpi']))
+		$model->kpi_id = $kpi->id;
+		$model->user_id = Yii::app()->user->id;
+
+		if(isset($_POST['KpiData']))
 		{
-			$model->real_value = $_POST['Kpi']['real_value'];
-			$model->modified_date = new CDbExpression("NOW()");
-			if ($model->save(array('real_value','modified_date'))) {
-				$this->redirect(array('project/view','id'=>$model->subproject->project->id));
+			$model->value = $_POST['KpiData']['value'];
+			if ($model->save()) {
+				$this->redirect(array('project/todo'));
 			}
 		}
 
 		$this->renderPartial('changestatus',array(
+			'kpi'=>$kpi,
 			'model'=>$model,
 		));
 	}
@@ -139,6 +143,8 @@ class KpiController extends Controller
 		if(isset($_POST['Kpi']))
 		{
 			$model->attributes=$_POST['Kpi'];
+
+			$model->calculateNextDueDate();
 
 			$ret = false;
 			if (!$model->parent_id) {
@@ -175,6 +181,8 @@ class KpiController extends Controller
 		{
 			$model->attributes=$_POST['Kpi'];
 
+			$model->calculateNextDueDate();
+
 			$ret = false;
 			if (!$model->parent_id) {
 				if (!$model->isRoot()) $ret = $model->moveAsRoot();
@@ -203,7 +211,7 @@ class KpiController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$this->loadModel($id)->deleteNode();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

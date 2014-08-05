@@ -108,14 +108,14 @@ $this->menu=array(
 <?php function display_kpi($kpi, $ischild=0) {?>
 			<tr <?php if ($ischild) echo "class='info'"; ?>>
 				<td>
-					<?php if (!$ischild): ?>
+					<?php /*if (!$ischild): ?>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
 						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
 						<?php echo $kpi->name; ?>
 						</a>
-					<?php else: ?>
+					<?php else:*/ ?>
 						<?php echo $kpi->name; ?>
-					<?php endif; ?>
+					<?php //endif; ?>
 				</td>
 				<!--td><?php echo $kpi->base_value; ?></td-->
 				<td>
@@ -155,14 +155,14 @@ $this->menu=array(
 					} ?>
 				</td>
 				<td style="text-align: center;">
-					<?php if (!$ischild): ?>
+					<?php /*if (!$ischild): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 					</a>
 					<?php else: ?>
 						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
-					<?php endif; ?>
+					<?php endif;*/ ?>
 				</td>
 			</tr>		
 <?php }?>
@@ -170,14 +170,14 @@ $this->menu=array(
 <?php function display_task($task) {?>
 			<tr>
 				<td>
-					<?php //if ($task->department_id == $department_id): ?>
+					<?php /*if ($task->department_id == $department_id): ?>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
 						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
 						<?php echo $task->name; ?>
 						</a>
-					<?php /*else: ?>
+					<?php else:*/ ?>
 						<?php echo $task->name; ?>
-					<?php endif; */?>
+					<?php //endif; ?>
 				</td>
 				<td><?php echo $task->start_date; ?></td>
 				<td>
@@ -202,12 +202,12 @@ $this->menu=array(
 					<?php endif; ?>
 				</td>
 				<td style="text-align: center;">
-					<?php //if ($task->department_id == $department_id): ?>
+					<?php /*if ($task->department_id == $department_id): ?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
 					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 					</a>
-					<?php /*else: ?>
+					<?php else: ?>
 						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
 					<?php endif; */?>
 				</td>

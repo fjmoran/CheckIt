@@ -49,6 +49,7 @@ if (Yii::app()->utility->isActiveMenu('strategy')) {
 		'items'=>array(
 			array('label'=>'<i class="fa fa-anchor fa-lg fa-fw"></i> Misión y Visión', 'url'=>array('/project/strategydata'), 'active'=>Yii::app()->utility->isActiveSubMenu('strategydata')),
 			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name').'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
+			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Por Hacer', 'url'=>array('/project/todo'), 'active'=>Yii::app()->utility->isActiveSubMenu('todo')),
 		),
 	)); 
 }?>

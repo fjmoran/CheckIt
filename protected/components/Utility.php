@@ -37,7 +37,7 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'option';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='project' && ($action!='myprojects' && $action!='view' && $action!='strategydata')) {
+		if ($controller=='project' && ($action!='myprojects' && $action!='view' && $action!='strategydata' && $action!='todo')) {
 			if ($level == 1) return 'admin';
 			if ($level == 2) return 'project';
 			if ($level == 3) return ' - Administración';
@@ -121,6 +121,12 @@ class Utility extends CApplicationComponent
 		if ($controller=='project' && ($action=='strategydata')) {
 			if ($level == 1) return 'strategy';
 			if ($level == 2) return 'strategydata';
+			if ($level == 3) return ' - Gestión Estratégica';
+		}
+
+		if ($controller=='project' && ($action=='todo')) {
+			if ($level == 1) return 'strategy';
+			if ($level == 2) return 'todo';
 			if ($level == 3) return ' - Gestión Estratégica';
 		}
 

@@ -289,4 +289,82 @@ class Kpi extends CActiveRecord
 		return $ret;
 	}
 
+	public function getPeriodStart() {
+		$date = $this->next_due_date;
+		switch ($this->update_frequency) {
+			case 0: //diario
+				return $date;
+				break;
+			case 1: //semanal
+				return date('Y-m-d', strtotime($date . " - 6 day"));
+				break;
+			case 2: //mensual
+				return date('Y-m-01', strtotime($date));
+				break;
+			case 3: //trimestral
+				$mn = date('n', strtotime($date));  // mes 
+				return date('Y-'.($mn-2).'-01', strtotime($date));
+				break;
+			case 4: //semestral
+				$mn = date('n', strtotime($date));  // mes 
+				return date('Y-'.($mn-5).'-01', strtotime($date));
+				break;
+			case 5: //anual
+				return date('Y-01-01', strtotime($date));
+				break;
+		}		
+	}
+
+	private function next_date($frequency, $date) {
+		$date = date('Y-m-d', strtotime($date . ' + 1 day'));
+		switch ($frequency) {
+			case 0: //diario
+				return $date;
+				break;
+			case 1: //semanal
+				$dw = date( "w", strtotime($date));
+				$dif = 7-$dw;
+				return date('Y-m-d', strtotime($date . " + $dif day"));
+				break;
+			case 2: //mensual
+				return date('Y-m-t', strtotime($date));
+				break;
+			case 3: //trimestral
+				$mn = date('n', strtotime($date))-1;  // mes desde 0 a 11
+				$dif = 2 - ($mn%3);
+				return date('Y-m-t', strtotime($date . " + $dif month"));
+				break;
+			case 4: //semestral
+				$mn = date('n', strtotime($date))-1;  // mes desde 0 a 11
+				$dif = 5 - ($mn%6);
+				return date('Y-m-t', strtotime($date . " + $dif month"));
+				break;
+			case 5: //anual
+				return date('Y-12-31', strtotime($date));
+				break;
+		}
+	}
+
+	public function calculateNextDueDate() {
+
+		//si no tiene datos guardados
+		$date = $this->base_date;
+
+		//si tiene
+		$data = KpiData::model()->findAllByAttributes(array(), array(
+			'condition'=>'kpi_id=:kpi_id',
+			'params'=>array('kpi_id'=>$this->id),
+			'order'=>'period_end DESC',
+			)
+		);
+
+		if ($data) {
+			$d = $data[0];
+			$date = $d->period_end;
+		}
+
+		$this->next_due_date = Kpi::model()->next_date($this->update_frequency, $date);
+
+	}
+
 }
