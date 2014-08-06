@@ -32,20 +32,23 @@ if (!$model->value && !$model->isNewRecord) {
 
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Ingresar KPI</h4>
+				<h4 class="modal-title" id="myModalLabel">KPI - <?php echo $kpi->name; ?></h4>
 			</div>
 			<div class="modal-body">
 
 				<?php echo $form->errorSummary($model); ?>
 
 				<div class="row">
-
 					<div class="col-md-4">
-						<p><strong>KPI</strong> </p>
+						<p><strong>Forma de Cálculo</strong> </p>
 					</div>
 					<div class="col-md-8">
-						<p><?php echo $kpi->name; ?> </p>
-					</div>
+						<div class="panel panel-default">
+						  <div class="panel-body">
+						    <?php echo $kpi->calculation; ?>
+						  </div>
+						</div>
+					</div>					
 
 					<div class="col-md-4">
 						<p><strong>Valor (<?php echo $kpi->unit; ?>) *</strong> </p>
@@ -56,17 +59,10 @@ if (!$model->value && !$model->isNewRecord) {
 					</div>
 
 					<div class="col-md-4">
-						<p><strong>Forma de Cálculo</strong> </p>
-					</div>
-					<div class="col-md-8">
-						<p><?php echo $kpi->calculation; ?></p>
-					</div>
-
-					<div class="col-md-4">
 						<p><strong>Comentarios</strong> </p>
 					</div>
 					<div class="col-md-8">
-						<p><?php echo $form->textArea($model,'comments',array('cols'=>6,'size'=>60,'maxlength'=>255,'class'=>'form-control')); ?></p>
+						<p><?php echo $form->textArea($model,'comments',array('rows'=>5,'size'=>60,'maxlength'=>255,'class'=>'form-control')); ?></p>
 					</div>
 
 				</div>
@@ -84,11 +80,11 @@ if (!$model->value && !$model->isNewRecord) {
 
 						<table class="table table-condensed" style="font-size:small;">
 							<tr>
-								<th style="width: 26%;">KPI</th>
-								<th style="width: 8%;">Último ingreso</th>
-								<th style="width: 10%;">Valor</th>
-								<th style="width: 15%;">Peso</th>
-								<th style="width: 15%;">Responsable</th>
+								<th style="width: 35%;">KPI</th>
+								<th style="width: 17%;">Último ingreso</th>
+								<th style="width: 12%;">Valor</th>
+								<th style="width: 12%;">Peso</th>
+								<th style="width: 24%;">Responsable</th>
 							</tr>
 
 					<?php foreach ($subkpi as $skpi): 
@@ -149,7 +145,7 @@ $("#KpiData_no_value").click(function () {
 	if ($("#KpiData_no_value").is(":checked")) {
 		$("#KpiData_value")
 			.attr("disabled", "disabled")
-			.css("background-color", "#aaa");
+			.css("background-color", "#ccc");
 		$("#referido").val("");
 	}
 	else {
