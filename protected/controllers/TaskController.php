@@ -58,7 +58,7 @@ class TaskController extends Controller
 		}
 	}
 
-	public function actionChangeStatus($id) {
+	public function actionChangeStatus($id, $page=0) {
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Task']))
@@ -77,7 +77,8 @@ class TaskController extends Controller
 			$model->comments = $_POST['Task']['comments'];
 
 			if ($model->saveNode(array('status','end_date','comments'))) {
-				$this->redirect(array('project/todo'));
+				if ($page==1) $this->redirect(array('project/completed'));
+				else $this->redirect(array('project/todo'));
 			}
 		}
 

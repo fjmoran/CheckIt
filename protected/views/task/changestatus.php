@@ -55,42 +55,34 @@
 				</div>
 
 				<?php 
+
+				$show_close = 1;
+
 				if ($model->status==0):
-					$subtask = $task->children()->findAll();
-					if ($subtask):
+					$subtasks = $model->children()->findAll();
+					if ($subtasks):
 				?>
 
 				<div class="row">
 					<div class="col-md-12">
 
-						<h4>KPI dependientes</h4>
+						<h4><?php echo Yii::app()->utility->getOption('tasks_name')?> dependientes</h4>
 
 						<table class="table table-condensed" style="font-size:small;">
 							<tr>
-								<th style="width: 26%;">KPI</th>
-								<th style="width: 8%;">Último ingreso</th>
-								<th style="width: 10%;">Valor</th>
-								<th style="width: 15%;">Peso</th>
+								<th style="width: 26%;">Nombre</th>
+								<th style="width: 8%;">Fecha término</th>
+								<th style="width: 10%;">Estado</th>
 								<th style="width: 15%;">Responsable</th>
 							</tr>
 
-					<?php foreach ($subkpi as $skpi): 
-						//obtenemos el ultimo dato
-						$kpidatas = $skpi->kpiDatas;
-						$date = '-';
-						$value = '-';
-						if ($kpidatas) {
-							$kpidata = $kpidatas[0];
-							$date = $kpidata->created;
-							$value = $kpidata->value;
-						}
-					?>
+					<?php foreach ($subtasks as $stask): ?>
+						<?php if ($stask->status==0) $show_close=0; ?>
 							<tr>
-								<td><?php echo $skpi->name; ?></td>
-								<td><?php echo $date; ?></td>
-								<td><?php echo $value; ?></td>
-								<td><?php echo $skpi->weight; ?></td>
-								<td><?php echo $skpi->inCharge; ?></td>
+								<td><?php echo $stask->name; ?></td>
+								<td><?php echo $stask->due_date; ?></td>
+								<td><?php echo $stask->statusText; ?></td>
+								<td><?php echo $stask->inCharge; ?></td>
 							</tr>
 					<? endforeach; ?>
 
@@ -102,12 +94,24 @@
 				<?php endif; ?>
 			<?php endif; ?>
 
+			<?php
+
+			$show_open = 1;
+			if ($model->status==1) {
+				if ($model->root && $model->root!=$model->id) {
+					$p = Task::model()->findByPk($model->root);
+					if ($p->status==1) $show_open=0;
+				}
+			}
+
+			?>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<?php if ($model->status==0):?>
+				<?php if ($model->status==0 && $show_close):?>
 					<?php echo CHtml::submitButton('Terminar', array('class'=>'btn btn-success')); ?>
-				<?php else: ?>
+				<?php elseif ($model->status==1 && $show_open): ?>
 					<?php echo CHtml::submitButton('Abrir', array('class'=>'btn btn-danger')); ?>
 				<?php endif; ?>
 			</div>

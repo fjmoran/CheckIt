@@ -62,7 +62,7 @@
 				<tr>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">					
+						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id, 'page'=>'1')); ?>">					
 						<?php echo $task->name; ?>
 						</a>
 					</td>
@@ -72,7 +72,7 @@
 					<td><?php echo $task->due_date?></td>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" 
-						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
+						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id, 'page'=>'1')); ?>">
 						<i class="fa fa-edit grid-icon"></i>
 						</a>
 					</td>

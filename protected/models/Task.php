@@ -39,9 +39,9 @@ class Task extends CActiveRecord
 			array('subproject_id, status, department_id, user_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('comments', 'length', 'max'=>1000),
-			array('due_date','compare','compareAttribute'=>'start_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
 			array('start_date','parentMinDate'),
 			array('due_date','parentMaxDate'),
+			array('due_date','compare','compareAttribute'=>'start_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, subproject_id, start_date, due_date, status, department_id', 'safe', 'on'=>'search'),
