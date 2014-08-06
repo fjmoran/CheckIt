@@ -196,4 +196,46 @@ class Utility extends CApplicationComponent
 
 	}
 
+	public function getAlertToDo() {
+
+		$alert_tasks = 0;
+		$user = User::model()->findByPk(Yii::app()->user->id);
+
+		$rows = Yii::app()->db->createCommand()
+			->select('count(*) as q')
+			->from('task t')
+			->where('t.status=0 AND t.due_date<NOW() AND t.user_id=:user_id', array(':user_id'=>Yii::app()->user->id))
+			//->where('t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$department_id))
+			//->order('j.jobno,j.projid')
+			->queryRow();
+		$alert_tasks = $alert_tasks + $rows['q'];
+
+		$rows = Yii::app()->db->createCommand()
+			->select('count(*) as q')
+			->from('kpi t')
+			->where('t.next_due_date<NOW() AND t.user_id=:user_id', array(':user_id'=>Yii::app()->user->id))
+			->queryRow();
+		$alert_tasks = $alert_tasks + $rows['q'];
+
+		if ($user->manager==1) {
+			$department_id = $user->department_id;
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('task t')
+				->where('t.status=0 AND t.due_date<NOW() AND t.department_id=:department_id', array(':department_id'=>$department_id))
+				->queryRow();
+			$alert_tasks = $alert_tasks + $rows['q'];
+
+			$rows = Yii::app()->db->createCommand()
+				->select('count(*) as q')
+				->from('kpi t')
+				->where('t.next_due_date<NOW() AND t.department_id=:department_id', array(':department_id'=>$department_id))
+				->queryRow();
+			$alert_tasks = $alert_tasks + $rows['q'];
+		}
+
+		if ($alert_tasks==0) $alert_tasks='';
+		return $alert_tasks;
+	}
+
 }

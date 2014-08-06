@@ -38,8 +38,7 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 <?php 
 if (Yii::app()->utility->isActiveMenu('strategy')) {
 
-	$alert_tasks = User::model()->find('id='.Yii::app()->user->id)->alertTasks;
-	if ($alert_tasks==0) $alert_tasks='';
+	$alert_tasks = Yii::app()->utility->getAlertToDo();
 
 	$this->widget('zii.widgets.CMenu',array(
 		'htmlOptions'=>array(
@@ -48,8 +47,8 @@ if (Yii::app()->utility->isActiveMenu('strategy')) {
 		'encodeLabel'=>false,
 		'items'=>array(
 			array('label'=>'<i class="fa fa-anchor fa-lg fa-fw"></i> Misión y Visión', 'url'=>array('/project/strategydata'), 'active'=>Yii::app()->utility->isActiveSubMenu('strategydata')),
-			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name').'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
-			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Por Hacer', 'url'=>array('/project/todo'), 'active'=>Yii::app()->utility->isActiveSubMenu('todo')),
+			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
+			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Por Hacer '.'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/todo'), 'active'=>Yii::app()->utility->isActiveSubMenu('todo')),
 			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Terminados', 'url'=>array('/project/completed'), 'active'=>Yii::app()->utility->isActiveSubMenu('completed')),
 		),
 	)); 

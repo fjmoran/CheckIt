@@ -248,24 +248,6 @@ class User extends CActiveRecord
 		}
 	}
 
-	public function getAlertTasks() {
-		$alert_tasks = 0;
-		$department_id = User::model()->find('id='.$this->id)->department_id;
-		if ($department_id) {
-			$rows = Yii::app()->db->createCommand()
-				->select('count(*) as q')
-				->from('task t')
-				->join('subproject s','t.subproject_id = s.id')
-				->join('project p', 's.project_id = p.id')
-				->where('t.department_id=:id AND t.status=0 AND t.due_date<NOW() + INTERVAL 15 DAY', array(':id'=>$department_id))
-				//->order('j.jobno,j.projid')
-				->queryRow();
-			$alert_tasks = $rows['q'];
-			if ($alert_tasks==0) $alert_tasks='';
-		}
-		return $alert_tasks;
-	}
-
 	public function getFullName() {
 		return $this->firstname . " " . $this->lastname;
 	}

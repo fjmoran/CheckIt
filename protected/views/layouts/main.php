@@ -96,8 +96,9 @@
 				<div class="collapse navbar-collapse pull-right">
 		<?php 
 
-		$alert_tasks = Yii::app()->user->id ? User::model()->find('id='.Yii::app()->user->id)->alertTasks : 0;
-		if ($alert_tasks==0) $alert_tasks='';
+		//$alert_tasks = Yii::app()->user->id ? User::model()->find('id='.Yii::app()->user->id)->alertTasks : 0;
+		//if ($alert_tasks==0) $alert_tasks='';
+		$alert_tasks = Yii::app()->utility->getAlertToDo();
 
 		$this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array(
