@@ -106,6 +106,7 @@ class KpiController extends Controller
 
 		if(isset($_POST['KpiData']))
 		{
+			
 			$model->value = $_POST['KpiData']['value'];
 			if ($model->save()) {
 				$this->redirect(array('project/todo'));

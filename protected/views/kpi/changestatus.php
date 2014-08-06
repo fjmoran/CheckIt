@@ -30,27 +30,26 @@
 
 				<div class="row">
 
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<p><strong>KPI:</strong> </p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<p><?php echo $kpi->name; ?> </p>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong> </p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<p><?php echo $kpi->subproject->name; ?> </p>
 					</div>
 
-					<div class="col-md-6">
-						<p><strong>Valor actual (<?php echo $kpi->unit; ?>):</strong> </p>
+					<div class="col-md-4">
+						<p><strong>Valor (<?php echo $kpi->unit; ?>):</strong> </p>
 					</div>
-					<div class="col-md-6">
-						<p><?php echo $form->textField($model,'value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?> </p>
-					</div>
-
+					<div class="col-md-8">
+						<p><?php echo $form->textField($model,'value',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?></p>
+						<p><input type="checkbox" id="no_value"> No considerar</p>
 					</div>
 
 				</div>
@@ -64,9 +63,17 @@
 <?php $this->endWidget(); ?>
 
 <script>
-$(document).ready(function(){
-	$('#myModal').on('hidden.bs.modal', function () {
-		$(this).removeData();
-	});
-});
+	$("#no_value").click(function () {
+		    if ($("#no_value").is(":checked")) {
+				$("#KpiData_value")
+					.attr("disabled", "disabled")
+					.css("background-color", "#aaa");
+				$("#referido").val("");
+		    }
+		    else {
+		        $("#KpiData_value")
+					.removeAttr("disabled")
+					.css("background-color", "white");
+		    }
+		});
 </script>

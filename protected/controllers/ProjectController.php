@@ -32,13 +32,48 @@ class ProjectController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('myprojects','strategyData','toDo'),
+				'actions'=>array('myprojects','strategyData','toDo','completed'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionCompleted() {
+
+		//kpi
+		$kpidata = KpiData::model()->findAllByAttributes(array(), array(
+			'condition'=>'user_id=:user_id',
+			'params'=>array(':user_id'=>Yii::app()->user->id),
+			'order'=>'created DESC',
+		));
+
+		$user = User::model()->find('id='.Yii::app()->user->id);
+		$department_id = $user->department_id;
+
+		//task
+		if ($department_id && $user->manager == 1) {
+			$tasks = Task::model()->findAllByAttributes(array(), array(
+				'condition'=>'(user_id=:user_id OR department_id=:department_id) AND status=1',
+				'params'=>array(':user_id'=>Yii::app()->user->id, ':department_id'=>$department_id),
+				'order'=>'end_date DESC',
+			));
+		}
+		else {
+			$tasks = Task::model()->findAllByAttributes(array(), array(
+				'condition'=>'user_id=:user_id AND status=1',
+				'params'=>array(':user_id'=>Yii::app()->user->id),
+				'order'=>'end_date DESC',
+			));
+		}
+
+		$this->render('completed',array(
+			'kpidata'=>$kpidata,
+			'tasks'=>$tasks,
+			//'tasks'=>$task,
+		));		
 	}
 
 	public function actionToDo() {

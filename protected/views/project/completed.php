@@ -1,20 +1,21 @@
-<?php if ($kpis):?>
+<?php if ($kpidata):?>
 
-<h2>KPI por Hacer</h2>
+<h2>Últimos KPI terminados</h2>
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
 					<th style="width: 26%;">KPI</th>
 					<th style="width: 26%;">Objetivo Estratégico</th>
 					<th style="width: 8%;">Meta</th>
-					<th style="width: 17%;">Responsable</th>
 					<th style="width: 10%;">Periodicidad</th>
 					<th style="width: 15%;">Fecha</th>
+					<th style="width: 15%;">Valor</th>
 					<th style="width: 7%; text-align: center;">Acciones</th>
 				</tr>
 
-	<?php foreach ($kpis as $kpi):?>
+	<?php foreach ($kpidata as $kdata):?>
 
+		<?php $kpi = $kdata->kpi; ?>
 				<tr>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
@@ -24,9 +25,9 @@
 					</td>
 					<td><?php echo $kpi->subproject->name?></td>
 					<td><?php echo $kpi->goal_value?></td>
-					<td><?php echo $kpi->inCharge?></td>
 					<td><?php echo $kpi->updateFrequencyText?></td>
-					<td <?php if (strtotime($kpi->next_due_date) < time()) {echo 'style="color: red;"';} else {echo 'style="color: green;"';}?>><?php echo $kpi->next_due_date?></td>
+					<td><?php echo $kdata->period_end; ?></td>
+					<td><?php echo $kdata->value; ?></td>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" 
 						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
@@ -44,7 +45,7 @@
 
 <?php if ($tasks):?>
 
-<h2><?php echo Yii::app()->utility->getOption('tasks_name'); ?> por Hacer</h2>
+<h2>Últimos <?php echo Yii::app()->utility->getOption('tasks_name'); ?> terminados</h2>
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
@@ -68,7 +69,7 @@
 					<td><?php echo $task->subproject->name?></td>
 					<td><?php echo $task->inCharge?></td>
 					<td><?php echo $task->start_date?></td>
-					<td <?php if (strtotime($task->due_date) < time()) {echo 'style="color: red;"';} else {echo 'style="color: green;"';}?>><?php echo $task->due_date?></td>
+					<td><?php echo $task->due_date?></td>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" 
 						href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
