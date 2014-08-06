@@ -76,7 +76,26 @@
 				<?php //echo $form->labelEx($model,'roles'); ?>
 				<div class="panel-body">
 
+					<?php ?>
+					<span id="User_roleIDs">
+
 					<?php 
+					$User_roleIDs=0;
+					Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
+					$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=0'));
+					foreach ($data as $d):?>
+						<input class="categoryFilter" id="User_roleIDs_<?php echo $User_roleIDs; ?>" value="<?php echo $d->id ?>" type="checkbox" name="User[roleIDs][]" <?php if (in_array($d->id, $model->roleIDs)):?>checked="checked"<?php endif;?>> 
+							&nbsp;&nbsp;
+							<label for="User_roleIDs_0">
+								<?php echo $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>'; ?>
+							</label>
+							<br />
+					<?php $User_roleIDs++; endforeach; ?>
+
+					</span>
+					<?php  ?>
+
+					<?php /*
 					Yii::app()->clientScript->registerScript('tooltip', '$(".showtooltip").tooltip(); ', CClientScript::POS_READY);
 
 					$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=0'));
@@ -86,7 +105,7 @@
 					}
 					echo CHtml::activeCheckBoxList(
 						$model, 
-						'roleIDs', 
+						'roleIDs0', 
 						$list,
 						array(
 							'template'=>'{input} &nbsp;&nbsp;{label}',
@@ -94,20 +113,37 @@
 							'class'=>'categoryFilter',
 							//'checkAll'=>'Todos',
 						)
-					);  ?>
+					); */?>
 
-					<br>
 					<a href="javascript:void(0);" onclick="$('#moreroles').toggle();">otros roles</a>
 					<div id="moreroles" style="display: none;">
+
+					<?php ?>
+					<span id="User_roleIDs">
+
 					<?php 
-						$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=1'));
+					$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=1'));
+					foreach ($data as $d):?>
+						<input class="categoryFilter" id="User_roleIDs_<?php echo $User_roleIDs; ?>" value="<?php echo $d->id ?>" type="checkbox" name="User[roleIDs][]" <?php if (in_array($d->id, $model->roleIDs)):?>checked="checked"<?php endif;?>> 
+							&nbsp;&nbsp;
+							<label for="User_roleIDs_0">
+								<?php echo $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>'; ?>
+							</label>
+							<br />
+					<?php $User_roleIDs++; endforeach; ?>
+
+					</span>
+					<?php  ?>
+
+					<?php 
+						/*$data = Role::model()->findAll(array('order'=>'pos ASC', 'condition'=>'type=1'));
 						$list = Array();
 						foreach ($data as $d) {
 							$list[$d->id] = $d->friendly_name.' &nbsp;&nbsp;<a style="text-decoration:none;" class="fa fa-question-circle showtooltip" data-toggle="tooltip" data-placement="right" title="'.$d->description.'"></a>';
 						}
 						echo CHtml::activeCheckBoxList(
 							$model, 
-							'roleIDs', 
+							'roleIDs1', 
 							$list,
 							array(
 								'template'=>'{input} &nbsp;&nbsp;{label}',
@@ -115,7 +151,7 @@
 								'class'=>'categoryFilter',
 								//'checkAll'=>'Todos',
 							)
-						);  ?>
+						);*/  ?>
 					</div>
 				</div>
 			</div>
