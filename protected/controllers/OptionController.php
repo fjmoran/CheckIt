@@ -28,8 +28,12 @@ class OptionController extends Controller
 	{
 		return array(
 			array('allow',  
-				'actions'=>array('view','update','admin','strategyData'),
+				'actions'=>array('view','update','admin'),
 				'roles'=>array('admin'),
+			),			
+			array('allow',  
+				'actions'=>array('strategyData'),
+				'roles'=>array('admin','strategy_admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
