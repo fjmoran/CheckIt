@@ -29,7 +29,7 @@
 					<td <?php if (strtotime($kpi->next_due_date) < time()) {echo 'style="color: red;"';} else {echo 'style="color: green;"';}?>><?php echo $kpi->next_due_date?></td>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" 
-						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
+						href="<?php echo Yii::app()->createUrl('kpi/addstatus',array('id'=>$kpi->id)); ?>">
 							<i class="fa fa-edit grid-icon"></i>
 						</a>
 					</td>
@@ -84,7 +84,7 @@
 <?php endif;?>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 		</div>
 	</div>

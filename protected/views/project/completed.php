@@ -19,7 +19,7 @@
 				<tr>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
+						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kdata->id)); ?>">					
 						<?php echo $kpi->name; ?>
 						</a>
 					</td>
@@ -27,10 +27,10 @@
 					<td><?php echo $kpi->goal_value?></td>
 					<td><?php echo $kpi->updateFrequencyText?></td>
 					<td><?php echo $kdata->period_end; ?></td>
-					<td><?php echo $kdata->value; ?></td>
+					<td><?php echo $kdata->value?$kdata->value:'-'; ?></td>
 					<td>
 						<a title="Editar" data-toggle="modal" data-target="#myModal" 
-						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
+						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kdata->id)); ?>">
 							<i class="fa fa-edit grid-icon"></i>
 						</a>
 					</td>
@@ -85,7 +85,7 @@
 <?php endif;?>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 		</div>
 	</div>

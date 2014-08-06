@@ -34,9 +34,10 @@ class KpiData extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('kpi_id, user_id, value', 'required'),
+			array('kpi_id, user_id', 'required'),
 			array('kpi_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('value', 'numerical'),
+			array('comments', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, kpi_id, user_id, created, period_start, period_end, value', 'safe', 'on'=>'search'),

@@ -39,13 +39,6 @@
 					</div>	
 
 					<div class="col-md-4">
-						<p><strong><?php echo Yii::app()->utility->getOption('subproject_name');?>:</strong></p>
-					</div>
-					<div class="col-md-8">
-						<p><?php echo $model->subproject->name; ?></p>
-					</div>	
-
-					<div class="col-md-4">
 						<p><strong>Estado actual:</strong></p>
 					</div>
 					<div class="col-md-8">

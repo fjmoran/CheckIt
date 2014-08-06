@@ -32,7 +32,7 @@ class KpiController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('changestatus'),
+				'actions'=>array('changestatus','addstatus'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
@@ -97,7 +97,7 @@ class KpiController extends Controller
 		}
 	}
 
-	public function actionChangeStatus($id) {
+	public function actionAddStatus($id) {
 		$kpi=$this->loadModel($id);
 		$model=new KpiData;
 
@@ -106,10 +106,39 @@ class KpiController extends Controller
 
 		if(isset($_POST['KpiData']))
 		{
-			
-			$model->value = $_POST['KpiData']['value'];
+			if (isset($_POST['KpiData']['no_value']) && $_POST['KpiData']['no_value']) {
+				//$model->value = new CDbExpression('NULL');
+			}
+			else {
+				$model->value = $_POST['KpiData']['value'];
+			}
+			$model->comments = $_POST['KpiData']['comments'];
 			if ($model->save()) {
 				$this->redirect(array('project/todo'));
+			}
+		}
+
+		$this->renderPartial('changestatus',array(
+			'kpi'=>$kpi,
+			'model'=>$model,
+		));
+	}
+
+	public function actionChangeStatus($id) {
+		$model = KpiData::model()->findByPk($id);
+		$kpi = $model->kpi;
+
+		if(isset($_POST['KpiData']))
+		{
+			if (isset($_POST['KpiData']['no_value']) && $_POST['KpiData']['no_value']) {
+				$model->value = new CDbExpression('NULL');
+			}
+			else {
+				$model->value = $_POST['KpiData']['value'];
+			}
+			$model->comments = $_POST['KpiData']['comments'];
+			if ($model->save()) {
+				$this->redirect(array('project/completed'));
 			}
 		}
 

@@ -133,6 +133,9 @@ class Kpi extends CActiveRecord
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 			'subproject' => array(self::BELONGS_TO, 'Subproject', 'subproject_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'kpiDatas' => array(self::HAS_MANY, 'KpiData', 'kpi_id',
+				'order'=>'created DESC', 
+			),
 		);
 	}
 

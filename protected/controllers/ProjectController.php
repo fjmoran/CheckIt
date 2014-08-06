@@ -48,6 +48,7 @@ class ProjectController extends Controller
 			'condition'=>'user_id=:user_id',
 			'params'=>array(':user_id'=>Yii::app()->user->id),
 			'order'=>'created DESC',
+			'limit'=>5,
 		));
 
 		$user = User::model()->find('id='.Yii::app()->user->id);
@@ -59,6 +60,7 @@ class ProjectController extends Controller
 				'condition'=>'(user_id=:user_id OR department_id=:department_id) AND status=1',
 				'params'=>array(':user_id'=>Yii::app()->user->id, ':department_id'=>$department_id),
 				'order'=>'end_date DESC',
+				'limit'=>5,
 			));
 		}
 		else {
@@ -66,6 +68,7 @@ class ProjectController extends Controller
 				'condition'=>'user_id=:user_id AND status=1',
 				'params'=>array(':user_id'=>Yii::app()->user->id),
 				'order'=>'end_date DESC',
+				'limit'=>5,
 			));
 		}
 
