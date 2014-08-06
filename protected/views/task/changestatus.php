@@ -45,7 +45,62 @@
 						<p><?php echo $model->statusText; ?></p>
 					</div>	
 
+					<div class="col-md-4">
+						<p><strong>Comentarios</strong> </p>
+					</div>
+					<div class="col-md-8">
+						<p><?php echo $form->textArea($model,'comments',array('cols'=>6,'size'=>60,'maxlength'=>255,'class'=>'form-control')); ?></p>
+					</div>
+
 				</div>
+
+				<?php 
+				if ($model->status==0):
+					$subtask = $task->children()->findAll();
+					if ($subtask):
+				?>
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<h4>KPI dependientes</h4>
+
+						<table class="table table-condensed" style="font-size:small;">
+							<tr>
+								<th style="width: 26%;">KPI</th>
+								<th style="width: 8%;">Último ingreso</th>
+								<th style="width: 10%;">Valor</th>
+								<th style="width: 15%;">Peso</th>
+								<th style="width: 15%;">Responsable</th>
+							</tr>
+
+					<?php foreach ($subkpi as $skpi): 
+						//obtenemos el ultimo dato
+						$kpidatas = $skpi->kpiDatas;
+						$date = '-';
+						$value = '-';
+						if ($kpidatas) {
+							$kpidata = $kpidatas[0];
+							$date = $kpidata->created;
+							$value = $kpidata->value;
+						}
+					?>
+							<tr>
+								<td><?php echo $skpi->name; ?></td>
+								<td><?php echo $date; ?></td>
+								<td><?php echo $value; ?></td>
+								<td><?php echo $skpi->weight; ?></td>
+								<td><?php echo $skpi->inCharge; ?></td>
+							</tr>
+					<? endforeach; ?>
+
+						</table>
+
+					</div>
+				</div>
+
+				<?php endif; ?>
+			<?php endif; ?>
 
 			</div>
 			<div class="modal-footer">

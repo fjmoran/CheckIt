@@ -38,6 +38,7 @@ class Task extends CActiveRecord
 			array('name, subproject_id, start_date, due_date', 'required'),
 			array('subproject_id, status, department_id, user_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
+			array('comments', 'length', 'max'=>1000),
 			array('due_date','compare','compareAttribute'=>'start_date','operator'=>'>', 'allowEmpty'=>false , 'message'=>'{attribute} debe ser mayor que "{compareValue}".'),
 			array('start_date','parentMinDate'),
 			array('due_date','parentMaxDate'),
@@ -49,8 +50,9 @@ class Task extends CActiveRecord
 
 	public function parentMinDate($elem) {
 		//obtenemos el padre
-		$parent=$this->parent()->find();
-		if ($parent) {
+		$parent = 0;
+		if ($this->root) $parent=Task::model()->findByPk($this->root);
+		if ($parent /*&& $parent=$parent->find()*/) {
 			if ($this->$elem < $parent->start_date) {
 				$this->addError($elem, "La fecha inicio debe ser mayor o igual a '{$parent->start_date}' (fecha inicio de padre) .");
 				return false;				
@@ -65,7 +67,8 @@ class Task extends CActiveRecord
 
 	public function parentMaxDate($elem) {
 		//obtenemos el padre
-		$parent=$this->parent()->find();
+		$parent = 0;
+		if ($this->root) $parent=Task::model()->findByPk($this->root);
 		if ($parent) {
 			if ($this->$elem > $parent->due_date) {
 				$this->addError($elem, "La fecha término debe ser menor o igual a '{$parent->due_date}' (fecha término de padre) .");

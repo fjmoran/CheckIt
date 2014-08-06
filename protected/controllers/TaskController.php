@@ -74,7 +74,9 @@ class TaskController extends Controller
 					break;
 			endswitch;
 
-			if ($model->saveNode(array('status','end_date'))) {
+			$model->comments = $_POST['Task']['comments'];
+
+			if ($model->saveNode(array('status','end_date','comments'))) {
 				$this->redirect(array('project/todo'));
 			}
 		}
