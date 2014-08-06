@@ -1,6 +1,6 @@
 <?php if ($kpidata):?>
 
-<h2>Últimos KPI terminados</h2>
+<h2>Últimos KPI terminados</h2><br>
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
@@ -45,7 +45,7 @@
 
 <?php if ($tasks):?>
 
-<h2>Últimos <?php echo Yii::app()->utility->getOption('tasks_name'); ?> terminados</h2>
+<h2>Últimos <?php echo Yii::app()->utility->getOption('tasks_name'); ?> terminados</h2><br>
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
