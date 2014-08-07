@@ -185,12 +185,12 @@ $this->menu=array(
 					<?php endif; ?>
 				</td>
 				<td style="text-align: center;">
-					<?php /*if ($task->department_id == $department_id): ?>
-					<a title="Editar" data-toggle="modal" data-target="#myModal" 
-					href="<?php echo Yii::app()->createUrl('task/changestatus',array('id'=>$task->id)); ?>">
-						<i class="fa fa-edit grid-icon"></i>
+					<?php /*if ($task->department_id == $department_id):*/ ?>
+					<a title="Ver" data-toggle="modal" data-target="#myModal" 
+					href="<?php echo Yii::app()->createUrl('task/view',array('id'=>$task->id)); ?>">
+						<i class="fa fa-eye grid-icon"></i>
 					</a>
-					<?php else: ?>
+					<?php /*else: ?>
 						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
 					<?php endif; */?>
 				</td>

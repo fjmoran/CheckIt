@@ -32,7 +32,7 @@ class TaskController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('changestatus'),
+				'actions'=>array('changestatus','view'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
@@ -94,7 +94,7 @@ class TaskController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
+		$this->renderPartial('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
