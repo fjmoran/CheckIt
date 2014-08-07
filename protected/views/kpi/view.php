@@ -18,7 +18,7 @@
 
 				<div class="row">
 					<div class="col-md-4">
-						<p><strong>Valor (<?php echo $model->unit; ?>) *</strong> </p>
+						<p><strong>Valor actual (<?php echo $model->unit; ?>) *</strong> </p>
 					</div>
 					<div class="col-md-8">
 						<p><?php echo $model->lastDataValue; ?></p>
@@ -27,37 +27,19 @@
 
 				<div class="row">
 					<div class="col-md-4">
-						<p><strong>Fecha Base</strong> </p>
+						<p><strong>Fecha Base / Meta</strong> </p>
 					</div>
 					<div class="col-md-8">
-						<p><?php echo $model->base_date; ?></p>
+						<p><?php echo $model->base_date; ?> / <?php echo $model->goal_date; ?></p>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-4">
-						<p><strong>Valor Base</strong> </p>
+						<p><strong>Valor Base / Meta</strong> </p>
 					</div>
 					<div class="col-md-8">
-						<p><?php echo $model->base_value; ?></p>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<p><strong>Fecha de Meta</strong> </p>
-					</div>
-					<div class="col-md-8">
-						<p><?php echo $model->goal_date; ?></p>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<p><strong>Valor Meta</strong> </p>
-					</div>
-					<div class="col-md-8">
-						<p><?php echo $model->goal_value; ?></p>
+						<p><?php echo $model->base_value; ?> / <?php echo $model->goal_value; ?></p>
 					</div>
 				</div>
 
@@ -90,15 +72,6 @@
 
 				<div class="row">
 					<div class="col-md-4">
-						<p><strong>Peso</strong> </p>
-					</div>
-					<div class="col-md-8">
-						<p><?php echo $model->weight; ?></p>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
 						<p><strong>Forma de Medición</strong> </p>
 					</div>
 					<div class="col-md-8">
@@ -114,6 +87,15 @@
 						<p><?php echo $model->functionText; ?></p>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<p><strong>Peso</strong> </p>
+					</div>
+					<div class="col-md-8">
+						<p><?php echo $model->weight; ?></p>
+					</div>
+				</div>				
 
 				<div class="row">
 					<div class="col-md-4">
