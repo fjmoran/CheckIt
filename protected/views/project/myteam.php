@@ -12,7 +12,7 @@ $this->menu=array(
 );
 ?>
 
-<h2>Mis <?php echo Yii::app()->utility->getOption('projects_name'); ?></h2>
+<h2>Mi Equipo</h2>
 
 <?php foreach ($projects as $project):?>
 <h3 style="padding-bottom:20px;"><?php echo $project->name; ?></h3>

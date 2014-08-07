@@ -370,4 +370,45 @@ class Kpi extends CActiveRecord
 
 	}
 
+	public function getLastDataValue() {
+		$datas = $this->kpiDatas;
+		if ($datas) {
+			$data = $datas[0];
+			return $data->value;
+		}
+		return null;
+	}
+
+	public function getStatusColor() {
+
+		//1: rojo ; 2: amarillo; 3: verde
+
+		$value = $this->lastDataValue;
+		if ($value===null) return null;
+
+		// Actual (A) / Meta (M) / Base (I)
+		$a = $value;
+		$m = $this->goal_value;
+		$i = $this->base_value;
+
+		//porcentaje de cumplimiento
+		if ($this->measuring==0) { // si es creciente
+			$compliance = ($a-$i)/($m-$i)*100;
+		}
+		if ($this->measuring==1) { // si es decreciente
+			$compliance = ($a-$i)/($m-$i)*100;
+		}
+		if ($this->measuring==2) { // más cercano
+			$compliance = 1 - abs($m-$a)/($m-$i)*100;
+		}
+
+		$is_yellow = Yii::app()->utility->getOption('kpi_yellow');
+		$is_red = Yii::app()->utility->getOption('kpi_red');
+
+		if ($compliance < $is_red) return 1;
+		if ($compliance < $is_yellow) return 2;
+		return 3;
+
+	}
+
 }

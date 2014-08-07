@@ -14,6 +14,13 @@
 		        </div>
 		        <div class="navbar-collapse collapse sidebar-navbar-collapse">
 <?php 
+
+$is_manager = 0;
+if (Yii::app()->user) {
+	$user = User::model()->findByPk(Yii::app()->user->id);
+	if ($user->manager) $is_manager = 1;
+}
+
 if (Yii::app()->utility->isActiveMenu('admin')) {
 	$this->widget('zii.widgets.CMenu',array(
 		'htmlOptions'=>array(
@@ -50,6 +57,7 @@ if (Yii::app()->utility->isActiveMenu('strategy')) {
 			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> Mis '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/myprojects'), 'active'=>Yii::app()->utility->isActiveSubMenu('myprojects')),
 			array('label'=>'<i class="fa fa-clock-o fa-lg fa-fw"></i> Mis Tareas '.'<span class="badge badge-red pull-right">'.$alert_tasks.'</span>', 'url'=>array('/project/todo'), 'active'=>Yii::app()->utility->isActiveSubMenu('todo')),
 			array('label'=>'<i class="fa fa-check-square-o fa-lg fa-fw"></i> Terminados', 'url'=>array('/project/completed'), 'active'=>Yii::app()->utility->isActiveSubMenu('completed')),
+			array('label'=>'<i class="fa fa-users fa-lg fa-fw"></i> Mi Equipo', 'url'=>array('/project/myteam'), 'active'=>Yii::app()->utility->isActiveSubMenu('myteam'), 'visible'=>$is_manager),
 		),
 	)); 
 }?>

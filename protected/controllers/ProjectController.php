@@ -32,13 +32,70 @@ class ProjectController extends Controller
 				'roles'=>array('admin', 'strategy_admin'),
 			),
 			array('allow',
-				'actions'=>array('myprojects','strategyData','toDo','completed'),
+				'actions'=>array('myprojects','strategyData','toDo','completed','myteam'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionMyTeam() {
+
+		$user = User::model()->find('id='.Yii::app()->user->id);
+		$department_id = $user->department_id;
+
+		//si es jefe, le muestro los KPI y Tareas del departamento
+
+		if (!$department_id || $user->manager == 0)  exit;
+
+		//obtenemos los kpi y tareas del departamento
+		$kpi_d=$task_d=array();
+		//$kpi_d = Kpi::model()->findAllByAttributes(array('department_id'=>$department_id));
+		//$task_d = Task::model()->findAllByAttributes(array('department_id'=>$department_id));
+
+		//si soy jefe, puedo ver un nivel más abajo
+		$dep = Department::model()->findByPk($department_id);
+		$dep_users = $dep->users;
+		$user_ids = array();
+		foreach ($dep_users as $user) {
+			if ($user->id != Yii::app()->user->id) $user_ids[] = $user->id;
+		}
+
+		//obtengo los KPI y Tareas de todos los usuarios
+		$kpi = Kpi::model()->findAllByAttributes(array('user_id'=>$user_ids));
+		$task = Task::model()->findAllByAttributes(array('user_id'=>$user_ids));
+
+		//obtenemos los objetivos estrategicos
+		$kpi_d_arr = array();
+		$task_d_arr = array();
+		$kpi_arr = array();
+		$task_arr = array();
+		
+		$oe_kpi = $oe_task = array();
+		foreach ($kpi_d as $k) $oe_kpi[] = $k->subproject_id;
+		foreach ($task_d as $k) $oe_task[] = $k->subproject_id;
+		foreach ($kpi as $k) $oe_kpi[] = $k->subproject_id;
+		foreach ($task as $k) $oe_task[] = $k->subproject_id;
+		$oe_kpi = array_unique($oe_kpi);
+		$oe_task = array_unique($oe_task);
+
+		foreach ($kpi_d as $k) $kpi_arr[$k->subproject_id][] = $k;
+		foreach ($task_d as $k) $task_arr[$k->subproject_id][] = $k;
+		foreach ($kpi as $k) $kpi_arr[$k->subproject_id][] = $k;
+		foreach ($task as $k) $task_arr[$k->subproject_id][] = $k;
+
+		$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',array_merge($oe_kpi, $oe_task)).')');
+
+		$this->render('myteam',array(
+			'kpis'=>$kpi_arr,
+			'tasks'=>$task_arr,
+			'subproject_kpi_ids'=>$oe_kpi,
+			'subproject_task_ids'=>$oe_task,
+			'projects'=>$projects,
+		));
+
 	}
 
 	public function actionCompleted() {
