@@ -304,15 +304,19 @@ class ProjectController extends Controller
 		$task_arr = array();
 		
 		$oe_kpi = $oe_task = array();
-		foreach ($kpi_d as $k) $oe_kpi[] = $k->subproject_id;
-		foreach ($task_d as $k) $oe_task[] = $k->subproject_id;
+		if ($department_id && $user->manager == 1) {
+			foreach ($kpi_d as $k) $oe_kpi[] = $k->subproject_id;
+			foreach ($task_d as $k) $oe_task[] = $k->subproject_id;
+		}
 		foreach ($kpi as $k) $oe_kpi[] = $k->subproject_id;
 		foreach ($task as $k) $oe_task[] = $k->subproject_id;
 		$oe_kpi = array_unique($oe_kpi);
 		$oe_task = array_unique($oe_task);
 
-		foreach ($kpi_d as $k) $kpi_arr[$k->subproject_id][] = $k;
-		foreach ($task_d as $k) $task_arr[$k->subproject_id][] = $k;
+		if ($department_id && $user->manager == 1) {
+			foreach ($kpi_d as $k) $kpi_arr[$k->subproject_id][] = $k;
+			foreach ($task_d as $k) $task_arr[$k->subproject_id][] = $k;
+		}
 		foreach ($kpi as $k) $kpi_arr[$k->subproject_id][] = $k;
 		foreach ($task as $k) $task_arr[$k->subproject_id][] = $k;
 
