@@ -150,7 +150,7 @@
 						$value = '-';
 						if ($kpidatas) {
 							$kpidata = $kpidatas[0];
-							$date = $kpidata->created;
+							$date = $kpidata->period_end;
 							$value = $kpidata->value;
 						}
 					?>
