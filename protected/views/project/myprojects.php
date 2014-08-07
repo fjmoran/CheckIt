@@ -138,12 +138,12 @@ $this->menu=array(
 					?>
 				</td>
 				<td style="text-align: center;">
-					<?php /*if (!$ischild): ?>
+					<?php /*if (!$ischild): */?>
 					<a title="Editar" data-toggle="modal" data-target="#myModal" 
-					href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">
-						<i class="fa fa-edit grid-icon"></i>
+					href="<?php echo Yii::app()->createUrl('kpi/view',array('id'=>$kpi->id)); ?>">
+						<i class="fa fa-eye grid-icon"></i>
 					</a>
-					<?php else: ?>
+					<?php /* else: ?>
 						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
 					<?php endif;*/ ?>
 				</td>
@@ -196,6 +196,21 @@ $this->menu=array(
 				</td>
 			</tr>	
 <?php } ?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+<?php
+Yii::app()->clientScript->registerScript('clear_modal','
+	$("body").on("hidden.bs.modal", "#myModal", function () {
+		$(this).removeData();
+	});
+', CClientScript::POS_READY);
+?>
 
 <?php /*if ($dataProvider): ?>
 <div class="panel-group" id="accordion">
