@@ -32,7 +32,7 @@ $this->menu=array(
 					<th style="width: 8%;">Actual</th>
 					<th style="width: 17%;">Responsable</th>
 					<th style="width: 8%;">Estado</th>
-					<th style="width: 7%; text-align: center;">Ver</th>
+					<th style="width: 7%; text-align: center;">Detalle</th>
 				</tr>
 		<?php endif;?>
 
@@ -81,7 +81,7 @@ $this->menu=array(
 					<th style="width: 12%;">Fecha término</th>
 					<th style="width: 15%;">Responsable</th>				
 					<th style="width: 8%;">Estado</th>
-					<th style="width: 7%; text-align: center;">Ver</th>
+					<th style="width: 7%; text-align: center;">Detalle</th>
 				</tr>
 		<?php endif;?>
 
