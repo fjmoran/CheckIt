@@ -223,7 +223,7 @@ class Utility extends CApplicationComponent
 			->queryRow();
 		$alert_tasks = $alert_tasks + $rows['q'];
 
-		if ($user->manager==1) {
+		if ($user && $user->manager==1) {
 			$department_id = $user->department_id;
 			$rows = Yii::app()->db->createCommand()
 				->select('count(*) as q')
