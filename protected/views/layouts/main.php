@@ -84,9 +84,9 @@
 			),
 			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'Mi Perfil', 'url'=>array('/user/profile')),
+				array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Mi Perfil', 'url'=>array('/user/profile')),
 				array('label'=>'', 'itemOptions'=>array('class'=>'divider')),
-				array('label'=>'Logout', 'url'=>array('/site/logout')),
+				array('label'=>'<i class="fa fa-power-off fa-lg fa-fw"></i> Logout', 'url'=>array('/site/logout')),
 			),
 		)); ?>
 					</div>
