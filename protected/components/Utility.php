@@ -244,4 +244,17 @@ class Utility extends CApplicationComponent
 		return $alert_tasks;
 	}
 
+	public function getStatusColor($compliance) {
+
+		//1: rojo ; 2: amarillo; 3: verde
+
+		$is_yellow = Yii::app()->utility->getOption('kpi_yellow');
+		$is_red = Yii::app()->utility->getOption('kpi_red');
+
+		if ($compliance < $is_red) return 1;
+		if ($compliance < $is_yellow) return 2;
+		return 3;
+
+	}
+
 }

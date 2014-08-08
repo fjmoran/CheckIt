@@ -167,7 +167,7 @@ class Project extends CActiveRecord
 		return $tasks;
 	}
 
-	public function getRedKpis() {
+/*	public function getRedKpis() {
 		$kpis = 0;
 		if ($this->id) {
 			$rows = Yii::app()->db->createCommand()
@@ -207,6 +207,24 @@ class Project extends CActiveRecord
 			$kpis = $rows['q'];
 		}
 		return $kpis;
+	}*/
+
+	public function getCompliance() {
+
+		//1: rojo ; 2: amarillo; 3: verde
+
+		$subprojects = $this->subprojects;
+		$t = 0;
+		$b = 0;
+		foreach ($subprojects as $subproject) {
+			$weight = $subproject->weight;
+			$compliance = $subproject->compliance;
+			$t += $weight*$compliance;
+			$b += $weight;
+		}
+
+		return $t/$b;
+
 	}
 
 }

@@ -379,10 +379,7 @@ class Kpi extends CActiveRecord
 		return null;
 	}
 
-	public function getStatusColor() {
-
-		//1: rojo ; 2: amarillo; 3: verde
-
+	public function getCompliance() {
 		$value = $this->lastDataValue;
 		if ($value===null) return null;
 
@@ -402,13 +399,7 @@ class Kpi extends CActiveRecord
 			$compliance = 1 - abs($m-$a)/($m-$i)*100;
 		}
 
-		$is_yellow = Yii::app()->utility->getOption('kpi_yellow');
-		$is_red = Yii::app()->utility->getOption('kpi_red');
-
-		if ($compliance < $is_red) return 1;
-		if ($compliance < $is_yellow) return 2;
-		return 3;
-
+		return $compliance;		
 	}
 
 }

@@ -131,7 +131,7 @@ $this->menu=array(
 				</td>				
 				<td>
 					<?php 
-						$color = $kpi->statusColor;
+						$color = Yii::app()->utility->getStatusColor($kpi->compliance);
 						if ($color == 1) echo '<span class="label label-danger">Rojo</span>';
 						if ($color == 2) echo '<span class="label label-warning">Amarillo</span>';
 						if ($color == 3) echo '<span class="label label-success">Verde</span>';

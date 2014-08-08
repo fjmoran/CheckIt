@@ -129,4 +129,24 @@ class Subproject extends CActiveRecord
 			}
 		}
 	}
+
+	public function getCompliance() {
+
+		//1: rojo ; 2: amarillo; 3: verde
+
+		$kpis = $this->kpis;
+		$t = 0;
+		$b = 0;
+		foreach ($kpis as $kpi) {
+			$weight = $kpi->weight;
+			$compliance = $kpi->compliance;
+			$t += $weight*$compliance;
+			$b += $weight;
+		}
+
+		if ($b==0) return 0;
+		else return $t/$b;
+
+	}
+
 }

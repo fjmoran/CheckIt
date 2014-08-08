@@ -72,6 +72,35 @@ class SiteController extends Controller
 	}
 
 	public function actionReport() {
+
+		$projects = Project::model()->findAll();
+
+		$detail = array();
+		foreach ($projects as $project) {
+			$d = array();
+			$d['title'] = $project->name;
+			$d['compliance'] = round($project->compliance,0);
+			$detail[] = $d;
+		}
+
+		$this->render('report',array(
+			'yellow' => Yii::app()->utility->getOption('kpi_yellow') / 100,
+			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
+			'detail'=>$detail,
+		));
+
+/*
+		$detail = array();
+		foreach ($projects as $project) {
+			$detail['categories'][] = $project->name;
+			//tareas atrasadas
+			$detail['greenKpis'][] = (int)$project->greenKpis;
+			//tareas pendientes
+			$detail['yellowKpis'][] = (int)$project->yellowKpis;
+			//tareas proximas
+			$detail['redKpis'][] = (int)$project->redKpis;
+		}
+
 		$projects = Project::model()->with('department')->findAll();
 
 		$department_array = Array();
@@ -113,12 +142,12 @@ class SiteController extends Controller
 			//tareas proximas
 			$detail3['redKpis'][] = (int)$project->redKpis;
 		}
-
 		$this->render('report',array(
 			'detail'=>$detail,
 			'detail2'=>$detail2,
 			'detail3'=>$detail3,
 		));
+*/
 	}
 
 	public function actionAdmin() {

@@ -17,7 +17,6 @@
 		each = H.each,
 		extend = H.extend,
 		format = H.format,
-		pick = H.pick,
 		wrap = H.wrap,
 		Chart = H.Chart,
 		seriesTypes = H.seriesTypes,
@@ -78,7 +77,7 @@
 			visibility: 'inherit'
 		})
 		.animate({
-			opacity: pick(this.newOpacity, 1) // newOpacity used in maps
+			opacity: 1
 		}, animation || {
 			duration: 250
 		});

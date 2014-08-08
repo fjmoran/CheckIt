@@ -2,6 +2,8 @@
 /* @var $this KpiController */
 /* @var $model Kpi */
 /* @var $form CActiveForm */
+
+if ($model->weight=='') $model->weight='100';
 ?>
 
 <?php

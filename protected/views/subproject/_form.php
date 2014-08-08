@@ -2,6 +2,8 @@
 /* @var $this SubprojectController */
 /* @var $model Subproject */
 /* @var $form CActiveForm */
+
+if ($model->weight=='') $model->weight='100';
 ?>
 
 <div class="form">
