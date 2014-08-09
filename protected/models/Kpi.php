@@ -29,7 +29,7 @@ class Kpi extends CActiveRecord
 
 	private $frequencyOptions = array(0 => 'Diario', 1 => 'Semanal', 2 => 'Mensual', 3 => 'Trimestral', 4 => 'Semestral', 5 => 'Anual');
 	private $measuringOptions = array(0 => ' Creciente (Más es mejor)', 1 => 'Decreciente (Menos es mejor)', 2 => 'Convergente (Más cerca es mejor)');
-	private $functionOptions = array(0 => 'Promedio', 1 => 'Suma');
+	private $functionOptions = array(0 => 'Promedio', 1 => 'Suma', 2 => 'Máximo', 3 => 'Mínimo');
 
 	/**
 	 * @return string the associated database table name

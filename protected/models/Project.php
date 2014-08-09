@@ -223,7 +223,8 @@ class Project extends CActiveRecord
 			$b += $weight;
 		}
 
-		return $t/$b;
+		if ($b==0) return 0;
+		else return $t/$b;
 
 	}
 
