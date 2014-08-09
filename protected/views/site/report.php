@@ -19,7 +19,12 @@ foreach ($ps as $p) {
 </div>
 <div class="row">
 
-<?php foreach ($projects as $project) : ?>
+<?php $i=0; foreach ($projects as $project) : ?>
+
+	<?php if ($i%4 == 0):?>
+		</div>
+		<div class="row">
+	<?php endif;?>
 
 	<div class="col-md-3">
 
@@ -124,6 +129,6 @@ foreach ($ps as $p) {
 	<br>
 	</div>	
 
-<?php endforeach; ?>
+<?php $i++; endforeach; ?>
 
 </div>
