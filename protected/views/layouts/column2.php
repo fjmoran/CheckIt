@@ -74,7 +74,7 @@ if (Yii::app()->utility->isActiveMenu('dashboard')) {
 		),
 		'encodeLabel'=>false,
 		'items'=>array(
-			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'), 'active'=>Yii::app()->utility->isActiveSubMenu('sitereport')),
+			array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'), 'active'=>Yii::app()->utility->isActiveSubMenu('sitereport')),
 		),
 	)); 
 }?>
