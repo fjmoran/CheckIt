@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 // menu
-$this->menu[] = array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('project_name').': '.$model->name, 'url'=>array('/site/report'));
+$this->menu[] = array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('project_name').': '.$model->name, 'url'=>array('/project/report', 'id'=>$model->id));
 //perspectivas
 $sps = Subproject::model()->findAllByAttributes(array('project_id'=>$model->id));
 foreach ($sps as $sp) {
-	$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.$sp->name, 'url'=>array('/subproject/report', 'id'=>$sp->id));
+	$this->menu[] = array('label'=>'<i class="fa fa-chevron-right fa-lg fa-fw"></i> '.$sp->name, 'url'=>array('/subproject/report', 'id'=>$sp->id));
 }
 
 ?>

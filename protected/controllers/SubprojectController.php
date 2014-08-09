@@ -31,10 +31,38 @@ class SubprojectController extends Controller
 				'actions'=>array('view','create','update','admin','delete'),
 				'roles'=>array('admin', 'strategy_admin'),
 			),
+			array('allow',
+				'actions'=>array('report'),
+				'roles'=>array('admin', 'dashboard_user', 'dashboard_manager', 'viewer'),
+			),			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionReport($id) {
+		$model=$this->loadModel($id);
+		$kpis = Kpi::model()->findAllByAttributes(array('subproject_id'=>(int)$id));
+		$tasks = Task::model()->findAllByAttributes(array('subproject_id'=>(int)$id));
+
+		/*$detail = array();
+		foreach ($subprojects as $subproject) {
+			$d = array();
+			$d['title'] = $subproject->name;
+			$d['compliance'] = round($subproject->compliance,0);
+			$detail[] = $d;
+		}*/
+
+		//$this->model_id = $model->id;
+
+		$this->render('report',array(
+			'model' => $model,
+			'yellow' => Yii::app()->utility->getOption('kpi_yellow') / 100,
+			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
+			'kpis'=>$kpis,
+			'tasks'=>$tasks,
+		));		
 	}
 
 	/**

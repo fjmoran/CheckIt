@@ -42,7 +42,7 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'project';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='subproject') {
+		if ($controller=='subproject' && $action!='report') {
 			if ($level == 1) return 'admin';
 			if ($level == 2) return 'subproject';
 			if ($level == 3) return ' - Administración';
@@ -152,6 +152,12 @@ class Utility extends CApplicationComponent
 		}
 
 		if ($controller=='project' && ($action=='report')) {
+			if ($level == 1) return 'dashboard';
+			if ($level == 2) return 'sitereport';
+			if ($level == 3) return ' - Cuadro de Mando';
+		}
+
+		if ($controller=='subproject' && ($action=='report')) {
 			if ($level == 1) return 'dashboard';
 			if ($level == 2) return 'sitereport';
 			if ($level == 3) return ' - Cuadro de Mando';
