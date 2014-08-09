@@ -88,66 +88,6 @@ class SiteController extends Controller
 			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
 			'detail'=>$detail,
 		));
-
-/*
-		$detail = array();
-		foreach ($projects as $project) {
-			$detail['categories'][] = $project->name;
-			//tareas atrasadas
-			$detail['greenKpis'][] = (int)$project->greenKpis;
-			//tareas pendientes
-			$detail['yellowKpis'][] = (int)$project->yellowKpis;
-			//tareas proximas
-			$detail['redKpis'][] = (int)$project->redKpis;
-		}
-
-		$projects = Project::model()->with('department')->findAll();
-
-		$department_array = Array();
-		foreach ($projects as $project) {
-			$department_array[] = $project->department->id;
-		}
-		$department_array = array_unique($department_array);
-
-		$detail = array();
-		foreach ($department_array as $department) {
-			$pos = Department::model()->find('id='.$department);
-			$detail['categories'][] = $pos->name;
-			//tareas atrasadas
-			$detail['overdueTasks'][] = (int)$pos->overdueTasks;
-			//tareas pendientes
-			$detail['pendingTasks'][] = (int)$pos->pendingTasks;
-			//tareas proximas
-			$detail['nextTasks'][] = (int)$pos->nextTasks;
-		}
-
-		$detail2 = array();
-		foreach ($projects as $project) {
-			$detail2['categories'][] = $project->name;
-			//tareas atrasadas
-			$detail2['overdueTasks'][] = (int)$project->overdueTasks;
-			//tareas pendientes
-			$detail2['pendingTasks'][] = (int)$project->pendingTasks;
-			//tareas proximas
-			$detail2['nextTasks'][] = (int)$project->nextTasks;
-		}
-
-		$detail3 = array();
-		foreach ($projects as $project) {
-			$detail3['categories'][] = $project->name;
-			//tareas atrasadas
-			$detail3['greenKpis'][] = (int)$project->greenKpis;
-			//tareas pendientes
-			$detail3['yellowKpis'][] = (int)$project->yellowKpis;
-			//tareas proximas
-			$detail3['redKpis'][] = (int)$project->redKpis;
-		}
-		$this->render('report',array(
-			'detail'=>$detail,
-			'detail2'=>$detail2,
-			'detail3'=>$detail3,
-		));
-*/
 	}
 
 	public function actionAdmin() {

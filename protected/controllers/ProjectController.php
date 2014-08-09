@@ -7,6 +7,7 @@ class ProjectController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	//public $model_id = 0;
 
 	/**
 	 * @return array action filters
@@ -35,10 +36,36 @@ class ProjectController extends Controller
 				'actions'=>array('myprojects','strategyData','toDo','completed','myteam'),
 				'roles'=>array('admin', 'strategy_user', 'strategy_manager'),
 			),
+			array('allow',
+				'actions'=>array('report'),
+				'roles'=>array('admin', 'dashboard_user', 'dashboard_manager', 'viewer'),
+			),			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionReport($id) {
+		$model=$this->loadModel($id);
+		$subprojects = Subproject::model()->findAllByAttributes(array('project_id'=>(int)$id));
+
+		$detail = array();
+		foreach ($subprojects as $subproject) {
+			$d = array();
+			$d['title'] = $subproject->name;
+			$d['compliance'] = round($subproject->compliance,0);
+			$detail[] = $d;
+		}
+
+		//$this->model_id = $model->id;
+
+		$this->render('report',array(
+			'model' => $model,
+			'yellow' => Yii::app()->utility->getOption('kpi_yellow') / 100,
+			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
+			'detail'=>$detail,
+		));		
 	}
 
 	public function actionMyTeam() {

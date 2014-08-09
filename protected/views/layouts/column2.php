@@ -73,9 +73,8 @@ if (Yii::app()->utility->isActiveMenu('dashboard')) {
 			'class'=>'nav navbar-nav',
 		),
 		'encodeLabel'=>false,
-		'items'=>array(
-			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'), 'active'=>Yii::app()->utility->isActiveSubMenu('sitereport')),
-		),
+		'items'=>$this->menu,
+		//'items'=>Yii::app()->utility->getReportMenu(),
 	)); 
 }?>
 
@@ -84,6 +83,22 @@ if (Yii::app()->utility->isActiveMenu('dashboard')) {
 		    </div>
         </div>
         <div class="col-md-offset-2 col-md-10 bg-colorlight" id="inner-content">
+
+        	<?php if(isset($this->breadcrumbs)):
+				//if ( Yii::app()->controller->route !== 'site/index' )
+					//$this->breadcrumbs = array_merge(array (Yii::t('zii','Home')=>Yii::app()->homeUrl), $this->breadcrumbs);
+
+					$this->widget('zii.widgets.CBreadcrumbs', array(
+						'links'=>$this->breadcrumbs,
+						'homeLink'=>false,
+						'tagName'=>'ul',
+						'separator'=>'',
+						'activeLinkTemplate'=>'<li><a href="{url}">{label}</a> <span class="divider">/</span></li>',
+						'inactiveLinkTemplate'=>'<li><span>{label}</span></li>',
+						'htmlOptions'=>array ('class'=>'breadcrumb')
+				)); ?><!-- breadcrumbs -->
+		    <?php endif; ?>
+
 			<?php echo $content; ?>
         </div>
 

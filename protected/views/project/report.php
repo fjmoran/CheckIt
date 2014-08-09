@@ -1,27 +1,33 @@
 <?php
 $this->breadcrumbs=array(
-	'Reportes',
+	'Reportes'=>array('site/report'),
+	Yii::app()->utility->getOption('project_name').': '.$model->name,
 );
 
 // menu
-$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'));
+$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('project_name').': '.$model->name, 'url'=>array('/site/report'));
 //perspectivas
-$ps = Project::model()->findAll();
-foreach ($ps as $p) {
-	$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.$p->name, 'url'=>array('/project/report', 'id'=>$p->id));
+$sps = Subproject::model()->findAllByAttributes(array('project_id'=>$model->id));
+foreach ($sps as $sp) {
+	$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.$sp->name, 'url'=>array('/subproject/report', 'id'=>$sp->id));
 }
+
 ?>
 
 <div class="row">
-	<div class="col-md-12">
-		<h2><?php echo Yii::app()->utility->getOption('projects_name');?></h2><br>
+	<div class="col-md-11">
+		<h2><?php echo Yii::app()->utility->getOption('project_name');?>: <?php echo $model->name?></h2>
+	</div>
+	<div class="col-md-1" style="padding-top: 20px;">
+		<a href="<?php echo Yii::app()->createUrl('site/report'); ?>" class="btn btn-primary btn-sm pull-right"><i class="fa fa-arrow-left"></i> Volver</a>
 	</div>
 </div>
+<br>
 <div class="row">
 
 <?php foreach ($detail as $d) : ?>
 
-	<div class="col-md-6">
+	<div class="col-md-4">
 
 	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(

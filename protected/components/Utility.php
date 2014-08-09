@@ -37,7 +37,7 @@ class Utility extends CApplicationComponent
 			if ($level == 2) return 'option';
 			if ($level == 3) return ' - Administración';
 		}
-		if ($controller=='project' && ($action!='myprojects' && $action!='view' && $action!='strategydata' && $action!='todo' && $action!='completed' && $action!='myteam')) {
+		if ($controller=='project' && ($action!='myprojects' && $action!='view' && $action!='strategydata' && $action!='todo' && $action!='completed' && $action!='myteam' && $action!='report')) {
 			if ($level == 1) return 'admin';
 			if ($level == 2) return 'project';
 			if ($level == 3) return ' - Administración';
@@ -145,8 +145,13 @@ class Utility extends CApplicationComponent
 
 
 
-
 		if ($controller=='site' && ($action=='report')) {
+			if ($level == 1) return 'dashboard';
+			if ($level == 2) return 'sitereport';
+			if ($level == 3) return ' - Cuadro de Mando';
+		}
+
+		if ($controller=='project' && ($action=='report')) {
 			if ($level == 1) return 'dashboard';
 			if ($level == 2) return 'sitereport';
 			if ($level == 3) return ' - Cuadro de Mando';
@@ -155,6 +160,35 @@ class Utility extends CApplicationComponent
 
 		return '';    
 	}
+
+/*	public function getReportMenu() {
+		$controller = Yii::app()->getController()->id;
+		$action = Yii::app()->getController()->getAction()->id;
+
+		$r = array();
+
+		if ($controller=='site' && $action=='report') {
+			$r[] = 	array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'));
+			//perspectivas
+			$ps = Project::model()->findAll();
+			foreach ($ps as $p) {
+				$r[] = 	array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.$p->name, 'url'=>array('/project/report', 'id'=>$p->id));
+			}
+		}
+
+		if ($controller=='project' && $action=='report') {
+			$project_id = Yii::app()->controller->model_id;
+			$p = Project::model()->findByPk( $project_id );
+			$r[] = 	array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('project_name').': '.$p->name, 'url'=>array('/site/report'));
+			//perspectivas
+			$sps = Subproject::model()->findAllByAttributes(array('project_id'=>$project_id));
+			foreach ($sps as $sp) {
+				$r[] = 	array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> '.$sp->name, 'url'=>array('/subproject/report', 'id'=>$sp->id));
+			}
+		}
+
+		return $r;
+	}*/
 
 	public function getOption($name) {
 		$data = Option::model()->find("name='$name'");
