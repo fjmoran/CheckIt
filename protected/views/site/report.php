@@ -47,8 +47,8 @@
 					array(1, '#449d44'), //green
 				),
 				'lineWidth' => 0,
-				'minorTickInterval' => null,
-				'tickPixelInterval' => 400,
+				'minorTickInterval' => 20,
+				'tickPixelInterval' => 100,
 				'tickWidth' => 0,
 				/*'title' => array(
 					'y' => -70,
@@ -69,7 +69,7 @@
 			),
 			'series' => array(
 				array(
-					'name' => 'KPI',
+					'name' => 'Perspectiva',
 					'data' => array($d['compliance']),
 					'dataLabels' => array(
 						'format' => '<div style="text-align:center"><span style="font-size:25px;color:black;">{y} %</span></div>',
