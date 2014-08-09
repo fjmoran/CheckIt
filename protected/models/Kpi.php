@@ -66,7 +66,8 @@ class Kpi extends CActiveRecord
 
 	public function parentMinDate($elem) {
 		//obtenemos el padre
-		$parent=$this->parent()->find();
+		$parent = 0;
+		if ($this->root) $parent=Task::model()->findByPk($this->root);
 		if ($parent) {
 			if ($this->$elem < $parent->base_date) {
 				$this->addError($elem, "La fecha base debe ser mayor o igual a '{$parent->base_date}' (fecha base de kpi padre) .");
@@ -82,7 +83,8 @@ class Kpi extends CActiveRecord
 
 	public function parentMaxDate($elem) {
 		//obtenemos el padre
-		$parent=$this->parent()->find();
+		$parent = 0;
+		if ($this->root) $parent=Task::model()->findByPk($this->root);
 		if ($parent) {
 			if ($this->$elem > $parent->goal_date) {
 				$this->addError($elem, "La fecha meta debe ser menor o igual a '{$parent->goal_date}' (fecha meta de kpi padre) .");
