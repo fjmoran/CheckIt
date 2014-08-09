@@ -64,9 +64,9 @@ foreach ($ps as $p) {
 				'max' => 100,
 				'stops' => array(
 					array(0, '#c9302c'), //red
-					array($red - 0.001, '#c9302c'), //red
+					array($red - 0.00001, '#c9302c'), //red
 					array($red, '#f7f43a'), //yellow
-					array($yellow - 0.001, '#f7f43a'), //yellow
+					array($yellow - 0.00001, '#f7f43a'), //yellow
 					array($yellow, '#449d44'), //green
 					array(1, '#449d44'), //green
 				),
