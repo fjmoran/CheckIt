@@ -21,7 +21,7 @@ foreach ($ps as $p) {
 
 <?php foreach ($detail as $d) : ?>
 
-	<div class="col-md-6">
+	<div class="col-md-3">
 
 	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(
@@ -31,14 +31,19 @@ foreach ($ps as $p) {
 		),
 		'options'=>array(
 			'credits' => array('enabled' => false),
-			'chart' => array('type' => 'solidgauge'),
+			'chart' => array(
+				'type' => 'solidgauge',
+				'borderColor' => '#aaa',
+				//'borderWidth' => '1',
+				'borderRadius' => '15px',
+				),
 			'title' => array('text' => $d['title']),
 			//'title' => null,
 			'pane' => array(
 				'center' => array('50%', '50%'),
 				'size' => '100%',
-				'startAngle' => -90,
-				'endAngle' => 90,
+				'startAngle' => -140,
+				'endAngle' => 140,
 				'background' => array(
 					'backgroundColor' => '#EEE',
 					'innerRadius' => '60%',
@@ -55,8 +60,8 @@ foreach ($ps as $p) {
 				'stops' => array(
 					array(0, '#c9302c'), //red
 					array($red - 0.001, '#c9302c'), //red
-					array($red, '#ffff33'), //yellow
-					array($yellow - 0.001, '#ffff33'), //yellow
+					array($red, '#f7f43a'), //yellow
+					array($yellow - 0.001, '#f7f43a'), //yellow
 					array($yellow, '#449d44'), //green
 					array(1, '#449d44'), //green
 				),
@@ -68,6 +73,7 @@ foreach ($ps as $p) {
 					'y' => -70,
 					'text' => 'Speed',
 				),*/
+
 				'labels' => array(
 					'y' => 16,
 				),
@@ -95,7 +101,7 @@ foreach ($ps as $p) {
 			),
 		)
 	));	?>
-
+	<br>
 	</div>	
 
 <?php endforeach; ?>
