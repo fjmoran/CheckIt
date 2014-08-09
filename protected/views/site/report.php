@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 
 // menu
-$this->menu[] = array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'));
+$this->menu[] = array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'));
 //perspectivas
 $ps = Project::model()->findAll();
 foreach ($ps as $p) {
