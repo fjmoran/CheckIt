@@ -7,7 +7,7 @@ Yii::app()->clientScript->registerCoreScript('jquery.ui');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jquery.jsPlumb.min.js',CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->createUrl('process/js', array('process_id'=>$model->id)),CClientScript::POS_HEAD);
 //Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/resources/js/jsPlumb_conf.js',CClientScript::POS_HEAD);
-
+/*
 $this->breadcrumbs=array(
 	'Processes'=>array('index'),
 	$model->name,
@@ -19,7 +19,7 @@ $this->menu=array(
 	array('label'=>'Update Process', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete Process', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Process', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Proceso: <?php echo $model->name; ?></h2>

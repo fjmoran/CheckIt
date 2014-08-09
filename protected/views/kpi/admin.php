@@ -1,7 +1,7 @@
 <?php
 /* @var $this KpiController */
 /* @var $model Kpi */
-
+/*
 $this->breadcrumbs=array(
 	'Kpis'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Kpi', 'url'=>array('index')),
 	array('label'=>'Create Kpi', 'url'=>array('create')),
-);
+);*/
 
 Yii::app()->clientScript->registerScript('search', "
 /*function init_tree(filter) {

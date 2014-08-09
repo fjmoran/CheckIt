@@ -1,7 +1,7 @@
 <?php
 /* @var $this OptionController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Options',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Option', 'url'=>array('create')),
 	array('label'=>'Manage Option', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Options</h1>

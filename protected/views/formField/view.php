@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldController */
 /* @var $model FormField */
-
+/*
 $this->breadcrumbs=array(
 	'Form Fields'=>array('index'),
 	$model->name,
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update FormField', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete FormField', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage FormField', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>View FormField #<?php echo $model->id; ?></h1>

@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldController */
 /* @var $model FormField */
-
+/*
 $this->breadcrumbs=array(
 	'Form Fields'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create FormField', 'url'=>array('create')),
 	array('label'=>'View FormField', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage FormField', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Proceso: <?php echo $process->name; ?></h2>

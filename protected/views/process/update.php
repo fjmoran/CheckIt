@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessController */
 /* @var $model Process */
-
+/*
 $this->breadcrumbs=array(
 	'Processes'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create Process', 'url'=>array('create')),
 	array('label'=>'View Process', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage Process', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Editar flujo de proceso</h2>

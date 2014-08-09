@@ -4,9 +4,9 @@
 /* @var $form CActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Forgot Password';
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Forgot Password',
-);
+);*/
 ?>
 
 <div class="ck-login">

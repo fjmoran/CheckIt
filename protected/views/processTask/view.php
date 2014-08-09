@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessTaskController */
 /* @var $model ProcessTask */
-
+/*
 $this->breadcrumbs=array(
 	'Process Tasks'=>array('index'),
 	$model->name,
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update ProcessTask', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete ProcessTask', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage ProcessTask', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>View ProcessTask #<?php echo $model->id; ?></h1>

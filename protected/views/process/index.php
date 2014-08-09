@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Processes',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Process', 'url'=>array('create')),
 	array('label'=>'Manage Process', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Processes</h1>

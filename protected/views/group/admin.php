@@ -1,7 +1,7 @@
 <?php
 /* @var $this GroupController */
 /* @var $model Group */
-
+/*
 $this->breadcrumbs=array(
 	'Groups'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Group', 'url'=>array('index')),
 	array('label'=>'Create Group', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

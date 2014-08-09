@@ -2,7 +2,7 @@
 /* @var $this TaskController */
 /* @var $model Task */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Tasks'=>array('index'),
 	'Manage',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Task', 'url'=>array('index')),
 	array('label'=>'Create Task', 'url'=>array('create')),
-);
+);*/
 
 Yii::app()->clientScript->registerScript('search', "
 $('.select-level').change(function(){

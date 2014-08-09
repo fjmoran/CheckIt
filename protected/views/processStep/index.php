@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessStepController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Process Steps',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create ProcessStep', 'url'=>array('create')),
 	array('label'=>'Manage ProcessStep', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Process Steps</h1>

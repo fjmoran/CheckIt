@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormController */
 /* @var $model Form */
-
+/*
 $this->breadcrumbs=array(
 	'Forms'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Form', 'url'=>array('index')),
 	array('label'=>'Create Form', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

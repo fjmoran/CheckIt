@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessStepController */
 /* @var $model ProcessStep */
-
+/*
 $this->breadcrumbs=array(
 	'Process Steps'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create ProcessStep', 'url'=>array('create')),
 	array('label'=>'View ProcessStep', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage ProcessStep', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Update ProcessStep <?php echo $model->id; ?></h1>

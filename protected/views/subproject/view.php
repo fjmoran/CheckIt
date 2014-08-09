@@ -2,7 +2,7 @@
 /* @var $this SubprojectController */
 /* @var $model Subproject */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Subprojects'=>array('index'),
 	$model->name,
 );
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update Subproject', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete Subproject', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Subproject', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>View Subproject #<?php echo $model->id; ?></h1>

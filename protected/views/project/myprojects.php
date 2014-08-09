@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProjectController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Projects',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Project', 'url'=>array('create')),
 	array('label'=>'Manage Project', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Mis <?php echo Yii::app()->utility->getOption('projects_name'); ?></h2>

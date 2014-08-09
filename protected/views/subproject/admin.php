@@ -2,7 +2,7 @@
 /* @var $this SubprojectController */
 /* @var $model Subproject */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Subprojects'=>array('index'),
 	'Manage',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Subproject', 'url'=>array('index')),
 	array('label'=>'Create Subproject', 'url'=>array('create')),
-);
+);*/
 
 Yii::app()->clientScript->registerScript('search', "
 $('#Subproject_project_id').change(function(){

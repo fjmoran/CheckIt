@@ -2,7 +2,7 @@
 /* @var $this PositionController */
 /* @var $model Position */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Positions'=>array('index'),
 	'Manage',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Position', 'url'=>array('index')),
 	array('label'=>'Create Position', 'url'=>array('create')),
-);
+);*/
 
 /*
 Yii::app()->clientScript->registerScript('search', "

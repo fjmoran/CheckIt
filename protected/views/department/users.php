@@ -1,7 +1,7 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
-
+/*
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List User', 'url'=>array('index')),
 	array('label'=>'Create User', 'url'=>array('create')),
-);
+);*/
 
 /*
 Yii::app()->clientScript->registerScript('search', "

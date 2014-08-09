@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormPropertyController */
 /* @var $model FormProperty */
-
+/*
 $this->breadcrumbs=array(
 	'Form Properties'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List FormProperty', 'url'=>array('index')),
 	array('label'=>'Create FormProperty', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

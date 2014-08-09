@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProjectController */
 /* @var $model Project */
-
+/*
 $this->breadcrumbs=array(
 	'Projects'=>array('index'),
 	$model->name,
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update Project', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete Project', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Project', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2 style="padding-bottom:20px;"><?php echo Yii::app()->utility->getOption('project_name').": ".$model->name; ?></h2>

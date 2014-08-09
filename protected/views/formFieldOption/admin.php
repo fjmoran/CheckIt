@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldOptionController */
 /* @var $model FormFieldOption */
-
+/*
 $this->breadcrumbs=array(
 	'Form Field Options'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List FormFieldOption', 'url'=>array('index')),
 	array('label'=>'Create FormFieldOption', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

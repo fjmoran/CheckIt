@@ -2,7 +2,7 @@
 /* @var $this UserGroupController */
 /* @var $model UserGroup */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'User Groups'=>array('index'),
 	'Create',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List UserGroup', 'url'=>array('index')),
 	array('label'=>'Manage UserGroup', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Agregar usuario a grupo <?php echo $group->name; ?></h2>

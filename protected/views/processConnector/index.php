@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessConnectorController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Process Connectors',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create ProcessConnector', 'url'=>array('create')),
 	array('label'=>'Manage ProcessConnector', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Process Connectors</h1>

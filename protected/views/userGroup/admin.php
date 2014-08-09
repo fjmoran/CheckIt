@@ -2,7 +2,7 @@
 /* @var $this UserGroupController */
 /* @var $model UserGroup */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'User Groups'=>array('index'),
 	'Manage',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List UserGroup', 'url'=>array('index')),
 	array('label'=>'Create UserGroup', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

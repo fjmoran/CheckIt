@@ -1,7 +1,7 @@
 <?php
 /* @var $this RoleController */
 /* @var $model Role */
-
+/*
 $this->breadcrumbs=array(
 	'Roles'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create Role', 'url'=>array('create')),
 	array('label'=>'View Role', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage Role', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Update Role <?php echo $model->id; ?></h1>

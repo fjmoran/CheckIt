@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Form Fields',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create FormField', 'url'=>array('create')),
 	array('label'=>'Manage FormField', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Form Fields</h1>

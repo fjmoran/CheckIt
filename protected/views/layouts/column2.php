@@ -91,10 +91,10 @@ if (Yii::app()->utility->isActiveMenu('dashboard')) {
 					$this->widget('zii.widgets.CBreadcrumbs', array(
 						'links'=>$this->breadcrumbs,
 						'homeLink'=>false,
-						'tagName'=>'ul',
+						'tagName'=>'ol',
 						'separator'=>'',
-						'activeLinkTemplate'=>'<li><a href="{url}">{label}</a> <span class="divider">/</span></li>',
-						'inactiveLinkTemplate'=>'<li><span>{label}</span></li>',
+						'activeLinkTemplate'=>'<li><a href="{url}">{label}</a></li>',
+						'inactiveLinkTemplate'=>'<li class="active">{label}</li>',
 						'htmlOptions'=>array ('class'=>'breadcrumb')
 				)); ?><!-- breadcrumbs -->
 		    <?php endif; ?>

@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProjectController */
 /* @var $model Project */
-
+/*
 $this->breadcrumbs=array(
 	'Projects'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Project', 'url'=>array('index')),
 	array('label'=>'Create Project', 'url'=>array('create')),
-);
+);*/
 
 /*
 Yii::app()->clientScript->registerScript('search', "

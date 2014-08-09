@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormController */
 /* @var $model Form */
-
+/*
 $this->breadcrumbs=array(
 	'Forms'=>array('index'),
 	'Create',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Form', 'url'=>array('index')),
 	array('label'=>'Manage Form', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Proceso: <?php echo $process->name; ?></h2>

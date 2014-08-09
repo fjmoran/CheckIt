@@ -1,7 +1,7 @@
 <?php
 /* @var $this RoleController */
 /* @var $model Role */
-
+/*
 $this->breadcrumbs=array(
 	'Roles'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Role', 'url'=>array('index')),
 	array('label'=>'Create Role', 'url'=>array('create')),
-);
+);*/
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

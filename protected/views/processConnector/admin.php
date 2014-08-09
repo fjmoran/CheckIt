@@ -1,7 +1,7 @@
 <?php
 /* @var $this ProcessConnectorController */
 /* @var $model ProcessConnector */
-
+/*
 $this->breadcrumbs=array(
 	'Process Connectors'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List ProcessConnector', 'url'=>array('index')),
 	array('label'=>'Create ProcessConnector', 'url'=>array('create')),
-);
+);*/
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

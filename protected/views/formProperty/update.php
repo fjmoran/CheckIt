@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormPropertyController */
 /* @var $model FormProperty */
-
+/*
 $this->breadcrumbs=array(
 	'Form Properties'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create FormProperty', 'url'=>array('create')),
 	array('label'=>'View FormProperty', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage FormProperty', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Proceso: <?php echo $process->name; ?></h2>

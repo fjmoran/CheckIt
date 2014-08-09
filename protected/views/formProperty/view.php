@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormPropertyController */
 /* @var $model FormProperty */
-
+/*
 $this->breadcrumbs=array(
 	'Form Properties'=>array('index'),
 	$model->id,
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update FormProperty', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete FormProperty', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage FormProperty', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>View FormProperty #<?php echo $model->id; ?></h1>

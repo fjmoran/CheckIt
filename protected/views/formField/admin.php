@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldController */
 /* @var $model FormField */
-
+/*
 $this->breadcrumbs=array(
 	'Form Fields'=>array('index'),
 	'Manage',
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List FormField', 'url'=>array('index')),
 	array('label'=>'Create FormField', 'url'=>array('create')),
-);
+);*/
 
 /*Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

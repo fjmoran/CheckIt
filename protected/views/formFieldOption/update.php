@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormFieldOptionController */
 /* @var $model FormFieldOption */
-
+/*
 $this->breadcrumbs=array(
 	'Form Field Options'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create FormFieldOption', 'url'=>array('create')),
 	array('label'=>'View FormFieldOption', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage FormFieldOption', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Proceso: <?php echo $process->name; ?></h2>

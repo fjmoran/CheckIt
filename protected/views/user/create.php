@@ -2,7 +2,7 @@
 /* @var $this UserController */
 /* @var $model User */
 
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Users'=>array('index'),
 	'Create',
 );
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List User', 'url'=>array('index')),
 	array('label'=>'Manage User', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h2>Crear nuevo usuario</h2>

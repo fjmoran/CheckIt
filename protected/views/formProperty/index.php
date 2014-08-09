@@ -1,7 +1,7 @@
 <?php
 /* @var $this FormPropertyController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Form Properties',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create FormProperty', 'url'=>array('create')),
 	array('label'=>'Manage FormProperty', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Form Properties</h1>

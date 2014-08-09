@@ -1,7 +1,7 @@
 <?php
 /* @var $this GroupController */
 /* @var $dataProvider CActiveDataProvider */
-
+/*
 $this->breadcrumbs=array(
 	'Groups',
 );
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Group', 'url'=>array('create')),
 	array('label'=>'Manage Group', 'url'=>array('admin')),
-);
+);*/
 ?>
 
 <h1>Groups</h1>
