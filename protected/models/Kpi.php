@@ -383,7 +383,7 @@ class Kpi extends CActiveRecord
 
 	public function getCompliance() {
 		$value = $this->lastDataValue;
-		if ($value===null) return null;
+		if ($value===null) $value = $this->base_value; //return null;
 
 		// Actual (A) / Meta (M) / Base (I)
 		$a = $value;
