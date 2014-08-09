@@ -24,63 +24,6 @@ foreach ($ps as $p) {
 	<div class="col-md-3">
 
 	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
-		'options'=>array(
-			'colors' => array(
-				'#c9302c', '#ccc', '#ffff33', '#449d44', '#fff'
-			),
-			'credits' => array('enabled' => false),
-			'chart' => array(
-				'plotBackgroundColor' => null,
-				'plotBorderWidth' => 0,
-				'plotShadow' => false,
-			),
-			'title' => array(
-				'text' => $d['title'],
-				'align' => 'center',
-				'verticalAlign' => 'middle',
-				'y' => 50,
-			),
-			'tooltip' => array(
-				'pointFormat' => '{series.name}: <b>{point.percentage:.1f}%</b>'
-			),
-			'plotOptions' => array(
-				'pie' => array(
-					'dataLabels' => array(
-						'enabled' => true,
-						'distance' => -50,
-						'style' => array(
-							'fontWeight' => 'bold',
-							'color' => 'white',
-							'textShadow' => '0px 1px 2px black',
-						),
-					),
-					'startAngle' => -90,
-					'endAngle' => 90,
-					'center' => array('50%', '75%'),
-				),
-			),
-			'series' => array(
-				array(
-					'type' => 'pie',
-					'name' => 'Perspectiva',
-					'innerSize' => '50%',
-					'data' => array(
-						array('Cumplimiento', $d['compliance']),
-						array(
-							'name' => '', 
-							'y' => 100 - $d['compliance'],
-							'dataLabels' => array(
-								'enabled' => false,
-							),
-						),
-					),
-				),
-			),
-		)
-	));	?>
-
-
-	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(
 			'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
 			'modules/solid-gauge',
@@ -90,16 +33,17 @@ foreach ($ps as $p) {
 			'credits' => array('enabled' => false),
 			'chart' => array(
 				'type' => 'solidgauge',
-				/*'height' => '200',
-				'width' => '450',*/
-			),
-			//'title' => array('text' => $d['title']),
-			'title' => null,
+				'borderColor' => '#aaa',
+				//'borderWidth' => '1',
+				'borderRadius' => '15px',
+				),
+			'title' => array('text' => $d['title']),
+			//'title' => null,
 			'pane' => array(
-				'center' => array('50%', '85%'),
-				'size' => '140%',
-				'startAngle' => -90,
-				'endAngle' => 90,
+				'center' => array('50%', '50%'),
+				'size' => '100%',
+				'startAngle' => -140,
+				'endAngle' => 140,
 				'background' => array(
 					'backgroundColor' => '#EEE',
 					'innerRadius' => '60%',
@@ -116,8 +60,8 @@ foreach ($ps as $p) {
 				'stops' => array(
 					array(0, '#c9302c'), //red
 					array($red - 0.001, '#c9302c'), //red
-					array($red, '#ffff33'), //yellow
-					array($yellow - 0.001, '#ffff33'), //yellow
+					array($red, '#f7f43a'), //yellow
+					array($yellow - 0.001, '#f7f43a'), //yellow
 					array($yellow, '#449d44'), //green
 					array(1, '#449d44'), //green
 				),
@@ -129,6 +73,7 @@ foreach ($ps as $p) {
 					'y' => -70,
 					'text' => $d['title'],
 				),*/
+
 				'labels' => array(
 					'y' => 16,
 				),
@@ -147,7 +92,7 @@ foreach ($ps as $p) {
 					'name' => 'Perspectiva',
 					'data' => array($d['compliance']),
 					'dataLabels' => array(
-						'format' => '<div style="text-align:center"><span style="font-size:35px;color:black;">{y} %</span><br><span style="font-size:18px;color:black">'.$d['title'].'</span></div><br>',
+						'format' => '<div style="text-align:center"><span style="font-size:26px;color:black;">{y} %</span><br></div><br>',
 					),
 					'tooltip' => array(
 						'valueSuffix' => ' %',
@@ -156,7 +101,7 @@ foreach ($ps as $p) {
 			),
 		)
 	));	?>
-
+	<br>
 	</div>	
 
 <?php endforeach; ?>
