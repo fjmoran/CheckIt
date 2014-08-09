@@ -1,7 +1,7 @@
 <?php
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
 	'Reportes',
-);
+);*/
 
 // menu
 $this->menu[] = array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> Reportes Estratégicos', 'url'=>array('/site/report'));
@@ -19,7 +19,7 @@ foreach ($ps as $p) {
 </div>
 <div class="row">
 
-<?php foreach ($detail as $d) : ?>
+<?php foreach ($projects as $project) : ?>
 
 	<div class="col-md-3">
 
@@ -37,7 +37,7 @@ foreach ($ps as $p) {
 				//'borderWidth' => '1',
 				'borderRadius' => '15px',
 				),
-			'title' => array('text' => $d['title']),
+			'title' => array('text' => $project->name),
 			//'title' => null,
 			'pane' => array(
 				'center' => array('50%', '50%'),
@@ -90,7 +90,7 @@ foreach ($ps as $p) {
 			'series' => array(
 				array(
 					'name' => 'Perspectiva',
-					'data' => array($d['compliance']),
+					'data' => array(round($project->compliance)),
 					'dataLabels' => array(
 						'format' => '<div style="text-align:center"><span style="font-size:26px;color:black;">{y} %</span><br></div><br>',
 					),
@@ -101,6 +101,26 @@ foreach ($ps as $p) {
 			),
 		)
 	));	?>
+
+	<table class="table table-condensed" style="font-size:small;">
+		<tr>
+			<th style="width: 26%;"><?php echo Yii::app()->utility->getOption('subproject_name');?></th>
+			<th style="width: 8%;">Estado</th>
+		</tr>			
+
+	<?php foreach ($project->subprojects as $subproject):?>
+		<tr>
+			<td><?php echo $subproject->name; ?></td>
+			<td><?php 
+				$color = Yii::app()->utility->getStatusColor($subproject->compliance); 
+				if ($color == 1) echo '<span class="label label-danger">Rojo</span>';
+				if ($color == 2) echo '<span class="label label-warning">Amarillo</span>';
+				if ($color == 3) echo '<span class="label label-success">Verde</span>';
+			?></td>
+		</tr>
+	<?php endforeach;?>
+	</table>
+
 	<br>
 	</div>	
 

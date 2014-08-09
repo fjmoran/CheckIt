@@ -75,18 +75,18 @@ class SiteController extends Controller
 
 		$projects = Project::model()->findAll();
 
-		$detail = array();
+		/*$detail = array();
 		foreach ($projects as $project) {
 			$d = array();
 			$d['title'] = $project->name;
 			$d['compliance'] = round($project->compliance,0);
 			$detail[] = $d;
-		}
+		}*/
 
 		$this->render('report',array(
 			'yellow' => Yii::app()->utility->getOption('kpi_yellow') / 100,
 			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
-			'detail'=>$detail,
+			'projects'=>$projects,
 		));
 	}
 
