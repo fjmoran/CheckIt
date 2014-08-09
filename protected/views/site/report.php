@@ -109,8 +109,8 @@ foreach ($ps as $p) {
 
 	<table class="table table-condensed" style="font-size:small;">
 		<tr>
-			<th style="width: 26%;"><?php echo Yii::app()->utility->getOption('subproject_name');?></th>
-			<th style="width: 8%;">Estado</th>
+			<th style="width: ;"><?php echo Yii::app()->utility->getOption('subproject_name');?></th>
+			<th style="width: ;">Estado</th>
 		</tr>			
 
 	<?php foreach ($project->subprojects as $subproject):?>

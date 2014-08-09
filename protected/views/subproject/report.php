@@ -69,10 +69,11 @@ foreach ($sps as $sp) {
 				</td>				
 				<td>
 					<?php 
-						$color = Yii::app()->utility->getStatusColor($kpi->compliance);
-						if ($color == 1) echo '<span class="label label-danger">Rojo</span>';
-						if ($color == 2) echo '<span class="label label-warning">Amarillo</span>';
-						if ($color == 3) echo '<span class="label label-success">Verde</span>';
+						$compliance = round($kpi->compliance);
+						$color = Yii::app()->utility->getStatusColor($compliance);
+						if ($color == 1) echo '<span class="label label-danger">'.$compliance.' %</span>';
+						if ($color == 2) echo '<span class="label label-warning">'.$compliance.' %</span>';
+						if ($color == 3) echo '<span class="label label-success">'.$compliance.' %</span>';
 					?>
 				</td>
 				<td style="text-align: center;">
