@@ -95,7 +95,7 @@ foreach ($ps as $p) {
 			'series' => array(
 				array(
 					'name' => 'Perspectiva',
-					'data' => array(round($project->compliance)),
+					'data' => array(round($project->compliance,1)),
 					'dataLabels' => array(
 						'format' => '<div style="text-align:center"><span style="font-size:26px;color:black;">{y} %</span><br></div><br>',
 					),
