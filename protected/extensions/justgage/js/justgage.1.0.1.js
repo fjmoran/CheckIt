@@ -23,7 +23,7 @@ JustGage = function(config) {
     
     // title : string
     // gauge title 
-    title : (config.title) ? config.title : "Title",
+    title : (config.title) ? config.title : "",
 
     fixedProgress : (config.fixedProgress != null) ? config.fixedProgress : false,
 

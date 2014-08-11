@@ -25,11 +25,31 @@ foreach ($sps as $sp) {
 <br>
 <div class="row">
 
-<?php foreach ($detail as $d) : ?>
+<?php foreach ($subprojects as $subproject) : ?>
 
-	<div class="col-md-4">
+	<div class="col-md-4 text-center">
 
-	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
+		<h3><?php echo $subproject->name ?></h3>
+
+	<?php $this->Widget('ext.justgage.JustGage', array(
+		'options'=>array(
+			'value' => $subproject->compliance,
+			'valueText' => round($subproject->compliance).'%',
+			'min' => 0,
+			'max' => 100,
+			'title' => '',
+			'levelColorsGradient' => false,
+			'fixedProgress' => true,
+			'progressValues' => array($red, $yellow, 1),
+			'levelColors' => array("#c9302c", "#f7f43a", "#449d44"),
+			'titleFontColor' => '#666',
+		),
+		'htmlOptions'=> array(
+			'style'=>'width:300px; height:240px; margin: 0 auto;',
+		),
+	));?>
+
+	<?php /* $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(
 			'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
 			'modules/solid-gauge',
@@ -70,10 +90,10 @@ foreach ($sps as $sp) {
 				'minorTickInterval' => 20,
 				'tickPixelInterval' => 100,
 				'tickWidth' => 0,
-				/*'title' => array(
-					'y' => -70,
-					'text' => 'Speed',
-				),*/
+				//'title' => array(
+				//	'y' => -70,
+				//	'text' => 'Speed',
+				//),
 				'labels' => array(
 					'y' => 16,
 				),
@@ -100,7 +120,7 @@ foreach ($sps as $sp) {
 				),
 			),
 		)
-	));	?>
+	));*/	?>
 
 	</div>	
 

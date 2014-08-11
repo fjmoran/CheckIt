@@ -50,13 +50,13 @@ class ProjectController extends Controller
 		$model=$this->loadModel($id);
 		$subprojects = Subproject::model()->findAllByAttributes(array('project_id'=>(int)$id));
 
-		$detail = array();
+		/*$detail = array();
 		foreach ($subprojects as $subproject) {
 			$d = array();
 			$d['title'] = $subproject->name;
 			$d['compliance'] = round($subproject->compliance,0);
 			$detail[] = $d;
-		}
+		}*/
 
 		//$this->model_id = $model->id;
 
@@ -64,7 +64,7 @@ class ProjectController extends Controller
 			'model' => $model,
 			'yellow' => Yii::app()->utility->getOption('kpi_yellow') / 100,
 			'red' => Yii::app()->utility->getOption('kpi_red') / 100,
-			'detail'=>$detail,
+			'subprojects'=>$subprojects,
 		));		
 	}
 
