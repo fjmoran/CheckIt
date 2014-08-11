@@ -34,11 +34,11 @@ foreach ($sps as $sp) {
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 33%;">KPI</th>
+					<th style="width: 41%;">KPI</th>
 					<th style="width: 8%;">Meta</th>
 					<th style="width: 8%;">Actual</th>
 					<th style="width: 8%;">Peso</th>
-					<th style="width: 17%;">Responsable</th>
+					<th style="width: 27%;">Responsable</th>
 					<th style="width: 8%;">Estado</th>
 				</tr>			
 
@@ -61,10 +61,10 @@ foreach ($sps as $sp) {
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 23%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+					<th style="width: 41%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
 					<th style="width: 12%;">Fecha inicio</th>
 					<th style="width: 12%;">Fecha término</th>
-					<th style="width: 15%;">Responsable</th>				
+					<th style="width: 27%;">Responsable</th>				
 					<th style="width: 8%;">Estado</th>
 				</tr>
 
