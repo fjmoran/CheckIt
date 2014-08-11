@@ -24,6 +24,9 @@ foreach ($sps as $sp) {
 	</div -->
 </div>
 <br>
+
+<?php if ($kpis) :?>
+
 <div class="row">
 	<div class="col-md-12">
 
@@ -31,27 +34,56 @@ foreach ($sps as $sp) {
 
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 26%;">KPI</th>
+					<th style="width: 33%;">KPI</th>
 					<th style="width: 8%;">Meta</th>
 					<th style="width: 8%;">Actual</th>
 					<th style="width: 8%;">Peso</th>
 					<th style="width: 17%;">Responsable</th>
 					<th style="width: 8%;">Estado</th>
-					<th style="width: 7%; text-align: center;">Acción</th>
 				</tr>			
 
 <?php foreach ($kpis as $kpi) : ?>
 
+	<?php display_kpi($kpi);?>
+
+<?php endforeach; ?>
+
+		</table>
+
+	</div>	
+</div>
+
+<?php endif;?>
+
+<?php if ($tasks): ?>
+
+		<h3><?php echo Yii::app()->utility->getOption('tasks_name'); ?></h3>
+
+			<table class="table table-condensed" style="font-size:small;">
+				<tr>
+					<th style="width: 23%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
+					<th style="width: 12%;">Fecha inicio</th>
+					<th style="width: 12%;">Fecha término</th>
+					<th style="width: 15%;">Responsable</th>				
+					<th style="width: 8%;">Estado</th>
+				</tr>
+
+	<?php foreach ($tasks as $task):?>
+
+	<?php display_task($task);?>
+
+	<?php endforeach; ?>
+
+			</table>
+
+<?php endif; ?>
+
+
+<?php function display_kpi($kpi, $ischild=0) { ?>
 			<tr>
 				<td>
-					<?php /*if (!$ischild): ?>
-						<a title="Editar" data-toggle="modal" data-target="#myModal" style="color: #333;" 
-						href="<?php echo Yii::app()->createUrl('kpi/changestatus',array('id'=>$kpi->id)); ?>">					
-						<?php echo $kpi->name; ?>
-						</a>
-					<?php else:*/ ?>
-						<?php echo $kpi->name; ?>
-					<?php //endif; ?>
+					<?php echo str_repeat('&nbsp;&nbsp;', $ischild); ?>
+					<i class="fa fa-circle<?php echo ($ischild%2 == 1)?'-o':''?>" style="font-size:8px"></i> <?php echo $kpi->name; ?>
 				</td>
 				<!--td><?php echo $kpi->base_value; ?></td-->
 				<td>
@@ -77,21 +109,46 @@ foreach ($sps as $sp) {
 						if ($color == 3) echo '<span class="label label-success">'.$compliance.' %</span>';
 					?>
 				</td>
-				<td style="text-align: center;">
-					<?php /*if (!$ischild): */?>
-					<a title="Editar" data-toggle="modal" data-target="#myModal" 
-					href="<?php echo Yii::app()->createUrl('kpi/view',array('id'=>$kpi->id)); ?>">
-						<i class="fa fa-eye grid-icon"></i>
-					</a>
-					<?php /* else: ?>
-						<i class="fa fa-ban grid-icon" style="color:#ccc;"></i>					
-					<?php endif;*/ ?>
-				</td>
 			</tr>
 
-<?php endforeach; ?>
+		<?php foreach ($kpi->children()->findAll() as $subkpi):?>
+			<?php display_kpi($subkpi, $ischild+1); ?>
+		<?php endforeach;?>
 
-		</table>
+<?php  } ?>
 
-	</div>	
-</div>
+<?php function display_task($task, $ischild=0) {?>
+			<tr>
+				<td>
+					<?php echo str_repeat('&nbsp;&nbsp;', $ischild); ?>
+					<i class="fa fa-circle<?php echo ($ischild%2 == 1)?'-o':''?>" style="font-size:8px"></i> <?php echo $task->name; ?>
+				</td>
+				<td><?php echo $task->start_date; ?></td>
+				<td>
+					<?php echo $task->due_date; ?>
+				</td>
+				<td>
+					<?php echo $task->inCharge; ?>
+				</td>				
+				<td>
+					<?php 
+						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
+						$datediff = (int)$interval->format("%R%a");
+					?>
+					<?php if ($task->status == 1):?>
+						<span class="label label-success">Terminado</span>
+					<?php elseif ($datediff < 0): ?>
+						<span class="label label-danger">Vencido</span>
+					<?php elseif ($datediff < 16): ?>
+						<span class="label label-warning">Vence en <?=$datediff?> días</span>
+					<?php else: ?>
+						<span class="label label-info">Pendiente</span>
+					<?php endif; ?>
+				</td>
+			</tr>	
+
+		<?php foreach ($task->children()->findAll() as $subtask):?>
+			<?php display_task($subtask, $ischild+1); ?>
+		<?php endforeach;?>
+
+<?php } ?>

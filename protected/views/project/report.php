@@ -35,7 +35,7 @@ foreach ($sps as $sp) {
 
 	<div class="col-md-3">
 		<div class="row text-center">
-			<p class="gaugeText"><?php echo $subproject->name ?></p>
+			<a href="<?php echo Yii::app()->createUrl('subproject/report',array('id'=>$subproject->id)); ?>" class="gaugeText"><?php echo $subproject->name ?></a>
 		</div>
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
@@ -137,7 +137,7 @@ foreach ($sps as $sp) {
 			<th style="width: ;">Estado</th>
 		</tr>			
 
-	<?php foreach ($subproject->kpis as $kpi):?>
+	<?php foreach ($subproject->childKpis as $kpi):?>
 		<tr>
 			<td><a class="report-link" href="<?php echo Yii::app()->createUrl('subproject/report', array('id'=>$subproject->id))?>"><?php echo $kpi->name; ?></a></td>
 			<td class="text-center"><?php 

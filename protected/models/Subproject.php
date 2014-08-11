@@ -55,6 +55,8 @@ class Subproject extends CActiveRecord
 			'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
 			'tasks' => array(self::HAS_MANY, 'Task', 'subproject_id'),
 			'kpis' => array(self::HAS_MANY, 'Kpi', 'subproject_id'),
+			'childTasks' => array(self::HAS_MANY, 'Task', 'subproject_id', 'condition'=>'childTasks.id = childTasks.root'),
+			'childKpis' => array(self::HAS_MANY, 'Kpi', 'subproject_id', 'condition'=>'childKpis.id = childKpis.root'),
 			'department' => array(self::BELONGS_TO, 'Department', 'department_id'),
 		);
 	}

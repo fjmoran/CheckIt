@@ -43,8 +43,8 @@ class SubprojectController extends Controller
 
 	public function actionReport($id) {
 		$model=$this->loadModel($id);
-		$kpis = Kpi::model()->findAllByAttributes(array('subproject_id'=>(int)$id));
-		$tasks = Task::model()->findAllByAttributes(array('subproject_id'=>(int)$id));
+		$kpis = Kpi::model()->findAllByAttributes(array(), array('condition'=>'subproject_id=:subproject_id AND root=id', 'params'=>array('subproject_id'=>(int)$id)));
+		$tasks = Task::model()->findAllByAttributes(array(), array('condition'=>'subproject_id=:subproject_id AND root=id', 'params'=>array('subproject_id'=>(int)$id)));
 
 		/*$detail = array();
 		foreach ($subprojects as $subproject) {
