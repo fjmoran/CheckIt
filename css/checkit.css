@@ -296,3 +296,7 @@ text-decoration: none;
 .report-link:hover {
 color:#000;
 }
+
+.gaugeText:hover {
+color:#666;
+}
