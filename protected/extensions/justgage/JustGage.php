@@ -38,7 +38,6 @@
  *           "min": 0,
  *           "max": 100,
  *           "title": "Visitors"
- *           "title": { "text": "Fruit Consumption" },
  *       }',
  *       'htmlOptions'=> array(
  *           'style'=>'width:200px; height:160px; margin: 0 auto;',
