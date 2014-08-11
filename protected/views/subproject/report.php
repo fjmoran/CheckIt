@@ -6,6 +6,7 @@ $this->breadcrumbs=array(
 );
 
 // menu
+$this->menu[] = array('label'=>'<i class="fa fa-chevron-left fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('project_name').': '.$model->project->name, 'url'=>array('/project/report', 'id'=>$model->project->id));
 $this->menu[] = array('label'=>'<i class="fa fa-file fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subproject_name').': '.$model->name, 'url'=>array('/subproject/report', 'id'=>$model->id));
 //perspectivas
 /*$sps = Subproject::model()->findAllByAttributes(array('project_id'=>$model->id));
@@ -18,9 +19,9 @@ foreach ($sps as $sp) {
 	<div class="col-md-11">
 		<h2><?php echo Yii::app()->utility->getOption('subproject_name');?>: <?php echo $model->name?></h2>
 	</div>
-	<div class="col-md-1" style="padding-top: 20px;">
+	<!-- div class="col-md-1" style="padding-top: 20px;">
 		<a href="<?php echo Yii::app()->createUrl('project/report', array('id'=>$model->project->id)); ?>" class="btn btn-primary btn-sm pull-right"><i class="fa fa-arrow-left"></i> Volver</a>
-	</div>
+	</div -->
 </div>
 <br>
 <div class="row">

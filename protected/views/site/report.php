@@ -29,7 +29,7 @@ foreach ($ps as $p) {
 	<div class="col-md-3">
 
 		<div class="row text-center">
-			<p class="gaugeText"><?php echo $project->name ?></p>
+			<a class="gaugeText" href="<?php echo Yii::app()->createUrl('project/report', array('id'=>$project->id))?>"><?php echo $project->name ?></a>
 		</div>
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
@@ -137,12 +137,13 @@ foreach ($ps as $p) {
 
 	<?php foreach ($project->subprojects as $subproject):?>
 		<tr>
-			<td><?php echo $subproject->name; ?></td>
-			<td><?php 
-				$color = Yii::app()->utility->getStatusColor($subproject->compliance); 
-				if ($color == 1) echo '<span class="label label-danger">Rojo</span>';
-				if ($color == 2) echo '<span class="label label-warning">Amarillo</span>';
-				if ($color == 3) echo '<span class="label label-success">Verde</span>';
+			<td><a class="report-link" href="<?php echo Yii::app()->createUrl('subproject/report', array('id'=>$subproject->id))?>"><?php echo $subproject->name; ?></a></td>
+			<td class="text-center"><?php 
+				$compliance = $subproject->compliance;
+				$color = Yii::app()->utility->getStatusColor($compliance); 
+				if ($color == 1) echo '<span class="label label-danger">'.round($compliance).'%</span>';
+				if ($color == 2) echo '<span class="label label-warning">'.round($compliance).'%</span>';
+				if ($color == 3) echo '<span class="label label-success">'.round($compliance).'%</span>';
 			?></td>
 		</tr>
 	<?php endforeach;?>

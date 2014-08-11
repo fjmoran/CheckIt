@@ -347,7 +347,10 @@ class ProjectController extends Controller
 		foreach ($kpi as $k) $kpi_arr[$k->subproject_id][] = $k;
 		foreach ($task as $k) $task_arr[$k->subproject_id][] = $k;
 
-		$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',array_merge($oe_kpi, $oe_task)).')');
+		$merge = array_merge($oe_kpi, $oe_task);
+		$projects = array();
+		if (count($merge))
+			$projects = Project::model()->with('subprojects')->findAll('subprojects.id IN ('.join(',',array_merge($oe_kpi, $oe_task)).')');
 
 		$this->render('myprojects',array(
 			//'kpi_d'=>$kpi_d_arr,
