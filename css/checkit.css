@@ -286,6 +286,9 @@ font-family: Arial;
 fill-opacity: 1;
 color: #666;
 margin-bottom: 0 !important;
+margin-left: 15px !important;
+margin-right: 15px !important;
+min-height: 42px;
 }
 
 .report-link{
