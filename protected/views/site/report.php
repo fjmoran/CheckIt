@@ -30,13 +30,16 @@ foreach ($ps as $p) {
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
-			'value' => round($project->compliance),
-			'label' => 'por ciento (%)',
+			'value' => $project->compliance,
+			'valueText' => round($project->compliance).'%',
 			'min' => 0,
 			'max' => 100,
 			'title' => $project->name,
 			'levelColorsGradient' => false,
+			'fixedProgress' => true,
+			'progressValues' => array($red, $yellow, 1),
 			'levelColors' => array("#c9302c", "#f7f43a", "#449d44"),
+			'titleFontColor' => '#666',
 		),
 		'htmlOptions'=> array(
 			'style'=>'width:200px; height:160px; margin: 0 auto;',

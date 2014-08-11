@@ -13,7 +13,7 @@
  *
  * To use this widget, you may insert the following code in a view:
  * <pre>
- *    <?php $this->Widget('ext.justgage.JustGage', array(
+ *    $this->Widget('ext.justgage.JustGage', array(
  *       'options'=>array(
  *           'value' => 67, 
  *           'min' => 0,
@@ -23,7 +23,7 @@
  *       'htmlOptions'=> array(
  *           'class' => '200x160px',
  *       ),
- *   ));?>
+ *   ));
  *
  * </pre>
  *
@@ -111,7 +111,7 @@ class JustGage extends CWidget
         $basePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR;
         $baseUrl = Yii::app()->getAssetManager()->publish($basePath, false, 1, YII_DEBUG);
 
-        $extension = '.min.js';
+        $extension = YII_DEBUG?'.js':'.min.js';
 
         $cs = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery');

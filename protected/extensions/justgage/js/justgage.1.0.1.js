@@ -24,7 +24,11 @@ JustGage = function(config) {
     // title : string
     // gauge title 
     title : (config.title) ? config.title : "Title",
-    
+
+    fixedProgress : (config.fixedProgress != null) ? config.fixedProgress : false,
+
+    progressValues : (config.progressValues) ? config.progressValues : null,
+
     // titleFontColor : string
     // color of gauge title 
     titleFontColor : (config.titleFontColor) ? config.titleFontColor : "#999999",
@@ -32,6 +36,7 @@ JustGage = function(config) {
     // value : int
     // value gauge is showing 
     value : (config.value) ? config.value : 0,
+    valueText : (config.valueText) ? config.valueText : ( (config.value) ? config.value : 0 ),
     
     // valueFontColor : string
     // color of label showing current value
@@ -221,7 +226,7 @@ JustGage = function(config) {
   // level
   this.level = this.canvas.path().attr({
     "stroke": "none",
-    "fill": getColorForPercentage((this.config.value - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient),  
+    "fill": getColorForPercentage((this.config.value - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient, this.config.fixedProgress, this.config.progressValues),  
     pki: [this.config.min, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale]
   });
   this.level.id = this.config.id+"-level";
@@ -238,7 +243,8 @@ JustGage = function(config) {
   this.txtTitle.id = this.config.id+"-txttitle";
   
   // value
-  this.txtValue = this.canvas.text(this.params.valueX, this.params.valueY, this.originalValue);
+  //this.txtValue = this.canvas.text(this.params.valueX, this.params.valueY, this.originalValue);
+  this.txtValue = this.canvas.text(this.params.valueX, this.params.valueY, this.config.valueText);
   this.txtValue. attr({
     "font-size":this.params.valueFontSize,
     "font-weight":"bold",
@@ -308,7 +314,7 @@ JustGage.prototype.refresh = function(val) {
   if (val > this.config.max) {val = this.config.max;}
   if (val < this.config.min) {val = this.config.min;}
     
-  var color = getColorForPercentage((val - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient);
+  var color = getColorForPercentage((val - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient, this.config.fixedProgress, this.config.progressValues);
   this.canvas.getById(this.config.id+"-txtvalue").attr({"text":originalVal});
   this.canvas.getById(this.config.id+"-level").animate({pki: [val, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale], "fill":color},  this.config.refreshAnimationTime, this.config.refreshAnimationType);
 };
@@ -374,14 +380,14 @@ JustGage.prototype.generateShadow = function(svg, defs) {
     }
 }
 
-var getColorForPercentage = function(pct, col, grad) {
+var getColorForPercentage = function(pct, col, grad, fix, val) { // pct: porcentaje (0 a 1) ; col: arreglo de colores; grad: si es sin gradiente
     
     var no = col.length;
     if (no === 1) return col[0];
     var inc = (grad) ? (1 / (no - 1)) : (1 / no);
     var colors = new Array();
     for (var i = 0; i < col.length; i++) {
-      var percentage = (grad) ? (inc * i) : (inc * (i + 1));
+      var percentage = (fix) ? ( val[i] ) : ( (grad) ? (inc * i) : (inc * (i + 1)) );
       var rval = parseInt((cutHex(col[i])).substring(0,2),16);
       var gval = parseInt((cutHex(col[i])).substring(2,4),16);
       var bval = parseInt((cutHex(col[i])).substring(4,6),16);
