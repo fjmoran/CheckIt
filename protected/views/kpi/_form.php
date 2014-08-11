@@ -20,8 +20,9 @@ $('.select-level').change(function(){
 ", CClientScript::POS_LOAD);
 
 if ($model->subproject_id) {
-	$parent_id = '';
-	$parent = $model->parent()->find();
+	$parent = 0;
+	if ($model->root) $parent=Task::model()->findByPk($model->root);
+	$parent_id= 0;
 	if ($parent) $parent_id = $parent->id;
 	Yii::app()->clientScript->registerScript('dependent_parent_init', "
 		var url = '".Yii::app()->createUrl('kpi/ajaxKpi')."';
