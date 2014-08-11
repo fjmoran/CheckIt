@@ -124,8 +124,12 @@ JustGage = function(config) {
   //var canvasH = document.getElementById(this.config.id).clientHeight;
   var canvasW = getStyle(document.getElementById(this.config.id), "width").slice(0, -2) * 1;
   var canvasH = getStyle(document.getElementById(this.config.id), "height").slice(0, -2) * 1;
-  
-  // widget dimensions
+
+  if (!this.config.title) {
+    canvasH = canvasH + canvasH / 3;
+  }
+
+    // widget dimensions
   var widgetW, widgetH;
   if ((canvasW / canvasH) > 1.25) {
     widgetW = 1.25 * canvasH;
@@ -138,7 +142,13 @@ JustGage = function(config) {
   // delta 
   var dx = (canvasW - widgetW)/2;
   var dy = (canvasH - widgetH)/2;
-  
+
+  var dtitleY = 0;
+  if (!this.config.title) {
+    dtitleY = dy + widgetH / 5.5;
+    dy = dy - dtitleY;
+  }
+
   // title 
   var titleFontSize = ((widgetH / 8) > 10) ? (widgetH / 10) : 10;
   var titleX = dx + widgetW / 2;
@@ -187,12 +197,12 @@ JustGage = function(config) {
     minY : minY,
     maxFontSize : maxFontSize,
     maxX : maxX,
-    maxY : maxY
+    maxY : maxY,
+    dtitleY : dtitleY
   };
   
   // pki - custom attribute for generating gauge paths
-  this.canvas.customAttributes.pki = function (value, min, max, w, h, dx, dy, gws) {
-    
+  this.canvas.customAttributes.pki = function (value, min, max, w, h, dx, dy, gws, dtop) {
        var alpha = (1 - (value - min) / (max - min)) * Math.PI ,
           Ro = w / 2 - w / 10,
           Ri = Ro - w / 6.666666666666667 * gws,
@@ -201,9 +211,9 @@ JustGage = function(config) {
           Cy = h / 1.25 + dy,
           
           Xo = w / 2 + dx + Ro * Math.cos(alpha),
-          Yo = h - (h - Cy) + dy - Ro * Math.sin(alpha),
+          Yo = h - (h - Cy) + dy + dtop - Ro * Math.sin(alpha),
           Xi = w / 2 + dx + Ri * Math.cos(alpha),
-          Yi = h - (h - Cy) + dy - Ri * Math.sin(alpha),
+          Yi = h - (h - Cy) + dy + dtop - Ri * Math.sin(alpha),
           path;
     
       path += "M" + (Cx - Ri) + "," + Cy + " ";
@@ -219,7 +229,7 @@ JustGage = function(config) {
   this.gauge = this.canvas.path().attr({
     "stroke": "none",
     "fill": this.config.gaugeColor,   
-    pki: [this.config.max, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale]
+    pki: [this.config.max, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale, this.params.dtitleY]
   });
   this.gauge.id = this.config.id+"-gauge";
   
@@ -227,20 +237,22 @@ JustGage = function(config) {
   this.level = this.canvas.path().attr({
     "stroke": "none",
     "fill": getColorForPercentage((this.config.value - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient, this.config.fixedProgress, this.config.progressValues),  
-    pki: [this.config.min, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale]
+    pki: [this.config.min, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale, this.params.dtitleY]
   });
   this.level.id = this.config.id+"-level";
   
   // title
-  this.txtTitle = this.canvas.text(this.params.titleX, this.params.titleY, this.config.title);
-  this.txtTitle. attr({
-    "font-size":this.params.titleFontSize,
-    "font-weight":"bold",
-    "font-family":"Arial",
-    "fill":this.config.titleFontColor,
-    "fill-opacity":"1"         
-  });
-  this.txtTitle.id = this.config.id+"-txttitle";
+  if (this.config.title) {
+    this.txtTitle = this.canvas.text(this.params.titleX, this.params.titleY, this.config.title);
+    this.txtTitle. attr({
+      "font-size":this.params.titleFontSize,
+      "font-weight":"bold",
+      "font-family":"Arial",
+      "fill":this.config.titleFontColor,
+      "fill-opacity":"1"         
+    });
+    this.txtTitle.id = this.config.id+"-txttitle";
+  }
   
   // value
   //this.txtValue = this.canvas.text(this.params.valueX, this.params.valueY, this.originalValue);
@@ -301,7 +313,7 @@ JustGage = function(config) {
   }
   
   // animate 
-  this.level.animate({pki: [this.config.value, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale]},  this.config.startAnimationTime, this.config.startAnimationType);
+  this.level.animate({pki: [this.config.value, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale, this.params.dtitleY]},  this.config.startAnimationTime, this.config.startAnimationType);
   
   this.txtValue.animate({"fill-opacity":"1"}, this.config.startAnimationTime, this.config.startAnimationType); 
   this.txtLabel.animate({"fill-opacity":"1"}, this.config.startAnimationTime, this.config.startAnimationType);  
@@ -316,7 +328,7 @@ JustGage.prototype.refresh = function(val) {
     
   var color = getColorForPercentage((val - this.config.min) / (this.config.max - this.config.min), this.config.levelColors, this.config.levelColorsGradient, this.config.fixedProgress, this.config.progressValues);
   this.canvas.getById(this.config.id+"-txtvalue").attr({"text":originalVal});
-  this.canvas.getById(this.config.id+"-level").animate({pki: [val, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale], "fill":color},  this.config.refreshAnimationTime, this.config.refreshAnimationType);
+  this.canvas.getById(this.config.id+"-level").animate({pki: [val, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH,  this.params.dx, this.params.dy, this.config.gaugeWidthScale, this.params.dtitleY], "fill":color},  this.config.refreshAnimationTime, this.config.refreshAnimationType);
 };
 
 var percentColors = [

@@ -28,13 +28,15 @@ foreach ($ps as $p) {
 
 	<div class="col-md-3">
 
+		<p class="gaugeText"><?php echo $project->name ?></p>
+
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
 			'value' => $project->compliance,
 			'valueText' => round($project->compliance).'%',
 			'min' => 0,
 			'max' => 100,
-			'title' => $project->name,
+			//'title' => $project->name,
 			'levelColorsGradient' => false,
 			'fixedProgress' => true,
 			'progressValues' => array($red, $yellow, 1),
@@ -42,7 +44,7 @@ foreach ($ps as $p) {
 			'titleFontColor' => '#666',
 		),
 		'htmlOptions'=> array(
-			'style'=>'width:250px; height:200px; margin: 0 auto;',
+			'style'=>'width:250px; height:150px; margin: 0 auto;',
 		),
 	));?>
 
