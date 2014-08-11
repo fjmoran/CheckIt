@@ -28,7 +28,9 @@ foreach ($ps as $p) {
 
 	<div class="col-md-3">
 
-		<p class="gaugeText"><?php echo $project->name ?></p>
+		<div class="row text-center">
+			<p class="gaugeText"><?php echo $project->name ?></p>
+		</div>
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
