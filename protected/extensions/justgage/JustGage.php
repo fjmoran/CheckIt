@@ -95,7 +95,7 @@ class JustGage extends CWidget
         $cs = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery');
         $cs->registerScriptFile("{$baseUrl}/raphael.2.1.0{$extension}");
-        $cs->registerScriptFile("{$baseUrl}/justgage.1.0.1{$extension}");
+        $cs->registerScriptFile("{$baseUrl}/justgage.1.0.1-modif{$extension}");
 
         // register embedded script
         $cs->registerScript($id, $embeddedScript, CClientScript::POS_LOAD);
