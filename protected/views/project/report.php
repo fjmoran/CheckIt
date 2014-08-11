@@ -26,11 +26,17 @@ foreach ($sps as $sp) {
 <br>
 <div class="row">
 
-<?php foreach ($subprojects as $subproject) : ?>
+<?php $i=0; foreach ($subprojects as $subproject) : ?>
 
-	<div class="col-md-4 text-center">
-		
-				<p class="gaugeText"><?php echo $subproject->name ?></p>
+	<?php if ($i%4 == 0):?>
+		</div>
+		<div class="row">
+	<?php endif;?>
+
+	<div class="col-md-3">
+		<div class="row text-center">
+			<p class="gaugeText"><?php echo $subproject->name ?></p>
+		</div>
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
@@ -46,7 +52,7 @@ foreach ($sps as $sp) {
 			'titleFontColor' => '#666',
 		),
 		'htmlOptions'=> array(
-			'style'=>'width:333px; height:200px; margin: 0 auto;',
+			'style'=>'width:250px; height:150px; margin: 0 auto;',
 		),
 	));?>
 
@@ -123,8 +129,61 @@ foreach ($sps as $sp) {
 		)
 	));*/	?>
 
+	<br>
+	<?php if ($subproject->kpis): ?>
+	<table class="table table-condensed" style="font-size:small;">
+		<tr>
+			<th style="width: ;">KPI</th>
+			<th style="width: ;">Estado</th>
+		</tr>			
+
+	<?php foreach ($subproject->kpis as $kpi):?>
+		<tr>
+			<td><a class="report-link" href="<?php echo Yii::app()->createUrl('subproject/report', array('id'=>$subproject->id))?>"><?php echo $kpi->name; ?></a></td>
+			<td class="text-center"><?php 
+				$compliance = $kpi->compliance;
+				$color = Yii::app()->utility->getStatusColor($compliance); 
+				if ($color == 1) echo '<span class="label label-danger">'.round($compliance).'%</span>';
+				if ($color == 2) echo '<span class="label label-warning">'.round($compliance).'%</span>';
+				if ($color == 3) echo '<span class="label label-success">'.round($compliance).'%</span>';
+			?></td>
+		</tr>
+	<?php endforeach;?>
+	</table>
+	<?php endif;?>
+
+	<?php if ($subproject->tasks): ?>
+	<table class="table table-condensed" style="font-size:small;">
+		<tr>
+			<th style="width: ;"><?php echo Yii::app()->utility->getOption('task_name');?></th>
+			<th style="width: ;">Estado</th>
+		</tr>			
+
+	<?php foreach ($subproject->tasks as $task):?>
+		<tr>
+			<td><a class="report-link" href="<?php echo Yii::app()->createUrl('subproject/report', array('id'=>$subproject->id))?>"><?php echo $task->name; ?></a></td>
+			<td class="text-center">
+					<?php 
+						$interval = date_diff(new Datetime(date('Y-m-d')), new Datetime($task->due_date)); 
+						$datediff = (int)$interval->format("%R%a");
+					?>
+					<?php if ($task->status == 1):?>
+						<span class="label label-success">Terminado</span>
+					<?php elseif ($datediff < 0): ?>
+						<span class="label label-danger">Vencido</span>
+					<?php elseif ($datediff < 16): ?>
+						<span class="label label-warning">Vence en <?=$datediff?> días</span>
+					<?php else: ?>
+						<span class="label label-info">Pendiente</span>
+					<?php endif; ?>
+			</td>
+		</tr>
+	<?php endforeach;?>
+	</table>
+	<?php endif;?>
+
 	</div>	
 
-<?php endforeach; ?>
+<?php $i++; endforeach; ?>
 
 </div>
