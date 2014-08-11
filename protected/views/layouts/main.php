@@ -107,7 +107,7 @@
 			'encodeLabel'=>false,
 			'items'=>array(
 				array('label'=>'<i class="fa fa-dashboard fa-lg fa-fw"></i> Cuadro de Mando', 'url'=>array('/site/report'), 'visible'=>Yii::app()->user->checkAccess('admin,dashboard_user,dashboard_manager,viewer'), 'active'=>Yii::app()->utility->isActiveMenu('dashboard')),
-				array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('admin,workflow_user,workflow_manager,viewer'), 'active'=>Yii::app()->utility->isActiveMenu('process')),
+				//array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/site/page', 'view'=>'about'), 'visible'=>Yii::app()->user->checkAccess('admin,workflow_user,workflow_manager,viewer'), 'active'=>Yii::app()->utility->isActiveMenu('process')),
 				array('label'=>'<i class="fa fa-briefcase fa-lg fa-fw"></i> Gestión Estratégica <span class="badge badge-red">'.$alert_tasks.'</span>', 'url'=>array('/project/myprojects'), 'visible'=>Yii::app()->user->checkAccess('admin,strategy_user,strategy_manager,viewer'), 'active'=>Yii::app()->utility->isActiveMenu('strategy')),
 				array('label'=>'<i class="fa fa-cogs fa-lg fa-fw"></i> Administración', 'url'=>array('/site/admin'), 'visible'=>Yii::app()->user->checkAccess('admin,strategy_admin,workflow_admin,dashboard_admin'), 'active'=>Yii::app()->utility->isActiveMenu('admin')),
 			),
