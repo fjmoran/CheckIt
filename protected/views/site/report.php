@@ -28,6 +28,18 @@ foreach ($ps as $p) {
 
 	<div class="col-md-3">
 
+	<?php $this->Widget('ext.justgage.JustGage', array(
+		'options'=>array(
+			'value' => 67, 
+			'min' => 0,
+			'max' => 100,
+			'title' => $project->name,
+		),
+		'htmlOptions'=> array(
+			'class' => '200x160px',
+		),
+	));?>
+
 	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(
 			'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
