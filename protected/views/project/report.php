@@ -28,8 +28,8 @@ foreach ($sps as $sp) {
 <?php foreach ($subprojects as $subproject) : ?>
 
 	<div class="col-md-4 text-center">
-
-		<h3><?php echo $subproject->name ?></h3>
+		
+				<p class="gaugeText"><?php echo $subproject->name ?></p>
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
