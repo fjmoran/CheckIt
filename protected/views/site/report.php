@@ -30,17 +30,20 @@ foreach ($ps as $p) {
 
 	<?php $this->Widget('ext.justgage.JustGage', array(
 		'options'=>array(
-			'value' => 67, 
+			'value' => round($project->compliance),
+			'label' => 'por ciento (%)',
 			'min' => 0,
 			'max' => 100,
 			'title' => $project->name,
+			'levelColorsGradient' => false,
+			'levelColors' => array("#c9302c", "#f7f43a", "#449d44"),
 		),
 		'htmlOptions'=> array(
-			'class' => '200x160px',
+			'style'=>'width:200px; height:160px; margin: 0 auto;',
 		),
 	));?>
 
-	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
+	<?php /*$this->Widget('ext.highcharts.HighchartsWidget', array(
 		'scripts' => array(
 			'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
 			'modules/solid-gauge',
@@ -86,10 +89,10 @@ foreach ($ps as $p) {
 				'minorTickInterval' => 20,
 				'tickPixelInterval' => 100,
 				'tickWidth' => 0,
-				/*'title' => array(
-					'y' => -70,
-					'text' => $d['title'],
-				),*/
+				//'title' => array(
+				//	'y' => -70,
+				//	'text' => $d['title'],
+				//),
 
 				'labels' => array(
 					'y' => 16,
@@ -117,7 +120,7 @@ foreach ($ps as $p) {
 				),
 			),
 		)
-	));	?>
+	));*/	?>
 
 	<table class="table table-condensed" style="font-size:small;">
 		<tr>
