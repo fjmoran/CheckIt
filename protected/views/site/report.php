@@ -42,7 +42,7 @@ foreach ($ps as $p) {
 			'titleFontColor' => '#666',
 		),
 		'htmlOptions'=> array(
-			'style'=>'width:200px; height:160px; margin: 0 auto;',
+			'style'=>'width:250px; height:200px; margin: 0 auto;',
 		),
 	));?>
 
@@ -124,7 +124,7 @@ foreach ($ps as $p) {
 			),
 		)
 	));*/	?>
-
+	<br>
 	<table class="table table-condensed" style="font-size:small;">
 		<tr>
 			<th style="width: ;"><?php echo Yii::app()->utility->getOption('subproject_name');?></th>
