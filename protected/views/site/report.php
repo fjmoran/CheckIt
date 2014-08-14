@@ -77,3 +77,88 @@ foreach ($ps as $p) {
 <?php $i++; endforeach; ?>
 
 </div>
+
+<?php /*?>
+
+<div class="row">
+	<div class="col-md-12">
+
+	<?php
+$min = 1357009201; // 01/01/2013
+$max = 1388545201; // 01/01/2014
+$dif = $max-$min;
+$data1 = array();
+for ($i=0; $i < 20; $i++) { 
+	$time = rand($min,$max);
+//	$data1[] = array( 'js:Date.UTC('.gmdate("Y, m, d", $time).')', round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$data1[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+}
+sort($data1);
+$data2 = array();
+for ($i=0; $i < 20; $i++) { 
+	$time = rand($min,$max);
+	$data2[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+}
+sort($data2);
+$data3 = array();
+for ($i=0; $i < 20; $i++) { 
+	$time = rand($min,$max);
+	$data3[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+}
+sort($data3);
+
+//print_r($data);
+	?>
+
+	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
+		'options'=>array(
+			'chart'=>array(
+				'type'=>'spline',
+			),
+			'title'=> array(
+				'text'=>'Histórico de '.Yii::app()->utility->getOption('projects_name'),
+			),
+			'subtitle'=>array(
+				'text'=>'Irregular time data in Highcharts JS',
+			),
+			'xAxis'=>array(
+				'type'=>'datetime',
+				'dateTimeLabelFormats'=>array(
+					'month'=>'%e. %b',
+					'year'=>'%b',
+				),
+				'title'=>array(
+					'text'=>'Date',
+				),
+			),
+			'yAxis'=>array(
+				'title'=>array(
+					'text'=>'Snow depth (m)',
+				),
+				'min'=>0,
+			),
+			'tooltip'=>array(
+				'headerFormat'=>'<b>{series.name}</b><br>',
+				'pointFormat'=>'{point.x:%e. %b}: {point.y:.2f} m',
+			),
+			'series'=>array(
+				array(
+					'name'=>'Winter 2007-2008',
+					'data'=>$data1,
+				),
+				array(
+					'name'=>'Winter 2008-2009',
+					'data'=>$data2,
+				),
+				array(
+					'name'=>'Winter 2009-2010',
+					'data'=>$data3,
+				),
+			),
+		),
+	));?>
+
+	</div>
+</div>
+
+<?php */?>
