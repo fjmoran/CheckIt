@@ -78,7 +78,7 @@ foreach ($ps as $p) {
 
 </div>
 
-<?php /*?>
+<?php ?>
 
 <div class="row">
 	<div class="col-md-12">
@@ -88,38 +88,60 @@ $min = 1357009201; // 01/01/2013
 $max = 1388545201; // 01/01/2014
 $dif = $max-$min;
 $data1 = array();
+$j=0;
 for ($i=0; $i < 20; $i++) { 
-	$time = rand($min,$max);
+	$time = $min+($dif/20)*$i;
 //	$data1[] = array( 'js:Date.UTC('.gmdate("Y, m, d", $time).')', round( (float)rand()/(float)getrandmax() , 2 ) ) ;
-	$data1[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$j =  ( round( (float)rand()/(float)getrandmax()/5 , 2 ) )*100 -8 + $j ;
+	if ($j<0) $j=$j*-1;
+	$data1[] = array( $time*1000 , $j ) ;
 }
 sort($data1);
 $data2 = array();
+$j=0;
 for ($i=0; $i < 20; $i++) { 
-	$time = rand($min,$max);
-	$data2[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$time = $min+($dif/20)*$i;
+//	$data1[] = array( 'js:Date.UTC('.gmdate("Y, m, d", $time).')', round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$j =  ( round( (float)rand()/(float)getrandmax()/5 , 2 ) )*100 -8 + $j ;
+	if ($j<0) $j=$j*-1;
+	$data2[] = array( $time*1000 , $j ) ;
 }
 sort($data2);
 $data3 = array();
+$j=0;
 for ($i=0; $i < 20; $i++) { 
-	$time = rand($min,$max);
-	$data3[] = array( $time*1000 , round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$time = $min+($dif/20)*$i;
+//	$data1[] = array( 'js:Date.UTC('.gmdate("Y, m, d", $time).')', round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$j =  ( round( (float)rand()/(float)getrandmax()/5 , 2 ) )*100 -8 + $j ;
+	if ($j<0) $j=$j*-1;
+	$data3[] = array( $time*1000 , $j ) ;
 }
 sort($data3);
+$data4 = array();
+$j=0;
+for ($i=0; $i < 20; $i++) { 
+	$time = $min+($dif/20)*$i;
+//	$data1[] = array( 'js:Date.UTC('.gmdate("Y, m, d", $time).')', round( (float)rand()/(float)getrandmax() , 2 ) ) ;
+	$j =  ( round( (float)rand()/(float)getrandmax()/5 , 2 ) )*100 -8 + $j ;
+	if ($j<0) $j=$j*-1;
+	$data4[] = array( $time*1000 , $j ) ;
+}
+sort($data4);
 
 //print_r($data);
 	?>
 
 	<?php $this->Widget('ext.highcharts.HighchartsWidget', array(
 		'options'=>array(
+			'credits' => array('enabled' => false),
 			'chart'=>array(
 				'type'=>'spline',
 			),
 			'title'=> array(
-				'text'=>'Histórico de '.Yii::app()->utility->getOption('projects_name'),
+				'text'=> Yii::app()->utility->getOption('projects_name'),
 			),
 			'subtitle'=>array(
-				'text'=>'Irregular time data in Highcharts JS',
+				'text'=>'Evolución histórica',
 			),
 			'xAxis'=>array(
 				'type'=>'datetime',
@@ -133,9 +155,10 @@ sort($data3);
 			),
 			'yAxis'=>array(
 				'title'=>array(
-					'text'=>'Snow depth (m)',
+					'text'=>'% cumplimiento',
 				),
 				'min'=>0,
+				'max'=>100,
 			),
 			'tooltip'=>array(
 				'headerFormat'=>'<b>{series.name}</b><br>',
@@ -143,22 +166,26 @@ sort($data3);
 			),
 			'series'=>array(
 				array(
-					'name'=>'Winter 2007-2008',
+					'name'=>'Financiera',
 					'data'=>$data1,
 				),
 				array(
-					'name'=>'Winter 2008-2009',
+					'name'=>'Clientes',
 					'data'=>$data2,
 				),
 				array(
-					'name'=>'Winter 2009-2010',
+					'name'=>'Procesos internos',
 					'data'=>$data3,
 				),
+				array(
+					'name'=>'Aprendizaje y desarrollo',
+					'data'=>$data4,
+				),				
 			),
 		),
-	));?>
+	)); ?>
 
 	</div>
 </div>
 
-<?php */?>
+<?php ?>
