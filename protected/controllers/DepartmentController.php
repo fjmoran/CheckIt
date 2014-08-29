@@ -117,7 +117,7 @@ class DepartmentController extends Controller
 
 			$ret = false;
 			if (!$model->parent_id) {
-				$ret = $model->moveAsRoot();
+				//$ret = $model->moveAsRoot();
 				$ret = $model->saveNode();
 			}
 			else {

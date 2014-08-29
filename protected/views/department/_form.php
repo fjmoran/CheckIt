@@ -43,7 +43,12 @@
 				if ($parent) $model->parent_id = $parent->id;				
 			}
 			?>
-			<?php echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('empty'=>'Sin superior','class'=>'form-control')); ?>
+			<?php 
+				if ($model->lft!=1 || $model->isNewRecord)
+					echo $form->dropDownList($model,'parent_id', CHtml::listData($data, 'id', 'name'), array('class'=>'form-control')); 
+				else
+					echo $form->dropDownList($model,'parent_id', array(), array('empty'=>'Sin superior','class'=>'form-control')); 
+			?>
 			<?php echo $form->error($model,'parent_id'); ?>
 		</div>
 
