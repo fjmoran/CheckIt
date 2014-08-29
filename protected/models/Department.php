@@ -112,7 +112,7 @@ class Department extends CActiveRecord
 
 	public function searchTree() {
 
-		$rawData = Department::model()->findAll(array('order'=>'root,lft ASC'));
+		$rawData = Department::model()->findAll(array('order'=>'lft ASC'));
 
 		foreach ($rawData as $d) {
 			$pre = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $d->level-1);
