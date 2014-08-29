@@ -65,10 +65,15 @@ class UserController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
-			$model->roles=$_POST['User']['roleIDs'];  // save authenticated users
-			if($model->save())
-				$this->redirect(array('admin'));
+			if (!isset($_POST['User']['roleIDs'])) {
+				$model->addError('roles', 'Por favor seleccione uno o más roles.');
+			}
+			else {
+				$model->attributes=$_POST['User'];
+				$model->roles=$_POST['User']['roleIDs'];  // save authenticated users
+				if($model->save())
+					$this->redirect(array('admin'));				
+			}
 		}
 
 		$this->render('create',array(
@@ -95,10 +100,15 @@ class UserController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
-			$model->roles=$_POST['User']['roleIDs'];  // save authenticated users
-			if($model->save())
-				$this->redirect(array('admin'));
+			if (!isset($_POST['User']['roleIDs'])) {
+				$model->addError('roles', 'Por favor seleccione uno o más roles.');
+			}
+			else {
+				$model->attributes=$_POST['User'];
+				$model->roles=$_POST['User']['roleIDs'];  // save authenticated users
+				if($model->save())
+					$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('update',array(
