@@ -26,7 +26,7 @@ $this->menu=array(
 		<?php if ($i==0):?>
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 26%;">Objetivo Estratégico</th>
+					<th style="width: 26%;"><?php echo Yii::app()->utility->getOption('subproject_name'); ?></th>
 					<th style="width: 26%;">KPI</th>
 					<th style="width: 8%;">Meta</th>
 					<th style="width: 8%;">Actual</th>
@@ -75,7 +75,7 @@ $this->menu=array(
 		<?php if ($i==0):?>
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
-					<th style="width: 23%;">Objetivo Estratégico</th>
+					<th style="width: 23%;"><?php echo Yii::app()->utility->getOption('subproject_name'); ?></th>
 					<th style="width: 23%;"><?php echo Yii::app()->utility->getOption('task_name'); ?></th>
 					<th style="width: 12%;">Fecha inicio</th>
 					<th style="width: 12%;">Fecha término</th>

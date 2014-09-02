@@ -18,9 +18,8 @@
 	<div class="form-group">
 		<?php echo $form->label($model,'subproject_id'); ?>
 		<?php 
-			$data = Subproject::model()->with('project')->findAll(array('order' => 'project.name ASC, t.name ASC')); 
 			$r = array();
-			foreach ($data as $d) {
+			foreach ($subprojects as $d) {
 				$r[$d->id] = $d->project->name." > ".$d->name;
 			}
 		?>

@@ -210,8 +210,11 @@ class TaskController extends Controller
 		if(isset($_GET['Task']))
 			$model->attributes=$_GET['Task'];
 
+
+
 		$this->render('admin',array(
 			'model'=>$model,
+			'subprojects' => $subprojects,
 		));
 	}
 

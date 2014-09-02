@@ -38,12 +38,19 @@ $('.select-level').change(function(){
 
 <h2>Gestión de KPI</h2>
 
+<?php if (count($subprojects) == 0):?>
+
+<div class="alert alert-warning" role="alert">Se debe especificar previamente <a href="<?php echo Yii::app()->createUrl('subproject/admin'); ?>"><?php echo Yii::app()->utility->getOption('subprojects_name'); ?></a> para poder definir KPIs.</div>
+
+<?php else: ?>
+
 <div class="row">
 	<div class="col-md-4">
 		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 		<div class="search-form">
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model,
+			'subprojects'=>$subprojects,
 		)); ?>
 		</div><!-- search-form -->
 	</div>
@@ -140,3 +147,6 @@ $('.select-level').change(function(){
 		//'nextPageLabel' => '<i class="icon-chevron-right">></i>',
 	),
 )); ?>
+
+<?php endif; ?>
+

@@ -23,6 +23,12 @@ $('#Subproject_project_id').change(function(){
 
 <h2>Gestión de <?php echo Yii::app()->utility->getOption('subprojects_name'); ?></h2>
 
+<?php if (count($projects) == 0):?>
+
+<div class="alert alert-warning" role="alert">Se debe especificar previamente <a href="<?php echo Yii::app()->createUrl('project/admin'); ?>"><?php echo Yii::app()->utility->getOption('projects_name'); ?></a> para poder definir <?php echo Yii::app()->utility->getOption('subprojects_name'); ?>.</div>
+
+<?php else: ?>
+
 <div class="row">
 	<div class="col-md-4">
 		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
@@ -101,3 +107,4 @@ $('#Subproject_project_id').change(function(){
 	</div>
 </div>
 
+<?php endif; ?>

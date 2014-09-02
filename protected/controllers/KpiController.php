@@ -276,7 +276,8 @@ class KpiController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-			'subproject_id'=>$subprojects[0]->id,
+			'subprojects'=>$subprojects,
+			//'subproject_id'=>$subprojects[0]->id,
 		));
 	}
 

@@ -56,20 +56,25 @@ $('.search-form form').submit(function(){
 	'template'=>'{items} <div style="clear:both;">{pager}</div> <div class="pull-right">{summary}</div>',
 	'columns'=>array(
 		array(
-			'htmlOptions' => array('style' => 'width: 24%;'),			
+			'htmlOptions' => array('style' => 'width: 20%;'),			
 			'header'=>'Correo electrónico',
 			'name'=>'email',
 		),		
 		array(
-			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>'Nombre',
 			'name'=>'firstname',
 		),			
 		array(
-			'htmlOptions' => array('style' => 'width: 16%;'),			
+			'htmlOptions' => array('style' => 'width: 12%;'),			
 			'header'=>'Apellido',
 			'name'=>'lastname',
-		),		
+		),
+		array(
+			'htmlOptions' => array('style' => 'width: 18%;'),			
+			//'header'=>'Apellido',
+			'name'=>'position',
+		),
 		array(
 			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name'),
@@ -90,7 +95,7 @@ $('.search-form form').submit(function(){
 			'value'=>'implode(", ",$data->roleNames)',
 		), */
 		array(
-			'htmlOptions' => array('style' => 'width: 12%;'),			
+			'htmlOptions' => array('style' => 'width: 15%;'),			
 			'name'=>'lastvisit',
 			'value'=>'strtotime($data->lastvisit)>0?date("d-m-Y h:i", strtotime($data->lastvisit)):\'\'',
 		),

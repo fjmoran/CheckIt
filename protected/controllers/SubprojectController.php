@@ -165,6 +165,7 @@ class SubprojectController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
+			'projects'=>$projects,
 		));
 	}
 

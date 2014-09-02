@@ -25,12 +25,19 @@ $('.select-level').change(function(){
 
 <h2>Gestión de <?php echo Yii::app()->utility->getOption('tasks_name'); ?></h2>
 
+<?php if (count($subprojects) == 0):?>
+
+<div class="alert alert-warning" role="alert">Se debe especificar previamente <a href="<?php echo Yii::app()->createUrl('subproject/admin'); ?>"><?php echo Yii::app()->utility->getOption('subprojects_name'); ?></a> para poder definir <?php echo Yii::app()->utility->getOption('tasks_name'); ?>.</div>
+
+<?php else: ?>
+
 <div class="row">
 	<div class="col-md-4">
 		<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 		<div class="search-form">
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model,
+			'subprojects' => $subprojects,
 		)); ?>
 		</div><!-- search-form -->
 	</div>
@@ -50,7 +57,10 @@ $('.select-level').change(function(){
 <div class="row">
 	<div class="col-md-12">
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+$dataProvider = $model->searchTree();
+
+if ($dataProvider) $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'task-grid',
 	'dataProvider'=>$model->searchTree(),
 	//'filter'=>$model,
@@ -126,4 +136,6 @@ $('.select-level').change(function(){
 )); ?>
 	</div>
 </div>
+
+<?php endif; ?>
 

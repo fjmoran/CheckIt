@@ -48,17 +48,41 @@ class ForgotPasswordForm extends CFormModel
 
 			$link = Yii::app()->createAbsoluteUrl('site/changepassword', array('t' => $token));
 
-			$message            = new YiiMailMessage;
-			$message->view = "forgotpassword";
-			$params              = array('user'=>$user, 'link'=>$link);
-			$message->subject    = 'Check!It - Recuperar contraseña';
-			$message->setBody($params, 'text/html');
-			$message->addTo($this->username);
-			$message->from = 'checkit@gmail.com';   
-			Yii::app()->mail->send($message);      
+			//$message            = new YiiMailMessage;
+			//$message->subject    = 'Check!It - Recuperar contraseña';
+			//$message->view = "forgotpassword";
+			//$params              = array('user'=>$user, 'link'=>$link);
+			//$message->setBody($params, 'text/html');
+			//$message->addTo($this->username);
+			//$message->from = 'checkit@gmail.com';   
+			//Yii::app()->mail->send($message);
+
+			$message       = Yii::app()->mandrillwrap;
+			$message->html = '<html>
+<head>
+</head>
+<body>
+
+<p>Estimado '.$user->firstname.':</p>
+
+<p>Para cambiar la contraseña de acceso al sistema debe hacer click en el siguiente link:</p>
+
+<p><a href="'.$link.'">'.$link.'</p>
+
+</body>
+</html>';
+			$message->subject    = 'Check It - Recuperar contraseña';
+			$message->toEmail = $this->username;
+			//$message->fromEmail = 'info@getcheck.it';   
+			$message->toName = $this->username;
+			//$message->fromName = 'checkit@gmail.com';   
+			$message->sendEmail();    
+
+			return true; 
 		}
 
-		return true; 
+		return false;
+
 	}
 
 }

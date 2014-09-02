@@ -189,6 +189,9 @@ class SiteController extends Controller
 			if ($model->validate() && $model->sendpassword()) {
 				Yii::app()->user->setFlash('message', 'La contraseña fue enviada al e-mail indicado.');
 			}
+			else {
+				Yii::app()->user->setFlash('message', 'El e-mail ingresado no corresponde.');
+			}
 		}
 
 		$this->render('forgotpassword',array(

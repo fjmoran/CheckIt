@@ -5,7 +5,7 @@
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
 					<th style="width: 30%;">KPI</th>
-					<th style="width: 30%;">Objetivo Estratégico</th>
+					<th style="width: 30%;"><?php echo Yii::app()->utility->getOption('subproject_name'); ?></th>
 					<th style="width: 8%;">Meta</th>
 					<th style="width: 13%;">Periodicidad</th>
 					<th style="width: 12%;">Fecha</th>
@@ -47,7 +47,7 @@
 			<table class="table table-condensed" style="font-size:small;">
 				<tr>
 					<th style="width: 30%;">Tarea</th>
-					<th style="width: 30%;">Objetivo Estratégico</th>
+					<th style="width: 30%;"><?php echo Yii::app()->utility->getOption('subproject_name'); ?></th>
 					<th style="width: 17%;">Fecha Inicio</th>
 					<th style="width: 16%;">Fecha Término</th>
 					<th style="width: 7%; text-align: center;">Acciones</th>
