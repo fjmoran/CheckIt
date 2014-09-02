@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Gestión Estratégica y Cuadros de Mando Integrales">
 	<meta name="author" content="Check!It">
-	<link rel="shortcut icon" href="">
+	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico" />
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
