@@ -30,13 +30,13 @@ if (Yii::app()->utility->isActiveMenu('admin')) {
 		'items'=>array(
 			array('label'=>'<i class="fa fa-user fa-lg fa-fw"></i> Usuarios', 'url'=>array('/user/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('user'), 'visible'=>Yii::app()->user->checkAccess('admin,system_admin')),
 			array('label'=>'<i class="fa fa-sitemap fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('departments_name'), 'url'=>array('/department/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('department'), 'visible'=>Yii::app()->user->checkAccess('admin, system_admin')),
-			//array('label'=>'<i class="fa fa-users fa-lg fa-fw"></i> Grupos', 'url'=>array('/group/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('group'), 'visible'=>Yii::app()->user->checkAccess('admin, system_admin, workflow_admin')),
+			array('label'=>'<i class="fa fa-users fa-lg fa-fw"></i> Grupos', 'url'=>array('/group/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('group'), 'visible'=>Yii::app()->user->checkAccess('admin, system_admin, workflow_admin')),
 			array('label'=>'<i class="fa fa-university fa-lg fa-fw"></i> Misión y Visión', 'url'=>array('/option/strategydata'), 'active'=>Yii::app()->utility->isActiveSubMenu('strategydata'), 'visible'=>Yii::app()->user->checkAccess('admin, strategy_admin')),
 			array('label'=>'<i class="fa fa-list-ul fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('projects_name'), 'url'=>array('/project/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('project'), 'visible'=>Yii::app()->user->checkAccess('admin, strategy_admin')),
 			array('label'=>'<i class="fa fa-clipboard fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('subprojects_name'), 'url'=>array('/subproject/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('subproject'), 'visible'=>Yii::app()->user->checkAccess('admin, strategy_admin')),
 			array('label'=>'<i class="fa fa-tasks fa-lg fa-fw"></i> '.Yii::app()->utility->getOption('tasks_name'), 'url'=>array('/task/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('task'), 'visible'=>Yii::app()->user->checkAccess('admin, strategy_admin')),
 			array('label'=>'<i class="fa fa-sliders fa-lg fa-fw"></i> KPI', 'url'=>array('/kpi/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('kpi'), 'visible'=>Yii::app()->user->checkAccess('admin, strategy_admin')),
-			//array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/process/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('process'), 'visible'=>Yii::app()->user->checkAccess('admin, workflow_admin')),
+			array('label'=>'<i class="fa fa-inbox fa-lg fa-fw"></i> Flujos de Proceso', 'url'=>array('/process/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('process'), 'visible'=>Yii::app()->user->checkAccess('admin, workflow_admin')),
 			array('label'=>'<i class="fa fa-code fa-lg fa-fw"></i> Parámetros', 'url'=>array('/option/admin'), 'active'=>Yii::app()->utility->isActiveSubMenu('option'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 		),
 	)); 
