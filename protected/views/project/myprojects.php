@@ -59,8 +59,8 @@ $this->menu=array(
 		
 			<?php endforeach; ?>
 
-		<?php endif;?>
-	<?php $i++; endforeach;?>
+		<?php $i++; endif;?>
+	<?php endforeach;?>
 
 	<?php if ($i>0):?>
 		</table>
@@ -95,8 +95,8 @@ $this->menu=array(
 
 			<?php endforeach; ?>
 
-		<?php endif;?>
-	<?php $i++; endforeach;?>
+		<?php $i++; endif;?>
+	<?php endforeach;?>
 
 	<?php if ($i>0):?>
 		</table>
