@@ -87,6 +87,7 @@ if ($dataProvider) $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'htmlOptions' => array('style' => 'width: 25%;'),			
 			'header'=> 'Responsable',
+			'type'=>'html',
 			'name' => 'inCharge',
 			//'name'=>'department.nameWithManager',
 		),

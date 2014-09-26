@@ -105,6 +105,7 @@ $('.select-level').change(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 28%;'),			
 			'header'=>'Responsable',
+			'type'=>'html',
 			'name'=>'inCharge',
 			//'name'=>'department.nameWithManager',
 		),

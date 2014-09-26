@@ -60,15 +60,16 @@ $('#Subproject_project_id').change(function(){
 			'name'=>'name',
 		),		
 		array(
-			'htmlOptions' => array('style' => 'width: 18%;'),			
+			'htmlOptions' => array('style' => 'width: 36%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
-			'name'=>'department.name',
+			'type'=>'html',
+			'name'=>'department.nameWithManager',
 		),
-		array(
+		/*array(
 			'htmlOptions' => array('style' => 'width: 18%;'),			
 			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
 			'name'=>'department.managerName',
-		),
+		),*/
 		'weight',
 		array(
 			'header'=> 'Opciones',

@@ -236,6 +236,7 @@ class Department extends CActiveRecord
 	public function getNameWithManager() {
 		$ret = $this->name;
 		if ($this->managerName) $ret.=' ('.$this->managerName.')';
+		else $ret.=' <span class="label label-danger"><a href="'.Yii::app()->createUrl('department/update', array('id'=>$this->id)).'">Sin Encargado</a></span>';
 		return $ret;
 	}
 

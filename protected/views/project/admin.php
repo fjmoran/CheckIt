@@ -62,13 +62,14 @@ $('.search-form form').submit(function(){
 		array(
 			'htmlOptions' => array('style' => 'width: 23%;'),			
 			'header'=>Yii::app()->utility->getOption('department_name').' Responsable',
-			'name'=>'department.name',
+			'type'=>'html',
+			'name'=>'department.nameWithManager',
 		),
-		array(
+		/*array(
 			'htmlOptions' => array('style' => 'width: 23%;'),			
 			'header'=>Yii::app()->utility->getOption('manager_name').' de '.Yii::app()->utility->getOption('department_name'),
 			'name'=>'department.managerName',
-		),
+		),*/
 		array(
 			'class'=>'CButtonColumn',
 			'htmlOptions' => array('style' => 'width: 7%;'),			

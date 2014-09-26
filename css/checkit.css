@@ -176,6 +176,13 @@ label.error {
   display: none;
 }
 
+.label a {
+  color: white;
+  text-decoration: none;
+}
+.label a:hover {
+  color: #eee;
+}
 
 
 /* make sidebar nav vertical */ 
